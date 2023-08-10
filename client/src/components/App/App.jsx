@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import c from "./App.module.css";
 import axios from "axios";
 import SignOn from "../LoginPage/SignOn";
+import AccountServices from "../LoginPage/AccountServices";
+import {AccountProvider} from "../Context/AccountServicesContext"
 
 const App = () => {
   // const [tasks, setTasks] = useState([]);
@@ -21,7 +23,9 @@ const App = () => {
 
   return (
     <>
-      <SignOn />
+      <AccountProvider>
+        <AccountServices />
+      </AccountProvider>
     </>
 
 

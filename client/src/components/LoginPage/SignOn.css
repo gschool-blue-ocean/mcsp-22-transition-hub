@@ -1,4 +1,4 @@
-.logOnBG{
+.logOnBG {
     position: fixed;
     background-color: #393941;
     color: #f0f0f0;
@@ -11,8 +11,8 @@
     justify-content: center;
 }
 
-.logOnContainer{
-    width: 50%;
+.logOnContainer {
+    width: 30%;
     height: 50%;
     background-color: #4F515E;
     display: flex;
@@ -27,30 +27,51 @@
 .login-form {
     display: flex;
     flex-direction: column;
+    width: 80%; 
 }
 
 .login-form label {
-    margin-bottom: 8px;
+    text-align: center;
 }
 
 .login-form input {
     padding: 8px;
     margin-bottom: 12px;
+    margin: 0 auto;
     border: 1px solid #ccc;
     border-radius: 4px;
+    width: 100%; 
+    box-sizing: border-box;
+}
+
+.login_Input{
+    margin-bottom: 20px;
 }
 
 .SignOn_Buttons {
-    background-color: #007bff;
+    background-color: #0D0F4A;
     color: white;
     border: none;
     border-radius: 4px;
     padding: 10px 15px;
     cursor: pointer;
-    margin-top: 20px;
+    width: 100%;
     transition: background-color 0.3s, transform 0.2s;
 }
-.SignOn_Buttons:hover{
-    background-color: #1e7e34;
+
+.SignOn_Buttons:hover {
+    background-color: #EF6E47;
     transform: scale(1.05);
+}
+
+.logOn_Title{
+    font-size: 2rem;
+}
+
+#signOn_Register{
+    margin-top: 10px;
+}
+
+.signOn_Register_Container{
+    width: 80%;
 }
