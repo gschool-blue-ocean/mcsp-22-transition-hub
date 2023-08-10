@@ -3,6 +3,7 @@ import c from "./App.module.css";
 import axios from "axios";
 import SignOn from "../LoginPage/SignOn";
 import AccountServices from "../LoginPage/AccountServices";
+import Header from '../AfterLogin/Header';
 import {AccountProvider} from "../Context/AccountServicesContext"
 
 const App = () => {
@@ -26,6 +27,8 @@ const App = () => {
       <AccountProvider>
         <AccountServices />
       </AccountProvider>
+
+      <Header />
     </>
 
 
