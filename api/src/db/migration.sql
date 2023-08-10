@@ -5,23 +5,14 @@ DROP TABLE IF EXISTS managers;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS cohorts;
 
-
-CREATE TABLE cohorts (
-  cohortsId SERIAL PRIMARY KEY,
-  cohortName varchar,
-  startDate varchar,
-  endDate varchar
-);
-
 CREATE TABLE users (
-  usersid SERIAL PRIMARY KEY,
-  cohortsId INTEGER REFERENCES cohorts(cohortsId),
-  userName varchar,
-  password varchar,
-  firstName varchar,
-  lastName varchar,
-  email varchar,
-  role varchar
+  usersId UUID PRIMARY KEY DEFAULT gen_random_uuid () NOT NULL,
+  userName varchar NOT NULL,
+  password varchar NOT NULL,
+  firstName varchar NOT NULL,
+  lastName varchar NOT NULL,
+  email varchar NOT NULL,
+  role varchar NOT NULL
 );
 
 CREATE TABLE managers (
@@ -29,6 +20,15 @@ CREATE TABLE managers (
   usersId INTEGER REFERENCES users(usersId),
   cohortsId INTEGER REFERENCES cohorts(cohortsId)
 );
+
+CREATE TABLE cohorts (
+  cohortsId SERIAL PRIMARY KEY,
+  managersId INTEGER REFERENCES managers(managersId) NOT NULL,
+  cohortName varchar,
+  startDate varchar,
+  endDate varchar
+);
+
 
 CREATE TABLE students (
   studentsId SERIAL PRIMARY KEY,
