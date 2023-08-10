@@ -1,10 +1,20 @@
 import express from "express";
-import pg from "pg";
+// import pg from "pg";
+import pkg from 'pg';
+import dotenv from 'dotenv';
+import cors from 'cors';
 
-
+dotenv.config();
 const PORT = process.env.PORT;
+app.use(cors());
+app.use(express.static('dist'));
+const { Pool } = pkg;
 
-const db = new pg.Pool({ connectionString: process.env.DATABASE_URL });
+// const db = new pg.Pool({ connectionString: process.env.DATABASE_URL });
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+});
+
 
 const app = express();
 
