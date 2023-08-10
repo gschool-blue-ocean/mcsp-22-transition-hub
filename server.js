@@ -1,14 +1,16 @@
 import express from "express";
-
 import pg from "pg";
+
+
+const PORT = process.env.PORT;
 
 const db = new pg.Pool({ connectionString: process.env.DATABASE_URL });
 
 const app = express();
 
 app.use(express.json());
-app.use('/api/auth', userRouter)
-app.use('/api/admin', adminRouter)
+// app.use('/api/auth', userRouter)
+// app.use('/api/admin', adminRouter)
 
 
 // -------------- SERVER ROUTES FOR TASKS -------------------- 
@@ -122,6 +124,10 @@ app.delete("/api/cohort/:id", async (req, res, next) => {
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send("Internal Server Error");
+});
+
+app.listen(PORT, () => {
+  console.log(`Listening on port ${PORT}`);
 });
 
 export default app;
