@@ -1,10 +1,19 @@
 import React from "react";
 import "./SignOn.css";
-import { useContext} from 'react'
+import { useContext, useState} from 'react'
 import AccountContext from '../Context/AccountServicesContext'
 
 const SignOn = () => {
     const {setCurrentService, accountServices} = useContext(AccountContext)
+    const [formData, setFormData] = useState({
+        username: "",
+        password: ""
+      });
+      const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+      };
+
     return (
         <div className="logOnBG">
             <div className="logOnContainer">
@@ -14,11 +23,16 @@ const SignOn = () => {
                 <div className="login-form">
                     <div className="login_Input">
                         <label>User Name</label>
-                        <input type="text" name="username" />
+                        <input type="text" name="username" 
+                        onChange={handleChange}
+                        value={formData.username}/>
                     </div>
                     <div className="login_Input">
                         <label>Password</label>
-                        <input type="password" name="password" />
+                        <input type="password" name="password" 
+                        onChange={handleChange}
+                        value={formData.password}
+                        />
                     </div>
                     <button className ="SignOn_Buttons" id="signOn_Submit" type="submit">Log On</button>
                 </div>

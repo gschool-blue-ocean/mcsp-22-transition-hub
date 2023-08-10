@@ -1,0 +1,47 @@
+.Register_Manager_Title{
+    font-size: 2rem;
+    text-align: center;
+}
+.Register_Manager_Form_Input_Container{
+    width: 80%;
+    margin-top: 1rem;
+}
+
+.Register_Manager_Form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    width: 80%;
+    margin-top: 40px;
+}
+
+.Register_Manager_Form label {
+    text-align: center;
+}
+.Register_Manager_Form input{
+    padding: 8px;
+    margin-bottom: 12px;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%; 
+    box-sizing: border-box;
+}
+
+.Register_Button{
+    background-color: #0D0F4A;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 15px;
+    margin-top: 10px;
+    cursor: pointer;
+    width: 50%;
+    transition: background-color 0.3s, transform 0.2s;
+}
+.Register_Button:hover{
+    background-color: #EF6E47;
+    transform: scale(1.05);
+}
+
