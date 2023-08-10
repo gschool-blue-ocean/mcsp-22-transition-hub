@@ -1,0 +1,65 @@
+.PassCode_BG{
+    position: fixed;
+    background-color: #393941;
+    color: #f0f0f0;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.PassCode_Container{
+    width: 30%;
+    height: 50%;
+    background-color: #4F515E;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 20px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+.RegisterPassCode_Title{
+    font-size: 2.5rem;
+}
+
+.passCode_form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 80%; 
+}
+.passCode_form label {
+    text-align: center;
+}
+.passCode_form input{
+    padding: 8px;
+    margin-bottom: 12px;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%; 
+    box-sizing: border-box;
+}
+#registerPasscode_submit {  /* Button */
+    background-color: #0D0F4A;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 15px;
+    margin-top: 10px;
+    cursor: pointer;
+    width: 50%;
+    transition: background-color 0.3s, transform 0.2s;
+}
+#registerPasscode_submit:hover{
+    background-color: #EF6E47;
+    transform: scale(1.05);
+}
+.passCode_notes{ /* Description under button */
+    font-size: .875rem;
+}

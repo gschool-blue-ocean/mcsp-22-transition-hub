@@ -20,7 +20,7 @@ const SignOn = () => {
                         <label>Password</label>
                         <input type="password" name="password" />
                     </div>
-                    <button className ="SignOn_Buttons" id="signOn_Submit" type="submit">Submit</button>
+                    <button className ="SignOn_Buttons" id="signOn_Submit" type="submit">Log On</button>
                 </div>
                 <div className="signOn_Register_Container">
                     <button className ="SignOn_Buttons" id="signOn_Register" type="button" onClick={() => setCurrentService(accountServices[1])}>Register</button>

@@ -1,9 +1,13 @@
 import './RegisterPage.css'
+import React from 'react'
+
 
 const RegisterPage = () => {
     return (
-        <div className="logOnBG">
-
+        <div className="RegisterPage_BG">
+            <div className="RegisterPage_Container">
+                
+            </div>        
         </div>
     )
 }
