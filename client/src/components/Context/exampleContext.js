@@ -1,4 +1,4 @@
-import {useState, creatContext, createContext} from 'react'
+import {useState, createContext} from 'react'
 
 const NavigationContext = createContext()
 
