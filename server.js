@@ -6,6 +6,7 @@ import cors from 'cors';
 
 dotenv.config();
 const PORT = process.env.PORT;
+const app = express();
 app.use(cors());
 app.use(express.static('dist'));
 const { Pool } = pkg;
@@ -16,7 +17,6 @@ const pool = new Pool({
 });
 
 
-const app = express();
 
 app.use(express.json());
 // app.use('/api/auth', userRouter)
