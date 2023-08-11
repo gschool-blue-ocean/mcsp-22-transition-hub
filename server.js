@@ -1,12 +1,27 @@
 import express from "express";
+<<<<<<< HEAD
 import pg from "pg";
 //import { studentRouter } from "../Authorization/routes/student.js";
+=======
+// import pg from "pg";
+import pkg from 'pg';
+import dotenv from 'dotenv';
+import cors from 'cors';
+>>>>>>> a00b86c2c4feda806e911d6d2d9cf2100440341d
 
+dotenv.config();
 const PORT = process.env.PORT;
-
-const db = new pg.Pool({ connectionString: process.env.DATABASE_URL });
-
 const app = express();
+app.use(cors());
+app.use(express.static('dist'));
+const { Pool } = pkg;
+
+// const db = new pg.Pool({ connectionString: process.env.DATABASE_URL });
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+});
+
+
 
 app.use(express.json());
 // app.use("/api/auth", studentRouter);

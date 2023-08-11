@@ -12,7 +12,9 @@
 }
 .RegisterPage_Container{
     width: 50%;
+    min-width: 640px;
     height: 80%;
+    min-height: 640px;
     background-color: #4F515E;
     display: flex;
     flex-direction: column;

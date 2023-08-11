@@ -1,13 +1,9 @@
 import React, { useEffect, useState } from "react";
 import AccountServices from "./Components/LoginPage/AccountServices";
-import Header from "./Components/AfterLogin/Header";
+import Header from "./Components/AfterLogin/Reuseable/Header";
 import { AccountProvider } from "./Components/Context/AccountServicesContext";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import AddTask from "./Components/AfterLogin/Reuseable/AddTask/AddTask";
 
 function App() {
   const checkAuth = async () => {
@@ -37,13 +33,40 @@ function App() {
 
   return (
     <>
-      <>
-        <AccountProvider>
-          <AccountServices />
-        </AccountProvider>
-
-        <Header />
-      </>
+      <Router>
+        <Routes>
+          <Route
+            exact
+            path='/'
+            element={
+              <AccountProvider>
+                <AccountServices />
+              </AccountProvider>
+            }
+          ></Route>
+          <Route
+            exact
+            path='/manager'
+            element={
+              <>
+                <Header />
+                {/*Rest of manager stuff goes here*/}
+              </>
+            }
+          ></Route>
+          <Route
+            exact
+            path='/student'
+            element={
+              <>
+                <Header />
+                <AddTask />
+                {/*Rest of student stuff goes here*/}
+              </>
+            }
+          ></Route>
+        </Routes>
+      </Router>
     </>
   );
 }

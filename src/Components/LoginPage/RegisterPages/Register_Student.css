@@ -12,7 +12,6 @@
     align-items: center;
     justify-content: space-around;
     width: 100%;
-    margin-top: 40px;
 }
 
 .Register_Student_Form label {
@@ -26,6 +25,8 @@
     border-radius: 4px;
     width: 100%; 
     box-sizing: border-box;
+    background-color: #cdc6c6df;
+    color: black;
 }
 
 .Register_Button{
@@ -65,6 +66,11 @@
     display: block;
     margin-bottom: 10px;
 }
+.Clearance_Container select{
+    background-color: #cdc6c6df;
+    color: black;
+    font-size: .875rem;
+}
 .BranchSelection {
     width: 50%;
     margin: 0 auto;
@@ -75,6 +81,7 @@
 .BranchSelection select {
     display: block;
     margin-bottom: 10px;
+
 }
 .Register_Student_Branch{ /* Select for branch */
     width: 100%;
@@ -87,6 +94,9 @@
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    background-color: #cdc6c6df;
+    color: black;
+    font-size: .875rem;
 }
 
 .Select_RowContainer{
@@ -97,4 +107,5 @@
 }
 .CenteredRow_ETS_Date{
     width: 25%;
+    margin-top: 5px;
 }

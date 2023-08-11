@@ -1,0 +1,41 @@
+.AddTask_Circle{
+    z-index: 500;
+    height: 5rem;
+    width: 5rem;
+    position: fixed; 
+    bottom: 2rem; 
+    right: 2rem;
+    cursor: pointer;
+    background-color: #EF6E47;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.AddTask_Circle_Plus{
+    font-size: 3rem;
+    margin: 0;
+    color: black;
+    transition: transform 0.2s, color 0.3s;
+}
+
+.AddTask_Circle:hover{
+    background-color: #0D0F4A;
+    transform: scale(1.05);
+}
+.AddTask_Circle:hover .AddTask_Circle_Plus {
+    color: #f0f0f0;
+}
+.AddTask_Circle:active{
+    background-color: #EF6E47;
+    transform: scale(1.15);
+}
+.AddTask_Circle:active .AddTask_Circle_Plus {
+    color: black;
+}
+
+
+
+
