@@ -1,6 +1,6 @@
 import express from "express";
 import pg from "pg";
-
+//import { studentRouter } from "../Authorization/routes/student.js";
 
 const PORT = process.env.PORT;
 
@@ -9,14 +9,15 @@ const db = new pg.Pool({ connectionString: process.env.DATABASE_URL });
 const app = express();
 
 app.use(express.json());
-// app.use('/api/auth', userRouter)
-// app.use('/api/admin', adminRouter)
+// app.use("/api/auth", studentRouter);
+// app.use("/api/admin", adminRouter);
 
-
-// -------------- SERVER ROUTES FOR TASKS -------------------- 
+// -------------- SERVER ROUTES FOR TASKS --------------------
 
 app.get("/api/tasks", async (req, res, next) => {
-  const result = await db.query("SELECT * FROM tasks ORDER BY dueDate").catch(next);
+  const result = await db
+    .query("SELECT * FROM tasks ORDER BY dueDate")
+    .catch(next);
   res.send(result.rows);
 });
 
@@ -37,25 +38,30 @@ app.post("/api/tasks", async (req, res, next) => {
   const { studentsId, taskName, taskDescription, dueDate, apptDate } = req.body;
 
   const result = await db
-    .query("INSERT INTO tasks (studentsId, taskName, taskDescription, dueDate, apptDate) VALUES ($1, $2, $3, $4, $5)", [studentsId, taskName, taskDescription, dueDate, apptDate])
+    .query(
+      "INSERT INTO tasks (studentsId, taskName, taskDescription, dueDate, apptDate) VALUES ($1, $2, $3, $4, $5)",
+      [studentsId, taskName, taskDescription, dueDate, apptDate]
+    )
     .catch(next);
   res.send(result.rows[0]);
 });
 
-app.put("/api/tasks/:id", async (req, res) => { 
+app.put("/api/tasks/:id", async (req, res) => {
   const id = req.params.id;
   const { studentsId, taskName, taskDescription, dueDate, apptDate } = req.body;
   try {
-      const result = await db.query(`UPDATE tasks SET studentsId =$1, taskName = $2, taskDescription = $3, dueDate = $4, apptDate = $5 WHERE taskId = $6 RETURNING *`, [studentsId, taskName, taskDescription, dueDate, apptDate, id]);
-      if (result.rowCount === 0) {
-          res.status(404).send('Task not found');
-      }
-      res.status(200).json(result.rows[0]);
-
+    const result = await db.query(
+      `UPDATE tasks SET studentsId =$1, taskName = $2, taskDescription = $3, dueDate = $4, apptDate = $5 WHERE taskId = $6 RETURNING *`,
+      [studentsId, taskName, taskDescription, dueDate, apptDate, id]
+    );
+    if (result.rowCount === 0) {
+      res.status(404).send("Task not found");
+    }
+    res.status(200).json(result.rows[0]);
   } catch (err) {
-      console.error(err);
-      res.status(500).send('Could not connect to database');
-  } 
+    console.error(err);
+    res.status(500).send("Could not connect to database");
+  }
 });
 
 app.delete("/api/tasks/:id", async (req, res, next) => {
@@ -65,11 +71,12 @@ app.delete("/api/tasks/:id", async (req, res, next) => {
   res.sendStatus(204);
 });
 
-
-//  -------------- SERVER ROUTES FOR COHORTS -------------------- 
+//  -------------- SERVER ROUTES FOR COHORTS --------------------
 
 app.get("/api/cohort", async (req, res, next) => {
-  const result = await db.query("SELECT * FROM cohort ORDER BY cohortId DESC").catch(next);
+  const result = await db
+    .query("SELECT * FROM cohort ORDER BY cohortId DESC")
+    .catch(next);
   res.send(result.rows);
 });
 
@@ -77,7 +84,10 @@ app.post("/api/cohort", async (req, res, next) => {
   const { cohortName, startDate, endDate } = req.body;
 
   const result = await db
-    .query("INSERT INTO cohort (cohortName, startDate, endDate) VALUES ($1, $2, $3)", [cohortName, startDate, endDate])
+    .query(
+      "INSERT INTO cohort (cohortName, startDate, endDate) VALUES ($1, $2, $3)",
+      [cohortName, startDate, endDate]
+    )
     .catch(next);
   res.send(result.rows[0]);
 });
@@ -95,20 +105,22 @@ app.get("/api/cohort/:id", async (req, res, next) => {
   }
 });
 
-app.put("/api/cohort/:id", async (req, res) => { 
+app.put("/api/cohort/:id", async (req, res) => {
   const id = req.params.id;
   const { cohortName, startDate, endDate } = req.body;
   try {
-      const result = await db.query(`UPDATE cohort SET cohortName = $1, startDate = $2, endDate = $3 WHERE cohortId = $4 RETURNING *`, [cohortName, startDate, endDate, id]);
-      if (result.rowCount === 0) {
-          res.status(404).send('Task not found');
-      }
-      res.status(200).json(result.rows[0]);
-
+    const result = await db.query(
+      `UPDATE cohort SET cohortName = $1, startDate = $2, endDate = $3 WHERE cohortId = $4 RETURNING *`,
+      [cohortName, startDate, endDate, id]
+    );
+    if (result.rowCount === 0) {
+      res.status(404).send("Task not found");
+    }
+    res.status(200).json(result.rows[0]);
   } catch (err) {
-      console.error(err);
-      res.status(500).send('Could not connect to database');
-  } 
+    console.error(err);
+    res.status(500).send("Could not connect to database");
+  }
 });
 
 app.delete("/api/cohort/:id", async (req, res, next) => {
@@ -117,7 +129,6 @@ app.delete("/api/cohort/:id", async (req, res, next) => {
   await db.query("DELETE FROM tasks WHERE id = $1", [id]).catch(next);
   res.sendStatus(204);
 });
-
 
 // ----------------------------------------------
 
