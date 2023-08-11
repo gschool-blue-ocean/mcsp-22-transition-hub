@@ -1,13 +1,10 @@
 import express from "express";
-<<<<<<< HEAD
-import pg from "pg";
 //import { studentRouter } from "../Authorization/routes/student.js";
-=======
 // import pg from "pg";
 import pkg from 'pg';
 import dotenv from 'dotenv';
 import cors from 'cors';
->>>>>>> a00b86c2c4feda806e911d6d2d9cf2100440341d
+
 
 dotenv.config();
 const PORT = process.env.PORT;
