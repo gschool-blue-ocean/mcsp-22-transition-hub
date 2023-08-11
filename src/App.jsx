@@ -3,6 +3,7 @@ import AccountServices from "./Components/LoginPage/AccountServices";
 import Header from "./Components/AfterLogin/Reuseable/Header";
 import { AccountProvider } from "./Components/Context/AccountServicesContext";
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom' 
+import AddTask from "./Components/AfterLogin/Reuseable/AddTask/AddTask";
 
 function App() {
   const [count, setCount] = useState(0)
@@ -17,15 +18,21 @@ function App() {
             </AccountProvider>
       }>
       </Route>
-      <Route exact path="/manager" element={
-        <Header />
-        //Rest of manager stuff goes here
-      }>
+        <Route exact path="/manager" element={
+          <>
+            <Header />
+             {/*Rest of manager stuff goes here*/}   
+          </>
+        }>
       </Route>
-            <Route exact path="/student" element={
-        <Header />
-        //Rest of student stuff goes here
-      }>
+        <Route exact path="/student" element={
+          <>
+            <Header />
+            <AddTask />
+            {/*Rest of student stuff goes here*/}   
+          </>
+   
+        }>
       </Route>
       </Routes>
     </Router>
