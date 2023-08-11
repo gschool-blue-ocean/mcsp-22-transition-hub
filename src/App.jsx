@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import AccountServices from "./Components/LoginPage/AccountServices";
-import Header from "./Components/AfterLogin/Header";
+import Header from "./Components/AfterLogin/Reuseable/Header";
 import { AccountProvider } from "./Components/Context/AccountServicesContext";
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom' 
 
@@ -19,10 +19,10 @@ function App() {
       </Route>
       <Route exact path="/manager" element={
         <Header />
-        //Rest of student stuff goes here
+        //Rest of manager stuff goes here
       }>
       </Route>
-            <Route exact path="/manager" element={
+            <Route exact path="/student" element={
         <Header />
         //Rest of student stuff goes here
       }>
