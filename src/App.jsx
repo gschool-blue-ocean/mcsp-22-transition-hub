@@ -4,6 +4,7 @@ import Header from "./Components/AfterLogin/Reuseable/Header";
 import { AccountProvider } from "./Components/Context/AccountServicesContext";
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom' 
 import AddTask from "./Components/AfterLogin/Reuseable/AddTask/AddTask";
+import ManagerSideNav from "./Components/AfterLogin/ManagerViewOnly/Manager Navigation Bar/ManagerSideNav";
 
 function App() {
   const [count, setCount] = useState(0)
@@ -21,6 +22,7 @@ function App() {
         <Route exact path="/manager" element={
           <>
             <Header />
+            <ManagerSideNav />
              {/*Rest of manager stuff goes here*/}   
           </>
         }>
