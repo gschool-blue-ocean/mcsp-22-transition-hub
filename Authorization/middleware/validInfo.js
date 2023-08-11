@@ -8,7 +8,7 @@ export default (req, res, next) => {
   switch (req.path) {
     case "/register":
       if (
-        ![username, password, firstName, lastName, email, role].every(Boolean)
+        ![userName, password, firstName, lastName, email, role].every(Boolean)
       ) {
         return res.json("Missing Credentials");
       } else if (!validEmail(email)) {
@@ -17,7 +17,7 @@ export default (req, res, next) => {
       break;
 
     case "/login":
-      if (![username, password].every(Boolean)) {
+      if (![userName, password].every(Boolean)) {
         return res.json("Missing Credentials");
       }
       break;
