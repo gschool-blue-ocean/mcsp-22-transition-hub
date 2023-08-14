@@ -9,13 +9,13 @@ const AddTaskForm = ({handleClose}) => {
         dueDate: "",
         apptDate: "",
     });
-    
+
       const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
       };
 
-
+      
     return (
         <div className="Add_Task_Form_Container">
             <form className="Add_Task_Form">
