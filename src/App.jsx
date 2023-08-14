@@ -9,19 +9,19 @@ import ManagerSideNav from "./Components/AfterLogin/ManagerViewOnly/Manager Navi
 import AverageCohort from "./Components/AfterLogin/ManagerViewOnly/AverageCohort/averageCohort";
 
 function App() {
-  const checkAuth = async () => {
-    try {
-      const res = await fetch("http://localhost:4500/authentication/verify", {
-        method: "POST",
-        headers: { jwt_token: localStorage.token },
-      });
-      const parseRes = await res.json();
+  // const checkAuth = async () => {
+  //   try {
+  //     const res = await fetch("http://localhost:4500/authentication/verify", {
+  //       method: "POST",
+  //       headers: { jwt_token: localStorage.token },
+  //     });
+  //     const parseRes = await res.json();
 
-      parseRes === true ? setIsAuth(true) : setIsAuth(false);
-    } catch (err) {
-      console.error(err.message);
-    }
-  };
+  //     parseRes === true ? setIsAuth(true) : setIsAuth(false);
+  //   } catch (err) {
+  //     console.error(err.message);
+  //   }
+  // };
 
 //   useEffect(() => {
 //     checkAuth();
