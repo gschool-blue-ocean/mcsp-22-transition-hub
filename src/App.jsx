@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
+import './App.css'
 import AccountServices from "./Components/LoginPage/AccountServices";
 import Header from "./Components/AfterLogin/Reuseable/Header";
 import { AccountProvider } from "./Components/Context/AccountServicesContext";
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom' 
+import StudentInfoBar from "./Components/AfterLogin/Reuseable/StudentInfoBar";
 
 function App() {
   const [count, setCount] = useState(0)
@@ -12,7 +14,7 @@ function App() {
     <Router>
       <Routes>
       <Route exact path="/" element={
-              <AccountProvider>
+            <AccountProvider>
               <AccountServices />
             </AccountProvider>
       }>
@@ -23,8 +25,11 @@ function App() {
       }>
       </Route>
             <Route exact path="/student" element={
+        <>
         <Header />
-        //Rest of student stuff goes here
+        <StudentInfoBar />
+        
+        </>
       }>
       </Route>
       </Routes>

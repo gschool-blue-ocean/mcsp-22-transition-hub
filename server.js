@@ -119,7 +119,32 @@ app.delete("/api/cohort/:id", async (req, res, next) => {
 });
 
 
+// --------------- ROUTE FOR GET STUDENT INFO --------------------
+
+app.get("/api/studentinfo", async (req, res) => {
+  try {
+    const result = await db.query('SELECT users.firstName, users.lastName, users.email, students.ets, students.branch, students.clearanceType FROM users JOIN students ON users.usersId = students.usersId')
+    res.status(200).json(result.rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Could not connect to database');
+  }
+});
+
+app.get ("/api/studentinfo/:id", async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const result = await db.query('SELECT users.firstName, users.lastName, users.email, students.ets, students.branch, students.clearanceType FROM users JOIN students ON users.usersId = students.usersId WHERE users.usersId = $1', [id]).catch(next);
+    res.status(200).json(result.rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Could not connect to database');
+  }
+});
+
 // ----------------------------------------------
+
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
