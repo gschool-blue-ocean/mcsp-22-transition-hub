@@ -6,6 +6,12 @@ import express from "express";
 import bcrypt from "bcrypt";
 const router = express.Router();
 
+router.get("/login", async (req, res, next) => {
+  const user = await pool.query("SELECT * FROM users").catch(next);
+
+  res.json(user.rows);
+});
+
 router.post("/register", validInfo, async (req, res) => {
   try {
     const { userName, password, firstName, lastName, email, role } = req.body;
