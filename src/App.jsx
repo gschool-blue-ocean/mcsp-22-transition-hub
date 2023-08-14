@@ -3,6 +3,7 @@ import './App.css'
 import AccountServices from "./Components/LoginPage/AccountServices";
 import Header from "./Components/AfterLogin/Reuseable/Header";
 import { AccountProvider } from "./Components/Context/AccountServicesContext";
+import { CohortProvider } from "./Components/Context/cohortContext";
 import StudentInfoBar from "./Components/AfterLogin/Reuseable/StudentInfoBar";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import AddTask from "./Components/AfterLogin/Reuseable/AddTask/AddTask";
@@ -56,8 +57,10 @@ function App() {
             element={
               <>
                 <Header />
-                <ManagerSideNav />
-                <AverageCohort />
+                <CohortProvider>
+                  <ManagerSideNav />
+                  <AverageCohort />
+                </CohortProvider>
                 {/*Rest of manager stuff goes here*/}
               </>
             }
