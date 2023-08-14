@@ -26,9 +26,9 @@ function App() {
     }
   };
 
-  useEffect(() => {
-    checkAuth();
-  }, []);
+//   useEffect(() => {
+//     checkAuth();
+//   }, []);
 
   //auth state set defaul to false
   // const [isAuth, setIsAuth] = useState(false);
