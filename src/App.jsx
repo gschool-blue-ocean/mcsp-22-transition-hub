@@ -31,11 +31,11 @@ function App() {
   }, []);
 
   //auth state set defaul to false
-  const [isAuth, setIsAuth] = useState(false);
+  // const [isAuth, setIsAuth] = useState(false);
 
-  const setAuth = (boolean) => {
-    setIsAuth(boolean);
-  };
+  // const setAuth = (boolean) => {
+  //   setIsAuth(boolean);
+  // };
 
   return (
     <>
