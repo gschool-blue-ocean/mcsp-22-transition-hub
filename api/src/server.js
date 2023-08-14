@@ -1,26 +1,14 @@
 import express from "express";
-import pkg from "pg";
-import dotenv from "dotenv";
-import cors from "cors";
-import { userRouter } from "./Authorization/routes/jwtAuth.js";
-import { studentRouter } from "./Authorization/routes/student.js";
-import { manageRouter } from "./Authorization/routes/manager.js";
+import { userRouter } from "../authorization/routes/jwtAuth";
+import pg from "pg";
 
-dotenv.config();
-const PORT = process.env.PORT;
+const db = new pg.Pool({ connectionString: process.env.DATABASE_URL });
+
 const app = express();
-app.use(cors());
-app.use(express.static("dist"));
-const { Pool } = pkg;
-
-// const db = new pg.Pool({ connectionString: process.env.DATABASE_URL });
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-});
 
 app.use(express.json());
-app.use("/api/auth", studentRouter);
-app.use("/api/admin", manageRouter);
+app.use("/api/auth", userRouter);
+app.use("/api/admin", adminRouter);
 
 // -------------- SERVER ROUTES FOR TASKS --------------------
 
@@ -142,15 +130,9 @@ app.delete("/api/cohort/:id", async (req, res, next) => {
 
 // ----------------------------------------------
 
-// ----------------------------------------------
-
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send("Internal Server Error");
-});
-
-app.listen(PORT, () => {
-  console.log(`Listening on port ${PORT}`);
 });
 
 export default app;

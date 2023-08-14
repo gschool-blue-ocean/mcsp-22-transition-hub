@@ -1,6 +1,5 @@
 import authorization from "../middleware/authorization.js";
 import express from "express";
-import validInfo from "../middleware/validInfo.js";
 const router = express.Router();
 
 router.post("/register", validInfo, async (req, res) => {
