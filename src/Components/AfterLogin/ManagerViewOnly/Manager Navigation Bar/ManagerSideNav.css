@@ -1,0 +1,42 @@
+.managerSide_Bar_Container{
+ position: fixed;
+ left: 0;
+ top: 90px;
+ width: 20%;
+ height: 85vh;
+ min-width: 225px;
+ background-color: #3A455A;
+ padding-top: 10px;
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+}
+.managerSide_Bar_Select {
+    position: relative;
+    display: inline-block;
+    border-radius: 4px;
+    padding: 8px;
+    cursor: pointer;
+    width: 90%;
+    font-size: 1.5rem;
+    text-align: center;
+    border: none;
+    border-bottom: whitesmoke 2px solid;
+    background-color: transparent;
+    margin-bottom: 10px;
+  }
+
+  .managerSide_Bar_Select:hover {
+    transition: .3s;
+    background-color: #f0f0f0;
+    border: 1px solid #f0f0f0;
+    color: black;
+  }
+
+.studentCardsContainer{
+    display:flex;
+    flex-direction: column;
+    width: 100%;
+    overflow: scroll;
+    align-items: center;
+}

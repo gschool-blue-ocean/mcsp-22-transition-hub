@@ -1,122 +1,171 @@
 import express from "express";
-import pg from "pg";
+import dotenv from 'dotenv';
+//import { studentRouter } from "../Authorization/routes/student.js";
+// import pg from "pg";
+import pkg from 'pg';
+import cors from 'cors';
 
 
-const PORT = process.env.PORT;
-
-const db = new pg.Pool({ connectionString: process.env.DATABASE_URL });
-
+dotenv.config();
+const PORT = process.env.PORT || 3000;
 const app = express();
+app.use(cors());
+app.use(express.static('dist'));
+const { Pool } = pkg;
+
+// const db = new pg.Pool({ connectionString: process.env.DATABASE_URL });
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
+  }
+});
+
+
 
 app.use(express.json());
-// app.use('/api/auth', userRouter)
-// app.use('/api/admin', adminRouter)
+// app.use("/api/auth", studentRouter);
+// app.use("/api/admin", adminRouter);
 
+// -------------- SERVER ROUTES FOR TASKS --------------------
 
-// -------------- SERVER ROUTES FOR TASKS -------------------- 
+// app.get('/tasks', async (req, res) => {
+//   try{
+//       const result = await pool.query('SELECT * FROM tasks');
+//       res.json(result.rows);
+//   }catch(err){
+//       console.error('Error executing query', err.stack);
+//       res.status(500).json({error: 'Internal server error'});
+//   }
+// });
 
-app.get("/api/tasks", async (req, res, next) => {
-  const result = await db.query("SELECT * FROM tasks ORDER BY dueDate").catch(next);
-  res.send(result.rows);
-});
+app.get('/tasks/:studentsId', async (req, res) => {
+  const studentsId = req.params.studentsId;  
 
-app.get("/api/tasks/:id", async (req, res, next) => {
-  let id = req.params.id;
-  const result = await db
-    .query("SELECT * FROM tasks WHERE taskId = $1", [id])
-    .catch(next);
-
-  if (result.rows.length === 0) {
-    res.sendStatus(404);
-  } else {
-    res.send(result.rows[0]);
+  try {
+      const result = await pool.query('SELECT * FROM tasks WHERE studentsId = $1', [studentsId]);  
+      res.json(result.rows);
+  } catch (error) {
+      console.error('Error querying tasks:', error.stack);
+      res.status(500).send('Internal Server Error');
   }
 });
 
-app.post("/api/tasks", async (req, res, next) => {
-  const { studentsId, taskName, taskDescription, dueDate, apptDate } = req.body;
+// app.get("/api/tasks", async (req, res, next) => {
+//   const result = await db
+//     .query("SELECT * FROM tasks ORDER BY dueDate")
+//     .catch(next);
+//   res.send(result.rows);
+// });
 
-  const result = await db
-    .query("INSERT INTO tasks (studentsId, taskName, taskDescription, dueDate, apptDate) VALUES ($1, $2, $3, $4, $5)", [studentsId, taskName, taskDescription, dueDate, apptDate])
-    .catch(next);
-  res.send(result.rows[0]);
-});
+// app.get("/api/tasks/:id", async (req, res, next) => {
+//   let id = req.params.id;
+//   const result = await db
+//     .query("SELECT * FROM tasks WHERE taskId = $1", [id])
+//     .catch(next);
 
-app.put("/api/tasks/:id", async (req, res) => { 
-  const id = req.params.id;
-  const { studentsId, taskName, taskDescription, dueDate, apptDate } = req.body;
-  try {
-      const result = await db.query(`UPDATE tasks SET studentsId =$1, taskName = $2, taskDescription = $3, dueDate = $4, apptDate = $5 WHERE taskId = $6 RETURNING *`, [studentsId, taskName, taskDescription, dueDate, apptDate, id]);
-      if (result.rowCount === 0) {
-          res.status(404).send('Task not found');
-      }
-      res.status(200).json(result.rows[0]);
+//   if (result.rows.length === 0) {
+//     res.sendStatus(404);
+//   } else {
+//     res.send(result.rows[0]);
+//   }
+// });
 
-  } catch (err) {
-      console.error(err);
-      res.status(500).send('Could not connect to database');
-  } 
-});
+// app.post("/api/tasks", async (req, res, next) => {
+//   const { studentsId, taskName, taskDescription, dueDate, apptDate } = req.body;
 
-app.delete("/api/tasks/:id", async (req, res, next) => {
-  const { id } = req.params;
+//   const result = await db
+//     .query(
+//       "INSERT INTO tasks (studentsId, taskName, taskDescription, dueDate, apptDate) VALUES ($1, $2, $3, $4, $5)",
+//       [studentsId, taskName, taskDescription, dueDate, apptDate]
+//     )
+//     .catch(next);
+//   res.send(result.rows[0]);
+// });
 
-  await db.query("DELETE FROM tasks WHERE id = $1", [id]).catch(next);
-  res.sendStatus(204);
-});
+// app.put("/api/tasks/:id", async (req, res) => {
+//   const id = req.params.id;
+//   const { studentsId, taskName, taskDescription, dueDate, apptDate } = req.body;
+//   try {
+//     const result = await db.query(
+//       `UPDATE tasks SET studentsId =$1, taskName = $2, taskDescription = $3, dueDate = $4, apptDate = $5 WHERE taskId = $6 RETURNING *`,
+//       [studentsId, taskName, taskDescription, dueDate, apptDate, id]
+//     );
+//     if (result.rowCount === 0) {
+//       res.status(404).send("Task not found");
+//     }
+//     res.status(200).json(result.rows[0]);
+//   } catch (err) {
+//     console.error(err);
+//     res.status(500).send("Could not connect to database");
+//   }
+// });
 
+// app.delete("/api/tasks/:id", async (req, res, next) => {
+//   const { id } = req.params;
 
-//  -------------- SERVER ROUTES FOR COHORTS -------------------- 
+//   await db.query("DELETE FROM tasks WHERE id = $1", [id]).catch(next);
+//   res.sendStatus(204);
+// });
 
-app.get("/api/cohort", async (req, res, next) => {
-  const result = await db.query("SELECT * FROM cohort ORDER BY cohortId DESC").catch(next);
-  res.send(result.rows);
-});
+// //  -------------- SERVER ROUTES FOR COHORTS --------------------
 
-app.post("/api/cohort", async (req, res, next) => {
-  const { cohortName, startDate, endDate } = req.body;
+// app.get("/api/cohort", async (req, res, next) => {
+//   const result = await db
+//     .query("SELECT * FROM cohort ORDER BY cohortId DESC")
+//     .catch(next);
+//   res.send(result.rows);
+// });
 
-  const result = await db
-    .query("INSERT INTO cohort (cohortName, startDate, endDate) VALUES ($1, $2, $3)", [cohortName, startDate, endDate])
-    .catch(next);
-  res.send(result.rows[0]);
-});
+// app.post("/api/cohort", async (req, res, next) => {
+//   const { cohortName, startDate, endDate } = req.body;
 
-app.get("/api/cohort/:id", async (req, res, next) => {
-  let id = req.params.id;
-  const result = await db
-    .query("SELECT * FROM cohort WHERE cohortId = $1", [id])
-    .catch(next);
+//   const result = await db
+//     .query(
+//       "INSERT INTO cohort (cohortName, startDate, endDate) VALUES ($1, $2, $3)",
+//       [cohortName, startDate, endDate]
+//     )
+//     .catch(next);
+//   res.send(result.rows[0]);
+// });
 
-  if (result.rows.length === 0) {
-    res.sendStatus(404);
-  } else {
-    res.send(result.rows[0]);
-  }
-});
+// app.get("/api/cohort/:id", async (req, res, next) => {
+//   let id = req.params.id;
+//   const result = await db
+//     .query("SELECT * FROM cohort WHERE cohortId = $1", [id])
+//     .catch(next);
 
-app.put("/api/cohort/:id", async (req, res) => { 
-  const id = req.params.id;
-  const { cohortName, startDate, endDate } = req.body;
-  try {
-      const result = await db.query(`UPDATE cohort SET cohortName = $1, startDate = $2, endDate = $3 WHERE cohortId = $4 RETURNING *`, [cohortName, startDate, endDate, id]);
-      if (result.rowCount === 0) {
-          res.status(404).send('Task not found');
-      }
-      res.status(200).json(result.rows[0]);
+//   if (result.rows.length === 0) {
+//     res.sendStatus(404);
+//   } else {
+//     res.send(result.rows[0]);
+//   }
+// });
 
-  } catch (err) {
-      console.error(err);
-      res.status(500).send('Could not connect to database');
-  } 
-});
+// app.put("/api/cohort/:id", async (req, res) => {
+//   const id = req.params.id;
+//   const { cohortName, startDate, endDate } = req.body;
+//   try {
+//     const result = await db.query(
+//       `UPDATE cohort SET cohortName = $1, startDate = $2, endDate = $3 WHERE cohortId = $4 RETURNING *`,
+//       [cohortName, startDate, endDate, id]
+//     );
+//     if (result.rowCount === 0) {
+//       res.status(404).send("Task not found");
+//     }
+//     res.status(200).json(result.rows[0]);
+//   } catch (err) {
+//     console.error(err);
+//     res.status(500).send("Could not connect to database");
+//   }
+// });
 
-app.delete("/api/cohort/:id", async (req, res, next) => {
-  const { id } = req.params;
+// app.delete("/api/cohort/:id", async (req, res, next) => {
+//   const { id } = req.params;
 
-  await db.query("DELETE FROM tasks WHERE id = $1", [id]).catch(next);
-  res.sendStatus(204);
-});
+//   await db.query("DELETE FROM tasks WHERE id = $1", [id]).catch(next);
+//   res.sendStatus(204);
+// });
 
 
 // --------------- ROUTE FOR GET STUDENT INFO --------------------
