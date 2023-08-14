@@ -28,20 +28,17 @@ router.post("/register", validInfo, async (req, res, next) => {
       [username, bcryptPassword, firstName, lastName, email, role]
     ).catch(next);
 
-    const token = jwtGenerator(newUser.rows[0].userId);
+    const token = jwtGenerator(newUser.rows[0].usersId);
 
     res.json({ token });
 
 });
 
 router.post("/login", validInfo, async (req, res, next) => {
-
   const { username, password } = req.body;
     const user = await pool.query(
       'SELECT * FROM users WHERE userName = $1', [username]
     ).catch(next);
-
-    console.log(user)
 
     if (user.rows.length < 1) {
       return res.send("User not found...");
@@ -57,7 +54,6 @@ router.post("/login", validInfo, async (req, res, next) => {
     }
 
     const token = jwtGenerator(newUser.rows[0].userId);
-
     res.json({ token });
 
 });
