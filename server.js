@@ -4,6 +4,9 @@ import dotenv from 'dotenv';
 // import pg from "pg";
 import pkg from 'pg';
 import cors from 'cors';
+import pool from "./DB/db.js";
+import { userRouter } from "./Authorization/routes/jwtAuth.js";
+import { manageRouter } from "./Authorization/routes/manager.js";
 
 
 dotenv.config();
@@ -11,21 +14,14 @@ const PORT = process.env.PORT || 3000;
 const app = express();
 app.use(cors());
 app.use(express.static('dist'));
-const { Pool } = pkg;
+// const { Pool } = pkg;
 
 // const db = new pg.Pool({ connectionString: process.env.DATABASE_URL });
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false
-  }
-});
-
-
 
 app.use(express.json());
-// app.use("/api/auth", studentRouter);
-// app.use("/api/admin", adminRouter);
+
+app.use('/api/auth', userRouter)
+app.use('/api/manager', manageRouter)
 
 // -------------- SERVER ROUTES FOR TASKS --------------------
 
@@ -39,17 +35,17 @@ app.use(express.json());
 //   }
 // });
 
-app.get('/tasks/:studentsId', async (req, res) => {
-  const studentsId = req.params.studentsId;  
+// app.get('/tasks/:studentsId', async (req, res) => {
+//   const studentsId = req.params.studentsId;  
 
-  try {
-      const result = await pool.query('SELECT * FROM tasks WHERE studentsId = $1', [studentsId]);  
-      res.json(result.rows);
-  } catch (error) {
-      console.error('Error querying tasks:', error.stack);
-      res.status(500).send('Internal Server Error');
-  }
-});
+//   try {
+//       const result = await pool.query('SELECT * FROM tasks WHERE studentsId = $1', [studentsId]);  
+//       res.json(result.rows);
+//   } catch (error) {
+//       console.error('Error querying tasks:', error.stack);
+//       res.status(500).send('Internal Server Error');
+//   }
+// });
 
 // app.get("/api/tasks", async (req, res, next) => {
 //   const result = await db
@@ -108,12 +104,10 @@ app.get('/tasks/:studentsId', async (req, res) => {
 //   res.sendStatus(204);
 // });
 
-// //  -------------- SERVER ROUTES FOR COHORTS --------------------
+// //  -------------- SERVER ROUTES FOR COHORTS -------------------- 
 
 // app.get("/api/cohort", async (req, res, next) => {
-//   const result = await db
-//     .query("SELECT * FROM cohort ORDER BY cohortId DESC")
-//     .catch(next);
+//   const result = await db.query("SELECT * FROM cohort ORDER BY cohortId DESC").catch(next);
 //   res.send(result.rows);
 // });
 
@@ -191,8 +185,6 @@ app.get ("/api/studentinfo/:id", async (req, res) => {
     res.status(500).send('Could not connect to database');
   }
 });
-
-// ----------------------------------------------
 
 
 /* -------------------------- Important -------------------  */
