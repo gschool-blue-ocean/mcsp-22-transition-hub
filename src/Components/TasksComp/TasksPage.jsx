@@ -4,8 +4,13 @@ import './tasks.css';
 const TasksPage = () => {
     const [tasks, setTasks] = useState([]);
     const [activeTaskId, setActiveTaskId] = useState(null);
+    const [completedTasks, setCompletedTasks] = useState({});
 
     useEffect(() => {
+        const savedTasks = localStorage.getItem('completedTasks');
+        if (savedTasks) {
+            setCompletedTasks(JSON.parse(savedTasks));
+        }
         fetchTasks();
     }, []);
 
@@ -24,9 +29,30 @@ const TasksPage = () => {
         setActiveTaskId(prevId => prevId === taskId ? null : taskId);
     };
 
+    const handleCheckboxChange = (taskId) => {
+        setCompletedTasks((prevCompletedTasks) => {
+            const updatedTasks = {
+                ...prevCompletedTasks,
+                [taskId]: !prevCompletedTasks[taskId]
+            };
+    
+            localStorage.setItem('completedTasks', JSON.stringify(updatedTasks));
+            return updatedTasks;
+        });
+    };
+
     const renderTask = (task) => (
         <div key={task.tasksid} className="accordion">
             <div className="accordion-header" onClick={() => toggleAccordion(task.tasksid)}>
+                <input
+                    type="checkbox"
+                    className="task-checkbox"
+                    checked={!!completedTasks[task.tasksid]}
+                    onClick={(e) => {
+                        handleCheckboxChange(task.tasksid);
+                        e.stopPropagation(); 
+                    }}
+                />
                 {task.taskname} 
                 <span className="due-date">{task.duedate}</span>
                 <span className="accordion-arrow">{activeTaskId === task.tasksid ? '▼' : '▶'}</span>
