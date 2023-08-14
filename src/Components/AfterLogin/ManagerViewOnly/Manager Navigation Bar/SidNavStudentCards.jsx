@@ -5,7 +5,7 @@ const SidNavStudentCards = ({student, id}) => {
     //Can use id to return different colors
     return (
         <button className="navStudent_cards">
-            {student}
+            {student.firstname} {student.lastname}
         </button>
     )
 }

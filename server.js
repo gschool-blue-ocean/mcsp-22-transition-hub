@@ -170,6 +170,39 @@ app.get('/tasks/:studentsId', async (req, res) => {
 
 // // ----------------------------------------------
 
+/* -------------------------- Important -------------------  */
+app.get("/manager/:cohort/students", async (req, res) => {
+  const {cohort} = req.params
+  try {
+    const result = await pool.query("SELECT u.firstName, u.lastName FROM users u JOIN students s ON u.usersId = s.usersId WHERE s.cohortsId = $1 ORDER BY u.lastName ASC", [cohort])
+    if (result.rows.length === 0) {
+      res.sendStatus(404);
+    } else {
+      res.send(result.rows);
+    }
+  } catch (error) {
+    console.error('Error querying tasks:', error.stack);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+app.get("/manager/cohorts", async (req, res) => {
+  const {cohort} = req.params
+  try {
+    const result = await pool.query("SELECT * from cohorts")
+    if (result.rows.length === 0) {
+      res.sendStatus(404);
+    } else {
+      res.send(result.rows);
+    }
+  } catch (error) {
+    console.error('Error querying tasks:', error.stack);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+/* -------------------------- Important -------------------  */
+
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send("Internal Server Error");
