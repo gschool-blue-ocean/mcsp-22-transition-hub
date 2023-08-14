@@ -51,7 +51,6 @@ app.get('/tasks/:studentsId', async (req, res) => {
   }
 });
 
-
 // app.get("/api/tasks", async (req, res, next) => {
 //   const result = await db
 //     .query("SELECT * FROM tasks ORDER BY dueDate")
@@ -168,7 +167,33 @@ app.get('/tasks/:studentsId', async (req, res) => {
 //   res.sendStatus(204);
 // });
 
-// // ----------------------------------------------
+
+// --------------- ROUTE FOR GET STUDENT INFO --------------------
+
+app.get("/api/studentinfo", async (req, res) => {
+  try {
+    const result = await db.query('SELECT users.firstName, users.lastName, users.email, students.ets, students.branch, students.clearanceType FROM users JOIN students ON users.usersId = students.usersId')
+    res.status(200).json(result.rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Could not connect to database');
+  }
+});
+
+app.get ("/api/studentinfo/:id", async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const result = await db.query('SELECT users.firstName, users.lastName, users.email, students.ets, students.branch, students.clearanceType FROM users JOIN students ON users.usersId = students.usersId WHERE users.usersId = $1', [id]).catch(next);
+    res.status(200).json(result.rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Could not connect to database');
+  }
+});
+
+// ----------------------------------------------
+
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
