@@ -4,6 +4,9 @@ import Header from "./Components/AfterLogin/Reuseable/Header";
 import { AccountProvider } from "./Components/Context/AccountServicesContext";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import AddTask from "./Components/AfterLogin/Reuseable/AddTask/AddTask";
+import TasksPage from "./Components/TasksComp/TasksPage";
+import ManagerSideNav from "./Components/AfterLogin/ManagerViewOnly/Manager Navigation Bar/ManagerSideNav";
+import AverageCohort from "./Components/AfterLogin/ManagerViewOnly/AverageCohort/averageCohort";
 
 function App() {
   const checkAuth = async () => {
@@ -50,6 +53,8 @@ function App() {
             element={
               <>
                 <Header />
+                <ManagerSideNav />
+                <AverageCohort />
                 {/*Rest of manager stuff goes here*/}
               </>
             }
@@ -61,6 +66,7 @@ function App() {
               <>
                 <Header />
                 <AddTask />
+                <TasksPage />
                 {/*Rest of student stuff goes here*/}
               </>
             }
@@ -68,7 +74,7 @@ function App() {
         </Routes>
       </Router>
     </>
-  );
+  )
 }
 
 export default App;
