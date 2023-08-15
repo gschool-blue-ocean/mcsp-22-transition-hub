@@ -27,15 +27,15 @@ app.use('/api/manager', manageRouter)
 
 // -------------- SERVER ROUTES FOR TASKS --------------------
 
-// app.get('/tasks', async (req, res) => {
-//   try{
-//       const result = await pool.query('SELECT * FROM tasks');
-//       res.json(result.rows);
-//   }catch(err){
-//       console.error('Error executing query', err.stack);
-//       res.status(500).json({error: 'Internal server error'});
-//   }
-// });
+app.get('/tasks', async (req, res) => {
+  try{
+      const result = await pool.query('SELECT * FROM tasks');
+      res.json(result.rows);
+  }catch(err){
+      console.error('Error executing query', err.stack);
+      res.status(500).json({error: 'Internal server error'});
+  }
+});
 
 app.get('/tasks/:studentsId', async (req, res) => {
   const studentsId = req.params.studentsId;  
@@ -188,7 +188,7 @@ app.patch("/tasks/:taskId/complete", async (req, res) => {
 
 app.get("/api/studentinfo", async (req, res) => {
   try {
-    const result = await db.query('SELECT users.firstName, users.lastName, users.email, students.ets, students.branch, students.clearanceType FROM users JOIN students ON users.usersId = students.usersId')
+    const result = await pool.query('SELECT users.firstName, users.lastName, users.email, students.ets, students.branch, students.clearanceType FROM users JOIN students ON users.usersId = students.usersId')
     res.status(200).json(result.rows);
   } catch (err) {
     console.error(err);
@@ -196,11 +196,11 @@ app.get("/api/studentinfo", async (req, res) => {
   }
 });
 
-app.get ("/api/studentinfo/:id", async (req, res) => {
-  const { id } = req.params;
+app.get ("/user/:usersId/info", async (req, res) => {
+  const { usersId } = req.params;
 
   try {
-    const result = await db.query('SELECT users.firstName, users.lastName, users.email, students.ets, students.branch, students.clearanceType FROM users JOIN students ON users.usersId = students.usersId WHERE users.usersId = $1', [id]).catch(next);
+    const result = await pool.query('SELECT users.firstName, users.lastName, users.email, students.ets, students.branch, students.clearanceType FROM users JOIN students ON users.usersId = students.usersId WHERE users.usersId = $1', [usersId]);
     res.status(200).json(result.rows);
   } catch (err) {
     console.error(err);
