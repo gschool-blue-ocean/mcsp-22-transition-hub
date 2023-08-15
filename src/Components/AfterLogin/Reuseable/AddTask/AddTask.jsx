@@ -18,7 +18,7 @@ const AddTask = () => {
             {visible ? <AddTaskForm handleVisibility={handleVisibility}/> : <></>} */}
             
             <div className='AddTask_Circle' onClick={handleVisibility}>  
-                <FontAwesomeIcon icon={faCirclePlus} style={{color: "#fb8c50", height: '4.5rem', width: '4.5rem'}} />
+                <FontAwesomeIcon icon={faCirclePlus} style={{color: "rgb(251, 140, 0)", height: '4.5rem', width: '4.5rem'}} />
             </div>
                 {visible ? <AddTaskForm handleVisibility={handleVisibility}/> : <></>}
         </>
