@@ -4,13 +4,8 @@ import './tasks.css';
 const TasksPage = () => {
     const [tasks, setTasks] = useState([]);
     const [activeTaskId, setActiveTaskId] = useState(null);
-    const [completedTasks, setCompletedTasks] = useState({});
-
+    
     useEffect(() => {
-        const savedTasks = localStorage.getItem('completedTasks');
-        if (savedTasks) {
-            setCompletedTasks(JSON.parse(savedTasks));
-        }
         fetchTasks();
     }, []);
 
@@ -29,16 +24,22 @@ const TasksPage = () => {
         setActiveTaskId(prevId => prevId === taskId ? null : taskId);
     };
 
-    const handleCheckboxChange = (taskId) => {
-        setCompletedTasks((prevCompletedTasks) => {
-            const updatedTasks = {
-                ...prevCompletedTasks,
-                [taskId]: !prevCompletedTasks[taskId]
-            };
-    
-            localStorage.setItem('completedTasks', JSON.stringify(updatedTasks));
-            return updatedTasks;
-        });
+    const handleCheckboxChange = async (taskId, currentCompletedStatus) => {
+        try {
+            const response = await fetch(`http://localhost:3000/tasks/${taskId}/complete`, {
+                method: 'PATCH'
+            });
+            if (!response.ok) throw new Error("Failed to update task completion status");
+            
+            // Update the task in the state with the new completion status
+            setTasks(prevTasks => prevTasks.map(task => 
+                task.tasksid === taskId 
+                ? {...task, completed: !currentCompletedStatus} 
+                : task
+            ));
+        } catch (error) {
+            console.error("There was a problem updating the task completion status:", error);
+        }
     };
 
     const renderTask = (task) => (
@@ -47,9 +48,9 @@ const TasksPage = () => {
                 <input
                     type="checkbox"
                     className="task-checkbox"
-                    checked={!!completedTasks[task.tasksid]}
+                    checked={!!task.completed}
                     onClick={(e) => {
-                        handleCheckboxChange(task.tasksid);
+                        handleCheckboxChange(task.tasksid, task.completed);
                         e.stopPropagation(); 
                     }}
                 />
