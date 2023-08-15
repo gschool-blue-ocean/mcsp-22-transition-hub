@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useContext } from "react";
 import SingleAverage from "./SingleAverage";
 import './averageCohort.css'
-import CohortContext from "../../../Context/cohortContext";
+import CohortContext from "../../../Context/CohortContext";
 
 const AverageCohort = () => {
     const {cohortTaskList} = useContext(CohortContext)
