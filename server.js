@@ -1,5 +1,6 @@
 import express from "express";
 import dotenv from 'dotenv';
+import path from 'path';
 //import { studentRouter } from "../Authorization/routes/student.js";
 // import pg from "pg";
 import pkg from 'pg';
@@ -241,6 +242,10 @@ app.get("/manager/cohorts", async (req, res) => {
 });
 
 /* -------------------------- Important -------------------  */
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+});
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
