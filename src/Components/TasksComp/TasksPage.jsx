@@ -31,7 +31,6 @@ const TasksPage = () => {
             });
             if (!response.ok) throw new Error("Failed to update task completion status");
             
-            // Update the task in the state with the new completion status
             setTasks(prevTasks => prevTasks.map(task => 
                 task.tasksid === taskId 
                 ? {...task, completed: !currentCompletedStatus} 
