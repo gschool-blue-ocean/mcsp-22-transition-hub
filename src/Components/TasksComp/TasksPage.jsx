@@ -1,46 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import './tasks.css';
+import StudentContext from '../Context/StudentContext';
 
 const TasksPage = () => {
-    const [tasks, setTasks] = useState([]);
-    const [activeTaskId, setActiveTaskId] = useState(null);
+
+
+    const {handleCheckboxChange, toggleAccordion, tasks, activeTaskId, studentId} = useContext(StudentContext)
+
     
-    useEffect(() => {
-        fetchTasks();
-    }, []);
-
-    const fetchTasks = async () => {
-        try {
-            const response = await fetch("http://localhost:3000/tasks/1");
-            if (!response.ok) throw new Error("Network response was not ok");
-            const data = await response.json();
-            setTasks(data);
-        } catch (error) {
-            setTasks(null);
-        }
-    };
-
-    const toggleAccordion = (taskId) => {
-        setActiveTaskId(prevId => prevId === taskId ? null : taskId);
-    };
-
-    const handleCheckboxChange = async (taskId, currentCompletedStatus) => {
-        try {
-            const response = await fetch(`http://localhost:3000/tasks/${taskId}/complete`, {
-                method: 'PATCH'
-            });
-            if (!response.ok) throw new Error("Failed to update task completion status");
-            
-            setTasks(prevTasks => prevTasks.map(task => 
-                task.tasksid === taskId 
-                ? {...task, completed: !currentCompletedStatus} 
-                : task
-            ));
-        } catch (error) {
-            console.error("There was a problem updating the task completion status:", error);
-        }
-    };
-
     const renderTask = (task) => (
         <div key={task.tasksid} className="accordion">
             <div className="accordion-header" onClick={() => toggleAccordion(task.tasksid)}>
@@ -65,14 +32,17 @@ const TasksPage = () => {
             )}
         </div>
     );
-
+console.log(studentId)
+console.log(tasks)
     return (
-        <div className="entirePage">
-            <div className="studentPage">
-                <h1 className="studentTaskList">Student Tasks</h1>
-                {tasks.map(renderTask)}
-            </div>
-        </div>
+        studentId && (tasks.length > 1) ? (
+            <div className="entirePage">
+                <div className="studentPage">
+                    <h1 className="studentTaskList">Student Tasks</h1>
+                    {tasks.map(renderTask)}
+                </div>
+             </div>
+        ) : <> ... Loading </>
     );
 }
 
