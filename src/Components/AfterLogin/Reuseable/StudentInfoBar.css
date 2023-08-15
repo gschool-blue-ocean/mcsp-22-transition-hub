@@ -38,13 +38,13 @@
     border: 3px solid rgb(251, 140, 0, 0.6)
 }
 
-.studentInfo-categoryTitle {
+.studentInfo-key {
     padding-right: 5px;
     color: rgb(119, 152, 213);
     font-weight: bold;
 }
 
-.studentInfo-categoryDetails {
+.studentInfo-value {
     color: rgb(119, 152, 213);
-    font-weight: normal;
+    font-weight: bold;
 }
