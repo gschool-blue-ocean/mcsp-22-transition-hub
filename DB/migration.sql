@@ -32,7 +32,7 @@ CREATE TABLE students (
   studentsId SERIAL PRIMARY KEY,
   usersId UUID REFERENCES users(usersId),
   cohortsId INTEGER REFERENCES cohorts(cohortsId),
-  ets varchar,
+  ets date,
   branch varchar,
   clearanceType varchar
 );
@@ -42,8 +42,8 @@ CREATE TABLE tasks (
   studentsId INTEGER REFERENCES students(studentsId),
   taskName varchar,
   taskDescription text,
-  dueDate varchar,
-  apptDate varchar,
+  dueDate date,
+  apptDate date,
   completed BOOLEAN
 );
 

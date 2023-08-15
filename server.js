@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 3000;
 const app = express();
 // const staticPath = path.join(__dirname, "MCSP-22-TRANSITION-HUB");
 app.use(cors());
-// app.use(express.static('dist'));
+app.use(express.static('dist'));
 // app.use(express.static(staticPath));
 // const { Pool } = pkg;
 
@@ -247,7 +247,7 @@ app.get("/manager/cohorts", async (req, res) => {
 app.get('/manager/tasks/all', async (req, res) => {
   try{
     const result = await pool.query(`
-    SELECT c.cohortsId, t.studentsId, t.tasksId, t.taskName, t.taskDescription, t.dueDate, t.apptDate 
+    SELECT c.cohortsId, t.studentsId, t.tasksId, t.taskName, t.taskDescription, t.dueDate, t.apptDate, t.completed 
     FROM tasks t
     JOIN students s ON t.studentsId = s.studentsId
     JOIN cohorts c ON s.cohortsId = c.cohortsId
@@ -264,9 +264,9 @@ app.get('/manager/tasks/all', async (req, res) => {
 });
 /* -------------------------- Important -------------------  */
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'MCSP-22-TRANSITION-HUB', 'index.html'));
-});
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, 'MCSP-22-TRANSITION-HUB', 'index.html'));
+// });
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
