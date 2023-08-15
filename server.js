@@ -263,7 +263,7 @@ app.get('/manager/tasks/all', async (req, res) => {
 /* -------------------------- Important -------------------  */
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+  res.sendFile(path.join(__dirname, 'MCSP-22-TRANSITION-HUB', 'index.html'));
 });
 
 app.use((err, req, res, next) => {
