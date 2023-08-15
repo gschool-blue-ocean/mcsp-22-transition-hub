@@ -13,10 +13,10 @@ import { manageRouter } from "./Authorization/routes/manager.js";
 dotenv.config();
 const PORT = process.env.PORT || 3000;
 const app = express();
-const staticPath = path.join(__dirname, "MCSP-22-TRANSITION-HUB");
+// const staticPath = path.join(__dirname, "MCSP-22-TRANSITION-HUB");
 app.use(cors());
 // app.use(express.static('dist'));
-app.use(express.static(staticPath));
+// app.use(express.static(staticPath));
 // const { Pool } = pkg;
 
 // const db = new pg.Pool({ connectionString: process.env.DATABASE_URL });

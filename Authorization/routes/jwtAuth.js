@@ -10,13 +10,13 @@ const router = express.Router();
 
 router.post("/register", validInfo, async (req, res, next) => {
 
-    const { username, password, firstName, lastName, email, role } = req.body;
+    const { username, password, firstName, lastName, email, role, cohortsId } = req.body;
     const user = await pool.query("SELECT * FROM users WHERE email = $1", [
       email,
     ]).catch(next);
 
     if (user.rows.length !== 0) {
-      res.send("This email is already in use.");
+      return res.send("This email is already in use.");
     }
 
     const saltRounds = 10;
@@ -27,6 +27,21 @@ router.post("/register", validInfo, async (req, res, next) => {
       `INSERT INTO users(userName, password, firstName, lastName, email, role) VALUES($1, $2, $3, $4, $5, $6) RETURNING *`,
       [username, bcryptPassword, firstName, lastName, email, role]
     ).catch(next);
+
+    console.log(newUser.rows[0].usersid)
+
+    // const addedUser = await newUser.rows[0].usersId
+    
+    // console.log(newUser.rows[0].usersId)
+    // console.log(addedUser)
+
+    if (role.toLowerCase() === 'student') {
+      console.log('adding to students')
+      const { ets, branch, clearanceType } = req.body
+      console.log(ets, branch, clearanceType)
+      await pool.query('INSERT INTO students (usersId, cohortsId, ets, branch, clearanceType) VALUES ($1, $2, $3, $4, $5)', 
+      [newUser.rows[0].usersid, cohortsId, ets, branch, clearanceType]).catch(next)
+    }
 
     const token = jwtGenerator(newUser.rows[0].usersId);
 
