@@ -247,7 +247,7 @@ app.get("/manager/cohorts", async (req, res) => {
 app.get('/manager/tasks/all', async (req, res) => {
   try{
     const result = await pool.query(`
-    SELECT c.cohortsId, t.studentsId, t.tasksId, t.taskName, t.taskDescription, t.dueDate, t.apptDate 
+    SELECT c.cohortsId, t.studentsId, t.tasksId, t.taskName, t.taskDescription, t.dueDate, t.apptDate, t.completed 
     FROM tasks t
     JOIN students s ON t.studentsId = s.studentsId
     JOIN cohorts c ON s.cohortsId = c.cohortsId

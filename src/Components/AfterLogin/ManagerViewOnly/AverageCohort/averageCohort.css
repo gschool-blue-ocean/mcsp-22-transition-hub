@@ -1,6 +1,6 @@
 .average_cohort_container{
     position: fixed;
-    left: 21%;
+    left: 24%;
     top: 90px;
     width: 80%;
     overflow: scroll;
@@ -8,4 +8,10 @@
 .average_cohort_title{
     text-align: center;
     width: 90%;
+}
+
+@media(max-width: 1024px){
+    .average_cohort_container{
+        left: 250px;
+    }
 }
