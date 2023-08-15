@@ -1,38 +1,41 @@
 import React, { useEffect, useState } from "react";
+import "./App.css";
 import AccountServices from "./Components/LoginPage/AccountServices";
 import Header from "./Components/AfterLogin/Reuseable/Header";
 import { AccountProvider } from "./Components/Context/AccountServicesContext";
+import { CohortProvider } from "./Components/Context/cohortContext";
+import StudentInfoBar from "./Components/AfterLogin/Reuseable/StudentInfoBar";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import AddTask from "./Components/AfterLogin/Reuseable/AddTask/AddTask";
 import TasksPage from "./Components/TasksComp/TasksPage";
 import ManagerSideNav from "./Components/AfterLogin/ManagerViewOnly/Manager Navigation Bar/ManagerSideNav";
-import AverageCohort from "./Components/AfterLogin/ManagerViewOnly/AverageCohort/averageCohort";
+import AverageCohort from "./Components/AfterLogin/ManagerViewOnly/AverageCohort/AverageCohort";
 
 function App() {
-  const checkAuth = async () => {
-    try {
-      const res = await fetch("http://localhost:4500/authentication/verify", {
-        method: "POST",
-        headers: { jwt_token: localStorage.token },
-      });
-      const parseRes = await res.json();
+  // const checkAuth = async () => {
+  //   try {
+  //     const res = await fetch("http://localhost:4500/authentication/verify", {
+  //       method: "POST",
+  //       headers: { jwt_token: localStorage.token },
+  //     });
+  //     const parseRes = await res.json();
 
-      parseRes === true ? setIsAuth(true) : setIsAuth(false);
-    } catch (err) {
-      console.error(err.message);
-    }
-  };
+  //     parseRes === true ? setIsAuth(true) : setIsAuth(false);
+  //   } catch (err) {
+  //     console.error(err.message);
+  //   }
+  // };
 
-  useEffect(() => {
-    checkAuth();
-  }, []);
+  //   useEffect(() => {
+  //     checkAuth();
+  //   }, []);
 
-  //auth state set default to false
-  const [isAuth, setIsAuth] = useState(false);
+  //auth state set defaul to false
+  // const [isAuth, setIsAuth] = useState(false);
 
-  const setAuth = (boolean) => {
-    setIsAuth(boolean);
-  };
+  // const setAuth = (boolean) => {
+  //   setIsAuth(boolean);
+  // };
 
   return (
     <>
@@ -53,8 +56,10 @@ function App() {
             element={
               <>
                 <Header />
-                <ManagerSideNav />
-                <AverageCohort />
+                <CohortProvider>
+                  <ManagerSideNav />
+                  <AverageCohort />
+                </CohortProvider>
                 {/*Rest of manager stuff goes here*/}
               </>
             }
@@ -65,6 +70,7 @@ function App() {
             element={
               <>
                 <Header />
+                <StudentInfoBar />
                 <AddTask />
                 <TasksPage />
                 {/*Rest of student stuff goes here*/}
