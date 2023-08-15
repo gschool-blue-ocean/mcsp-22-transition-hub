@@ -3,12 +3,12 @@ import "./App.css";
 import AccountServices from "./Components/LoginPage/AccountServices";
 import Header from "./Components/AfterLogin/Reuseable/Header";
 import { AccountProvider } from "./Components/Context/AccountServicesContext";
-import { CohortProvider } from "./Components/Context/cohortContext";
+import { CohortProvider } from "./Components/Context/CohortContext";
 import StudentInfoBar from "./Components/AfterLogin/Reuseable/StudentInfoBar";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import AddTask from "./Components/AfterLogin/Reuseable/AddTask/AddTask";
 import TasksPage from "./Components/TasksComp/TasksPage";
-import ManagerSideNav from "./Components/AfterLogin/ManagerViewOnly/Manager Navigation Bar/ManagerSideNav";
+import ManagerSideNav from "./Components/AfterLogin/ManagerViewOnly/ManagerNavigationBar/ManagerSideNav";
 import AverageCohort from "./Components/AfterLogin/ManagerViewOnly/AverageCohort/AverageCohort";
 
 function App() {

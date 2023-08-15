@@ -3,21 +3,22 @@
   width: 100vw;
   height: 100vh;
   display: flex;
-  justify-content: center;
-  align-Items: center;
+  /* justify-content: center; */
+  /* align-Items: center; */
+  margin-left: 19rem;
 }
 
 .studentPage {
   background-color: #4f515e;
   /* border: 1px  solid red; */
   width: 45%;
-  height: auto;
-  border-radius: 20px;
+  height: 84.5%;
+  /* border-radius: 20px; */
   padding: 2.5rem;
   position: fixed;
-    align-items: center;
-    top: 150px;
-    width: 55%;
+    /* align-items: center; */
+    top: 6.5%;
+    width: 69%;
     /* overflow: scroll; */
 }
 
@@ -59,11 +60,9 @@ float: left;
   background-color: #0d0f4a; 
 }
 
-.due-date {
-    /* border: 1px solid red; */
-    /* margin-left: 20rem; */
-    /* margin-right: -19rem; */
-}
+/* .due-date {
+  
+} */
 
 /* Arrow indicator for the accordion state (collapsed/expanded) */
 .accordion-arrow {

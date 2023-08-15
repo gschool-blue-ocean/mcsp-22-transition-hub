@@ -44,7 +44,8 @@ CREATE TABLE tasks (
   taskName varchar,
   taskDescription text,
   dueDate varchar,
-  apptDate varchar
+  apptDate varchar,
+  completed BOOLEAN
 );
 
 -- CREATE TABLE comments (
