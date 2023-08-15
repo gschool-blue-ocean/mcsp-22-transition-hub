@@ -4,7 +4,7 @@ import {useState, createContext} from 'react'
 const CohortContext = createContext()
 
 export const CohortProvider = ({children}) => {
-    const url = "http://0.0.0.0:8000"
+    const url = "http://localhost:8000"
 
     /* ------------------  To Grab Students First and Last Name By Cohort ------------------- */
     const [cohort, setCohort] = useState(0) //Current displayed Cohort
@@ -41,11 +41,30 @@ export const CohortProvider = ({children}) => {
         getData()
       }, [])
 
+/* ---------------------All Tasks with Cohortid------------------------- */
+      const [cohortTaskList, setCohortTaskList] = useState([]) 
+      useEffect(() =>{
+        const getData = async () => {
+        try{
+                const result = await fetch(`${url}/manager/tasks/all`)
+                const data = await result.json()
+                setCohortTaskList([...data])
+              }
+         catch (err){
+            console.log(err.message)
+            }
+        }
+        getData()
+      }, [])
+
+
+
 
     return <CohortContext.Provider value={{
         displayedStudents,
         setCohort,
-        cohortList
+        cohortList,
+        cohortTaskList
     }}>
         {children}
         </CohortContext.Provider>
