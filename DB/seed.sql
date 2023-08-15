@@ -12,9 +12,9 @@ INSERT INTO users(userName, password, firstName, lastName, email, role) VALUES('
 INSERT INTO users(userName, password, firstName, lastName, email, role) VALUES('ev123', '12345qwerty', 'Eddie', 'Vedder', 'eddievedder@gmail.com', 'manager');
 
 
-INSERT INTO cohorts(cohortName, startDate, endDate) VALUES('2023-01', '05/01/2023', '09/01/2023');
-INSERT INTO cohorts(cohortName, startDate, endDate) VALUES('2023-02', '06/01/2023', '10/01/2023');
-INSERT INTO cohorts(cohortName, startDate, endDate) VALUES('2023-03', '07/01/2023', '11/01/2023');
+INSERT INTO cohorts(cohortName, startDate, endDate) VALUES('2023-01', '2023-05-01', '2023-09-01');
+INSERT INTO cohorts(cohortName, startDate, endDate) VALUES('2023-02', '2023-06-01', '2023-10-01');
+INSERT INTO cohorts(cohortName, startDate, endDate) VALUES('2023-03', '2023-07-01', '2023-11-01');
 
 
 INSERT INTO managers(usersId, cohortsId) VALUES('caf391f4-c4ec-4066-afa2-1e80f457a74a', 3);
@@ -22,44 +22,44 @@ INSERT INTO managers(usersId, cohortsId) VALUES('926ad601-5c9a-41ca-b2df-dbff64c
 INSERT INTO managers(usersId, cohortsId) VALUES('8519ed7a-257f-4422-90ea-091d19a9ff00', 5);
 
 
-INSERT INTO students(usersId, cohortsId, ets, branch, clearanceType) VALUES('08fe5d56-2f71-42a1-b782-7a533452313f', 3, '09/01/2023', 'Army', 'SECRET');
-INSERT INTO students(usersId, cohortsId, ets, branch, clearanceType) VALUES('0819e06c-63cd-42c6-a504-4de0b341feb6', 3, '09/01/2023', 'Navy', 'SECRET');
-INSERT INTO students(usersId, cohortsId, ets, branch, clearanceType) VALUES('cb42ccb6-76e1-47fd-ac67-299aa7c82f2f', 3, '09/01/2023', 'Air Force', 'SECRET');
-INSERT INTO students(usersId, cohortsId, ets, branch, clearanceType) VALUES('42c8b0bb-6241-4439-b93e-490ebaddc1a9', 4, '10/01/2023', 'Army', 'SECRET');
-INSERT INTO students(usersId, cohortsId, ets, branch, clearanceType) VALUES('aa21d834-64fb-4d82-90f5-b32fa4723d0c', 4, '10/01/2023', 'Navy', 'SECRET');
-INSERT INTO students(usersId, cohortsId, ets, branch, clearanceType) VALUES('01b26f1f-04b6-4e99-bf05-366cd61c83d1', 4, '10/01/2023', 'Air Force', 'SECRET');
-INSERT INTO students(usersId, cohortsId, ets, branch, clearanceType) VALUES('29b89ef8-e25d-4594-a90e-1396bc5a478e', 5, '11/01/2023', 'Army', 'SECRET');
-INSERT INTO students(usersId, cohortsId, ets, branch, clearanceType) VALUES('babdecf8-c8eb-4650-91e2-b393c3e449b3', 5, '11/01/2023', 'Navy', 'SECRET');
-INSERT INTO students(usersId, cohortsId, ets, branch, clearanceType) VALUES('fbefe90b-4367-4429-bc60-ffa6be838cc9', 5, '11/01/2023', 'Air Force', 'SECRET');
+INSERT INTO students(usersId, cohortsId, ets, branch, clearanceType) VALUES('08fe5d56-2f71-42a1-b782-7a533452313f', 3, '2023-09-01', 'Army', 'SECRET');
+INSERT INTO students(usersId, cohortsId, ets, branch, clearanceType) VALUES('0819e06c-63cd-42c6-a504-4de0b341feb6', 3, '2023-09-01', 'Navy', 'SECRET');
+INSERT INTO students(usersId, cohortsId, ets, branch, clearanceType) VALUES('cb42ccb6-76e1-47fd-ac67-299aa7c82f2f', 3, '2023-09-01', 'Air Force', 'SECRET');
+INSERT INTO students(usersId, cohortsId, ets, branch, clearanceType) VALUES('42c8b0bb-6241-4439-b93e-490ebaddc1a9', 4, '2023-10-01', 'Army', 'SECRET');
+INSERT INTO students(usersId, cohortsId, ets, branch, clearanceType) VALUES('aa21d834-64fb-4d82-90f5-b32fa4723d0c', 4, '2023-10-01', 'Navy', 'SECRET');
+INSERT INTO students(usersId, cohortsId, ets, branch, clearanceType) VALUES('01b26f1f-04b6-4e99-bf05-366cd61c83d1', 4, '2023-10-01', 'Air Force', 'SECRET');
+INSERT INTO students(usersId, cohortsId, ets, branch, clearanceType) VALUES('29b89ef8-e25d-4594-a90e-1396bc5a478e', 5, '2023-11-01', 'Army', 'SECRET');
+INSERT INTO students(usersId, cohortsId, ets, branch, clearanceType) VALUES('babdecf8-c8eb-4650-91e2-b393c3e449b3', 5, '2023-11-01', 'Navy', 'SECRET');
+INSERT INTO students(usersId, cohortsId, ets, branch, clearanceType) VALUES('fbefe90b-4367-4429-bc60-ffa6be838cc9', 5, '2023-11-01', 'Air Force', 'SECRET');
 
 
-INSERT INTO tasks(studentsId, taskName, taskDescription, dueDate, apptDate, completed) VALUES(1, 'CIF Turn-In', 'Clean, Inventory, and Organize and equipment to get turned in', '09/01/2023', '08/25/2023', false);
-INSERT INTO tasks(studentsId, taskName, taskDescription, dueDate, apptDate, completed) VALUES(1, 'DD 214', '214 accurancy with correction and updates', '09/01/2023', '08/27/2023', false);
-INSERT INTO tasks(studentsId, taskName, taskDescription, dueDate, apptDate, completed) VALUES(1, 'Clear', 'Follow checklist and complete all neccessary actions', '09/01/2023', '08/25/2023-09/01/2023', false);
-INSERT INTO tasks(studentsId, taskName, taskDescription, dueDate, apptDate, completed) VALUES(2, 'CIF Turn-In', 'Clean, Inventory, and Organize and equipment to get turned in', '10/01/2023', '09/25/2023', false);
-INSERT INTO tasks(studentsId, taskName, taskDescription, dueDate, apptDate, completed) VALUES(2, 'DD 214', '214 accurancy with correction and updates', '10/01/2023', '09/27/2023', false);
-INSERT INTO tasks(studentsId, taskName, taskDescription, dueDate, apptDate, completed) VALUES(2, 'Clear', 'Follow checklist and complete all neccessary actions', '10/01/2023', '09/25/2023-10/01/2023', false);
-INSERT INTO tasks(studentsId, taskName, taskDescription, dueDate, apptDate, completed) VALUES(3, 'CIF Turn-In', 'Clean, Inventory, and Organize and equipment to get turned in', '11/01/2023', '10/25/2023', false);
-INSERT INTO tasks(studentsId, taskName, taskDescription, dueDate, apptDate, completed) VALUES(3, 'DD 214', '214 accurancy with correction and updates', '11/01/2023', '10/27/2023', false);
-INSERT INTO tasks(studentsId, taskName, taskDescription, dueDate, apptDate, completed) VALUES(3, 'Clear', 'Follow checklist and complete all neccessary actions', '11/01/2023', '10/25/2023-11/01/2023', false);
-INSERT INTO tasks(studentsId, taskName, taskDescription, dueDate, apptDate, completed) VALUES(4, 'CIF Turn-In', 'Clean, Inventory, and Organize and equipment to get turned in', '09/01/2023', '08/25/2023', false);
-INSERT INTO tasks(studentsId, taskName, taskDescription, dueDate, apptDate, completed) VALUES(4, 'DD 214', '214 accurancy with correction and updates', '09/01/2023', '08/27/2023', false);
-INSERT INTO tasks(studentsId, taskName, taskDescription, dueDate, apptDate, completed) VALUES(4, 'Clear', 'Follow checklist and complete all neccessary actions', '09/01/2023', '08/25/2023-09/01/2023', false);
-INSERT INTO tasks(studentsId, taskName, taskDescription, dueDate, apptDate, completed) VALUES(5, 'CIF Turn-In', 'Clean, Inventory, and Organize and equipment to get turned in', '10/01/2023', '09/25/2023', false);
-INSERT INTO tasks(studentsId, taskName, taskDescription, dueDate, apptDate, completed) VALUES(5, 'DD 214', '214 accurancy with correction and updates', '10/01/2023', '09/27/2023', false);
-INSERT INTO tasks(studentsId, taskName, taskDescription, dueDate, apptDate, completed) VALUES(5, 'Clear', 'Follow checklist and complete all neccessary actions', '10/01/2023', '09/25/2023-10/01/2023', false);
-INSERT INTO tasks(studentsId, taskName, taskDescription, dueDate, apptDate, completed) VALUES(6, 'CIF Turn-In', 'Clean, Inventory, and Organize and equipment to get turned in', '11/01/2023', '10/25/2023', false);
-INSERT INTO tasks(studentsId, taskName, taskDescription, dueDate, apptDate, completed) VALUES(6, 'DD 214', '214 accurancy with correction and updates', '11/01/2023', '10/27/2023', false);
-INSERT INTO tasks(studentsId, taskName, taskDescription, dueDate, apptDate, completed) VALUES(6, 'Clear', 'Follow checklist and complete all neccessary actions', '11/01/2023', '10/25/2023-11/01/2023', false);
-INSERT INTO tasks(studentsId, taskName, taskDescription, dueDate, apptDate, completed) VALUES(7, 'CIF Turn-In', 'Clean, Inventory, and Organize and equipment to get turned in', '09/01/2023', '08/25/2023', false);
-INSERT INTO tasks(studentsId, taskName, taskDescription, dueDate, apptDate, completed) VALUES(7, 'DD 214', '214 accurancy with correction and updates', '09/01/2023', '08/27/2023', false);
-INSERT INTO tasks(studentsId, taskName, taskDescription, dueDate, apptDate, completed) VALUES(7, 'Clear', 'Follow checklist and complete all neccessary actions', '09/01/2023', '08/25/2023-09/01/2023', false);
-INSERT INTO tasks(studentsId, taskName, taskDescription, dueDate, apptDate, completed) VALUES(8, 'CIF Turn-In', 'Clean, Inventory, and Organize and equipment to get turned in', '10/01/2023', '09/25/2023', false);
-INSERT INTO tasks(studentsId, taskName, taskDescription, dueDate, apptDate, completed) VALUES(8, 'DD 214', '214 accurancy with correction and updates', '10/01/2023', '09/27/2023', false);
-INSERT INTO tasks(studentsId, taskName, taskDescription, dueDate, apptDate, completed) VALUES(8, 'Clear', 'Follow checklist and complete all neccessary actions', '10/01/2023', '09/25/2023-10/01/2023', false);
-INSERT INTO tasks(studentsId, taskName, taskDescription, dueDate, apptDate, completed) VALUES(9, 'CIF Turn-In', 'Clean, Inventory, and Organize and equipment to get turned in', '11/01/2023', '10/25/2023', false);
-INSERT INTO tasks(studentsId, taskName, taskDescription, dueDate, apptDate, completed) VALUES(9, 'DD 214', '214 accurancy with correction and updates', '11/01/2023', '10/27/2023', false);
-INSERT INTO tasks(studentsId, taskName, taskDescription, dueDate, apptDate, completed) VALUES(9, 'Clear', 'Follow checklist and complete all neccessary actions', '11/01/2023', '10/25/2023-11/01/2023', false);
+INSERT INTO tasks(studentsId, taskName, taskDescription, dueDate, apptDate, completed) VALUES(1, 'CIF Turn-In', 'Clean, Inventory, and Organize and equipment to get turned in', '2023-09-01', '2023-08-25', false);
+INSERT INTO tasks(studentsId, taskName, taskDescription, dueDate, apptDate, completed) VALUES(1, 'DD 214', '214 accurancy with correction and updates', '2023-09-01', '2023-08-27', false);
+INSERT INTO tasks(studentsId, taskName, taskDescription, dueDate, apptDate, completed) VALUES(1, 'Clear', 'Follow checklist and complete all neccessary actions', '2023-09-01', '2023-08-25', false);
+INSERT INTO tasks(studentsId, taskName, taskDescription, dueDate, apptDate, completed) VALUES(2, 'CIF Turn-In', 'Clean, Inventory, and Organize and equipment to get turned in', '2023-10-01', '2023-09-25', false);
+INSERT INTO tasks(studentsId, taskName, taskDescription, dueDate, apptDate, completed) VALUES(2, 'DD 214', '214 accurancy with correction and updates', '2023-10-01', '2023-09-27', false);
+INSERT INTO tasks(studentsId, taskName, taskDescription, dueDate, apptDate, completed) VALUES(2, 'Clear', 'Follow checklist and complete all neccessary actions', '2023-10-01', '2023-09-25', false);
+INSERT INTO tasks(studentsId, taskName, taskDescription, dueDate, apptDate, completed) VALUES(3, 'CIF Turn-In', 'Clean, Inventory, and Organize and equipment to get turned in', '2023-11-01', '2023-10-25', false);
+INSERT INTO tasks(studentsId, taskName, taskDescription, dueDate, apptDate, completed) VALUES(3, 'DD 214', '214 accurancy with correction and updates', '2023-11-01', '2023-10-27', false);
+INSERT INTO tasks(studentsId, taskName, taskDescription, dueDate, apptDate, completed) VALUES(3, 'Clear', 'Follow checklist and complete all neccessary actions', '2023-11-01', '2023-10-25', false);
+INSERT INTO tasks(studentsId, taskName, taskDescription, dueDate, apptDate, completed) VALUES(4, 'CIF Turn-In', 'Clean, Inventory, and Organize and equipment to get turned in', '2023-09-01', '2023-08-25', false);
+INSERT INTO tasks(studentsId, taskName, taskDescription, dueDate, apptDate, completed) VALUES(4, 'DD 214', '214 accurancy with correction and updates', '2023-09-01', '2023-08-27', false);
+INSERT INTO tasks(studentsId, taskName, taskDescription, dueDate, apptDate, completed) VALUES(4, 'Clear', 'Follow checklist and complete all neccessary actions', '2023-09-01', '2023-08-25', false);
+INSERT INTO tasks(studentsId, taskName, taskDescription, dueDate, apptDate, completed) VALUES(5, 'CIF Turn-In', 'Clean, Inventory, and Organize and equipment to get turned in', '2023-10-01', '2023-09-25', false);
+INSERT INTO tasks(studentsId, taskName, taskDescription, dueDate, apptDate, completed) VALUES(5, 'DD 214', '214 accurancy with correction and updates', '2023-10-01', '2023-09-27', false);
+INSERT INTO tasks(studentsId, taskName, taskDescription, dueDate, apptDate, completed) VALUES(5, 'Clear', 'Follow checklist and complete all neccessary actions', '2023-10-01', '2023-09-25', false);
+INSERT INTO tasks(studentsId, taskName, taskDescription, dueDate, apptDate, completed) VALUES(6, 'CIF Turn-In', 'Clean, Inventory, and Organize and equipment to get turned in', '2023-11-01', '2023-10-25', false);
+INSERT INTO tasks(studentsId, taskName, taskDescription, dueDate, apptDate, completed) VALUES(6, 'DD 214', '214 accurancy with correction and updates', '2023-11-01', '2023-10-27', false);
+INSERT INTO tasks(studentsId, taskName, taskDescription, dueDate, apptDate, completed) VALUES(6, 'Clear', 'Follow checklist and complete all neccessary actions', '2023-11-01', '2023-10-25', false);
+INSERT INTO tasks(studentsId, taskName, taskDescription, dueDate, apptDate, completed) VALUES(7, 'CIF Turn-In', 'Clean, Inventory, and Organize and equipment to get turned in', '2023-09-01', '2023-08-25', false);
+INSERT INTO tasks(studentsId, taskName, taskDescription, dueDate, apptDate, completed) VALUES(7, 'DD 214', '214 accurancy with correction and updates', '2023-09-01', '2023-08-27', false);
+INSERT INTO tasks(studentsId, taskName, taskDescription, dueDate, apptDate, completed) VALUES(7, 'Clear', 'Follow checklist and complete all neccessary actions', '2023-09-01', '2023-08-25', false);
+INSERT INTO tasks(studentsId, taskName, taskDescription, dueDate, apptDate, completed) VALUES(8, 'CIF Turn-In', 'Clean, Inventory, and Organize and equipment to get turned in', '2023-10-01', '2023-09-25', false);
+INSERT INTO tasks(studentsId, taskName, taskDescription, dueDate, apptDate, completed) VALUES(8, 'DD 214', '214 accurancy with correction and updates', '2023-10-01', '2023-09-27', false);
+INSERT INTO tasks(studentsId, taskName, taskDescription, dueDate, apptDate, completed) VALUES(8, 'Clear', 'Follow checklist and complete all neccessary actions', '2023-10-01', '2023-09-25', false);
+INSERT INTO tasks(studentsId, taskName, taskDescription, dueDate, apptDate, completed) VALUES(9, 'CIF Turn-In', 'Clean, Inventory, and Organize and equipment to get turned in', '2023-11-01', '2023-10-25', false);
+INSERT INTO tasks(studentsId, taskName, taskDescription, dueDate, apptDate, completed) VALUES(9, 'DD 214', '214 accurancy with correction and updates', '2023-11-01', '2023-10-27', false);
+INSERT INTO tasks(studentsId, taskName, taskDescription, dueDate, apptDate, completed) VALUES(9, 'Clear', 'Follow checklist and complete all neccessary actions', '2023-11-01', '2023-10-25', false);
 -- INSERT INTO comments(managersId, tasksId, description) VALUES('Do the dishes');
 
 
