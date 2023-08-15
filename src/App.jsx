@@ -27,7 +27,7 @@ function App() {
     checkAuth();
   }, []);
 
-  //auth state set defaul to false
+  //auth state set default to false
   const [isAuth, setIsAuth] = useState(false);
 
   const setAuth = (boolean) => {
@@ -43,7 +43,7 @@ function App() {
             path='/'
             element={
               <AccountProvider>
-                <AccountServices />
+                <AccountServices setAuth={setAuth} />
               </AccountProvider>
             }
           ></Route>
@@ -74,7 +74,7 @@ function App() {
         </Routes>
       </Router>
     </>
-  )
+  );
 }
 
 export default App;
