@@ -1,29 +1,26 @@
 import express from "express";
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
 //import { studentRouter } from "../Authorization/routes/student.js";
 // import pg from "pg";
-import pkg from 'pg';
-import cors from 'cors';
+import pkg from "pg";
+import cors from "cors";
 import pool from "./DB/db.js";
 import { userRouter } from "./Authorization/routes/jwtAuth.js";
 import { manageRouter } from "./Authorization/routes/manager.js";
-
 
 dotenv.config();
 const PORT = process.env.PORT || 3000;
 const app = express();
 app.use(cors());
-app.use(express.static('dist'));
+app.use(express.static("dist"));
 // const { Pool } = pkg;
 
 // const db = new pg.Pool({ connectionString: process.env.DATABASE_URL });
 
 app.use(express.json());
 
-app.use('/api/auth', userRouter)
-app.use('/api/manager', manageRouter)
-
-  
+app.use("/api/auth", userRouter);
+app.use("/api/manager", manageRouter);
 
 // -------------- SERVER ROUTES FOR TASKS --------------------
 
@@ -94,10 +91,10 @@ app.put("/api/tasks/:id", async (req, res) => {
   }
 });
 
-app.delete("/api/tasks/:id", async (req, res, next) => {
-  const { id } = req.params;
+// app.delete("/api/tasks/:id", async (req, res, next) => {
+//   const { id } = req.params;
 
-// //  -------------- SERVER ROUTES FOR COHORTS -------------------- 
+// //  -------------- SERVER ROUTES FOR COHORTS --------------------
 
 // app.get("/api/cohort", async (req, res, next) => {
 //   const result = await db.query("SELECT * FROM cohort ORDER BY cohortId DESC").catch(next);
@@ -161,60 +158,68 @@ app.delete("/api/cohort/:id", async (req, res, next) => {
   res.sendStatus(204);
 });
 
-
 // --------------- ROUTE FOR GET STUDENT INFO --------------------
 
 app.get("/api/studentinfo", async (req, res) => {
   try {
-    const result = await db.query('SELECT users.firstName, users.lastName, users.email, students.ets, students.branch, students.clearanceType FROM users JOIN students ON users.usersId = students.usersId')
+    const result = await db.query(
+      "SELECT users.firstName, users.lastName, users.email, students.ets, students.branch, students.clearanceType FROM users JOIN students ON users.usersId = students.usersId"
+    );
     res.status(200).json(result.rows);
   } catch (err) {
     console.error(err);
-    res.status(500).send('Could not connect to database');
+    res.status(500).send("Could not connect to database");
   }
 });
 
-app.get ("/api/studentinfo/:id", async (req, res) => {
+app.get("/api/studentinfo/:id", async (req, res) => {
   const { id } = req.params;
 
   try {
-    const result = await db.query('SELECT users.firstName, users.lastName, users.email, students.ets, students.branch, students.clearanceType FROM users JOIN students ON users.usersId = students.usersId WHERE users.usersId = $1', [id]).catch(next);
+    const result = await db
+      .query(
+        "SELECT users.firstName, users.lastName, users.email, students.ets, students.branch, students.clearanceType FROM users JOIN students ON users.usersId = students.usersId WHERE users.usersId = $1",
+        [id]
+      )
+      .catch(next);
     res.status(200).json(result.rows);
   } catch (err) {
     console.error(err);
-    res.status(500).send('Could not connect to database');
+    res.status(500).send("Could not connect to database");
   }
 });
 
-
 /* -------------------------- Important -------------------  */
 app.get("/manager/:cohort/students", async (req, res) => {
-  const {cohort} = req.params
+  const { cohort } = req.params;
   try {
-    const result = await pool.query("SELECT u.firstName, u.lastName FROM users u JOIN students s ON u.usersId = s.usersId WHERE s.cohortsId = $1 ORDER BY u.lastName ASC", [cohort])
+    const result = await pool.query(
+      "SELECT u.firstName, u.lastName FROM users u JOIN students s ON u.usersId = s.usersId WHERE s.cohortsId = $1 ORDER BY u.lastName ASC",
+      [cohort]
+    );
     if (result.rows.length === 0) {
       res.sendStatus(404);
     } else {
       res.send(result.rows);
     }
   } catch (error) {
-    console.error('Error querying tasks:', error.stack);
-    res.status(500).send('Internal Server Error');
+    console.error("Error querying tasks:", error.stack);
+    res.status(500).send("Internal Server Error");
   }
 });
 
 app.get("/manager/cohorts", async (req, res) => {
-  const {cohort} = req.params
+  const { cohort } = req.params;
   try {
-    const result = await pool.query("SELECT * from cohorts")
+    const result = await pool.query("SELECT * from cohorts");
     if (result.rows.length === 0) {
       res.sendStatus(404);
     } else {
       res.send(result.rows);
     }
   } catch (error) {
-    console.error('Error querying tasks:', error.stack);
-    res.status(500).send('Internal Server Error');
+    console.error("Error querying tasks:", error.stack);
+    res.status(500).send("Internal Server Error");
   }
 });
 
