@@ -16,15 +16,15 @@ const SingleAverage = ({cohort, id}) => {
         <>
           <div className='column' key={cohort.id} style={{background: backgroundcolor, color: textColor}}>
                         <div className="side">
-                            <div>{cohort.name}</div>
+                            <div>{cohort.cohortsid}</div>
                         </div>
                         <div className="middle">
                             <div className="bar-container">
-                                <div className={`bar`} style={{ width: `${cohort.average}%` }} ></div>
+                                <div className={`bar`} style={{ width: `${Math.ceil(cohort.average * 100)}%` }} ></div>
                             </div>
                         </div>
                         <div className="side-right">
-                            {`${cohort.average}%`}
+                            {`${Math.ceil(cohort.average * 100)}%`}
                         </div>
                     </div>
         </>
