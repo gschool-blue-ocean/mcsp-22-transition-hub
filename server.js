@@ -23,6 +23,8 @@ app.use(express.json());
 app.use('/api/auth', userRouter)
 app.use('/api/manager', manageRouter)
 
+  
+
 // -------------- SERVER ROUTES FOR TASKS --------------------
 
 // app.get('/tasks', async (req, res) => {
@@ -35,17 +37,17 @@ app.use('/api/manager', manageRouter)
 //   }
 // });
 
-// app.get('/tasks/:studentsId', async (req, res) => {
-//   const studentsId = req.params.studentsId;  
+app.get('/tasks/:studentsId', async (req, res) => {
+  const studentsId = req.params.studentsId;  
 
-//   try {
-//       const result = await pool.query('SELECT * FROM tasks WHERE studentsId = $1', [studentsId]);  
-//       res.json(result.rows);
-//   } catch (error) {
-//       console.error('Error querying tasks:', error.stack);
-//       res.status(500).send('Internal Server Error');
-//   }
-// });
+  try {
+      const result = await pool.query('SELECT * FROM tasks WHERE studentsId = $1', [studentsId]);  
+      res.json(result.rows);
+  } catch (error) {
+      console.error('Error querying tasks:', error.stack);
+      res.status(500).send('Internal Server Error');
+  }
+});
 
 // app.get("/api/tasks", async (req, res, next) => {
 //   const result = await db
