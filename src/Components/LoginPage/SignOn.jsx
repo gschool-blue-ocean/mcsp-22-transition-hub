@@ -1,25 +1,51 @@
 import React from "react";
 import "./SignOn.css";
+import axios from "axios";
+import { useAuthDataUpdate } from "../../../Authorization/utils/AuthContext";
 import { useContext, useState } from "react";
-//import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import AccountContext from "../Context/AccountServicesContext";
 
-const SignOn = ({ setAuth }) => {
+const SignOn = () => {
+  const setAuthData = useAuthDataUpdate();
   const { setCurrentService, accountServices } = useContext(AccountContext);
   const [formData, setFormData] = useState({
     userName: "",
     password: "",
   });
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+  };
+
+  const onSubmitForm = async (e) => {
+    e.preventDefault();
+    try {
+      const body = { email, password };
+      const response = await axios.post(
+        "http://localhost:4500/api/auth/login",
+        body
+      );
+
+      const parseRes = await response.data;
+
+      if (parseRes.token) {
+        localStorage.setItem("token", parseRes.token);
+        setAuthData(true);
+      } else {
+        setAuthData(false);
+      }
+    } catch (err) {
+      console.error(err.message);
+    }
   };
 
   return (
     <div className='logOnBG'>
       <div className='logOnContainer'>
         <div className='logOn_Title'>LogIn</div>
-        <div className='login-form'>
+        <form className='login-form' onSubmit={onSubmitForm}>
           <div className='login_Input'>
             <label>User Name</label>
             <input
@@ -32,8 +58,8 @@ const SignOn = ({ setAuth }) => {
           <div className='login_Input'>
             <label>Password</label>
             <input
-              type='password'
-              name='password'
+              type='current-password'
+              name='current-password'
               onChange={handleChange}
               value={formData.password}
             />
@@ -41,7 +67,7 @@ const SignOn = ({ setAuth }) => {
           <button className='SignOn_Buttons' id='signOn_Submit' type='submit'>
             Log On
           </button>
-        </div>
+        </form>
         <div className='signOn_Register_Container'>
           <button
             className='SignOn_Buttons'

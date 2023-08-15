@@ -9,7 +9,7 @@ import { userRouter } from "./Authorization/routes/jwtAuth.js";
 import { manageRouter } from "./Authorization/routes/manager.js";
 
 dotenv.config();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
 const app = express();
 app.use(cors());
 app.use(express.static("dist"));

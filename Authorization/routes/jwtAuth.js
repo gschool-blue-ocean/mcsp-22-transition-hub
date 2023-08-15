@@ -2,7 +2,6 @@ import authorization from "../middleware/authorization.js";
 import jwtGenerator from "../utils/jwtGenerator.js";
 import validInfo from "../middleware/validInfo.js";
 import pool from "../../DB/db.js";
-import pool from "../../DB/db.js";
 import express from "express";
 import bcrypt from "bcrypt";
 const router = express.Router();
@@ -16,7 +15,7 @@ router.get("/login", async (req, res, next) => {
 // ----------------------- AUTH ROUTES FOR LOGIN AND REGISTER -------------------------------------------------------------
 
 router.post("/register", validInfo, async (req, res, next) => {
-  const { username, password, firstName, lastName, email, role } = req.body;
+  const { userName, password, firstName, lastName, email, role } = req.body;
   const user = await pool
     .query("SELECT * FROM users WHERE email = $1", [email])
     .catch(next);
@@ -32,7 +31,7 @@ router.post("/register", validInfo, async (req, res, next) => {
   const newUser = await pool
     .query(
       `INSERT INTO users(userName, password, firstName, lastName, email, role) VALUES($1, $2, $3, $4, $5, $6) RETURNING *`,
-      [username, bcryptPassword, firstName, lastName, email, role]
+      [userName, bcryptPassword, firstName, lastName, email, role]
     )
     .catch(next);
 
