@@ -1,17 +1,23 @@
 .AddTask_Circle{
     z-index: 500;
-    /* height: 5rem;
-    width: 5rem; */
+    height: 4rem;
+    width: 4rem;
     position: fixed; 
     bottom: 1.5rem; 
     right: 1.5rem;
     cursor: pointer;
-    /* background-color: rgb(251, 140, 0, 0.8);
-    border-radius: 50%; */
+    background-color: #393941;
+    border-radius: 50%; 
     display: flex;
     align-items: center;
     justify-content: center;
     transition: background-color 0.3s, transform 0.2s;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    border: 6px solid transparent;
+}
+.AddTask_Circle:hover {
+    background-color: #393941;
+    border: 6px solid rgb(251, 140, 0);
 }
 
 /* .AddTask_Circle_Plus{
