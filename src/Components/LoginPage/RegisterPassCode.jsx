@@ -5,7 +5,10 @@ import { useContext, useState } from 'react'
 
 const RegisterPassCode = () => {
 
-    const {setCurrentService, accountServices} = useContext(AccountContext)
+    //use effect to grab all the cohort names, put into student in the state
+    const {setCurrentService, accountService, currentCohort} = useContext(AccountContext)
+
+
     const [formData, setFormData] = useState({
         PassCode: "",
       });
