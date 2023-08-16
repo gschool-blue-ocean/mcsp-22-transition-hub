@@ -29,16 +29,19 @@ const TasksPage = () => {
                     type="checkbox"
                     className="task-checkbox"
                     checked={!!task.completed}
-                    onClick={(e) => {
-                        handleCheckboxChange(task.tasksid, task.completed);
+                    onChange={(e) => {
                         e.stopPropagation(); 
+                        handleCheckboxChange(task.tasksid, !task.completed);
+                    }}
+                    onClick={(e) => {
+                        e.stopPropagation();
                     }}
                 />
-                {task.taskname} 
-                <span className={dueDateClass}>
+                <p className="headerName">{task.taskname}</p> 
+                <p className={dueDateClass}>
                     {moment(task.duedate).format('MM/DD/YYYY')}
-                    </span>
-                <span className="accordion-arrow">{activeTaskId === task.tasksid ? '▼' : '▶'}</span>
+                    </p>
+                <p className="accordion-arrow">{activeTaskId === task.tasksid ? '▼' : '▶'}</p>
             </div>
             {activeTaskId === task.tasksid && (
                 <div className="expansion">

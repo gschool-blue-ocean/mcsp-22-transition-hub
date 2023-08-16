@@ -72,6 +72,39 @@ app.patch("/tasks/:taskId/complete", async (req, res) => {
   }
 });
 
+app.post("/tasks", async (req, res) => {
+  const { studentsId, taskName, taskDescription, dueDate, apptDate } = req.body;
+  
+  try {
+    const newTask = await pool.query(
+      "INSERT INTO tasks (studentsId, taskName, taskDescription, dueDate, apptDate, completed) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *", 
+      [studentsId, taskName, taskDescription, dueDate, apptDate, false]
+    );
+    
+    res.status(201).send(newTask.rows[0]); // Respond with the created task
+  } catch (error) {
+    console.error('Error creating task:', error.stack);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+app.delete("/tasks/:taskId", async (req, res) => {
+  const { taskId } = req.params;
+  
+  try {
+      const deleteResult = await pool.query("DELETE FROM tasks WHERE tasksId = $1 RETURNING *", [taskId]);
+      
+      if (deleteResult.rows.length === 0) {
+          res.status(404).send('Task not Found');
+      } else {
+          res.status(200).send({ message: 'Task deleted successfully', deletedTask: deleteResult.rows[0] });
+      }
+      
+  } catch (error) {
+      console.error('Error deleting task:', error.stack);
+      res.status(500).send('Internal Server Error');
+  }
+});
 // app.get("/api/tasks", async (req, res, next) => {
 //   const result = await db
 //     .query("SELECT * FROM tasks ORDER BY dueDate")
