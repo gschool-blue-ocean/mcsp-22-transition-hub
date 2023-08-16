@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
-import { AuthProvider } from "../Authorization/utils/AuthContext";
+import { AuthProvider } from "./Components/Context/AuthContext";
 import LogInPage from "./Components/MainComponents/LogInPage";
 import Manager from "./Components/MainComponents/Manager";
 import Student from "./Components/MainComponents/Student";
