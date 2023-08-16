@@ -50,10 +50,10 @@ const SignOn = () => {
       if (isAuthenticated) {
         switch (roles) {
           case "student":
-            <Link to='/student' />;
+            <Link to='/student'>Student Route</Link>;
             break;
           case "manager":
-            <Link to='/manager' />;
+            <Link to='/manager'>Manager Route</Link>;
             break;
 
           default:
