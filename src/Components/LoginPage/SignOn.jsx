@@ -1,6 +1,6 @@
 import React from "react";
 import "./SignOn.css";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import { useContext, useState } from "react";
 import AuthContext from "../../../Authorization/utils/AuthContext";
@@ -8,13 +8,12 @@ import AccountContext from "../Context/AccountServicesContext";
 
 const SignOn = () => {
   const { setCurrentService, accountServices } = useContext(AccountContext);
-  const { setIsAuthenticated, isAuthenticated } = useContext(AuthContext);
+  const { setIsAuthenticated, isAuthenticated, roles, setRoles } =
+    useContext(AuthContext);
   const [formData, setFormData] = useState({
     username: "",
     password: "",
   });
-  //   console.log(useAuthData);
-  const navigate = useNavigate();
 
   const { username, password } = formData;
 
@@ -32,13 +31,34 @@ const SignOn = () => {
       );
 
       const parseRes = await response.data;
+      setRoles(parseRes.role);
 
-      if (parseRes.token) {
+      const verify = await axios.get("http://localhost:8000/api/auth/verify", {
+        headers: {
+          token: parseRes.token,
+        },
+      });
+
+      if (verify) {
         localStorage.setItem("token", parseRes.token);
+        console.log(localStorage);
         setIsAuthenticated(true);
-        navigate(isAuthenticated ? "/manager" : "/student"); //may need to change this logic
       } else {
         setIsAuthenticated(false);
+      }
+
+      if (isAuthenticated) {
+        switch (roles) {
+          case "student":
+            <Link to='/student' />;
+            break;
+          case "manager":
+            <Link to='/manager' />;
+            break;
+
+          default:
+            return "No role found";
+        }
       }
     } catch (err) {
       console.error(err.message);

@@ -5,20 +5,15 @@ import { createContext, useState, useEffect } from "react";
 const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  //all user id where role = student or manager
-  //maybe two requests one for student or manager
-  //export state
-
-  // useEffect = () => {
-  //     router.get('/users')
-  // }
+  const [roles, setRoles] = useState("");
 
   return (
     <AuthContext.Provider
       value={{
         isAuthenticated,
         setIsAuthenticated,
+        roles,
+        setRoles,
       }}
     >
       {children}
