@@ -17,8 +17,8 @@
   padding: 2.5rem;
   position: fixed;
     /* align-items: center; */
-    top: 10%;
-    width: 69%;
+    top: 6.75%;
+    width: 69.5%;
     /* overflow: scroll; */
 }
 
@@ -46,7 +46,7 @@ float: left;
 /* Header styling for the accordion */
 .accordion-header {
   background-color: #393941;
-  /* border: 1px  solid red; */
+  border: 1px  solid red;
   padding: 10px 15px;
   font-weight: bold;
   color: #f0f0f0;
@@ -60,13 +60,28 @@ float: left;
   background-color: #0d0f4a; 
 }
 
-/* .due-date {
-  
-} */
+ .due-date {
+    /* border: 1px  solid red; */
+    background-color: none;
+    padding: .5rem;
+}
+
+.due-today {
+      background-color: red;
+      padding: .5rem;
+}
+
+.due-soon {
+      background-color: #ffbf00;
+      padding: .5rem;
+
+}
 
 /* Arrow indicator for the accordion state (collapsed/expanded) */
 .accordion-arrow {
+  border: 1px  solid red;
   float: right;
+  
 }
 
 .expansion {
