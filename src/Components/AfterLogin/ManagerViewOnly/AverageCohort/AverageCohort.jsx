@@ -3,7 +3,7 @@ import { useState, useContext } from "react";
 import SingleAverage from "./SingleAverage";
 import './averageCohort.css'
 import CohortContext from "../../../Context/CohortContext";
-import { LoadingAnimation1, LoadingAnimation2 } from "../../../LoadingAnimation";
+import LoadingAnimation from "../../../LoadingAnimation";
 
 const AverageCohort = () => {
     const {average} = useContext(CohortContext)
@@ -20,7 +20,7 @@ const AverageCohort = () => {
         ) : 
         (
             <div className='average_cohort_container'>
-                <LoadingAnimation1 />
+                <LoadingAnimation />
             </div>
         )
 
