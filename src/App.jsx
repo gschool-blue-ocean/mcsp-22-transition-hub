@@ -12,6 +12,7 @@ import TasksPage from "./Components/TasksComp/TasksPage";
 import ManagerSideNav from "./Components/AfterLogin/ManagerViewOnly/ManagerNavigationBar/ManagerSideNav";
 import AverageCohort from "./Components/AfterLogin/ManagerViewOnly/AverageCohort/AverageCohort";
 import { AuthProvider } from "../Authorization/utils/AuthContext";
+import AddCohort from "./Components/AfterLogin/ManagerViewOnly/AddCohort";
 
 function App() {
   // const checkAuth = async () => {
@@ -61,10 +62,11 @@ function App() {
                   <Header />
                   <CohortProvider>
                     <ManagerSideNav />
-                    <AverageCohort />
+                    <AverageCohort /> 
+                    {/* <AddCohort /> */}
                   </CohortProvider>
                   {/*Rest of manager stuff goes here*/}
-                </>
+              </>
               }
             ></Route>
             <Route
@@ -83,7 +85,7 @@ function App() {
             ></Route>
           </Routes>
         </Router>
-      </AuthProvider>
+      </AuthProvider>         
     </>
   );
 }

@@ -142,6 +142,7 @@ app.put("/api/tasks/:id", async (req, res) => {
 //   res.send(result.rows);
 // });
 
+
 app.get("/api/cohort", async (req, res, next) => {
   const result = await db
     .query("SELECT * FROM cohort ORDER BY cohortId DESC")
@@ -280,6 +281,19 @@ app.get("/manager/tasks/all", async (req, res) => {
     console.error("Error querying tasks:", error.stack);
     res.status(500).send("Internal Server Error");
   }
+});
+//Add Cohort
+app.post("/cohort", async (req, res) => {
+  const { cohortName, startDate, endDate } = req.body;
+  try{
+    const result = await pool.query("INSERT INTO cohorts (cohortName, startDate, endDate) VALUES ($1, $2, $3) RETURNING *", [cohortName, startDate, endDate])
+    res.send(result.rows[0]);
+  } catch (error) {
+    console.error('Error querying tasks:', error.stack);
+    res.status(500).send('Internal Server Error');
+  }
+  
+  
 });
 /* -------------------------- Important -------------------  */
 
