@@ -1,87 +1,36 @@
-import React, { useEffect, useState } from "react";
-import './App.css'
-import AccountServices from "./Components/LoginPage/AccountServices";
-import Header from "./Components/AfterLogin/Reuseable/Header";
-import { AccountProvider } from "./Components/Context/AccountServicesContext";
-import { CohortProvider } from "./Components/Context/CohortContext";
-import StudentInfoBar from "./Components/AfterLogin/Reuseable/StudentInfoBar";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import AddTask from "./Components/AfterLogin/Reuseable/AddTask/AddTask";
-import TasksPage from "./Components/TasksComp/TasksPage";
-import ManagerSideNav from "./Components/AfterLogin/ManagerViewOnly/ManagerNavigationBar/ManagerSideNav";
-import AverageCohort from "./Components/AfterLogin/ManagerViewOnly/AverageCohort/AverageCohort";
-
+import React from "react";
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
+import { AuthProvider } from "../Authorization/utils/AuthContext";
+import LogInPage from "./Components/MainComponents/LogInPage";
+import Manager from "./Components/MainComponents/Manager";
+import Student from "./Components/MainComponents/Student";
 
 function App() {
-  // const checkAuth = async () => {
-  //   try {
-  //     const res = await fetch("http://localhost:4500/authentication/verify", {
-  //       method: "POST",
-  //       headers: { jwt_token: localStorage.token },
-  //     });
-  //     const parseRes = await res.json();
-
-  //     parseRes === true ? setIsAuth(true) : setIsAuth(false);
-  //   } catch (err) {
-  //     console.error(err.message);
-  //   }
-  // };
-
-//   useEffect(() => {
-//     checkAuth();
-//   }, []);
-
-  //auth state set defaul to false
-  // const [isAuth, setIsAuth] = useState(false);
-
-  // const setAuth = (boolean) => {
-  //   setIsAuth(boolean);
-  // };
+const isAuthenticated = true
+const isManager = true
+const isStudent = true
 
   return (
-    <>
+    <AuthProvider>
       <Router>
         <Routes>
-          <Route
-            exact
-            path='/'
-            element={
-              <AccountProvider>
-                <AccountServices />
-              </AccountProvider>
-            }
-          ></Route>
-          <Route
-            exact
-            path='/manager'
-            element={
-              <>
-                <Header />
-                <CohortProvider>
-                  <ManagerSideNav />
-                  <AverageCohort />
-                </CohortProvider>
-                {/*Rest of manager stuff goes here*/}
-              </>
-            }
-          ></Route>
-          <Route
-            exact
-            path='/student'
-            element={
-              <>
-                <Header />
-                <StudentInfoBar />
-                <AddTask />
-                <TasksPage />
-                {/*Rest of student stuff goes here*/}
-              </>
-            }
-          ></Route>
+          <Route path="/" element={<LogInPage />} />
+          <Route path="/manager" element={isAuthenticated && isManager ? <Manager /> : <LogInPage/>} />
+          <Route path="/student" element={isAuthenticated && isStudent ? <Student /> : <LogInPage />} />
         </Routes>
       </Router>
-    </>
-  )
+    </AuthProvider>
+  );
 }
 
 export default App;
+
+
+/*
+  if (!user) {
+    return <Navigate to="/" state={{ from: location }} replace />;
+  } else {
+    return children;
+  }
+}
+*/

@@ -26,10 +26,11 @@
     color:#f0f0f0;
     padding: 10px 10px;
     /* margin-left: 1%; */
-    border: 2px solid transparent;
+    border: none;
 }
 .header-buttons:hover {
-    border: 2px solid #FB8C00;
+    background-color:  rgb(239, 132, 1);
+    border: none;
 }
 
 .header-dropdownBtn {

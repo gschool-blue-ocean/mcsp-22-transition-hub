@@ -1,0 +1,79 @@
+.AddCohort_Container{
+    height: 35%;
+    width: 30%;
+    min-width: 320px;
+    /* @Michelle if you need to Adjust Position */
+    position: fixed; 
+    top: 25%; 
+    left: 25%;
+    z-index: 99;
+    /* @Michelle if you need to Adjust Position */
+    background-color: #686868;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+    font-family: Arial, Helvetica, sans-serif;
+    padding-bottom: 5px;
+}
+.Add_Cohort_Form{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 75%;
+    justify-content: space-around;
+    margin-top: -10%;
+}
+.Cohort_Names_Container{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.Cohort_Names_Container label {
+    font-size: 1rem;
+}
+.Cohort_Names_Container input{
+    height: 2rem;
+    font-size: 1rem;
+    width: 50%;
+}
+.Cohort_Dates{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.Cohort_Dates label{
+    font-size: 1rem;
+}
+.Cohort_Dates input{
+    height: 2rem;
+    font-size: 1rem;
+}
+
+.AddCohort_Exit_Button {
+    align-self:flex-end;
+    background-color: transparent;
+    height: 50px;
+    width: 50px;
+    margin-top: 3px;
+    margin-right: 3px;
+    color: white;
+    font-weight: 600;
+    border: none;
+    margin-bottom: 10px;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.AddCohort_Exit_Button:hover {
+    transition: .3s;
+    color: red;
+    border: none;
+    outline: none
+}

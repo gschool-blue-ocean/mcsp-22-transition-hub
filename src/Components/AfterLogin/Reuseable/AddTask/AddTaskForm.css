@@ -11,7 +11,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 10px;
+    border-radius: 4px;
 }
 
 .Add_Task_Form{
@@ -22,8 +22,9 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background-color: #3A455A;
-    border-radius: 8px;
+    background-color: #4F515E;
+    
+    border-radius: 2px;
 }
 
 
@@ -35,6 +36,7 @@
 .Add_Task_Form_Input_Title label {
     padding: 0 4px;
     font-weight: 800;
+    color: rgb(119, 152, 213);
 }
 
 .Add_Task_Form_Input_Title input {
@@ -42,10 +44,11 @@
     margin-left: 10px;
     background-color: transparent;
     border: none;
-    border-bottom: 2px solid #EF6E47;
+    border-bottom: 2px solid #f0f0f0;
     outline: none;
     padding: 0.5rem 0;
     font-size: 1rem;
+    color:#F0f0f0
 }
 
 .Add_Task_Form_Input_Description{
@@ -61,17 +64,19 @@
 .Add_Task_Form_Input_Description label{
     padding: 0 4px;
     font-weight: 800;
+    color: rgb(119, 152, 213);
 }
 .Add_Task_Form_Input_Description textarea{
     flex: 1;
     background-color: transparent;
     border: none;
-    border: 2px solid #EF6E47;
+    border: 2px solid #f0f0f0;
     outline: none;
     padding: 0.5rem 0;
     resize: vertical;
     align-self: center;
     width: 100%;
+    color:#F0f0f0
 }
 
 .AddTask_Form_Dates {
@@ -92,6 +97,7 @@
 .AddTask_Date label {
     font-weight: 800;
     margin-bottom: 0.5rem; 
+    color: rgb(119, 152, 213);
 }
 
 .AddTask_Date input[type="date"] {
@@ -102,7 +108,8 @@
     border-radius: 4px;
     outline: none;
     background-color: transparent;
-    border-bottom: 2px solid #EF6E47;
+    border-bottom: 2px solid #F0f0f0;
+    color:#F0f0f0
 }
 .AddTask_Date input[type="date"]::-webkit-calendar-picker-indicator {
     cursor: pointer; 
@@ -122,4 +129,20 @@
 .exit_Add_Task_Form_Container:hover{
     color: #EF6E47;
     transition: .2s;
+}
+
+.AddTask_Button {
+    border-radius: 4px;
+    background-color: #333;
+    color: #f0f0f0 ;
+    padding: 10px 10px;
+    font-weight: bold;
+    border: none;
+    width: 480px;
+}
+
+.AddTask_Button:hover {
+    background-color: rgb(251, 140, 0, 0.8);
+    border: none;
+    color:#F0f0f0;
 }

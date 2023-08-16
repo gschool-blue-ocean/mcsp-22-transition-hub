@@ -43,6 +43,7 @@ export const CohortProvider = ({children}) => {
 
 /* ---------------------All Tasks with Cohortid------------------------- */
       const [cohortTaskList, setCohortTaskList] = useState([]) 
+      const [average, setAverage] = useState({})
       useEffect(() =>{
         const getData = async () => {
         try{
@@ -55,16 +56,40 @@ export const CohortProvider = ({children}) => {
             }
         }
         getData()
+
       }, [])
+/* ---------------------Create an Array of all totals/averages per cohort------------------------- */
+      useEffect( () =>{
+        let tempArray = createTasksTotalArray(cohortTaskList)
+        setAverage(tempArray)
+      }, [cohortTaskList])
 
-
-
+/* ---------------------Post Request for Adding a Cohort------------------------- */
+const postCohort = async (formData) => {
+  try {
+    const response = await fetch(`${url}/cohort`, {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
+    }) 
+const data = await response.json()
+console.log(data)
+setCohortList((prevCohortList) => [...prevCohortList, data]);
+}
+catch(err){
+    console.log(err)
+}
+}
 
     return <CohortContext.Provider value={{
         displayedStudents,
         setCohort,
+        postCohort,
         cohortList,
-        cohortTaskList
+        cohortTaskList,
+        average
     }}>
         {children}
         </CohortContext.Provider>
@@ -72,4 +97,35 @@ export const CohortProvider = ({children}) => {
 
 export default CohortContext
 
-//  /manager/:cohort/students
+
+//Generates a data object with aggregated information for each cohort
+function createTasksTotalArray(tasks) {
+    const cohorts = [];
+
+    if (tasks) {
+        tasks.forEach((task) => {
+            const cohortIndex = cohorts.findIndex(cohort => cohort.cohortsid === task.cohortsid);
+            const completed = checkBoolean(task.completed);
+
+            if (cohortIndex !== -1) {
+                cohorts[cohortIndex].totalComplete += completed;
+                cohorts[cohortIndex].totalTask++;
+                cohorts[cohortIndex].average = cohorts[cohortIndex].totalComplete / cohorts[cohortIndex].totalTask;
+            } else {
+                const newCohort = {
+                    cohortsid: task.cohortsid,
+                    totalComplete: completed,
+                    totalTask: 1,
+                    average: completed ? 1 : 0,
+                };
+                cohorts.push(newCohort);
+            }
+        });
+    }
+    return cohorts;
+}
+
+//Takes boolean and returns numbers 
+function checkBoolean(value) {
+  return value ? 1 : 0;
+}
