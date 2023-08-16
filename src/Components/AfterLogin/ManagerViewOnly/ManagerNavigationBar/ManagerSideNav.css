@@ -1,4 +1,4 @@
-.managerSide_Bar_Container{
+/* .managerSide_Bar_Container{
  position: fixed;
  left: 0;
  top: 90px;
@@ -10,7 +10,27 @@
  display: flex;
  flex-direction: column;
  align-items: center;
+} */
+.managerSide_Bar_Container {
+  background-color: rgb(58, 69, 90, 0.6); 
+  border: 3px solid rgb(63, 75, 98);
+  border-bottom: none;
+  border-top: none;
+  border-left: none;
+  width: 300px;
+  height: 90vh;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  margin-block-end: 0;
+  margin-block-start: 0;
+  display: flex;
+  position: fixed;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  left: 0;
+  top: 80px
 }
+
 .managerSide_Bar_Select {
     position: relative;
     display: inline-block;

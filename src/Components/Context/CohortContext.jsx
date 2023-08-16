@@ -4,7 +4,7 @@ import {useState, createContext} from 'react'
 const CohortContext = createContext()
 
 export const CohortProvider = ({children}) => {
-    const url = "http://localhost:8000"
+    const url = "http://localhost:3000"
 
     /* ------------------  To Grab Students First and Last Name By Cohort ------------------- */
     const [cohort, setCohort] = useState(0) //Current displayed Cohort
@@ -129,3 +129,16 @@ function createTasksTotalArray(tasks) {
 function checkBoolean(value) {
   return value ? 1 : 0;
 }
+
+function calculateStudentProgress(studentTasks) {
+  let totalTasks = studentTasks.length;
+  let completedTasks = studentTasks.filter(task => task.completed).length;
+  
+  if (totalTasks === 0) {
+      return 0;
+  }
+  
+  return completedTasks / totalTasks;
+}
+
+// ------------------------- Manager main middle student list after clicking a cohort ----------------

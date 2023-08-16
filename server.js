@@ -75,6 +75,39 @@ app.patch("/tasks/:taskId/complete", async (req, res) => {
   }
 });
 
+app.post("/tasks", async (req, res) => {
+  const { studentsId, taskName, taskDescription, dueDate, apptDate } = req.body;
+  
+  try {
+    const newTask = await pool.query(
+      "INSERT INTO tasks (studentsId, taskName, taskDescription, dueDate, apptDate, completed) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *", 
+      [studentsId, taskName, taskDescription, dueDate, apptDate, false]
+    );
+    
+    res.status(201).send(newTask.rows[0]); // Respond with the created task
+  } catch (error) {
+    console.error('Error creating task:', error.stack);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+app.delete("/tasks/:taskId", async (req, res) => {
+  const { taskId } = req.params;
+  
+  try {
+      const deleteResult = await pool.query("DELETE FROM tasks WHERE tasksId = $1 RETURNING *", [taskId]);
+      
+      if (deleteResult.rows.length === 0) {
+          res.status(404).send('Task not Found');
+      } else {
+          res.status(200).send({ message: 'Task deleted successfully', deletedTask: deleteResult.rows[0] });
+      }
+      
+  } catch (error) {
+      console.error('Error deleting task:', error.stack);
+      res.status(500).send('Internal Server Error');
+  }
+});
 // app.get("/api/tasks", async (req, res, next) => {
 //   const result = await db
 //     .query("SELECT * FROM tasks ORDER BY dueDate")
@@ -295,6 +328,94 @@ app.post("/cohort", async (req, res) => {
   
   
 });
+
+//Michelle: Grab all tasks for each student
+app.get("/manager/:cohort/studentsTasks", async (req, res) => {
+  const { cohort } = req.params;
+  try {
+    const result = await pool.query(
+      `SELECT s.studentsId, s.ets,
+        COUNT(t.completed) AS totalTasks,
+        SUM(CASE WHEN t.completed THEN 1 ELSE 0 END) AS completedTasks
+      FROM students s
+      LEFT JOIN tasks t ON s.studentsId = t.studentsId
+      WHERE s.cohortsId = $1
+      GROUP BY s.studentsId
+      ORDER BY s.ets ASC`,
+      [cohort]
+    );
+    if (result.rows.length === 0) {
+      res.sendStatus(404);
+    } else {
+      res.send(result.rows);
+    }
+  } catch (error) {
+    console.error("Error querying tasks:", error.stack);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+//Michelle: Grab each students first and last name, ETS, tasks and task completion from each cohort
+app.get("/manager/:cohort/studentdetails", async (req, res) => {
+  const { cohort } = req.params;
+    try {
+      const result = await pool.query(`
+        SELECT s.studentsId, u.firstName, u.lastName, s.ets
+        FROM users u
+        JOIN students s ON u.usersId = s.usersId
+        WHERE s.cohortsId = $1
+        ORDER BY s.ets ASC
+      `, [cohort])
+      if (result.rows.length === 0) {
+        res.sendStatus(404);
+      } else {
+        res.send(result.rows);
+      }
+
+  // try {
+  //   const result = await pool.query(
+  //     `SELECT u.firstName, u.lastName, s.ets, t.taskName, t.completed
+  //     FROM users u
+  //     JOIN students s ON u.usersId = s.usersId
+  //     LEFT JOIN tasks t ON s.usersId = t.studentsId
+  //     WHERE s.cohortsId = $1
+  //     ORDER BY u.lastName ASC`,
+  //     [cohort]
+  //   );
+
+  //   if (result.rows.length === 0) {
+  //     res.sendStatus(404);
+  //   } else {
+  //     const studentsData = result.rows.reduce((array, student) => {
+  //       const { firstName, lastName, ets, taskName, completed } = student;
+  //       const studentIndex = array.findIndex((s) => s.studentId === studentId);
+
+  //       if (studentIndex !== -1) {
+  //         array[studentIndex].tasks.push({ taskName, completed });
+  //         if (completed) {
+  //           array[studentIndex].completedTasks++;
+  //         }
+  //       } else {
+  //         array.push({
+  //           firstName,
+  //           lastName,
+  //           ets,
+  //           tasks: [{ taskName, completed }],
+  //           completedTasks: completed ? 1 : 0,
+  //         });
+  //       }
+  //       return array;
+  //     }, []);
+
+  //     res.send(studentsData);
+  //     console.log(studentsData)
+  //   }
+  } catch (error) {
+    console.error("Error querying tasks:", error.stack);
+    res.status(500).json({ error: "Internal Server Error" }); // Sending error as JSON
+  }
+});
+            
 /* -------------------------- Important -------------------  */
 
 // app.get('*', (req, res) => {
