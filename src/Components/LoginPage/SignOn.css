@@ -1,7 +1,7 @@
 .logOnBG {
     position: fixed;
     /* background-color: #393941; */
-    background-image: url("../../public/logIn.png");
+    background-image: url("../../public/test4.svg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;     
@@ -26,7 +26,7 @@
     align-items: center;
     justify-content: center;
     border-radius: 20px;
-    box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 14px 20px 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
 }
 
@@ -55,7 +55,7 @@
 }
 
 .SignOn_Buttons {
-    background-color: #0D0F4A;
+    background-color: #d8d1d836;
     color: white;
     border: none;
     border-radius: 4px;
@@ -71,7 +71,12 @@
 }
 
 .logOn_Title{
-    font-size: 2rem;
+    height: 50%;
+    width: 50%;
+    background-image: url('../../public/transition-light.png');
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-position: center center;     
 }
 
 #signOn_Register{
