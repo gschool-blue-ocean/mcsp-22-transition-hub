@@ -4,8 +4,8 @@ const StudentContext = createContext()
 export const StudentProvider = ({children}) => {
     const [tasks, setTasks] = useState([]);
     const [activeTaskId, setActiveTaskId] = useState(null);
-    const [studentId, setStudentId] = useState("")
-    const url = "http://localhost:8000" 
+    const [studentId, setStudentId] = useState("1")
+    const url = "http://localhost:3000" 
 
     useEffect(() => {
         const fetchTasks = async () => {
