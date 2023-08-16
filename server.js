@@ -1,5 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
+import path from "path";
 //import { studentRouter } from "../Authorization/routes/student.js";
 // import pg from "pg";
 import pkg from "pg";
@@ -11,8 +12,10 @@ import { manageRouter } from "./Authorization/routes/manager.js";
 dotenv.config();
 const PORT = process.env.PORT || 8000;
 const app = express();
+// const staticPath = path.join(__dirname, "MCSP-22-TRANSITION-HUB");
 app.use(cors());
 app.use(express.static("dist"));
+// app.use(express.static(staticPath));
 // const { Pool } = pkg;
 
 // const db = new pg.Pool({ connectionString: process.env.DATABASE_URL });
@@ -25,6 +28,18 @@ app.use("/api/manager", manageRouter);
 // -------------- SERVER ROUTES FOR TASKS --------------------
 
 app.get("/tasks", async (req, res) => {
+  try {
+    const result = await pool.query("SELECT * FROM tasks");
+    res.json(result.rows);
+  } catch (err) {
+    console.error("Error executing query", err.stack);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+app.get("/tasks/:studentsId", async (req, res) => {
+  const studentsId = req.params.studentsId;
+
   try {
     const result = await pool.query("SELECT * FROM tasks");
     res.json(result.rows);
@@ -188,7 +203,7 @@ app.delete("/api/cohort/:id", async (req, res, next) => {
 
 app.get("/api/studentinfo", async (req, res) => {
   try {
-    const result = await db.query(
+    const result = await pool.query(
       "SELECT users.firstName, users.lastName, users.email, students.ets, students.branch, students.clearanceType FROM users JOIN students ON users.usersId = students.usersId"
     );
     res.status(200).json(result.rows);
@@ -198,16 +213,14 @@ app.get("/api/studentinfo", async (req, res) => {
   }
 });
 
-app.get("/api/studentinfo/:id", async (req, res) => {
-  const { id } = req.params;
+app.get("/user/:usersId/info", async (req, res) => {
+  const { usersId } = req.params;
 
   try {
-    const result = await db
-      .query(
-        "SELECT users.firstName, users.lastName, users.email, students.ets, students.branch, students.clearanceType FROM users JOIN students ON users.usersId = students.usersId WHERE users.usersId = $1",
-        [id]
-      )
-      .catch(next);
+    const result = await pool.query(
+      "SELECT users.firstName, users.lastName, users.email, students.ets, students.branch, students.clearanceType FROM users JOIN students ON users.usersId = students.usersId WHERE users.usersId = $1",
+      [usersId]
+    );
     res.status(200).json(result.rows);
   } catch (err) {
     console.error(err);
@@ -253,7 +266,7 @@ app.get("/manager/cohorts", async (req, res) => {
 app.get("/manager/tasks/all", async (req, res) => {
   try {
     const result = await pool.query(`
-    SELECT c.cohortsId, t.studentsId, t.tasksId, t.taskName, t.taskDescription, t.dueDate, t.apptDate 
+    SELECT c.cohortsId, t.studentsId, t.tasksId, t.taskName, t.taskDescription, t.dueDate, t.apptDate, t.completed 
     FROM tasks t
     JOIN students s ON t.studentsId = s.studentsId
     JOIN cohorts c ON s.cohortsId = c.cohortsId
@@ -270,7 +283,9 @@ app.get("/manager/tasks/all", async (req, res) => {
 });
 /* -------------------------- Important -------------------  */
 
-// ----------------------------------------------
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, 'MCSP-22-TRANSITION-HUB', 'index.html'));
+// });
 
 app.use((err, req, res, next) => {
   console.error(err.stack);

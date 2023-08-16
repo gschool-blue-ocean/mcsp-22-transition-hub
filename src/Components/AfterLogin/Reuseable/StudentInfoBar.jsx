@@ -8,24 +8,26 @@ import profileicon from "./img/usericon.png";
 const StudentInfoBar = () => {
     
     const [studentInfo, setStudentInfo] = useState({
-        firstName: '',
-        lastName: '',
+        firstname: '',
+        lastname: '',
         email: '',
         branch: '',
         ets: '',
-        clearanceType: '',
-        
+        clearancetype: '', 
     });
 
-    const getStudentInfo = async () => {
-         const response = await fetch('http://localhost:5173/api/studentinfo/:id');
-         const results = await response.json();
-         setStudentInfo(results);
-         console.log(results)
-    }
     useEffect(() => {
+        const getStudentInfo = async () => {
+            const response = await fetch('http://localhost:8000/user/08fe5d56-2f71-42a1-b782-7a533452313f/info');
+            const results = await response.json();
+            setStudentInfo(...results);
+            console.log(results)
+        }
         getStudentInfo();
     }, []);
+    // useEffect(() => {
+    //     getStudentInfo();
+    // }, []);
     
     return (
         <>
@@ -40,34 +42,28 @@ const StudentInfoBar = () => {
                     </div>
                     <div className='studentInfo'>
                         <div className='studentInfo-fetch'>
-                            <span className='studentInfo-categoryTitle'>First Name:</span>
-                            <span className='studentInfo-categoryDetails'>{studentInfo.firstName}</span>
-                            <span className='studentInfo-categoryTitle'>Michelle</span>
+                            <span className='studentInfo-key'>First Name:</span>
+                            <span className='studentInfo-value'>{studentInfo.firstname}</span>
                         </div>
                         <div className='studentInfo-fetch'>
-                            <span className='studentInfo-categoryTitle'>Last Name:</span>
-                            <span className='studentInfo-categoryDetails'>{studentInfo.lastName}</span>
-                            <span className='studentInfo-categoryTitle'>Dukette</span>
+                            <span className='studentInfo-key'>Last Name:</span>
+                            <span className='studentInfo-value'>{studentInfo.lastname}</span>
                         </div>
                         <div className='studentInfo-fetch'>
-                            <span className='studentInfo-categoryTitle'>Email:</span>
-                            <span className='studentInfo-categoryDetails'>{studentInfo.email}</span>
-                            <span className='studentInfo-categoryTitle'>mdukette978@gmail.com</span>
+                            <span className='studentInfo-key'>Email:</span>
+                            <span className='studentInfo-value'>{studentInfo.email}</span>
                         </div>
                         <div className='studentInfo-fetch'>
-                            <span className='studentInfo-categoryTitle'>Military Branch:</span>
-                            <span className='studentInfo-categoryDetails'>{studentInfo.branch}</span>
-                            <span className='studentInfo-categoryTitle'>Army</span>
+                            <span className='studentInfo-key'>Military Branch:</span>
+                            <span className='studentInfo-value'>{studentInfo.branch}</span>
                         </div>
                         <div className='studentInfo-fetch'>
-                            <span className='studentInfo-categoryTitle'>ETS Date:</span>
-                            <span className='studentInfo-categoryDetails'>{studentInfo.ets}</span>
-                            <span className='studentInfo-categoryTitle'>2023-09-08</span>
+                            <span className='studentInfo-key'>ETS Date:</span>
+                            <span className='studentInfo-value'>{studentInfo.ets}</span>
                         </div>
                         <div className='studentInfo-fetch'>
-                            <span className='studentInfo-categoryTitle'>Clearance Type:</span>
-                            <span className='studentInfo-categoryDetails'>{studentInfo.clearanceType}</span>
-                            <span className='studentInfo-categoryTitle'>Secret</span>
+                            <span className='studentInfo-key'>Clearance Type:</span>
+                            <span className='studentInfo-value'>{studentInfo.clearancetype}</span>
                         </div>
                     </div>
                 </div>

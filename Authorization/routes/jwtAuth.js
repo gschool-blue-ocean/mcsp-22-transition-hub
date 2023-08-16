@@ -15,13 +15,14 @@ const router = express.Router();
 // ----------------------- AUTH ROUTES FOR LOGIN AND REGISTER -------------------------------------------------------------
 
 router.post("/register", validInfo, async (req, res, next) => {
-  const { username, password, firstName, lastName, email, role } = req.body;
+  const { username, password, firstName, lastName, email, role, cohortsId } =
+    req.body;
   const user = await pool
     .query("SELECT * FROM users WHERE email = $1", [email])
     .catch(next);
 
   if (user.rows.length !== 0) {
-    res.send("This email is already in use.");
+    return res.send("This email is already in use.");
   }
 
   const saltRounds = 10;
@@ -34,6 +35,25 @@ router.post("/register", validInfo, async (req, res, next) => {
       [username, bcryptPassword, firstName, lastName, email, role]
     )
     .catch(next);
+
+  console.log(newUser.rows[0].usersid);
+
+  // const addedUser = await newUser.rows[0].usersId
+
+  // console.log(newUser.rows[0].usersId)
+  // console.log(addedUser)
+
+  if (role.toLowerCase() === "student") {
+    console.log("adding to students");
+    const { ets, branch, clearanceType } = req.body;
+    console.log(ets, branch, clearanceType);
+    await pool
+      .query(
+        "INSERT INTO students (usersId, cohortsId, ets, branch, clearanceType) VALUES ($1, $2, $3, $4, $5)",
+        [newUser.rows[0].usersid, cohortsId, ets, branch, clearanceType]
+      )
+      .catch(next);
+  }
 
   const token = jwtGenerator(newUser.rows[0].usersId);
 
@@ -62,64 +82,74 @@ router.post("/login", validInfo, async (req, res, next) => {
 
 // // -------------- AUTH ROUTES FOR TASKS --------------------
 
-// router.get("/tasks", async (req, res, next) => {
-//   const result = await pool.query("SELECT * FROM tasks ORDER BY dueDate").catch(next);
-//   res.send(result.rows);
-// });
+router.get("/tasks", async (req, res, next) => {
+  const result = await pool
+    .query("SELECT * FROM tasks ORDER BY dueDate")
+    .catch(next);
+  res.send(result.rows);
+});
 
-// router.get("/tasks/:id", async (req, res, next) => {
-//   let id = req.params.id;
-//   const result = await pool
-//     .query("SELECT * FROM tasks WHERE taskId = $1", [id])
-//     .catch(next);
+router.get("/tasks/:id", async (req, res, next) => {
+  let id = req.params.id;
+  const result = await pool
+    .query("SELECT * FROM tasks WHERE taskId = $1", [id])
+    .catch(next);
 
-//   if (result.rows.length === 0) {
-//     res.sendStatus(404);
-//   } else {
-//     res.send(result.rows[0]);
-//   }
-// });
+  if (result.rows.length === 0) {
+    res.sendStatus(404);
+  } else {
+    res.send(result.rows[0]);
+  }
+});
 
-// router.post("/tasks", async (req, res, next) => {
-//   const { studentsId, taskName, taskDescription, dueDate, apptDate } = req.body;
+router.post("/tasks", async (req, res, next) => {
+  const { studentsId, taskName, taskDescription, dueDate, apptDate } = req.body;
 
-//   const result = await pool
-//     .query("INSERT INTO tasks (studentsId, taskName, taskDescription, dueDate, apptDate) VALUES ($1, $2, $3, $4, $5)", [studentsId, taskName, taskDescription, dueDate, apptDate])
-//     .catch(next);
-//   res.send(result.rows[0]);
-// });
+  const result = await pool
+    .query(
+      "INSERT INTO tasks (studentsId, taskName, taskDescription, dueDate, apptDate) VALUES ($1, $2, $3, $4, $5) RETURNING *",
+      [studentsId, taskName, taskDescription, dueDate, apptDate]
+    )
+    .catch(next);
+  res.send(result.rows[0]);
+});
 
-// router.put("/tasks/:id", async (req, res, next) => {
-//   const id = req.params.id;
-//   const { studentsId, taskName, taskDescription, dueDate, apptDate } = req.body;
-//       const result = await pool.query(`UPDATE tasks SET studentsId =$1, taskName = $2, taskDescription = $3, dueDate = $4, apptDate = $5 WHERE taskId = $6 RETURNING *`, [studentsId, taskName, taskDescription, dueDate, apptDate, id]).catch(next);
-//       if (result.rowCount === 0) {
-//           res.send('Task not found');
-//       }
-//       res.status(200).json(result.rows[0]);
-// });
+router.patch("/tasks/:id", async (req, res, next) => {
+  const id = req.params.id;
+  const { studentsId, taskName, taskDescription, dueDate, apptDate } = req.body;
+  const result = await pool
+    .query(
+      `UPDATE tasks SET studentsId =$1, taskName = $2, taskDescription = $3, dueDate = $4, apptDate = $5 WHERE tasksId = $6 RETURNING *`,
+      [studentsId, taskName, taskDescription, dueDate, apptDate, id]
+    )
+    .catch(next);
+  if (result.rowCount === 0) {
+    res.send("Task not found");
+  }
+  res.status(200).json(result.rows[0]);
+});
 
-// router.delete("/tasks/:id", async (req, res, next) => {
-//   const { id } = req.params;
+router.delete("/tasks/:id", async (req, res, next) => {
+  const id = req.params.id;
 
-//   await pool.query("DELETE FROM tasks WHERE id = $1", [id]).catch(next);
-//   res.sendStatus(204);
-// });
+  await pool.query("DELETE FROM tasks WHERE tasksId = $1", [id]).catch(next);
+  res.status(204).send("deleted");
+});
 
 // //  -------------- AUTH ROUTES FOR COHORTS --------------------
 
-// router.get("/cohort/:id", async (req, res, next) => {
-//   let id = req.params.id;
-//   const result = await pool
-//     .query("SELECT * FROM cohort WHERE cohortId = $1", [id])
-//     .catch(next);
+router.get("/cohorts/:id", async (req, res, next) => {
+  let id = req.params.id;
+  const result = await pool
+    .query("SELECT * FROM cohorts WHERE cohortsId = $1", [id])
+    .catch(next);
 
-//   if (result.rows.length === 0) {
-//     res.sendStatus(404);
-//   } else {
-//     res.send(result.rows[0]);
-//   }
-// });
+  if (result.rows.length === 0) {
+    res.sendStatus(404);
+  } else {
+    res.send(result.rows[0]);
+  }
+});
 
 // ----------------------------------------------
 
