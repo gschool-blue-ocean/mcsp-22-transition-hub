@@ -15,27 +15,6 @@ import { AuthProvider } from "../Authorization/utils/AuthContext";
 import AddCohort from "./Components/AfterLogin/ManagerViewOnly/AddCohort";
 
 function App() {
-  // const checkAuth = async () => {
-  //   try {
-  //     const res = await fetch("http://localhost:4500/authentication/verify", {
-  //       method: "POST",
-  //       headers: { jwt_token: localStorage.token },
-  //     });
-  //     const parseRes = await res.json();
-
-  //     parseRes === true ? setIsAuth(true) : setIsAuth(false);
-  //   } catch (err) {
-  //     console.error(err.message);
-  //   }
-  // };
-
-  //   useEffect(() => {
-  //     checkAuth();
-  //   }, []);
-
-  //auth state set defaul to false
-  // const [isAuth, setIsAuth] = useState(false);
-
   return (
     <>
       <AuthProvider>
@@ -62,11 +41,11 @@ function App() {
                   <Header />
                   <CohortProvider>
                     <ManagerSideNav />
-                    <AverageCohort /> 
+                    <AverageCohort />
                     {/* <AddCohort /> */}
                   </CohortProvider>
                   {/*Rest of manager stuff goes here*/}
-              </>
+                </>
               }
             ></Route>
             <Route
@@ -85,7 +64,7 @@ function App() {
             ></Route>
           </Routes>
         </Router>
-      </AuthProvider>         
+      </AuthProvider>
     </>
   );
 }
