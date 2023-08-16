@@ -21,12 +21,38 @@ const Register_Student = () => {
     setFormData({ ...formData, [name]: value });
   };
 
+  const onSubmitForm = async () => {
+    e.preventDefault();
+    try {
+      const body = { email, userName, password };
+      const res = await fetch("http://localhost:8000/authorization/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      }); // may have to change route, unsure at this time
+      const parseRes = await response.json();
+
+      if (parseRes.jwtToken) {
+        localStorage.setItem("token", parseRes.jwtToken);
+        setAuth(true);
+        TransformStream.success("Register Successful");
+      } else {
+        setAuth(false);
+        toast.error(parseRes);
+      }
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
   return (
     <>
       <div className='Register_Student_Title'>
-        Welcome, new Career Services Manager!
+        Welcome, to Career Services Manager!
       </div>
-      <form className='Register_Student_Form'>
+      <form className='Register_Student_Form' onSubmit={onSubmitForm}>
         <div className='Register_Manager_Form_Input_Container'>
           <label>UserName</label>
           <input
@@ -120,7 +146,11 @@ const Register_Student = () => {
             />
           </div>
         </div>
-        <button className='Register_Button' id='Register_Student_Button'>
+        <button
+          className='Register_Button'
+          id='Register_Student_Button'
+          type='submit'
+        >
           Register
         </button>
       </form>

@@ -1,6 +1,7 @@
 import React from "react";
 import "./Register_Manager.css";
 import { useState } from "react";
+import { Link } from "react";
 
 const Register_Manager = () => {
   const [formData, setFormData] = useState({
@@ -22,7 +23,7 @@ const Register_Manager = () => {
     e.preventDefault();
     try {
       const body = { email, userName, password };
-      const res = await fetch("http://localhost:4500/authorization/register", {
+      const res = await fetch("http://localhost:8000/authorization/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -49,7 +50,7 @@ const Register_Manager = () => {
       <div className='Register_Manager_Title'>
         Welcome, New Career Services Manager!
       </div>
-      <form className='Register_Manager_Form'>
+      <form className='Register_Manager_Form' onSubmit={onSubmitForm}>
         <div className='Register_Manager_Form_Input_Container'>
           <label>UserName</label>
           <input
@@ -113,7 +114,11 @@ const Register_Manager = () => {
             value={formData.email}
           ></input>
         </div>
-        <button className='Register_Button' id='Register_Manager_Button'>
+        <button
+          className='Register_Button'
+          id='Register_Manager_Button'
+          type='submit'
+        >
           Register
         </button>
       </form>

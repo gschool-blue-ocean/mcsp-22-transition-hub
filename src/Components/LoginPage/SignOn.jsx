@@ -2,20 +2,18 @@ import React from "react";
 import "./SignOn.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useAuthDataUpdate } from "../../../Authorization/utils/AuthContext";
-import { useAuthData } from "../../../Authorization/utils/AuthContext";
 import { useContext, useState } from "react";
+import AuthContext from "../../../Authorization/utils/AuthContext";
 import AccountContext from "../Context/AccountServicesContext";
 
 const SignOn = () => {
-  const setAuthData = useAuthDataUpdate();
-  const authSuccess = useAuthData();
   const { setCurrentService, accountServices } = useContext(AccountContext);
+  const { setIsAuthenticated, isAuthenticated } = useContext(AuthContext);
   const [formData, setFormData] = useState({
     username: "",
     password: "",
   });
-
+  //   console.log(useAuthData);
   const navigate = useNavigate();
 
   const { username, password } = formData;
@@ -37,11 +35,10 @@ const SignOn = () => {
 
       if (parseRes.token) {
         localStorage.setItem("token", parseRes.token);
-        setAuthData(true);
-
-        navigate(authSuccess ? "/manager" : "/student"); //may need to change this logic
+        setIsAuthenticated(true);
+        navigate(isAuthenticated ? "/manager" : "/student"); //may need to change this logic
       } else {
-        setAuthData(false);
+        setIsAuthenticated(false);
       }
     } catch (err) {
       console.error(err.message);

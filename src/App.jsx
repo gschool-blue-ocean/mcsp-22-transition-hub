@@ -11,6 +11,7 @@ import AddTask from "./Components/AfterLogin/Reuseable/AddTask/AddTask";
 import TasksPage from "./Components/TasksComp/TasksPage";
 import ManagerSideNav from "./Components/AfterLogin/ManagerViewOnly/ManagerNavigationBar/ManagerSideNav";
 import AverageCohort from "./Components/AfterLogin/ManagerViewOnly/AverageCohort/AverageCohort";
+import { AuthProvider } from "../Authorization/utils/AuthContext";
 
 function App() {
   // const checkAuth = async () => {
@@ -36,51 +37,53 @@ function App() {
 
   return (
     <>
-      <Router>
-        <Routes>
-          <Route
-            exact
-            path='/'
-            element={
-              <AccountProvider>
-                <CohortProvider>
+      <AuthProvider>
+        <Router>
+          <Routes>
+            <Route
+              exact
+              path='/'
+              element={
+                <AccountProvider>
+                  <CohortProvider>
+                    <StudentProvider>
+                      <AccountServices /> {/* Actual Component */}
+                    </StudentProvider>
+                  </CohortProvider>
+                </AccountProvider>
+              }
+            ></Route>
+            <Route
+              exact
+              path='/manager'
+              element={
+                <>
+                  <Header />
+                  <CohortProvider>
+                    <ManagerSideNav />
+                    <AverageCohort />
+                  </CohortProvider>
+                  {/*Rest of manager stuff goes here*/}
+                </>
+              }
+            ></Route>
+            <Route
+              exact
+              path='/student'
+              element={
+                <>
+                  <Header />
                   <StudentProvider>
-                    <AccountServices /> {/* Actual Component */}
+                    <StudentInfoBar />
+                    <AddTask />
+                    <TasksPage />
                   </StudentProvider>
-                </CohortProvider>
-              </AccountProvider>
-            }
-          ></Route>
-          <Route
-            exact
-            path='/manager'
-            element={
-              <>
-                <Header />
-                <CohortProvider>
-                  <ManagerSideNav />
-                  <AverageCohort /> 
-                </CohortProvider>
-                {/*Rest of manager stuff goes here*/}
-              </>
-            }
-          ></Route>
-          <Route
-            exact
-            path='/student'
-            element={
-              <>
-                <Header />
-                <StudentProvider>
-                  <StudentInfoBar />
-                  <AddTask />
-                  <TasksPage />
-                </StudentProvider>
-              </>
-            }
-          ></Route>
-        </Routes>
-      </Router>
+                </>
+              }
+            ></Route>
+          </Routes>
+        </Router>
+      </AuthProvider>
     </>
   );
 }
