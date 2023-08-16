@@ -136,17 +136,7 @@ app.patch("/tasks/:taskId/complete", async (req, res) => {
 //   res.send(result.rows);
 // });
 
-// app.post("/api/cohort", async (req, res, next) => {
-//   const { cohortName, startDate, endDate } = req.body;
 
-//   const result = await db
-//     .query(
-//       "INSERT INTO cohort (cohortName, startDate, endDate) VALUES ($1, $2, $3)",
-//       [cohortName, startDate, endDate]
-//     )
-//     .catch(next);
-//   res.send(result.rows[0]);
-// });
 
 // app.get("/api/cohort/:id", async (req, res, next) => {
 //   let id = req.params.id;
@@ -261,6 +251,19 @@ app.get('/manager/tasks/all', async (req, res) => {
     console.error('Error querying tasks:', error.stack);
     res.status(500).send('Internal Server Error');
   }
+});
+//Add Cohort
+app.post("/cohort", async (req, res) => {
+  const { cohortName, startDate, endDate } = req.body;
+  try{
+    const result = await pool.query("INSERT INTO cohorts (cohortName, startDate, endDate) VALUES ($1, $2, $3) RETURNING *", [cohortName, startDate, endDate])
+    res.send(result.rows[0]);
+  } catch (error) {
+    console.error('Error querying tasks:', error.stack);
+    res.status(500).send('Internal Server Error');
+  }
+  
+  
 });
 /* -------------------------- Important -------------------  */
 

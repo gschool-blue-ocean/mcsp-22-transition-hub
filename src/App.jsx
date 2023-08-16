@@ -11,6 +11,7 @@ import AddTask from "./Components/AfterLogin/Reuseable/AddTask/AddTask";
 import TasksPage from "./Components/TasksComp/TasksPage";
 import ManagerSideNav from "./Components/AfterLogin/ManagerViewOnly/ManagerNavigationBar/ManagerSideNav";
 import AverageCohort from "./Components/AfterLogin/ManagerViewOnly/AverageCohort/AverageCohort";
+import AddCohort from "./Components/AfterLogin/ManagerViewOnly/addCohort";
 
 
 function App() {
@@ -65,6 +66,7 @@ function App() {
                 <CohortProvider>
                   <ManagerSideNav />
                   <AverageCohort /> 
+                  {/* <AddCohort /> */}
                 </CohortProvider>
                 {/*Rest of manager stuff goes here*/}
               </>
