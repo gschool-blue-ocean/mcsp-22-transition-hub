@@ -28,13 +28,6 @@ router.post("/register", validInfo, async (req, res, next) => {
       [username, bcryptPassword, firstName, lastName, email, role]
     ).catch(next);
 
-    console.log(newUser.rows[0].usersid)
-
-    // const addedUser = await newUser.rows[0].usersId
-    
-    // console.log(newUser.rows[0].usersId)
-    // console.log(addedUser)
-
     if (role.toLowerCase() === 'student') {
       console.log('adding to students')
       const { ets, branch, clearanceType } = req.body
@@ -69,19 +62,19 @@ router.post("/login", validInfo, async (req, res, next) => {
     }
 
     const token = jwtGenerator(user.rows[0].userId);
-    res.json({ token });
+    res.json({ token, role: user.rows[0].role });
 
 });
 
 
 // // -------------- AUTH ROUTES FOR TASKS -------------------- 
 
-router.get("/tasks", async (req, res, next) => {
+router.get("/tasks", authorization, async (req, res, next) => {
   const result = await pool.query("SELECT * FROM tasks ORDER BY dueDate").catch(next);
   res.send(result.rows);
 });
 
-router.get("/tasks/:id", async (req, res, next) => {
+router.get("/tasks/:id", authorization, async (req, res, next) => {
   let id = req.params.id;
   const result = await pool
     .query("SELECT * FROM tasks WHERE taskId = $1", [id])
@@ -138,11 +131,32 @@ router.get("/cohorts/:id", async (req, res, next) => {
   }
 });
 
+router.get("/register/verify", async (req, res) => {
+  const {passcode} = req.body
+  try {
+
+    if (passcode === 'manager') {
+      return res.send('manager')
+    }
+
+    const result = await pool.query("SELECT * FROM cohorts WHERE cohortName = $1", [passcode])
+    if (result.rows[0]) {
+      return res.send('student')
+    } else {
+      return res.send('Incorrect Passcode')
+    }
+
+  } catch (error) {
+    console.error('Error querying tasks:', error.stack);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
 // ----------------------------------------------
 
 
 router.get("/verify", authorization, async (req, res, next) => {
-    res.json(true).catch(next);
+    res.json(true);
 });
 
 router.use((err, req, res, next) => {
