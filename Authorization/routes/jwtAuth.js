@@ -6,16 +6,16 @@ import express from "express";
 import bcrypt from "bcrypt";
 const router = express.Router();
 
-router.get("/login", async (req, res, next) => {
-  const user = await pool.query("SELECT * FROM users").catch(next);
+// router.get("/login", async (req, res, next) => {
+//   const user = await pool.query("SELECT * FROM users").catch(next);
 
-  res.json(user.rows);
-});
+//   res.json(user.rows);
+// });
 
 // ----------------------- AUTH ROUTES FOR LOGIN AND REGISTER -------------------------------------------------------------
 
 router.post("/register", validInfo, async (req, res, next) => {
-  const { userName, password, firstName, lastName, email, role } = req.body;
+  const { username, password, firstName, lastName, email, role } = req.body;
   const user = await pool
     .query("SELECT * FROM users WHERE email = $1", [email])
     .catch(next);
@@ -30,8 +30,8 @@ router.post("/register", validInfo, async (req, res, next) => {
 
   const newUser = await pool
     .query(
-      `INSERT INTO users(userName, password, firstName, lastName, email, role) VALUES($1, $2, $3, $4, $5, $6) RETURNING *`,
-      [userName, bcryptPassword, firstName, lastName, email, role]
+      `INSERT INTO users(username, password, firstName, lastName, email, role) VALUES($1, $2, $3, $4, $5, $6) RETURNING *`,
+      [username, bcryptPassword, firstName, lastName, email, role]
     )
     .catch(next);
 
@@ -56,7 +56,7 @@ router.post("/login", validInfo, async (req, res, next) => {
     return res.send("Incorrect username or password...");
   }
 
-  const token = jwtGenerator(newUser.rows[0].userId);
+  const token = jwtGenerator(user.rows[0].userId);
   res.json({ token });
 });
 

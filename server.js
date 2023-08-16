@@ -9,7 +9,7 @@ import { userRouter } from "./Authorization/routes/jwtAuth.js";
 import { manageRouter } from "./Authorization/routes/manager.js";
 
 dotenv.config();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 8000;
 const app = express();
 app.use(cors());
 app.use(express.static("dist"));
@@ -37,20 +37,26 @@ app.get("/tasks", async (req, res) => {
 app.patch("/tasks/:taskId/complete", async (req, res) => {
   const { taskId } = req.params;
   try {
-    const currentStatusResult = await pool.query("SELECT completed FROM tasks WHERE tasksId = $1", [taskId]);
-    
+    const currentStatusResult = await pool.query(
+      "SELECT completed FROM tasks WHERE tasksId = $1",
+      [taskId]
+    );
+
     if (currentStatusResult.rows.length === 0) {
-      res.sendStatus(404).send('Task not Found'); 
+      res.sendStatus(404).send("Task not Found");
     } else {
       const newStatus = !currentStatusResult.rows[0].completed;
-    
-      await pool.query("UPDATE tasks SET completed = $1 WHERE tasksId = $2", [newStatus, taskId]);
-      
-      res.status(200).send({ completed: newStatus }); 
+
+      await pool.query("UPDATE tasks SET completed = $1 WHERE tasksId = $2", [
+        newStatus,
+        taskId,
+      ]);
+
+      res.status(200).send({ completed: newStatus });
     }
   } catch (error) {
-    console.error('Error updating task:', error.stack);
-    res.status(500).send('Internal Server Error');
+    console.error("Error updating task:", error.stack);
+    res.status(500).send("Internal Server Error");
   }
 });
 
@@ -244,22 +250,22 @@ app.get("/manager/cohorts", async (req, res) => {
   }
 });
 //Grab all tasks and cohort id for each task, order desc
-app.get('/manager/tasks/all', async (req, res) => {
-  try{
+app.get("/manager/tasks/all", async (req, res) => {
+  try {
     const result = await pool.query(`
     SELECT c.cohortsId, t.studentsId, t.tasksId, t.taskName, t.taskDescription, t.dueDate, t.apptDate 
     FROM tasks t
     JOIN students s ON t.studentsId = s.studentsId
     JOIN cohorts c ON s.cohortsId = c.cohortsId
-    ORDER BY c.cohortsId ASC`)
+    ORDER BY c.cohortsId ASC`);
     if (result.rows.length === 0) {
       res.sendStatus(404);
     } else {
       res.send(result.rows);
     }
   } catch (error) {
-    console.error('Error querying tasks:', error.stack);
-    res.status(500).send('Internal Server Error');
+    console.error("Error querying tasks:", error.stack);
+    res.status(500).send("Internal Server Error");
   }
 });
 /* -------------------------- Important -------------------  */

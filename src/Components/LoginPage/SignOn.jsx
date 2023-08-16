@@ -1,30 +1,35 @@
 import React from "react";
 import "./SignOn.css";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useAuthDataUpdate } from "../../../Authorization/utils/AuthContext";
+import { useAuthData } from "../../../Authorization/utils/AuthContext";
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
 import AccountContext from "../Context/AccountServicesContext";
 
 const SignOn = () => {
   const setAuthData = useAuthDataUpdate();
+  const authSuccess = useAuthData();
   const { setCurrentService, accountServices } = useContext(AccountContext);
   const [formData, setFormData] = useState({
-    userName: "",
+    username: "",
     password: "",
   });
 
+  const navigate = useNavigate();
+
+  const { username, password } = formData;
+
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const onSubmitForm = async (e) => {
     e.preventDefault();
     try {
-      const body = { email, password };
+      const body = { username, password };
       const response = await axios.post(
-        "http://localhost:4500/api/auth/login",
+        "http://localhost:8000/api/auth/login",
         body
       );
 
@@ -33,6 +38,8 @@ const SignOn = () => {
       if (parseRes.token) {
         localStorage.setItem("token", parseRes.token);
         setAuthData(true);
+
+        navigate(authSuccess ? "/manager" : "/student"); //may need to change this logic
       } else {
         setAuthData(false);
       }
@@ -52,14 +59,14 @@ const SignOn = () => {
               type='text'
               name='username'
               onChange={handleChange}
-              value={formData.userName}
+              value={formData.username}
             />
           </div>
           <div className='login_Input'>
             <label>Password</label>
             <input
-              type='current-password'
-              name='current-password'
+              type='password'
+              name='password'
               onChange={handleChange}
               value={formData.password}
             />
