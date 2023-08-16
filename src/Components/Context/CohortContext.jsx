@@ -58,16 +58,35 @@ export const CohortProvider = ({children}) => {
         getData()
 
       }, [])
-
+/* ---------------------Create an Array of all totals/averages per cohort------------------------- */
       useEffect( () =>{
         let tempArray = createTasksTotalArray(cohortTaskList)
         setAverage(tempArray)
       }, [cohortTaskList])
 
+/* ---------------------Post Request for Adding a Cohort------------------------- */
+const postCohort = async (formData) => {
+  try {
+    const response = await fetch(`${url}/cohort`, {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
+    }) 
+const data = await response.json()
+console.log(data)
+setCohortList((prevCohortList) => [...prevCohortList, data]);
+}
+catch(err){
+    console.log(err)
+}
+}
 
     return <CohortContext.Provider value={{
         displayedStudents,
         setCohort,
+        postCohort,
         cohortList,
         cohortTaskList,
         average

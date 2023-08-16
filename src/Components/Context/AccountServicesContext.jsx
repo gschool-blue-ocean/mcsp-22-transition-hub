@@ -7,7 +7,7 @@ export const AccountProvider = ({children}) => {
     const [accountServices, setAccountServices] = useState(["LogOn", "PassCode", "Register"]);
     const [currentService, setCurrentService] = useState(accountServices[0])
 
-
+    
     return <AccountContext.Provider value={{
         accountServices,
         currentService,
