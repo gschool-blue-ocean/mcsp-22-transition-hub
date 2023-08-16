@@ -34,7 +34,9 @@ CREATE TABLE students (
   cohortsId INTEGER REFERENCES cohorts(cohortsId),
   ets date,
   branch varchar,
-  clearanceType varchar
+  clearanceType varchar,
+  dutyLocation varchar,
+  jobTitle varchar
 );
 
 CREATE TABLE tasks (
