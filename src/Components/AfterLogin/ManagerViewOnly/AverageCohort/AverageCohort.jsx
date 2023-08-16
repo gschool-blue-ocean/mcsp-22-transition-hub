@@ -3,9 +3,11 @@ import { useState, useContext } from "react";
 import SingleAverage from "./SingleAverage";
 import './averageCohort.css'
 import CohortContext from "../../../Context/CohortContext";
+import LoadingAnimation from "../../../LoadingAnimation";
 
 const AverageCohort = () => {
     const {average} = useContext(CohortContext)
+    // const average = []
 
     return (
         average.length > 1 ? (
@@ -15,7 +17,12 @@ const AverageCohort = () => {
                     <SingleAverage cohort={cohort} key={index} id={index}/>
                     ))}
         </div>
-        ) : <> </>
+        ) : 
+        (
+            <div className='average_cohort_container'>
+                <LoadingAnimation />
+            </div>
+        )
 
     );
 }

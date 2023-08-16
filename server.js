@@ -83,7 +83,7 @@ app.patch("/tasks/:taskId/complete", async (req, res) => {
 // });
 
 app.get("/api/tasks", async (req, res, next) => {
-  const result = await db
+  const result = await pool
     .query("SELECT * FROM tasks ORDER BY dueDate")
     .catch(next);
   res.send(result.rows);
@@ -91,7 +91,7 @@ app.get("/api/tasks", async (req, res, next) => {
 
 app.get("/api/tasks/:id", async (req, res, next) => {
   let id = req.params.id;
-  const result = await db
+  const result = await pool
     .query("SELECT * FROM tasks WHERE taskId = $1", [id])
     .catch(next);
 
@@ -105,7 +105,7 @@ app.get("/api/tasks/:id", async (req, res, next) => {
 app.post("/api/tasks", async (req, res, next) => {
   const { studentsId, taskName, taskDescription, dueDate, apptDate } = req.body;
 
-  const result = await db
+  const result = await pool
     .query(
       "INSERT INTO tasks (studentsId, taskName, taskDescription, dueDate, apptDate) VALUES ($1, $2, $3, $4, $5)",
       [studentsId, taskName, taskDescription, dueDate, apptDate]
@@ -118,7 +118,7 @@ app.put("/api/tasks/:id", async (req, res) => {
   const id = req.params.id;
   const { studentsId, taskName, taskDescription, dueDate, apptDate } = req.body;
   try {
-    const result = await db.query(
+    const result = await pool.query(
       `UPDATE tasks SET studentsId =$1, taskName = $2, taskDescription = $3, dueDate = $4, apptDate = $5 WHERE taskId = $6 RETURNING *`,
       [studentsId, taskName, taskDescription, dueDate, apptDate, id]
     );
@@ -144,7 +144,7 @@ app.put("/api/tasks/:id", async (req, res) => {
 
 
 app.get("/api/cohort", async (req, res, next) => {
-  const result = await db
+  const result = await pool
     .query("SELECT * FROM cohort ORDER BY cohortId DESC")
     .catch(next);
   res.send(result.rows);
@@ -153,7 +153,7 @@ app.get("/api/cohort", async (req, res, next) => {
 app.post("/api/cohort", async (req, res, next) => {
   const { cohortName, startDate, endDate } = req.body;
 
-  const result = await db
+  const result = await pool
     .query(
       "INSERT INTO cohort (cohortName, startDate, endDate) VALUES ($1, $2, $3)",
       [cohortName, startDate, endDate]
@@ -164,7 +164,7 @@ app.post("/api/cohort", async (req, res, next) => {
 
 app.get("/api/cohort/:id", async (req, res, next) => {
   let id = req.params.id;
-  const result = await db
+  const result = await pool
     .query("SELECT * FROM cohort WHERE cohortId = $1", [id])
     .catch(next);
 
@@ -179,7 +179,7 @@ app.put("/api/cohort/:id", async (req, res) => {
   const id = req.params.id;
   const { cohortName, startDate, endDate } = req.body;
   try {
-    const result = await db.query(
+    const result = await pool.query(
       `UPDATE cohort SET cohortName = $1, startDate = $2, endDate = $3 WHERE cohortId = $4 RETURNING *`,
       [cohortName, startDate, endDate, id]
     );
@@ -196,7 +196,7 @@ app.put("/api/cohort/:id", async (req, res) => {
 app.delete("/api/cohort/:id", async (req, res, next) => {
   const { id } = req.params;
 
-  await db.query("DELETE FROM tasks WHERE id = $1", [id]).catch(next);
+  await pool.query("DELETE FROM tasks WHERE id = $1", [id]).catch(next);
   res.sendStatus(204);
 });
 
