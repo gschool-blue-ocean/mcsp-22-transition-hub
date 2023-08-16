@@ -1,61 +1,86 @@
-import React from "react";
-import './AddTaskForm.css'
-import { useState } from "react";
+import React, { useState, useContext } from 'react';
+import './AddTaskForm.css';
+import StudentContext from '/src/Components/Context/StudentContext';
+const AddTaskForm = () => {
 
-const AddTaskForm = ({handleClose}) => {
-    const [formData, setFormData] = useState({
-        taskName: "",
-        taskDescription: "",
-        dueDate: "",
-        apptDate: "",
-    });
+    const {
+        formData,
+        handleChange,
+        handleSubmit,
+        studentId
+    } = useContext(StudentContext);
 
-      const handleChange = (e) => {
+    const [isFormVisible, setFormVisible] = useState(true);
+
+    const handleInputChange = (e) => {
         const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
-      };
+        handleChange(name, value);
+    };
 
-      
-    return (
+    const handleClose = () => {
+        setFormVisible(false);
+    };
+
+    return isFormVisible ? (
         <div className="Add_Task_Form_Container">
-            <form className="Add_Task_Form">
-            <button className="exit_Add_Task_Form_Container" onClick={handleClose}>X</button>
+            <form className="Add_Task_Form" onSubmit={handleSubmit}>
+                <button className="exit_Add_Task_Form_Container" onClick={handleClose}>X</button>
+
                 <div className="Add_Task_Form_Input_Title">
                     <label>Task Name:</label>
-                    <input type='text' placeholder=''
-                    name="taskName"
-                    onChange={handleChange}
-                    value={formData.taskName}></input>
+                    <input
+                        type='text'
+                        placeholder=''
+                        name="taskName"
+                        onChange={handleInputChange}
+                        value={formData.taskName}
+                    />
                 </div>
+
                 <div className="Add_Task_Form_Input_Description">
                     <label>Task Description</label>
-                    <textarea type='text' placeholder=''
-                    name="taskDescription"
-                    onChange={handleChange}
-                    value={formData.taskDescription}></textarea>
+                    <textarea
+                        type='text'
+                        placeholder=''
+                        name="taskDescription"
+                        onChange={handleInputChange}
+                        value={formData.taskDescription}
+                    />
                 </div>
+
                 <div className="AddTask_Form_Dates">
                     <div className="AddTask_Date">
-                        <label htmlFor="dueDate">Due date:</label>
-                        <input type="date" id="AddTask_Due_Date" name="dueDate" onChange={handleChange}/>
+                        <label htmlFor="dueDate">Due Date:</label>
+                        <input
+                            type="date"
+                            id="AddTask_Due_Date"
+                            name="dueDate"
+                            onChange={handleInputChange}
+                            value={formData.dueDate}
+                        />
                     </div>
+
                     <div className="AddTask_Date">
-                        <label htmlFor="apptDate">Appointment date:</label>
-                        <input type="date" id="AddTask_Appt_Date" name="apptDate" onChange={handleChange}/>
+                        <label htmlFor="apptDate">Appointment Date:</label>
+                        <input
+                            type="date"
+                            id="AddTask_Appt_Date"
+                            name="apptDate"
+                            onChange={handleInputChange}
+                            value={formData.apptDate}
+                        />
                     </div>
                 </div>
 
-                <button className="AddTask_Button" id="AddTask_Button_id">Add Task</button>
+                <button className="AddTask_Button" id="AddTask_Button_id" type="submit">Add Task</button>
             </form>
         </div>
-    )
+    ) : null;
 }
 
-export default AddTaskForm
+export default AddTaskForm;
 
-/*
-  taskName varchar,
-  taskDescription text,
-  dueDate varchar,
-  apptDate varchar
-*/
+
+
+
+
