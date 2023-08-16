@@ -6,12 +6,6 @@ import express from "express";
 import bcrypt from "bcrypt";
 const router = express.Router();
 
-// router.get("/login", async (req, res, next) => {
-//   const user = await pool.query("SELECT * FROM users").catch(next);
-
-//   res.json(user.rows);
-// });
-
 // ----------------------- AUTH ROUTES FOR LOGIN AND REGISTER -------------------------------------------------------------
 
 router.post("/register", validInfo, async (req, res, next) => {
@@ -37,11 +31,6 @@ router.post("/register", validInfo, async (req, res, next) => {
     .catch(next);
 
   console.log(newUser.rows[0].usersid);
-
-  // const addedUser = await newUser.rows[0].usersId
-
-  // console.log(newUser.rows[0].usersId)
-  // console.log(addedUser)
 
   if (role.toLowerCase() === "student") {
     console.log("adding to students");
@@ -77,7 +66,7 @@ router.post("/login", validInfo, async (req, res, next) => {
   }
 
   const token = jwtGenerator(user.rows[0].userId);
-  res.json({ token });
+  res.json({ token, role: user.rows[0].role });
 });
 
 // // -------------- AUTH ROUTES FOR TASKS --------------------
@@ -154,7 +143,7 @@ router.get("/cohorts/:id", async (req, res, next) => {
 // ----------------------------------------------
 
 router.get("/verify", authorization, async (req, res, next) => {
-  res.json(true).catch(next);
+  res.json(true);
 });
 
 router.use((err, req, res, next) => {
