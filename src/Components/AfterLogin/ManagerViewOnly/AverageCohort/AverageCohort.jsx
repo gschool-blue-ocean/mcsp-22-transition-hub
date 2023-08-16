@@ -6,8 +6,8 @@ import CohortContext from "../../../Context/CohortContext";
 import { LoadingAnimation1, LoadingAnimation2 } from "../../../LoadingAnimation";
 
 const AverageCohort = () => {
-    // const {average} = useContext(CohortContext)
-    const average = []
+    const {average} = useContext(CohortContext)
+    // const average = []
 
     return (
         average.length > 1 ? (
