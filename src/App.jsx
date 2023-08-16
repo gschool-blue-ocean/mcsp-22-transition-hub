@@ -6,15 +6,17 @@ import Manager from "./Components/MainComponents/Manager";
 import Student from "./Components/MainComponents/Student";
 
 function App() {
-
+const isAuthenticated = true
+const isManager = true
+const isStudent = true
 
   return (
     <AuthProvider>
       <Router>
         <Routes>
           <Route path="/" element={<LogInPage />} />
-          <Route path="/manager" element={<Manager />} />
-          <Route path="/student" element={<Student />} />
+          <Route path="/manager" element={isAuthenticated && isManager ? <Manager /> : <LogInPage/>} />
+          <Route path="/student" element={isAuthenticated && isStudent ? <Student /> : <LogInPage />} />
         </Routes>
       </Router>
     </AuthProvider>
