@@ -4,7 +4,7 @@ import {useState, createContext} from 'react'
 const CohortContext = createContext()
 
 export const CohortProvider = ({children}) => {
-    const url = "http://localhost:3000"
+    const url = "http://localhost:8000"
 
     /* ------------------  To Grab Students First and Last Name By Cohort ------------------- */
     const [cohort, setCohort] = useState(0) //Current displayed Cohort

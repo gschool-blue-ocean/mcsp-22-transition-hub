@@ -39,11 +39,11 @@
 }
 
 .studentlist_tabledata {
-    background-color: #f0f0f0;
+    background-color: transparent;
     border-bottom: 1px solid #ccc;
     transition: background-color 0.3s ease;
 }
 
 /* .studentlist_tabledata:hover {
 
-} */
+} */    
