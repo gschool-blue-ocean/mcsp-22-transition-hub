@@ -27,10 +27,16 @@ router.post("/register", validInfo, async (req, res, next) => {
     .query(
       `INSERT INTO users(username, password, firstName, lastName, email, role) VALUES($1, $2, $3, $4, $5, $6) RETURNING *`,
       [username, bcryptPassword, firstName, lastName, email, role]
-    )
-    .catch(next);
 
-  console.log(newUser.rows[0].usersid);
+    ).catch(next);
+
+    if (role.toLowerCase() === 'student') {
+      console.log('adding to students')
+      const { ets, branch, clearanceType } = req.body
+      console.log(ets, branch, clearanceType)
+      await pool.query('INSERT INTO students (usersId, cohortsId, ets, branch, clearanceType) VALUES ($1, $2, $3, $4, $5)', 
+      [newUser.rows[0].usersid, cohortsId, ets, branch, clearanceType]).catch(next)
+    }
 
   if (role.toLowerCase() === "student") {
     console.log("adding to students");
@@ -61,6 +67,7 @@ router.post("/login", validInfo, async (req, res, next) => {
 
   const validPassword = await bcrypt.compare(password, user.rows[0].password);
 
+
   if (!validPassword) {
     return res.send("Incorrect username or password...");
   }
@@ -71,14 +78,16 @@ router.post("/login", validInfo, async (req, res, next) => {
 
 // // -------------- AUTH ROUTES FOR TASKS --------------------
 
+
 router.get("/tasks", async (req, res, next) => {
   const result = await pool
     .query("SELECT * FROM tasks ORDER BY dueDate")
     .catch(next);
+  
   res.send(result.rows);
 });
 
-router.get("/tasks/:id", async (req, res, next) => {
+router.get("/tasks/:id", authorization, async (req, res, next) => {
   let id = req.params.id;
   const result = await pool
     .query("SELECT * FROM tasks WHERE taskId = $1", [id])
@@ -140,10 +149,33 @@ router.get("/cohorts/:id", async (req, res, next) => {
   }
 });
 
+router.get("/register/verify", async (req, res) => {
+  const {passcode} = req.body
+  try {
+
+    if (passcode === 'manager') {
+      return res.send('manager')
+    }
+
+    const result = await pool.query("SELECT * FROM cohorts WHERE cohortName = $1", [passcode])
+    if (result.rows[0]) {
+      return res.send('student')
+    } else {
+      return res.send('Incorrect Passcode')
+    }
+
+  } catch (error) {
+    console.error('Error querying tasks:', error.stack);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
 // ----------------------------------------------
 
 router.get("/verify", authorization, async (req, res, next) => {
-  res.json(true);
+
+    res.json(true);
+
 });
 
 router.use((err, req, res, next) => {
