@@ -68,7 +68,7 @@ const SignOn = () => {
   return (
     <div className='logOnBG'>
       <div className='logOnContainer'>
-        <div className='logOn_Title'>LogIn</div>
+        <div className='logOn_Title'></div>
         <form className='login-form' onSubmit={onSubmitForm}>
           <div className='login_Input'>
             <label>User Name</label>
