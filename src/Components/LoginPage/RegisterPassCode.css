@@ -12,18 +12,19 @@
 }
 .PassCode_Container{
     width: 30%;
+    min-width: 330px;
     height: 50%;
     background-color: #4F515E;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
     border-radius: 20px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     padding: 20px;
 }
 .RegisterPassCode_Title{
-    font-size: 2.5rem;
+    font-size: 2rem;
 }
 
 .passCode_form{
@@ -62,4 +63,24 @@
 }
 .passCode_notes{ /* Description under button */
     font-size: .875rem;
+}
+
+@media (max-width:850px) {
+    .PassCode_Container{
+        justify-content: center;
+        height: 30%;
+        min-width: 200px;
+    }
+    .RegisterPassCode_Title{
+        font-size: 1rem;
+    }
+    .passCode_form label {
+        font-size: .875rem;
+    }
+    .passCode_notes{
+        font-size: .5rem;
+    }
+    #registerPasscode_submit{
+        font-size: .5rem
+    }
 }
