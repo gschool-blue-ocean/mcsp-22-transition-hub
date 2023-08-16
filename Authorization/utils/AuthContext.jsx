@@ -1,6 +1,5 @@
 import React from "react";
 import { createContext, useState, useEffect, useContext } from "react";
-// import { router } from 'react-router-dom';
 
 const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
@@ -26,28 +25,3 @@ export const useAuth = () => {
 };
 
 export default AuthContext;
-// const AuthUpdateContext = React.createContext();
-
-// export function useAuthData() {
-//   return useContext(AuthContext);
-// }
-
-// export function useAuthDataUpdate() {
-//   return useContext(AuthUpdateContext);
-// }
-
-// export function AuthProvider({ children }) {
-//   const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-//   function updateAuthData(boolean) {
-//     setIsAuthenticated(boolean);
-//   }
-
-//   return (
-//     <AuthContext.Provider value={isAuthenticated}>
-//       <AuthUpdateContext.Provider value={updateAuthData}>
-//         {children}
-//       </AuthUpdateContext.Provider>
-//     </AuthContext.Provider>
-//   );
-//}

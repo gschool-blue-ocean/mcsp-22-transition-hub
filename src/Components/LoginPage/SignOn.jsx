@@ -1,6 +1,6 @@
 import React from "react";
 import "./SignOn.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useContext, useState } from "react";
 import AuthContext from "../../../Authorization/utils/AuthContext";
@@ -15,6 +15,7 @@ const SignOn = () => {
     password: "",
   });
 
+  const navigate = useNavigate();
   const { username, password } = formData;
 
   const handleChange = (e) => {
@@ -50,10 +51,10 @@ const SignOn = () => {
       if (isAuthenticated) {
         switch (roles) {
           case "student":
-            <Link to='/student'>Student Route</Link>;
+            navigate("/student");
             break;
           case "manager":
-            <Link to='/manager'>Manager Route</Link>;
+            navigate("/manager");
             break;
 
           default:
