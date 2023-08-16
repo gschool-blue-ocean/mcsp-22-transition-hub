@@ -11,7 +11,7 @@ import { manageRouter } from "./Authorization/routes/manager.js";
 
 
 dotenv.config();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8000;
 const app = express();
 // const staticPath = path.join(__dirname, "MCSP-22-TRANSITION-HUB");
 app.use(cors());

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import './tasks.css';
 import StudentContext from '../Context/StudentContext';
+import moment from 'moment';
 
 const TasksPage = () => {
 
@@ -21,7 +22,7 @@ const TasksPage = () => {
                     }}
                 />
                 {task.taskname} 
-                <span className="due-date">{task.duedate}</span>
+                <span className="due-date">{moment(task.duedate).format('MM/DD/YYYY')}</span>
                 <span className="accordion-arrow">{activeTaskId === task.tasksid ? '▼' : '▶'}</span>
             </div>
             {activeTaskId === task.tasksid && (
@@ -32,8 +33,8 @@ const TasksPage = () => {
             )}
         </div>
     );
-console.log(studentId)
-console.log(tasks)
+// console.log(studentId)
+// console.log(tasks)
     return (
         studentId && (tasks.length > 1) ? (
             <div className="entirePage">
