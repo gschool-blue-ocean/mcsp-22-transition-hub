@@ -1,38 +1,36 @@
-import React, { useContext, useEffect, useState } from "react";
-import "./App.css";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import AuthContext from "../Authorization/utils/AuthContext"; 
+import React from "react";
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import { AuthProvider } from "../Authorization/utils/AuthContext";
-import LogInPage from "./Components/Main Components/LogInPage";
-import Manager from "./Components/Main Components/Manager";
-import Student from "./Components/Main Components/Student";
+import LogInPage from "./Components/MainComponents/LogInPage";
+import Manager from "./Components/MainComponents/Manager";
+import Student from "./Components/MainComponents/Student";
 
 function App() {
-
-  // function PrivateRoute({ element, ...rest }) {
-  //   const {isAuthenticated} = useContext(AuthContext)
-
-  
-  //   if (!isAuthenticated) {
-  //     return <Navigate to="/" />;
-  //   }
-  
-  //   return <Route element={element} {...rest} />;
-  // }
+const isAuthenticated = true
+const isManager = true
+const isStudent = true
 
   return (
-    <>
-      <AuthProvider>
-        <Router>
-          <Routes>
-            <Route exact path='/' element={ <LogInPage /> }></Route>
-            <Route path='/manager' element={ <Manager /> }></Route>
-            <Route path='/student' element={ <Student /> }></Route>
-          </Routes>
-        </Router>
-      </AuthProvider>         
-    </>
+    <AuthProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<LogInPage />} />
+          <Route path="/manager" element={isAuthenticated && isManager ? <Manager /> : <LogInPage/>} />
+          <Route path="/student" element={isAuthenticated && isStudent ? <Student /> : <LogInPage />} />
+        </Routes>
+      </Router>
+    </AuthProvider>
   );
 }
 
 export default App;
+
+
+/*
+  if (!user) {
+    return <Navigate to="/" state={{ from: location }} replace />;
+  } else {
+    return children;
+  }
+}
+*/
