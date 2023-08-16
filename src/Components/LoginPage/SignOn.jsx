@@ -3,7 +3,7 @@ import "./SignOn.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useContext, useState } from "react";
-import AuthContext from "../../../Authorization/utils/AuthContext";
+import AuthContext from "../Context/AuthContext";
 import AccountContext from "../Context/AccountServicesContext";
 
 const SignOn = () => {
