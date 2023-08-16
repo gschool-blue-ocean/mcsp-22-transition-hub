@@ -63,3 +63,22 @@
 .passCode_notes{ /* Description under button */
     font-size: .875rem;
 }
+
+@media (max-width:850px) {
+    .PassCode_Container{
+        justify-content: center;
+        height: 30%;
+    }
+    .RegisterPassCode_Title{
+        font-size: 1rem;
+    }
+    .passCode_form label {
+        font-size: .875rem;
+    }
+    .passCode_notes{
+        font-size: .5rem;
+    }
+    #registerPasscode_submit{
+        font-size: .5rem
+    }
+}
