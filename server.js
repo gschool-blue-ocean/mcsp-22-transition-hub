@@ -240,7 +240,7 @@ app.delete("/api/cohort/:id", async (req, res, next) => {
 app.get("/api/studentinfo", async (req, res) => {
   try {
     const result = await pool.query(
-      "SELECT users.firstName, users.lastName, users.email, students.ets, students.branch, students.clearanceType FROM users JOIN students ON users.usersId = students.usersId"
+      "SELECT users.firstName, users.lastName, users.email, students.ets, students.branch, students.jobTitle, students.dutyLocation, students.clearanceType FROM users JOIN students ON users.usersId = students.usersId"
     );
     res.status(200).json(result.rows);
   } catch (err) {
@@ -254,7 +254,7 @@ app.get("/user/:usersId/info", async (req, res) => {
 
   try {
     const result = await pool.query(
-      "SELECT users.firstName, users.lastName, users.email, students.ets, students.branch, students.clearanceType FROM users JOIN students ON users.usersId = students.usersId WHERE users.usersId = $1",
+      "SELECT users.firstName, users.lastName, users.email, students.ets, students.branch, students.jobTitle, students.dutyLocation, students.clearanceType FROM users JOIN students ON users.usersId = students.usersId WHERE users.usersId = $1",
       [usersId]
     );
     res.status(200).json(result.rows);
