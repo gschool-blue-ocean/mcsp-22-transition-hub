@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./SignOn.css";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useContext, useState } from "react";
 import AuthContext from "../Context/AuthContext";
@@ -32,7 +32,6 @@ const SignOn = () => {
       );
 
       const parseRes = await response.data;
-      setRoles(parseRes.role);
 
       const verify = await axios.get("http://localhost:8000/api/auth/verify", {
         headers: {
@@ -42,29 +41,28 @@ const SignOn = () => {
 
       if (verify) {
         localStorage.setItem("token", parseRes.token);
-        console.log(localStorage);
         setIsAuthenticated(true);
+        setRoles(parseRes.role);
       } else {
         setIsAuthenticated(false);
-      }
-
-      if (isAuthenticated) {
-        switch (roles) {
-          case "student":
-            navigate("/student");
-            break;
-          case "manager":
-            navigate("/manager");
-            break;
-
-          default:
-            return "No role found";
-        }
       }
     } catch (err) {
       console.error(err.message);
     }
   };
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      switch (roles) {
+        case "manager":
+          navigate("/manager");
+          break;
+        case "student":
+          navigate("/student");
+          break;
+      }
+    }
+  }, [roles]);
 
   return (
     <div className='logOnBG'>
