@@ -47,7 +47,6 @@ const RegisterPasscode = () => {
       setCurrentService(accountServices[2]); // <--- === "Register"
     }
   };
-
   return (
     <div className='PassCode_BG'>
       <div className='PassCode_Container'>

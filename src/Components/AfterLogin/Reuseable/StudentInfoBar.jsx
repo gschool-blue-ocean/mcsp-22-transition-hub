@@ -1,13 +1,15 @@
 import './StudentInfoBar.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faUser } from '@fortawesome/free-solid-svg-icons';
 import profileicon from "./img/usericon.png";
 import moment from 'moment';
+import UrlContext from '../../Context/URLContext';
 
 
 const StudentInfoBar = () => {
-    
+    const {url} = useContext(UrlContext)
+
     const [studentInfo, setStudentInfo] = useState({
         firstname: '',
         lastname: '',
@@ -21,7 +23,7 @@ const StudentInfoBar = () => {
 
     useEffect(() => {
         const getStudentInfo = async () => {
-            const response = await fetch('http://localhost:8000/user/08fe5d56-2f71-42a1-b782-7a533452313f/info');
+            const response = await fetch(url + '/info');
             const results = await response.json();
             setStudentInfo(...results);
             console.log(results)

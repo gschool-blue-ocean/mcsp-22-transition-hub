@@ -8,7 +8,7 @@ import UrlContext from '../../Context/URLContext'
 
 
 const Register_Manager = () => {
-  // const {setCurrentService, accountServices} = useContext(AccountContext)
+  const {setCurrentService, accountServices} = useContext(AccountContext)
   const {url} = useContext(UrlContext)
   const [formData, setFormData] = useState({
     username: "",
@@ -27,18 +27,12 @@ const Register_Manager = () => {
   const onSubmitForm = async (e) => {
     e.preventDefault();
     try {
-      // setCurrentService(accountServices[0])
       const res = await axios.post(url + '/api/auth/register', formData) // may have to change route, unsure at this time
       const parseRes = await res.data;
-      console.log(parseRes)
-      // if (parseRes.token) {
-      //   localStorage.setItem("token", parseRes.token);
-      //   setAuth(true);
-      //   TransformStream.success("Register Successful");
-      // } else {
-      //   setAuth(false);
-      //   toast.error(parseRes);
-      // }
+
+      if (parseRes.token) {
+        setCurrentService(accountServices[0])
+      }
     } catch (err) {
       console.error(err.message);
     }

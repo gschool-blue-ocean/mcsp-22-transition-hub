@@ -13,10 +13,12 @@ import AuthContext from "../../Context/AuthContext";
 const Header = () => {
   const [isExpanded, setIsExpanded] = useState(false);
 
-  const { setRoles } = useContext(AuthContext);
+  const { setRoles, setIsAuthenticated } = useContext(AuthContext);
 
   const onLogout = () => {
     setRoles("");
+    setIsAuthenticated('')
+    localStorage.setItem("token", '');
   };
 
   const toggleExpansion = () => {
