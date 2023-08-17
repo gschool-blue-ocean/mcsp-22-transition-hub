@@ -11,8 +11,7 @@ const ManagerSideNav = () => {
     //Set cohort value for get request, takes the cohort id
     const handleChange = (e) => {
         const { value } = e.target;
-        setCohort(value)
-        console.log(value)
+        setCohort(value)    
     };
 
     return (
