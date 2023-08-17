@@ -5,7 +5,8 @@ import axios from "axios";
 import { useContext, useState } from "react";
 import AuthContext from "../Context/AuthContext";
 import AccountContext from "../Context/AccountServicesContext";
-
+import UrlContext from '../Context/URLContext'
+ 
 const SignOn = () => {
   const { setCurrentService, accountServices } = useContext(AccountContext);
   const { setIsAuthenticated, isAuthenticated, roles, setRoles } =
@@ -14,6 +15,7 @@ const SignOn = () => {
     username: "",
     password: "",
   });
+  const {url} = useContext(UrlContext)
 
   const navigate = useNavigate();
   const { username, password } = formData;
@@ -27,13 +29,13 @@ const SignOn = () => {
     try {
       const body = { username, password };
       const response = await axios.post(
-        "http://localhost:8000/api/auth/login",
+        url + "/api/auth/login",
         body
       );
 
       const parseRes = await response.data;
 
-      const verify = await axios.get("http://localhost:8000/api/auth/verify", {
+      const verify = await axios.get(url + "/api/auth/verify", {
         headers: {
           token: parseRes.token,
         },

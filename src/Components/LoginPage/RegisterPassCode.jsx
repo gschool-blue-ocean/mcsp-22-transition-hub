@@ -1,44 +1,67 @@
-import './RegisterPassCode.css'
+import './RegisterPasscode.css'
 import React from 'react'
+import axios from 'axios'
+import AuthContext from '../Context/AuthContext'
 import AccountContext from '../Context/AccountServicesContext'
 import { useContext, useState } from 'react'
+import UrlContext from '../Context/URLContext'
 
-const RegisterPassCode = () => {
-
+const RegisterPasscode = () => {
     //use effect to grab all the cohort names, put into student in the state
-    const {setCurrentService, accountService, currentCohort} = useContext(AccountContext)
-
+    const {setCurrentService, accountServices, currentCohort} = useContext(AccountContext)
+    const {setRoles, setCohortsId} = useContext(AuthContext)
+    const {url} = useContext(UrlContext)
 
     const [formData, setFormData] = useState({
-        PassCode: "",
+        passcode: "",
       });
+
       const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
       };
 
-    const handleClick = () => {
-        /* logic to verify passcode is correct */
-        setCurrentService(accountServices[2]) // <--- === "Register"
+      const passcodeVerification = async (formData) => {
+        try {
+            const results = await axios.post(url + '/api/auth/register/verify', formData)
+            const res = await results.data
+
+            setRoles(res.role)
+            if (res.id) {
+                setCohortsId(res.id)
+            }
+            return true
+        } catch (err) {
+            console.error(err)
+        }
+
+      } 
+
+    const handleSubmit = () => {
+        const toRegistration = passcodeVerification(formData)
+
+        if (toRegistration) {
+            setCurrentService(accountServices[2]) // <--- === "Register"
+        }
     }
 
     return (
-        <div className="PassCode_BG">
-            <div className="PassCode_Container">
-                <div className='RegisterPassCode_Title'>
-                    Verification Passcode
+        <div className="Passcode_BG">
+            <div className="Passcode_Container">
+                <div className='RegisterPasscode_Title'>
+                    Verification passcode
                 </div>
-                <form className='passCode_form'>
-                        <div className='passCode_Input'>
-                            <label>PassCode</label>
+                <form className='passcode_form' onSubmit={handleSubmit}>
+                        <div className='passcode_Input'>
+                            <label>passcode</label>
                             <input type='text' placeholder=''
-                            name="PassCode"
+                            name="passcode"
                             onChange={handleChange}
-                            value={formData.PassCode}></input>
+                            value={formData.passcode}></input>
                         </div>
-                        <button type='submit' id='registerPasscode_submit' onClick={handleClick}>Submit</button>
+                        <button type='submit' id='registerPasscode_submit' >Submit</button>
                     </form>
-                    <p className='passCode_notes'>
+                    <p className='passcode_notes'>
                         ***This passcode will be provided by either your instructor or manager. 
                     </p>
             </div>            
@@ -46,4 +69,4 @@ const RegisterPassCode = () => {
     )
 }
 
-export default RegisterPassCode
+export default RegisterPasscode

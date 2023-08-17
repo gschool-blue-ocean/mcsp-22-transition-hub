@@ -8,6 +8,28 @@ const router = express.Router();
 
 // ----------------------- AUTH ROUTES FOR LOGIN AND REGISTER -------------------------------------------------------------
 
+router.post("/register/verify", async (req, res) => {
+  const {passcode} = req.body
+  try {
+    
+    if (passcode === 'manager') {
+      return res.send({role: 'manager'})
+    }
+    
+    const result = await pool.query("SELECT * FROM cohorts WHERE cohortName = $1", [passcode])
+    
+    if (result.rows[0].cohortname) {
+      return res.send({role:'student', id: result.rows[0].cohortsid})
+    } else {
+      return res.send('Incorrect Passcode')
+    }
+
+  } catch (error) {
+    console.error('Error querying tasks:', error.stack);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
 router.post("/register", validInfo, async (req, res, next) => {
   const { username, password, firstName, lastName, email, role, cohortsId } =
     req.body;
@@ -30,20 +52,7 @@ router.post("/register", validInfo, async (req, res, next) => {
     )
     .catch(next);
 
-  if (role.toLowerCase() === "student") {
-    console.log("adding to students");
-    const { ets, branch, clearanceType } = req.body;
-    console.log(ets, branch, clearanceType);
-    await pool
-      .query(
-        "INSERT INTO students (usersId, cohortsId, ets, branch, clearanceType) VALUES ($1, $2, $3, $4, $5)",
-        [newUser.rows[0].usersid, cohortsId, ets, branch, clearanceType]
-      )
-      .catch(next);
-  }
-
-  if (role.toLowerCase() === "student") {
-    console.log("adding to students");
+  if (role === "student") {
     const { ets, branch, clearanceType } = req.body;
     console.log(ets, branch, clearanceType);
     await pool
@@ -148,28 +157,6 @@ router.get("/cohorts/:id", async (req, res, next) => {
     res.sendStatus(404);
   } else {
     res.send(result.rows[0]);
-  }
-});
-
-router.get("/register/verify", async (req, res) => {
-  const { passcode } = req.body;
-  try {
-    if (passcode === "manager") {
-      return res.send("manager");
-    }
-
-    const result = await pool.query(
-      "SELECT * FROM cohorts WHERE cohortName = $1",
-      [passcode]
-    );
-    if (result.rows[0]) {
-      return res.send("student");
-    } else {
-      return res.send("Incorrect Passcode");
-    }
-  } catch (error) {
-    console.error("Error querying tasks:", error.stack);
-    res.status(500).send("Internal Server Error");
   }
 });
 

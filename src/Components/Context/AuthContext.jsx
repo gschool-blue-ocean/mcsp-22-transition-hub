@@ -5,6 +5,8 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [roles, setRoles] = useState("");
+  const [cohortsId, setCohortsId] = useState(0)
+
 
   return (
     <AuthContext.Provider
@@ -13,6 +15,8 @@ export const AuthProvider = ({ children }) => {
         setIsAuthenticated,
         roles,
         setRoles,
+        cohortsId,
+        setCohortsId
       }}
     >
       {children}
