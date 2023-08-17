@@ -4,8 +4,10 @@ import "./Register_Student.css";
 import AuthContext from "../../Context/AuthContext";
 import UrlContext from '../../Context/URLContext'
 import axios from "axios";
+import AccountContext from "../../Context/AccountServicesContext";
 
 const Register_Student = () => {
+  const {accountServices, setCurrentService} = useContext(AccountContext)
   const {cohortsId} = useContext(AuthContext)
   const {url} = useContext(UrlContext)
   const [formData, setFormData] = useState({
@@ -32,15 +34,10 @@ const Register_Student = () => {
       // setCurrentService(accountServices[0])
       const res = await axios.post(url + '/api/auth/register', formData) // may have to change route, unsure at this time
       const parseRes = await res.data;
-      console.log(parseRes)
-      // if (parseRes.token) {
-      //   localStorage.setItem("token", parseRes.token);
-      //   setAuth(true);
-      //   TransformStream.success("Register Successful");
-      // } else {
-      //   setAuth(false);
-      //   toast.error(parseRes);
-      // }
+
+      if (parseRes.token) {
+        setCurrentService(accountServices[0])
+      }
     } catch (err) {
       console.error(err.message);
     }

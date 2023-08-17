@@ -46,22 +46,22 @@ const RegisterPasscode = () => {
     }
 
     return (
-        <div className="Passcode_BG">
-            <div className="Passcode_Container">
-                <div className='RegisterPasscode_Title'>
+        <div className="PassCode_BG">
+            <div className="PassCode_Container">
+                <div className='RegisterPassCode_Title'>
                     Verification passcode
                 </div>
-                <form className='passcode_form' onSubmit={handleSubmit}>
-                        <div className='passcode_Input'>
+                <form className='passCode_form' onSubmit={handleSubmit}>
+                        <div className='passCode_Input'>
                             <label>passcode</label>
                             <input type='text' placeholder=''
                             name="passcode"
                             onChange={handleChange}
                             value={formData.passcode}></input>
                         </div>
-                        <button type='submit' id='registerPasscode_submit' >Submit</button>
+                        <button type='submit' id='registerPassCode_submit' >Submit</button>
                     </form>
-                    <p className='passcode_notes'>
+                    <p className='passCode_notes'>
                         ***This passcode will be provided by either your instructor or manager. 
                     </p>
             </div>            
