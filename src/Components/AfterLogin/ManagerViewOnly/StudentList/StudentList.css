@@ -1,17 +1,10 @@
 .studentlist_taskprogress_bigcontainer {
-    position: fixed;
-    left: 310px;
-    top: 320px;
-    width: 70%;
+    width: 100%;
 }
 
 .studentlist_h2 {
     color:#f0f0f0;
     text-align: left;
-}
-
-.studentlist_taskprogress_bigcontainer {
-    margin: 20px;
 }
 
 .studentlist_table {
