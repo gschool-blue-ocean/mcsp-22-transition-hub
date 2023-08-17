@@ -1,15 +1,20 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import "./Register_Student.css";
+import AuthContext from "../../Context/AuthContext";
+import UrlContext from '../Context/URLContext'
+import axios from "axios";
 
 const Register_Student = () => {
+  const {cohortsId} = useContext(AuthContext)
+  const {url} = useContext(UrlContext)
   const [formData, setFormData] = useState({
     username: "",
     password: "",
-    cohort: "",
     firstName: "",
     lastName: "",
     email: "",
+    cohortsid: cohortsId,
     branch: "",
     clearance: "",
     ETS: "",
@@ -21,27 +26,21 @@ const Register_Student = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const onSubmitForm = async () => {
+  const onSubmitForm = async (e) => {
     e.preventDefault();
     try {
-      const body = { email, userName, password };
-      const res = await fetch("http://localhost:8000/authorization/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(body),
-      }); // may have to change route, unsure at this time
-      const parseRes = await response.json();
-
-      if (parseRes.jwtToken) {
-        localStorage.setItem("token", parseRes.jwtToken);
-        setAuth(true);
-        TransformStream.success("Register Successful");
-      } else {
-        setAuth(false);
-        toast.error(parseRes);
-      }
+      // setCurrentService(accountServices[0])
+      const res = await axios.post(url + '/api/auth/register', formData) // may have to change route, unsure at this time
+      const parseRes = await res.data;
+      console.log(parseRes)
+      // if (parseRes.token) {
+      //   localStorage.setItem("token", parseRes.token);
+      //   setAuth(true);
+      //   TransformStream.success("Register Successful");
+      // } else {
+      //   setAuth(false);
+      //   toast.error(parseRes);
+      // }
     } catch (err) {
       console.error(err.message);
     }
@@ -68,15 +67,6 @@ const Register_Student = () => {
             type='password'
             placeholder=''
             name='password'
-            onChange={handleChange}
-          ></input>
-        </div>
-        <div className='Register_Student_Form_Input_Container'>
-          <label>Cohort</label>
-          <input
-            type='text'
-            placeholder=''
-            name='cohort'
             onChange={handleChange}
           ></input>
         </div>

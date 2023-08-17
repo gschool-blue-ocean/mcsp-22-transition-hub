@@ -1,17 +1,22 @@
 import React from "react";
 import "./Register_Manager.css";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link } from "react";
+import axios from "axios";
+import AccountContext from "../../Context/AccountServicesContext";
+import UrlContext from '../../Context/URLContext'
+
 
 const Register_Manager = () => {
+  // const {setCurrentService, accountServices} = useContext(AccountContext)
+  const {url} = useContext(UrlContext)
   const [formData, setFormData] = useState({
-    userName: "",
+    username: "",
     password: "",
-    cohort: "",
     firstName: "",
     lastName: "",
     email: "",
-    role: "manager",
+    role: "manager"
   });
 
   const handleChange = (e) => {
@@ -22,24 +27,18 @@ const Register_Manager = () => {
   const onSubmitForm = async (e) => {
     e.preventDefault();
     try {
-      const body = { email, userName, password };
-      const res = await fetch("http://localhost:8000/authorization/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(body),
-      }); // may have to change route, unsure at this time
-      const parseRes = await response.json();
-
-      if (parseRes.jwtToken) {
-        localStorage.setItem("token", parseRes.jwtToken);
-        setAuth(true);
-        TransformStream.success("Register Successful");
-      } else {
-        setAuth(false);
-        toast.error(parseRes);
-      }
+      // setCurrentService(accountServices[0])
+      const res = await axios.post(url + '/api/auth/register', formData) // may have to change route, unsure at this time
+      const parseRes = await res.data;
+      console.log(parseRes)
+      // if (parseRes.token) {
+      //   localStorage.setItem("token", parseRes.token);
+      //   setAuth(true);
+      //   TransformStream.success("Register Successful");
+      // } else {
+      //   setAuth(false);
+      //   toast.error(parseRes);
+      // }
     } catch (err) {
       console.error(err.message);
     }
@@ -58,7 +57,7 @@ const Register_Manager = () => {
             placeholder=''
             name='username'
             onChange={handleChange}
-            value={formData.userName}
+            value={formData.username}
           ></input>
         </div>
         <div className='Register_Manager_Form_Input_Container'>
@@ -69,16 +68,6 @@ const Register_Manager = () => {
             name='password'
             onChange={handleChange}
             value={formData.password}
-          ></input>
-        </div>
-        <div className='Register_Manager_Form_Input_Container'>
-          <label>Cohort</label>
-          <input
-            type='text'
-            placeholder=''
-            name='cohort'
-            onChange={(e) => handleChange(e)}
-            value={formData.cohort}
           ></input>
         </div>
         <div className='Register_Manager_Form_Input_Name'>
@@ -107,7 +96,7 @@ const Register_Manager = () => {
         <div className='Register_Manager_Form_Input_Container'>
           <label>Email</label>
           <input
-            type='email'
+            type='text'
             placeholder=''
             name='email'
             onChange={(e) => handleChange(e)}
@@ -122,7 +111,7 @@ const Register_Manager = () => {
           Register
         </button>
       </form>
-      <Link to='/login'>Login</Link>
+      {/* <Link to='/login'>Login</Link> */}
     </>
   );
 };

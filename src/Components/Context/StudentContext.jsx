@@ -5,7 +5,7 @@ export const StudentProvider = ({children}) => {
     const [tasks, setTasks] = useState([]);
     const [activeTaskId, setActiveTaskId] = useState(null);
     const [studentId, setStudentId] = useState("1")
-    const url = "http://localhost:8000" 
+    const url = "http://localhost:4000" 
 
     useEffect(() => {
         const fetchTasks = async () => {
