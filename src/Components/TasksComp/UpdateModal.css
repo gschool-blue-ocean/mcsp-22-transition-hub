@@ -1,0 +1,60 @@
+.modal-container {
+    z-index: 501;
+    position: fixed;
+    left: 25%;
+    top: 25%;
+    min-height: 400px;
+    min-width: 400px;
+    height: 60%;
+    width: 50%;
+    background-color: #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+  }
+  
+  .update-modal {
+    position: relative;
+    height: 98%;
+    width: 98%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #4F515E;
+    border-radius: 2px;
+  }
+  
+  .closeButton {
+    position: absolute; 
+    top: 1.5rem; 
+    right: 1.5rem; 
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transform: translate(50%, -50%);
+    outline: none;
+  }
+
+  .closeButton:hover {
+    color: #EF6E47;
+    transition: .2s;
+  }
+
+  .submitButton {
+    border-radius: 4px;
+    background-color: #333;
+    color: #f0f0f0 ;
+    padding: 10px 10px;
+    font-weight: bold;
+    border: none;
+    width: 480px;
+  }
+
+  .submitButton:hover {
+    background-color: rgb(251, 140, 0, 0.8);
+    border: none;
+    color:#F0f0f0;
+  }

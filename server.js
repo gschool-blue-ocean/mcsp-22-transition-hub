@@ -27,6 +27,8 @@ app.use("/api/manager", manageRouter);
 
 // -------------- SERVER ROUTES FOR TASKS --------------------
 
+//-------------------What Joe Needs is below -------------------
+
 app.get("/tasks", async (req, res) => {
   try {
     const result = await pool.query("SELECT * FROM tasks");
@@ -85,7 +87,7 @@ app.post("/tasks", async (req, res) => {
       [studentsId, taskName, taskDescription, dueDate, apptDate, false]
     );
     
-    res.status(201).send(newTask.rows[0]); // Respond with the created task
+    res.status(201).send(newTask.rows[0]); 
   } catch (error) {
     console.error('Error creating task:', error.stack);
     res.status(500).send('Internal Server Error');
@@ -109,6 +111,27 @@ app.delete("/tasks/:taskId", async (req, res) => {
       res.status(500).send('Internal Server Error');
   }
 });
+
+app.patch("/tasks/:taskId", async (req, res) => {
+  const taskId = req.params.taskId;
+  const { taskName, taskDescription, dueDate, apptDate } = req.body;
+
+  try {
+      await pool.query(
+          "UPDATE tasks SET taskName = $1, taskDescription = $2, dueDate = $3, apptDate = $4 WHERE tasksId = $5",
+          [taskName, taskDescription, dueDate, apptDate, taskId]
+      );
+
+      res.status(200).json({ message: "Task updated successfully" });
+  } catch (err) {
+      console.error("Error executing query", err.stack);
+      res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+//------------------------^What Joe Needs^----------------------------
+
+
 app.get("/api/tasks", async (req, res, next) => {
   const result = await db
     .query("SELECT * FROM tasks ORDER BY dueDate")

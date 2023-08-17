@@ -7,7 +7,7 @@ export const CohortProvider = ({children}) => {
   const {url} = useContext(UrlContext)
   
     /* ------------------  To Grab Students First and Last Name By Cohort ------------------- */
-    const [cohort, setCohort] = useState(0) //Current displayed Cohort
+    const [cohort, setCohort] = useState(1) //Current displayed Cohort
     const [displayedStudents, setDisplayedStudents] = useState([]) //Current students displayed
     const [studentAverage, setStudentAverage] = useState([])
 
@@ -79,7 +79,6 @@ const postCohort = async (formData) => {
         body: JSON.stringify(formData)
     }) 
 const data = await response.json()
-console.log(data)
 setCohortList((prevCohortList) => [...prevCohortList, data]);
 }
 catch(err){

@@ -2,11 +2,32 @@ import React, { useState, useEffect, useContext } from 'react';
 import './tasks.css';
 import StudentContext from '../Context/StudentContext';
 import moment from 'moment';
+import UpdateModal from './UpdateModal';
 const TasksPage = () => {
 
 
     const {handleCheckboxChange, toggleAccordion, tasks, activeTaskId, studentId} = useContext(StudentContext)
 
+    const [isModalOpen, setModalOpen] = useState(false);
+  const [currentTask, setCurrentTask] = useState(null);
+
+  const openModalWithTask = (task) => {
+    const defaultTask = {
+        taskname: "",
+        taskdescription: "",
+        duedate: "",
+        apptdate: "",
+        ...task
+    };
+    setCurrentTask(task);
+    setModalOpen(true);
+};
+
+
+  const closeModal = () => {
+    setModalOpen(false);
+    setCurrentTask(null);
+  };
     
     const renderTask = (task) => {
 
@@ -46,6 +67,7 @@ const TasksPage = () => {
                 <div className="expansion">
                     <h4>Description</h4>
                     <p>{task.taskdescription}</p>
+                    <button onClick={() => openModalWithTask(task)} className="update-button">Update Task</button>
                 </div>
             )}
         </div>
@@ -59,6 +81,13 @@ const TasksPage = () => {
                 <div className="studentPage">
                     <h1 className="studentTaskList">Student Tasks</h1>
                     {tasks.map(renderTask)}
+                    {isModalOpen && currentTask && (
+                        <UpdateModal
+                            taskId={currentTask.tasksid}
+                            initialData={currentTask}
+                            closeModal={closeModal}
+                        />
+                    )}
                 </div>
              </div>
         ) : <> ... Loading </>
