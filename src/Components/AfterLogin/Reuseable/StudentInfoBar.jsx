@@ -18,7 +18,7 @@ const StudentInfoBar = () => {
 
     useEffect(() => {
         const getStudentInfo = async () => {
-            const response = await fetch('http://localhost:3000/user/08fe5d56-2f71-42a1-b782-7a533452313f/info');
+            const response = await fetch('http://localhost:8000/user/08fe5d56-2f71-42a1-b782-7a533452313f/info');
             const results = await response.json();
             setStudentInfo(...results);
             console.log(results)

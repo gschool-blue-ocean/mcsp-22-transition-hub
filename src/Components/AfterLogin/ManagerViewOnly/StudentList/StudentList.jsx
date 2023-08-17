@@ -9,7 +9,7 @@ const StudentList = () => {
   
       const fetchData = async () => {
         try {
-          const response = await fetch(`http://localhost:3000/manager/2/studentsTasks`);
+          const response = await fetch(`http://localhost:8000/manager/2/studentsTasks`);
           const results = await response.json();
           setStudentsProgress(results);
           console.log(studentsProgress)
@@ -28,7 +28,7 @@ const StudentList = () => {
         const fetchStudentsData = async () => {
           try {
             // URL/manager/:cohort/students/progressdetails
-            const response = await fetch('http://localhost:3000/manager/2/studentdetails');
+            const response = await fetch('http://localhost:8000/manager/2/studentdetails');
             const results = await response.json();
             setStudentData(results);
             console.log(results)

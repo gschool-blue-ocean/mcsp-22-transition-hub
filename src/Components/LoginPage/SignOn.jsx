@@ -3,7 +3,7 @@ import "./SignOn.css";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useContext, useState } from "react";
-import AuthContext from "../../../Authorization/utils/AuthContext";
+import AuthContext from "../Context/AuthContext";
 import AccountContext from "../Context/AccountServicesContext";
 
 const SignOn = () => {
@@ -69,7 +69,7 @@ const SignOn = () => {
   return (
     <div className='logOnBG'>
       <div className='logOnContainer'>
-        <div className='logOn_Title'>LogIn</div>
+        <div className='logOn_Title'></div>
         <form className='login-form' onSubmit={onSubmitForm}>
           <div className='login_Input'>
             <label>User Name</label>
