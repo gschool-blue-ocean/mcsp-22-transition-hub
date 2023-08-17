@@ -8,21 +8,16 @@ const StudentList = () => {
     const [studentsProgress, setStudentsProgress] = useState([]);
   
     const [studentData, setStudentData] = useState([]);
-    console.log(studentAverage)
     useEffect(() => {
         const arr = [];
-        console.log(studentAverage)
         studentAverage.forEach((student) => {
-            console.log(cohort)
             if (student.cohortsid == cohort) {
-                console.log('working?')
                 arr.push(student);
             }
         })
-        console.log(arr)
         setStudentData([...arr]);
       }, [cohort]);
-console.log(studentData)
+
     return (
         cohort && studentData ? 
         (<div className='studentlist_taskprogress_bigcontainer'>
