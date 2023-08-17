@@ -263,7 +263,7 @@ app.delete("/api/cohort/:id", async (req, res, next) => {
 app.get("/api/studentinfo", async (req, res) => {
   try {
     const result = await pool.query(
-      "SELECT users.firstName, users.lastName, users.email, students.ets, students.branch, students.clearanceType FROM users JOIN students ON users.usersId = students.usersId"
+      "SELECT users.firstName, users.lastName, users.email, students.ets, students.branch, students.jobTitle, students.dutyLocation, students.clearanceType FROM users JOIN students ON users.usersId = students.usersId"
     );
     res.status(200).json(result.rows);
   } catch (err) {
@@ -277,7 +277,7 @@ app.get("/user/:usersId/info", async (req, res) => {
 
   try {
     const result = await pool.query(
-      "SELECT users.firstName, users.lastName, users.email, students.ets, students.branch, students.clearanceType FROM users JOIN students ON users.usersId = students.usersId WHERE users.usersId = $1",
+      "SELECT users.firstName, users.lastName, users.email, students.ets, students.branch, students.jobTitle, students.dutyLocation, students.clearanceType FROM users JOIN students ON users.usersId = students.usersId WHERE users.usersId = $1",
       [usersId]
     );
     res.status(200).json(result.rows);
@@ -325,10 +325,11 @@ app.get("/manager/cohorts", async (req, res) => {
 app.get("/manager/tasks/all", async (req, res) => {
   try {
     const result = await pool.query(`
-    SELECT c.cohortsId, t.studentsId, t.tasksId, t.taskName, t.taskDescription, t.dueDate, t.apptDate, t.completed 
+    SELECT c.cohortsId, c.cohortName, t.studentsId, t.tasksId, t.taskName, t.taskDescription, t.dueDate, t.apptDate, t.completed, u.firstName, u.lastName, s.ets 
     FROM tasks t
     JOIN students s ON t.studentsId = s.studentsId
     JOIN cohorts c ON s.cohortsId = c.cohortsId
+    JOIN users u ON s.usersId = u.usersId
     ORDER BY c.cohortsId ASC`);
     if (result.rows.length === 0) {
       res.sendStatus(404);

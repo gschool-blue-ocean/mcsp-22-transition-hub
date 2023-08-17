@@ -5,6 +5,8 @@ import CohortContext from "../../Context/CohortContext";
 import { formToJSON } from "axios";
 
 const AddCohort = () => {
+    // const [cohortformOpen, setcohortFormOpen] = useState(false);
+
     const {postCohort} = useContext(CohortContext)
     const [formData, setFormData] = useState({
         cohortName : "",
@@ -33,9 +35,10 @@ const AddCohort = () => {
         setData(newFormData);
     };
 
+    // closeForm={() => setFormOpen(false)}
+
     const handleExit = () => {
-        //prob need state for this
-        return 
+    //     closeForm();
     }
 
     return (

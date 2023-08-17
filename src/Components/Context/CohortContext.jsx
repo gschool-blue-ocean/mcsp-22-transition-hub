@@ -1,15 +1,17 @@
-import React, { useEffect } from 'react';
-import {useState, createContext} from 'react'
+import {useState, createContext, useEffect, useContext} from 'react'
+import UrlContext from './URLContext'
 
 const CohortContext = createContext()
 
 export const CohortProvider = ({children}) => {
-    const url = "http://localhost:8000"
-
+  const {url} = useContext(UrlContext)
+  
     /* ------------------  To Grab Students First and Last Name By Cohort ------------------- */
-    const [cohort, setCohort] = useState(0) //Current displayed Cohort
+    const [cohort, setCohort] = useState(1) //Current displayed Cohort
     const [displayedStudents, setDisplayedStudents] = useState([]) //Current students displayed
-    
+    const [studentAverage, setStudentAverage] = useState([])
+
+
     useEffect(() =>{
         const getData = async () => {
         try{
@@ -50,6 +52,7 @@ export const CohortProvider = ({children}) => {
                 const result = await fetch(`${url}/manager/tasks/all`)
                 const data = await result.json()
                 setCohortTaskList([...data])
+
               }
          catch (err){
             console.log(err.message)
@@ -62,6 +65,7 @@ export const CohortProvider = ({children}) => {
       useEffect( () =>{
         let tempArray = createTasksTotalArray(cohortTaskList)
         setAverage(tempArray)
+        setStudentAverage(taskProgressAveragePerStudent(cohortTaskList))
       }, [cohortTaskList])
 
 /* ---------------------Post Request for Adding a Cohort------------------------- */
@@ -75,7 +79,6 @@ const postCohort = async (formData) => {
         body: JSON.stringify(formData)
     }) 
 const data = await response.json()
-console.log(data)
 setCohortList((prevCohortList) => [...prevCohortList, data]);
 }
 catch(err){
@@ -89,7 +92,9 @@ catch(err){
         postCohort,
         cohortList,
         cohortTaskList,
-        average
+        average,
+        studentAverage,
+        cohort,
     }}>
         {children}
         </CohortContext.Provider>
@@ -101,18 +106,17 @@ export default CohortContext
 //Generates a data object with aggregated information for each cohort
 function createTasksTotalArray(tasks) {
     const cohorts = [];
-
     if (tasks) {
         tasks.forEach((task) => {
             const cohortIndex = cohorts.findIndex(cohort => cohort.cohortsid === task.cohortsid);
             const completed = checkBoolean(task.completed);
-
             if (cohortIndex !== -1) {
                 cohorts[cohortIndex].totalComplete += completed;
                 cohorts[cohortIndex].totalTask++;
                 cohorts[cohortIndex].average = cohorts[cohortIndex].totalComplete / cohorts[cohortIndex].totalTask;
             } else {
                 const newCohort = {
+                    cohortname: task.cohortname,
                     cohortsid: task.cohortsid,
                     totalComplete: completed,
                     totalTask: 1,
@@ -141,4 +145,29 @@ function calculateStudentProgress(studentTasks) {
   return completedTasks / totalTasks;
 }
 
-// ------------------------- Manager main middle student list after clicking a cohort ----------------
+function taskProgressAveragePerStudent(data) {
+  const arr = [];
+
+  data.forEach((student)=>{
+    const studentIndex = arr.findIndex(individual => individual.studentsid === student.studentsid);
+    const completed = checkBoolean(student.completed);
+    if (studentIndex !== -1) {
+        arr[studentIndex].totalComplete += completed;
+        arr[studentIndex].totalTask++;
+        arr[studentIndex].average =  arr[studentIndex].totalComplete /  arr[studentIndex].totalTask;
+    } else {
+        const newstudent = {
+            studentsid: student.studentsid,
+            totalComplete: completed,
+            totalTask: 1,
+            average: completed ? 1 : 0,
+            cohortsid: student.cohortsid,
+            ets: student.ets,
+            firstname: student.firstname,
+            lastname: student.lastname
+        };
+        arr.push(newstudent);
+      }
+  });
+  return arr;
+}

@@ -3,21 +3,22 @@ import AccountServices from "../LoginPage/AccountServices";
 import { AccountProvider } from "../Context/AccountServicesContext";
 import { CohortProvider } from "../Context/CohortContext";
 import { StudentProvider } from "../Context/StudentContext";
+import { UrlProvider } from "../Context/URLContext";
 
 const LogInPage = () => {
  
 
   return (
             <>
-                <AccountProvider>
-                  <CohortProvider>
-                    <StudentProvider>
+                  <AccountProvider>
+                    <CohortProvider>
+                      <StudentProvider>
 
-                      <AccountServices /> {/* Actual Component */}
+                        <AccountServices /> {/* Actual Component */}
                       
-                    </StudentProvider>
-                  </CohortProvider>
-                </AccountProvider>
+                      </StudentProvider>
+                    </CohortProvider>
+                  </AccountProvider>
             </>
   );
 }

@@ -30,9 +30,9 @@
 .studentInfo-fetch {
     background-color:rgb(58, 69, 90, 0.6);
     border: 3px solid rgb(63, 75, 98);
-    padding: 15px;
-    margin-top: 15px;
-    margin-bottom: 15px;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 .studentInfo-fetch:hover {
     border: 3px solid rgb(251, 140, 0, 0.6)

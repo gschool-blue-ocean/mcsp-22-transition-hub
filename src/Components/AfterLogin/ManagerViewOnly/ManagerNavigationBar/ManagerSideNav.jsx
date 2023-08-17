@@ -11,7 +11,7 @@ const ManagerSideNav = () => {
     //Set cohort value for get request, takes the cohort id
     const handleChange = (e) => {
         const { value } = e.target;
-        setCohort(value)
+        setCohort(value)    
     };
 
     return (
@@ -25,7 +25,7 @@ const ManagerSideNav = () => {
             </select>
             {displayedStudents.length > 0 ? 
             <div className='studentCardsContainer'>
-                {displayedStudents.map( (student, index) => (
+                {displayedStudents.map((student, index) => (
                     <SidNavStudentCards student={student} key={index} id={index}/>
                     ))}
             </div> : <></> }

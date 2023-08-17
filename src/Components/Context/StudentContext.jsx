@@ -1,13 +1,13 @@
-import { useState, createContext, useEffect } from 'react';
+import {useState, createContext, useEffect, useContext} from 'react'
+import UrlContext from './URLContext';
 
 const StudentContext = createContext();
 
 export const StudentProvider = ({ children }) => {
     const [tasks, setTasks] = useState([]);
     const [activeTaskId, setActiveTaskId] = useState(null);
-    const [studentId, setStudentId] = useState("1");
-    const url = "http://localhost:8000";
-
+    const [studentId, setStudentId] = useState("1")
+    const {url} = useContext(UrlContext)
     const [formData, setFormData] = useState({
         taskName: "",
         taskDescription: "",
