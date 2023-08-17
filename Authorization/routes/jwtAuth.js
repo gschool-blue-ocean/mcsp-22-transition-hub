@@ -49,8 +49,8 @@ router.post("/register", validInfo, async (req, res, next) => {
     .query(
       `INSERT INTO users(username, password, firstName, lastName, email, role) VALUES($1, $2, $3, $4, $5, $6) RETURNING *`,
       [username, bcryptPassword, firstName, lastName, email, role]
-
-    ).catch(next);
+    )
+    .catch(next);
 
   if (role === "student") {
     const { ets, branch, clearanceType } = req.body;
@@ -74,12 +74,11 @@ router.post("/login", validInfo, async (req, res, next) => {
     .query("SELECT * FROM users WHERE userName = $1", [username])
     .catch(next);
 
-  if (user.rows.length < 1) {
-    return res.send("User not found...");
-  }
+  // if (user.rows.length < 1) {
+  //   return res.send("User not found...");
+  // }
 
   const validPassword = await bcrypt.compare(password, user.rows[0].password);
-
 
   if (!validPassword) {
     return res.send("Incorrect username or password...");
@@ -91,12 +90,11 @@ router.post("/login", validInfo, async (req, res, next) => {
 
 // // -------------- AUTH ROUTES FOR TASKS --------------------
 
-
 router.get("/tasks", async (req, res, next) => {
   const result = await pool
     .query("SELECT * FROM tasks ORDER BY dueDate")
     .catch(next);
-  
+
   res.send(result.rows);
 });
 
@@ -165,9 +163,7 @@ router.get("/cohorts/:id", async (req, res, next) => {
 // ----------------------------------------------
 
 router.get("/verify", authorization, async (req, res, next) => {
-
-    res.json(true);
-
+  res.json(true);
 });
 
 router.use((err, req, res, next) => {

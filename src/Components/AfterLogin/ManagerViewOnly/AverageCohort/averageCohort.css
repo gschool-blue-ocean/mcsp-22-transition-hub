@@ -1,17 +1,14 @@
 .average_cohort_container{
-    position: fixed;
-    left: 24%;
-    top: 90px;
-    width: 80%;
+    width: 100%;
+    height: 100%;
     overflow: scroll;
 }
 .average_cohort_title{
-    text-align: center;
+    text-align: right;
     width: 90%;
+    color: #f0f0f0;
+    font-weight: bold;
+    font-size: 1.5rem;
+    width: 100% ;
 }
 
-@media(max-width: 1024px){
-    .average_cohort_container{
-        left: 250px;
-    }
-}

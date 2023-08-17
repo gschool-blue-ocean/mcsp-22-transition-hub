@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./SignOn.css";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useContext, useState } from "react";
 import AuthContext from "../Context/AuthContext";
@@ -17,6 +17,7 @@ const SignOn = () => {
   });
   const {url} = useContext(UrlContext)
 
+  const navigate = useNavigate();
   const { username, password } = formData;
 
   const handleChange = (e) => {
@@ -33,7 +34,6 @@ const SignOn = () => {
       );
 
       const parseRes = await response.data;
-      setRoles(parseRes.role);
 
       const verify = await axios.get(url + "/api/auth/verify", {
         headers: {
@@ -43,34 +43,33 @@ const SignOn = () => {
 
       if (verify) {
         localStorage.setItem("token", parseRes.token);
-        console.log(localStorage);
         setIsAuthenticated(true);
+        setRoles(parseRes.role);
       } else {
         setIsAuthenticated(false);
-      }
-
-      if (isAuthenticated) {
-        switch (roles) {
-          case "student":
-            <Link to='/student' />;
-            break;
-          case "manager":
-            <Link to='/manager' />;
-            break;
-
-          default:
-            return "No role found";
-        }
       }
     } catch (err) {
       console.error(err.message);
     }
   };
 
+  useEffect(() => {
+    if (isAuthenticated) {
+      switch (roles) {
+        case "manager":
+          navigate("/manager");
+          break;
+        case "student":
+          navigate("/student");
+          break;
+      }
+    }
+  }, [roles]);
+
   return (
     <div className='logOnBG'>
       <div className='logOnContainer'>
-        <div className='logOn_Title'>LogIn</div>
+        <div className='logOn_Title'></div>
         <form className='login-form' onSubmit={onSubmitForm}>
           <div className='login_Input'>
             <label>User Name</label>

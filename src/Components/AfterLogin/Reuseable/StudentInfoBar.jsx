@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faUser } from '@fortawesome/free-solid-svg-icons';
 import profileicon from "./img/usericon.png";
+import moment from 'moment';
 
 
 const StudentInfoBar = () => {
@@ -12,6 +13,8 @@ const StudentInfoBar = () => {
         lastname: '',
         email: '',
         branch: '',
+        jobtitle: '',
+        dutylocation: '',
         ets: '',
         clearancetype: '', 
     });
@@ -33,7 +36,7 @@ const StudentInfoBar = () => {
         <>
             <div className='studentInfo-bigcontainer'>
                 <div className='studentInfo-wrapper'>
-                    <div style={{marginTop: '70px'}}>
+                    <div style={{marginTop: '50px'}}>
                         {/* <FontAwesomeIcon icon={faUser} style={{color: "#f0f0f0"}} size="xl"/> */}
                         <img src={profileicon} style={{height: '55px', width: '55px'}}></img>
                         <div className='studentInfo-titlediv'>
@@ -58,8 +61,16 @@ const StudentInfoBar = () => {
                             <span className='studentInfo-value'>{studentInfo.branch}</span>
                         </div>
                         <div className='studentInfo-fetch'>
+                            <span className='studentInfo-key'>Job Title:</span>
+                            <span className='studentInfo-value'>{studentInfo.jobtitle}</span>
+                        </div>
+                        <div className='studentInfo-fetch'>
+                            <span className='studentInfo-key'>Duty Location:</span>
+                            <span className='studentInfo-value'>{studentInfo.dutylocation}</span>
+                        </div>
+                        <div className='studentInfo-fetch'>
                             <span className='studentInfo-key'>ETS Date:</span>
-                            <span className='studentInfo-value'>{studentInfo.ets}</span>
+                            <span className='studentInfo-value'>{moment(studentInfo.ets).format('MM/DD/YYYY')}</span>
                         </div>
                         <div className='studentInfo-fetch'>
                             <span className='studentInfo-key'>Clearance Type:</span>

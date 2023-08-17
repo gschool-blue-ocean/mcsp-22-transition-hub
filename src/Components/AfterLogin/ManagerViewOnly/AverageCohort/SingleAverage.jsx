@@ -16,7 +16,7 @@ const SingleAverage = ({cohort, id}) => {
         <>
           <div className='column' key={cohort.id} style={{background: backgroundcolor, color: textColor}}>
                         <div className="side">
-                            <div>{cohort.cohortsid}</div>
+                            <div>{cohort.cohortname}</div>
                         </div>
                         <div className="middle">
                             <div className="bar-container">

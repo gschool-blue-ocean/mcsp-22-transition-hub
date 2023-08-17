@@ -7,9 +7,9 @@ import Manager from "./Components/MainComponents/Manager";
 import Student from "./Components/MainComponents/Student";
 
 function App() {
-const isAuthenticated = true
-const isManager = true
-const isStudent = true
+  const isAuthenticated = true;
+  const isManager = true;
+  const isStudent = true;
 
   return (
     <AuthProvider>
@@ -27,7 +27,6 @@ const isStudent = true
 }
 
 export default App;
-
 
 /*
   if (!user) {
