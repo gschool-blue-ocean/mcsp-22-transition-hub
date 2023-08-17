@@ -1,12 +1,11 @@
-import {useState, createContext, useContext, useEffect} from 'react'
-import UrlContext from './URLContext';
-
+import {useState, createContext, useEffect, useContext} from 'react'
+import UrlContext from './URLContext'
 
 const CohortContext = createContext()
 
 export const CohortProvider = ({children}) => {
-    const {url} = useContext(UrlContext)
-
+  const {url} = useContext(UrlContext)
+  
     /* ------------------  To Grab Students First and Last Name By Cohort ------------------- */
     const [cohort, setCohort] = useState(0) //Current displayed Cohort
     const [displayedStudents, setDisplayedStudents] = useState([]) //Current students displayed
