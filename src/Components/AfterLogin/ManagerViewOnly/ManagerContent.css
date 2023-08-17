@@ -1,0 +1,18 @@
+.ManagerContent_Container{
+    position: fixed;
+    left: 22%;
+    top: 100px;
+    width: 70%;
+    height: 85%;
+    min-width: 850px; /* Will need to adjust in future*/
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+
+}
+
+@media(max-width: 1024px){
+    .ManagerContent_Container{
+        left: 250px; /* Will need to adjust in future*/
+    }
+}

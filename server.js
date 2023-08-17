@@ -41,13 +41,14 @@ app.get("/tasks/:studentsId", async (req, res) => {
   const studentsId = req.params.studentsId;
 
   try {
-    const result = await pool.query("SELECT * FROM tasks");
+    const result = await pool.query("SELECT * FROM tasks WHERE studentsId = $1", [studentsId]);
     res.json(result.rows);
   } catch (err) {
     console.error("Error executing query", err.stack);
     res.status(500).json({ error: "Internal server error" });
   }
 });
+
 
 app.patch("/tasks/:taskId/complete", async (req, res) => {
   const { taskId } = req.params;
@@ -108,12 +109,12 @@ app.delete("/tasks/:taskId", async (req, res) => {
       res.status(500).send('Internal Server Error');
   }
 });
-// app.get("/api/tasks", async (req, res, next) => {
-//   const result = await db
-//     .query("SELECT * FROM tasks ORDER BY dueDate")
-//     .catch(next);
-//   res.send(result.rows);
-// });
+app.get("/api/tasks", async (req, res, next) => {
+  const result = await db
+    .query("SELECT * FROM tasks ORDER BY dueDate")
+    .catch(next);
+  res.send(result.rows);
+});
 
 app.get("/api/tasks", async (req, res, next) => {
   const result = await pool
@@ -165,8 +166,9 @@ app.put("/api/tasks/:id", async (req, res) => {
   }
 });
 
-// app.delete("/api/tasks/:id", async (req, res, next) => {
-//   const { id } = req.params;
+app.delete("/api/tasks/:id", async (req, res, next) => {
+  const { id } = req.params;
+})
 
 // //  -------------- SERVER ROUTES FOR COHORTS --------------------
 
@@ -238,7 +240,7 @@ app.delete("/api/cohort/:id", async (req, res, next) => {
 app.get("/api/studentinfo", async (req, res) => {
   try {
     const result = await pool.query(
-      "SELECT users.firstName, users.lastName, users.email, students.ets, students.branch, students.clearanceType FROM users JOIN students ON users.usersId = students.usersId"
+      "SELECT users.firstName, users.lastName, users.email, students.ets, students.branch, students.jobTitle, students.dutyLocation, students.clearanceType FROM users JOIN students ON users.usersId = students.usersId"
     );
     res.status(200).json(result.rows);
   } catch (err) {
@@ -252,7 +254,7 @@ app.get("/user/:usersId/info", async (req, res) => {
 
   try {
     const result = await pool.query(
-      "SELECT users.firstName, users.lastName, users.email, students.ets, students.branch, students.clearanceType FROM users JOIN students ON users.usersId = students.usersId WHERE users.usersId = $1",
+      "SELECT users.firstName, users.lastName, users.email, students.ets, students.branch, students.jobTitle, students.dutyLocation, students.clearanceType FROM users JOIN students ON users.usersId = students.usersId WHERE users.usersId = $1",
       [usersId]
     );
     res.status(200).json(result.rows);
@@ -300,7 +302,7 @@ app.get("/manager/cohorts", async (req, res) => {
 app.get("/manager/tasks/all", async (req, res) => {
   try {
     const result = await pool.query(`
-    SELECT c.cohortsId, t.studentsId, t.tasksId, t.taskName, t.taskDescription, t.dueDate, t.apptDate, t.completed 
+    SELECT c.cohortsId, c.cohortName, t.studentsId, t.tasksId, t.taskName, t.taskDescription, t.dueDate, t.apptDate, t.completed 
     FROM tasks t
     JOIN students s ON t.studentsId = s.studentsId
     JOIN cohorts c ON s.cohortsId = c.cohortsId

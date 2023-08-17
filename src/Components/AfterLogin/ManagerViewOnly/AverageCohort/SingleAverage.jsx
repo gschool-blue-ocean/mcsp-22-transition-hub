@@ -11,12 +11,12 @@ const SingleAverage = ({cohort, id}) => {
         backgroundcolor = "#f0f0f0"
         textColor = "black"
     }
-
+    console.log(cohort)
     return (
         <>
           <div className='column' key={cohort.id} style={{background: backgroundcolor, color: textColor}}>
                         <div className="side">
-                            <div>{cohort.cohortsid}</div>
+                            <div>{cohort.cohortname}</div>
                         </div>
                         <div className="middle">
                             <div className="bar-container">
