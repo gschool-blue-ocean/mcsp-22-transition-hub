@@ -12,6 +12,7 @@ const ManagerSideNav = () => {
     const handleChange = (e) => {
         const { value } = e.target;
         setCohort(value)
+        console.log(value)
     };
 
     return (

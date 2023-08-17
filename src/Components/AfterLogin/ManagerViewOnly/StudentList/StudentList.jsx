@@ -1,48 +1,31 @@
 import './StudentList.css';
 import { useState, useEffect, useContext } from 'react';
 import CohortContext from '../../../Context/CohortContext';
-
+import LoadingAnimation from '../../../LoadingAnimation';
 
 const StudentList = () => {
-    const { displayedStudents, cohort, cohortList } = useContext(CohortContext);
+    const { displayedStudents, cohort, cohortList, studentAverage } = useContext(CohortContext);
     const [studentsProgress, setStudentsProgress] = useState([]);
   
-      const fetchData = async () => {
-        try {
-          const response = await fetch(`http://localhost:8000/manager/2/studentsTasks`);
-          const results = await response.json();
-          setStudentsProgress(results);
-          console.log(studentsProgress)
-        } catch (error) {
-          console.log(error.message);
-        }
-      };
-
-    useEffect(() => {
-      fetchData();
-    }, [cohort]);
-    
     const [studentData, setStudentData] = useState([]);
-
-    // useEffect(() => {
-        const fetchStudentsData = async () => {
-          try {
-            // URL/manager/:cohort/students/progressdetails
-            const response = await fetch('http://localhost:8000/manager/2/studentdetails');
-            const results = await response.json();
-            setStudentData(results);
-            console.log(results)
-          } catch (error) {
-            console.error('Error fetching data:', error);
-          }
-        }
-
+    console.log(studentAverage)
     useEffect(() => {
-        fetchStudentsData();
-      }, []);
-    
+        const arr = [];
+        console.log(studentAverage)
+        studentAverage.forEach((student) => {
+            console.log(cohort)
+            if (student.cohortsid == cohort) {
+                console.log('working?')
+                arr.push(student);
+            }
+        })
+        console.log(arr)
+        setStudentData([...arr]);
+      }, [cohort]);
+console.log(studentData)
     return (
-        <div className='studentlist_taskprogress_bigcontainer'>
+        cohort && studentData ? 
+        (<div className='studentlist_taskprogress_bigcontainer'>
             <h2 className='studentlist_h2'>Task Progress By Student</h2>
             <table className='studentlist_table'>
                 <thead>
@@ -55,16 +38,18 @@ const StudentList = () => {
                 </thead>
                 <tbody className='studentlist_tablerow'>
                     {studentData.map((student, index) => (
-                    <tr key={student.studentsId} className='studentlist_tabledata'>
+                    <tr key={student.studentsid} className='studentlist_tabledata'>
                         <td>{student.firstname}</td>
                         <td>{student.lastname}</td>
                         <td>{student.ets}</td>
-                        <td>{`${(studentsProgress[index]?.completedtasks / studentsProgress[index]?.totaltasks) * 100}%`}</td>
+                        <td>{`${Math.ceil((student.totalComplete / student.totalTask) * 100)}%`}</td>
                     </tr>
                     ))}
                 </tbody>
             </table>
-        </div>
+        </div>)
+        : 
+        (<LoadingAnimation />)
     );
 }
 
