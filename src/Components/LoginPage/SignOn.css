@@ -1,7 +1,7 @@
 .logOnBG {
     position: fixed;
     /* background-color: #393941; */
-    background-image: url("../../public/test4.svg");
+    background-image: url("../../public/logIn.svg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;     

@@ -101,18 +101,17 @@ export default CohortContext
 //Generates a data object with aggregated information for each cohort
 function createTasksTotalArray(tasks) {
     const cohorts = [];
-
     if (tasks) {
         tasks.forEach((task) => {
             const cohortIndex = cohorts.findIndex(cohort => cohort.cohortsid === task.cohortsid);
             const completed = checkBoolean(task.completed);
-
             if (cohortIndex !== -1) {
                 cohorts[cohortIndex].totalComplete += completed;
                 cohorts[cohortIndex].totalTask++;
                 cohorts[cohortIndex].average = cohorts[cohortIndex].totalComplete / cohorts[cohortIndex].totalTask;
             } else {
                 const newCohort = {
+                    cohortname: task.cohortname,
                     cohortsid: task.cohortsid,
                     totalComplete: completed,
                     totalTask: 1,

@@ -1,6 +1,6 @@
 .RegisterPage_BG{
     position: fixed;
-    background-image: url("../../public/logIn.png");
+    background-image: url("../../public/logIn.svg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center; 
