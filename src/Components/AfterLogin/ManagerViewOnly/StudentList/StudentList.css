@@ -1,42 +1,47 @@
 .studentlist_taskprogress_bigcontainer {
-    width: 100%;
+  width: 100%;
+  overflow-y: auto;
+}
+
+.studentlist_taskprogress_bigcontainer::-webkit-scrollbar {
+  display: none;
 }
 
 .studentlist_h2 {
-    color:#f0f0f0;
-    text-align: left;
+  color: #f0f0f0;
+  text-align: left;
 }
 
 .studentlist_table {
-    width: 100%;
-    border-collapse: collapse;
-    border: 1px solid transparent;
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid transparent;
 }
 
 .studentlist_table th,
 .studentlist_table td {
-    padding: 10px;
-    text-align: center;
+  padding: 10px;
+  text-align: center;
 }
 
 .studentlist_table th {
-    background-color: #4F515E;
-    color:#f0f0f0;
-    text-align: center;
-    margin-bottom: 10px;
+  background-color: #4f515e;
+  color: #f0f0f0;
+  text-align: center;
+  margin-bottom: 10px;
 }
 
 .studentlist_table tr:nth-child(even) {
-    background-color: #4F515E;
-    color: #f0f0f0;
+  background-color: #4f515e;
+  color: #f0f0f0;
 }
 
 .studentlist_tabledata {
-    background-color: transparent;
-    border-bottom: 1px solid #ccc;
-    transition: background-color 0.3s ease;
+  background-color: transparent;
+  border-bottom: 1px solid #ccc;
+  transition: background-color 0.3s ease;
 }
 
 /* .studentlist_tabledata:hover {
 
-} */    
+} */
