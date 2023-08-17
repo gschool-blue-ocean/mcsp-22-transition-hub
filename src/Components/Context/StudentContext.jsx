@@ -21,6 +21,7 @@ export const StudentProvider = ({ children }) => {
                 const response = await fetch(`${url}/tasks/${studentId}`);
                 if (!response.ok) throw new Error("Network response was not ok");
                 const data = await response.json();
+                console.log("Fetched data from server:", data);
                 setTasks(data);
             } catch (error) {
                 setTasks(null);

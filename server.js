@@ -41,13 +41,14 @@ app.get("/tasks/:studentsId", async (req, res) => {
   const studentsId = req.params.studentsId;
 
   try {
-    const result = await pool.query("SELECT * FROM tasks");
+    const result = await pool.query("SELECT * FROM tasks WHERE studentsId = $1", [studentsId]);
     res.json(result.rows);
   } catch (err) {
     console.error("Error executing query", err.stack);
     res.status(500).json({ error: "Internal server error" });
   }
 });
+
 
 app.patch("/tasks/:taskId/complete", async (req, res) => {
   const { taskId } = req.params;
@@ -108,12 +109,12 @@ app.delete("/tasks/:taskId", async (req, res) => {
       res.status(500).send('Internal Server Error');
   }
 });
-// app.get("/api/tasks", async (req, res, next) => {
-//   const result = await db
-//     .query("SELECT * FROM tasks ORDER BY dueDate")
-//     .catch(next);
-//   res.send(result.rows);
-// });
+app.get("/api/tasks", async (req, res, next) => {
+  const result = await db
+    .query("SELECT * FROM tasks ORDER BY dueDate")
+    .catch(next);
+  res.send(result.rows);
+});
 
 app.get("/api/tasks", async (req, res, next) => {
   const result = await pool
@@ -165,8 +166,9 @@ app.put("/api/tasks/:id", async (req, res) => {
   }
 });
 
-// app.delete("/api/tasks/:id", async (req, res, next) => {
-//   const { id } = req.params;
+app.delete("/api/tasks/:id", async (req, res, next) => {
+  const { id } = req.params;
+})
 
 // //  -------------- SERVER ROUTES FOR COHORTS --------------------
 
