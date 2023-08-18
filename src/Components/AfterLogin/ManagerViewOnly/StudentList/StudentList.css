@@ -1,15 +1,27 @@
 .studentlist_taskprogress_bigcontainer {
   width: 100%;
   overflow-y: auto;
+  margin-top: 30px;
 }
 
 .studentlist_taskprogress_bigcontainer::-webkit-scrollbar {
   display: none;
 }
 
+.studentlist_headerContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .studentlist_h2 {
   color: #f0f0f0;
   text-align: left;
+
+}
+
+.studentList_cohort_buttons {
+  align-content: end;
 }
 
 .studentlist_table {
@@ -18,26 +30,29 @@
   border: 1px solid transparent;
 }
 
-.studentlist_table th,
 .studentlist_table td {
   padding: 10px;
   text-align: center;
 }
 
 .studentlist_table th {
-  background-color: #4f515e;
+  /* background-color: #4f515e; */
+  background-color: #3A455A;
   color: #f0f0f0;
   text-align: center;
   margin-bottom: 10px;
+  font-size:large;
+  padding: 15px;
 }
 
 .studentlist_table th:hover{
     cursor: pointer;
-    color: #EF6E47
+    color: rgb(239, 132, 1);
 }
 
 .studentlist_table tr:nth-child(even) {
   background-color: #4f515e;
+  /* background-color: #3A455A; */
   color: #f0f0f0;
 }
 

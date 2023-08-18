@@ -14,8 +14,7 @@ const {setCohortFormOpen, cohortFormOpen} = useContext(CohortContext)
             <>
                 <Header />
                   <div className='app_BG'>
-                    <div style={{width: "300px", height: "90vh"}}></div>
-                    <ManagerSideNav />
+                    
                     <ManagerContent />
                     {cohortFormOpen && (
                      <AddCohort 
