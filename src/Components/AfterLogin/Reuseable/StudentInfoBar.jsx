@@ -35,7 +35,7 @@ const StudentInfoBar = () => {
     // }, []);
     
     return (
-        <>
+        <div className='app_BG'>
             <div className='studentInfo-bigcontainer'>
                 <div className='studentInfo-wrapper'>
                     <div style={{marginTop: '50px'}}>
@@ -81,7 +81,7 @@ const StudentInfoBar = () => {
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 
