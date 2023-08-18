@@ -4,7 +4,7 @@ import axios from "axios";
 import AuthContext from "../Context/AuthContext";
 import AccountContext from "../Context/AccountServicesContext";
 import { useContext, useState } from "react";
-import UrlContext from "../Context/URLContext";
+import UrlContext from "../Context/UrlContext";
 
 const RegisterPasscode = () => {
   //use effect to grab all the cohort names, put into student in the state
@@ -48,11 +48,11 @@ const RegisterPasscode = () => {
     }
   };
   return (
-    <div className='PassCode_BG'>
-      <div className='PassCode_Container'>
+    <div className='Passcode_BG'>
+      <div className='Passcode_Container'>
         <div className='RegisterPassCode_Title'>Verification passcode</div>
-        <form className='passCode_form' onSubmit={handleSubmit}>
-          <div className='passCode_Input'>
+        <form className='passcode_form' onSubmit={handleSubmit}>
+          <div className='passcode_Input'>
             <label>passcode</label>
             <input
               type='text'
@@ -62,11 +62,11 @@ const RegisterPasscode = () => {
               value={formData.passcode}
             ></input>
           </div>
-          <button type='submit' id='registerPassCode_submit'>
+          <button type='submit' id='registerPasscode_submit'>
             Submit
           </button>
         </form>
-        <p className='passCode_notes'>
+        <p className='passcode_notes'>
           ***This passcode will be provided by either your instructor or
           manager.
         </p>
