@@ -113,12 +113,15 @@ app.delete("/tasks/:taskId", async (req, res) => {
 });
 
 app.patch("/tasks/:taskId", async (req, res) => {
+  console.log('Received data:', req.body);
   const taskId = req.params.taskId;
-  const { taskName, taskDescription, dueDate, apptDate } = req.body;
+  // const { taskName, taskDescription, dueDate, apptDate } = req.body;
+  const { taskname: taskName, taskdescription: taskDescription, duedate: dueDate, apptdate: apptDate } = req.body;
+
 
   try {
       await pool.query(
-          "UPDATE tasks SET taskName = $1, taskDescription = $2, dueDate = $3, apptDate = $4 WHERE tasksId = $5",
+          "UPDATE tasks SET taskname = $1, taskdescription = $2, duedate = $3, apptdate = $4 WHERE tasksid = $5",
           [taskName, taskDescription, dueDate, apptDate, taskId]
       );
 
