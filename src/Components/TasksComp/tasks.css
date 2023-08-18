@@ -111,3 +111,20 @@ border: 1px  solid red;
 .accordion.active .accordion-content {
   display: block;
 }
+
+.update-button {
+  border-radius: 4px;
+  /* background-color: #333; */
+  background-color: #0d0f4a;
+  color: #f0f0f0 ;
+  padding: 10px 10px;
+  font-weight: bold;
+  border: none;
+  width: 240px;
+}
+
+.update-button:hover {
+  background-color: rgb(251, 140, 0, 0.8);
+  border: none;
+  color:#F0f0f0;
+}

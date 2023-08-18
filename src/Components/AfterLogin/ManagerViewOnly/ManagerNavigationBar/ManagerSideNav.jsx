@@ -34,7 +34,6 @@ const ManagerSideNav = () => {
                     <FontAwesomeIcon icon={faPlus} style={{color: "black",}} size='xl' />
                 </button>
             </div>
-
             {displayedStudents.length > 0 ? 
             <div className='studentCardsContainer'>
                 {displayedStudents.map((student, index) => (

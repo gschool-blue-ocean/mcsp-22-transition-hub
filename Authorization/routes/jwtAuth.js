@@ -17,7 +17,7 @@ router.post("/register/verify", async (req, res) => {
     }
     
     const result = await pool.query("SELECT * FROM cohorts WHERE cohortName = $1", [passcode])
-    
+
     if (result.rows[0].cohortname) {
       return res.send({role:'student', id: result.rows[0].cohortsid})
     } else {
@@ -34,11 +34,11 @@ router.post("/register", validInfo, async (req, res, next) => {
   const { username, password, firstName, lastName, email, role, cohortsId } =
     req.body;
   const user = await pool
-    .query("SELECT * FROM users WHERE email = $1", [email])
+    .query("SELECT * FROM users WHERE username = $1", [username])
     .catch(next);
 
   if (user.rows.length !== 0) {
-    return res.send("This email is already in use.");
+    return res.send("This username is already in use.");
   }
 
   const saltRounds = 10;
