@@ -43,6 +43,14 @@
     transition: .2s;
   }
 
+  .taskTitleDiv {
+    width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center; 
+  margin-bottom: 1rem;
+  }
+
   .nameTitle {
     width: 80%;
     margin-bottom: 1rem;
@@ -64,6 +72,14 @@
     padding: 0.5rem 0;
     font-size: 1rem;
     color:#F0f0f0
+  }
+
+  .taskDescriptionDiv {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center; 
+    margin-bottom: 1rem;
   }
 
   .task-description {
@@ -92,6 +108,18 @@
     align-self: center;
     width: 100%;
     color:#F0f0f0
+}
+
+.warningDiv {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center; 
+  margin-bottom: 1rem;
+}
+
+.warning {
+  color: red;
 }
 
 .dateDiv {

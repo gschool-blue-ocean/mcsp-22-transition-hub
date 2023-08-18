@@ -17,7 +17,7 @@ CREATE TABLE users (
 
 CREATE TABLE cohorts (
   cohortsId SERIAL PRIMARY KEY,
-  cohortName varchar,
+  cohortName varchar NOT NULL,
   startDate varchar,
   endDate varchar
 );

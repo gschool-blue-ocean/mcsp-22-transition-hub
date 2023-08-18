@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import moment from 'moment';
 import "./UpdateModal.css"
 
 
@@ -16,8 +17,8 @@ const UpdateModal = ({ taskId, initialData, closeModal }) => {
     setFormData({
         taskname: initialData.taskname || '',
         taskdescription: initialData.taskdescription || '',
-        duedate: initialData.duedate || '',
-        apptdate: initialData.apptdate || '',
+        duedate: moment(initialData.duedate).format('yyyy/MM/DD') || '',
+        apptdate: moment(initialData.apptdate).format('yyyy/MM/DD') || '',
     });
 }, [initialData]);
 
@@ -31,6 +32,7 @@ const UpdateModal = ({ taskId, initialData, closeModal }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log('Sending this data:', formData);
 
     // Send the PATCH request
     try {
@@ -44,6 +46,7 @@ const UpdateModal = ({ taskId, initialData, closeModal }) => {
 
       if (response.ok) {
         alert('Task updated successfully');
+        window.location.reload();
       } else {
         alert('Failed to update task');
       }
@@ -61,30 +64,41 @@ const UpdateModal = ({ taskId, initialData, closeModal }) => {
         <div className="update-modal">
             <button className="closeButton" onClick={closeModal}>X</button>
              <form onSubmit={handleSubmit}>
+            <div className="taskTitleDiv">
             <div className="nameTitle">
               <label>
                   Task Name:
                 </label>
-                  <input type="text" name="taskName" value={formData.taskname} onChange={handleChange} />
+                  <input type="text" name="taskname" value={formData.taskname} onChange={handleChange} />
               </div>
+              </div>
+              <div className="taskDescriptionDiv">
               <div className="task-description">
              <label>
                  Task Description:
               </label>
-                 <textarea name="taskDescription" value={formData.taskdescription} onChange={handleChange} />
+                 <textarea name="taskdescription" value={formData.taskdescription} onChange={handleChange} />
               </div>
+              </div>
+              <div className="warningDiv">
+                <div className="warning">
+                  <label>
+                    MUST ENTER DATES BEFORE SUBMITTING FORM
+                  </label>
+                </div>
+                </div>
               <div className="dateDiv">
                 <div className="dueDateDiv"> 
                 <label>
                  Due Date:
                 </label>
-                <input type="date" name="dueDate" value={formData.duedate} onChange={handleChange} />
+                <input type="date" name="duedate" value={formData.duedate} onChange={handleChange} />
                 </div>
                 <div className="dueDateDiv">
                 <label>
                 Appointment Date:
                 </label>
-                <input type="date" name="apptDate" value={formData.apptdate} onChange={handleChange} />
+                <input type="date" name="apptdate" value={formData.apptdate} onChange={handleChange} />
                 </div>
               </div>
                 <button className="submitButton" type="submit">Submit</button>
