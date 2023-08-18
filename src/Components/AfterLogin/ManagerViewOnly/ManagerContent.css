@@ -1,6 +1,6 @@
 .ManagerContent_Container {
-  /* position: fixed; */
-  transform: translate(374px, -720px);
+  position: static;
+  transform: translate(370px, -740px);
   /* left: 22%; */
   top: 100px;
   width: 70%;
