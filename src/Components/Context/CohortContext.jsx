@@ -7,7 +7,7 @@ export const CohortProvider = ({children}) => {
   const {url} = useContext(UrlContext)
   
     /* ------------------  To Grab Students First and Last Name By Cohort ------------------- */
-    const [cohort, setCohort] = useState(1) //Current displayed Cohort
+    const [cohort, setCohort] = useState(0) //Current displayed Cohort
     const [displayedStudents, setDisplayedStudents] = useState([]) //Current students displayed
     const [studentAverage, setStudentAverage] = useState([])
 

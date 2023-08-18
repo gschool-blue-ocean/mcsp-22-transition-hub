@@ -17,6 +17,7 @@ const ManagerSideNav = () => {
     return (
         <div className='managerSide_Bar_Container'>
             <select className='managerSide_Bar_Select' onChange={handleChange} >
+                <option disabled selected value> -- select an option -- </option>
                 {cohortList.map((cohort, index) => (
                     <option value={cohort.cohortsid} key={index}>
                         {cohort.cohortname}
