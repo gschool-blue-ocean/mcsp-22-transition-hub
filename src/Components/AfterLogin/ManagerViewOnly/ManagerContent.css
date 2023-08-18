@@ -1,15 +1,12 @@
 .ManagerContent_Container {
-  position: static;
-  transform: translate(370px, -740px);
-  /* left: 22%; */
-  top: 100px;
-  width: 70%;
-  height: 85%;
-  overflow-y: auto;
-  min-width: 850px; /* Will need to adjust in future*/
-  background-color: transparent;
-  display: flex;
-  flex-direction: column;
+	width: 70%;
+	height: 85%;
+	overflow-y: auto;
+	min-width: 850px;
+	background-color: transparent;
+	display: flex;
+	flex-direction: column;
+	margin-top: 2rem;
 }
 
 .ManagerContent_Container::-webkit-scrollbar {

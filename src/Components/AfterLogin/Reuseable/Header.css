@@ -1,12 +1,13 @@
 .app_BG {
-  background-image: url("../../../public/managerBG.png");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center center;
-  color: #f0f0f0;
-  width: 100%;
-  height: 100vh;
-  position: static;
+	background-image: url("/src/public/managerBG.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center center;
+	color: #f0f0f0;
+	width: 100%;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
 }
 
 .header-container {

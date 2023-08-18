@@ -9,11 +9,14 @@ const Manager = () => {
   return (
             <>
                 <Header />
+                <div className='app_BG'>
+                  <div style={{width: "300px", height: "90vh"}}></div>
                   <CohortProvider>
-                  <ManagerSideNav />
-                  <ManagerContent />
+                      <ManagerSideNav />
+                      <ManagerContent />
                   {/* <AddCohort /> */}
                 </CohortProvider>
+                    </div>
             </>
   );
 }
