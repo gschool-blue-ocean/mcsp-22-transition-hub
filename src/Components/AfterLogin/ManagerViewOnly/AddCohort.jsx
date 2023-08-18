@@ -5,9 +5,9 @@ import CohortContext from "../../Context/CohortContext";
 import { formToJSON } from "axios";
 
 const AddCohort = () => {
-    // const [cohortformOpen, setcohortFormOpen] = useState(false);
 
-    const {postCohort} = useContext(CohortContext)
+    const {postCohort, setCohortFormOpen, cohortFormOpen} = useContext(CohortContext)
+
     const [formData, setFormData] = useState({
         cohortName : "",
         startDate: "",
@@ -35,33 +35,34 @@ const AddCohort = () => {
         setData(newFormData);
     };
 
-    // closeForm={() => setFormOpen(false)}
-
-    const handleExit = () => {
-    //     closeForm();
-    }
 
     return (
-    <div className="AddCohort_Container">
-        <button className="AddCohort_Exit_Button" onClick={handleExit}>X</button>
-        <form className="Add_Cohort_Form">
-            <div className="Cohort_Names_Container">
-                <label>Cohort Name:
-                </label>
-                <input type='text' placeholder=''
-                name="cohortName"
-                onChange={handleChange} value={formData.cohortName}></input>
+    <div className="addcohort-overlay">
+        <div className="AddCohort_Container">
+            <div className="exit-button-container">
+                <button className="AddCohort_Exit_Button" onClick={() => setCohortFormOpen(false)}>X</button>
             </div>
-            <div className="Cohort_Dates">
-                <label htmlFor="startDate">Start Date:</label>
-                <input type="date" id="Cohort_Start" name="startDate" onChange={handleChange} value={formData.startDate}/>
+            <div className="cohort_form_container">
+                <form className="Add_Cohort_Form">
+                    <div className="Cohort_Names_Container">
+                        <label>Cohort Name:</label>
+                        <input type='text' placeholder='' name="cohortName"
+                        onChange={handleChange} value={formData.cohortName}></input>
+                    </div>
+                    <div className="Cohort_Dates">
+                        <label htmlFor="startDate">Start Date:</label>
+                        <input type="date" id="Cohort_Start" name="startDate" onChange={handleChange} value={formData.startDate}/>
+                    </div>
+                    <div className="Cohort_Dates">
+                        <label htmlFor="endDate">End Date:</label>
+                        <input type="date" id="Cohort_End" name="endDate" onChange={handleChange} value={formData.endDate}/>
+                    </div>
+                </form>
+                <div>
+                    <button className="Add_Cohort" id="Add_Cohort_Button" onClick={handleClick}>Add Cohort</button>
+                </div>
             </div>
-            <div className="Cohort_Dates">
-                <label htmlFor="endDate">End Date:</label>
-                <input type="date" id="Cohort_End" name="endDate" onChange={handleChange} value={formData.endDate}/>
-            </div>
-            <button className="Add_Cohort" id="Add_Cohort_Button" onClick={handleClick}>Add Cohort</button>
-        </form>
+        </div>
     </div>
  )
 }

@@ -1,56 +1,54 @@
-body {
-  background-image: url("../../public/logIn.svg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center center;
+
+.Passcode_BG{
+    position: fixed;
+    background-image: url("../../public/logIn.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;     
+    color: #f0f0f0;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.Passcode_Container{
+    width: 30%;
+    min-width: 330px;
+    height: 50%;
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 20px;
+    box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+.RegisterPasscode_Title{
+    font-size: 2rem;
 }
 
-.PassCode_BG {
-  position: fixed;
-  color: #f0f0f0;
-  width: 100vw;
-  height: 100vh;
-  top: 0;
-  left: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.passcode_form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 80%; 
 }
-.PassCode_Container {
-  width: 30%;
-  min-width: 330px;
-  height: 50%;
-  background-color: transparent;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-  border-radius: 20px;
-  box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.1);
-  padding: 20px;
+.passcode_form label {
+    text-align: center;
 }
-.RegisterPassCode_Title {
-  font-size: 2rem;
-}
-
-.passCode_form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 80%;
-}
-.passCode_form label {
-  text-align: center;
-}
-.passCode_form input {
-  padding: 8px;
-  margin-bottom: 12px;
-  margin: 0 auto;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  width: 100%;
-  box-sizing: border-box;
+.passcode_form input{
+    padding: 8px;
+    margin-bottom: 12px;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%; 
+    box-sizing: border-box;
 }
 #registerPasscode_submit {
   /* Button */
@@ -73,22 +71,23 @@ body {
   font-size: 0.875rem;
 }
 
-@media (max-width: 850px) {
-  .PassCode_Container {
-    justify-content: center;
-    height: 30%;
-    min-width: 200px;
-  }
-  .RegisterPassCode_Title {
-    font-size: 1rem;
-  }
-  .passCode_form label {
-    font-size: 0.875rem;
-  }
-  .passCode_notes {
-    font-size: 0.5rem;
-  }
-  #registerPasscode_submit {
-    font-size: 0.5rem;
-  }
+
+@media (max-width:850px) {
+    .Passcode_Container{
+        justify-content: center;
+        height: 30%;
+        min-width: 200px;
+    }
+    .RegisterPasscode_Title{
+        font-size: 1rem;
+    }
+    .passcode_form label {
+        font-size: .875rem;
+    }
+    .passcode_notes{
+        font-size: .5rem;
+    }
+    #registerPasscode_submit{
+        font-size: .5rem
+    }
 }
