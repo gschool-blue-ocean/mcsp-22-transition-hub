@@ -8,8 +8,13 @@ const TasksPage = () => {
 
     const {handleCheckboxChange, toggleAccordion, tasks, activeTaskId, studentId} = useContext(StudentContext)
 
-    const [isModalOpen, setModalOpen] = useState(false);
+  const [isModalOpen, setModalOpen] = useState(false);
   const [currentTask, setCurrentTask] = useState(null);
+  const [sortMethod, setSortMethod] = useState('dueDate');
+
+  const toggleSortMethod = () => {
+    setSortMethod(prevSortMethod => (prevSortMethod === 'dueDate' ? 'apptDate' : 'dueDate'));
+};
 
   const openModalWithTask = (task) => {
     const defaultTask = {
@@ -28,6 +33,14 @@ const TasksPage = () => {
     setModalOpen(false);
     setCurrentTask(null);
   };
+
+  const sortedTasks = [...tasks].sort((a, b) => {
+    if (sortMethod === 'dueDate') {
+        return new Date(a.duedate) - new Date(b.duedate);
+    } else {
+        return new Date(a.apptdate) - new Date(b.apptdate);
+    }
+});
     
     const renderTask = (task) => {
 
@@ -65,8 +78,18 @@ const TasksPage = () => {
             </div>
             {activeTaskId === task.tasksid && (
                 <div className="expansion">
+                    <div className="descriptionHeader">
+                    <div>
                     <h4>Description</h4>
-                    <p>{task.taskdescription}</p>
+                    </div>
+                    <div>
+                    <h4 className="apptDateDiv">
+                        <label className="apptDateLabel">Appointment Date: </label>
+                        {moment(task.apptdate).format('MM/DD/YYYY')}
+                        </h4>
+                        </div>
+                    </div>
+                    <p className="descriptionBody">{task.taskdescription}</p>
                     <button onClick={() => openModalWithTask(task)} className="update-button">Update Task</button>
                 </div>
             )}
@@ -76,11 +99,14 @@ const TasksPage = () => {
 // console.log(studentId)
 // console.log(tasks)
     return (
-        studentId && (tasks.length > 1) ? (
+        studentId && (tasks.length > 0) ? (
             <div className="entirePage">
                 <div className="studentPage">
                     <h1 className="studentTaskList">Student Tasks</h1>
-                    {tasks.map(renderTask)}
+                    <button className="sortButton" onClick={toggleSortMethod}>
+                    Sort by {sortMethod === 'dueDate' ? 'Appointment Date' : 'Due Date'}
+                    </button>
+                    {sortedTasks.map(renderTask)}
                     {isModalOpen && currentTask && (
                         <UpdateModal
                             taskId={currentTask.tasksid}
