@@ -52,14 +52,13 @@ export const CohortProvider = ({children}) => {
                 const result = await fetch(`${url}/manager/tasks/all`)
                 const data = await result.json()
                 setCohortTaskList([...data])
-
               }
          catch (err){
             console.log(err.message)
             }
         }
         getData()
-
+        
       }, [])
 /* ---------------------Create an Array of all totals/averages per cohort------------------------- */
       useEffect( () =>{
