@@ -31,6 +31,11 @@
   margin-bottom: 10px;
 }
 
+.studentlist_table th:hover{
+    cursor: pointer;
+    color: #EF6E47
+}
+
 .studentlist_table tr:nth-child(even) {
   background-color: #4f515e;
   color: #f0f0f0;
