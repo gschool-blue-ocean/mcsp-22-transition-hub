@@ -2,6 +2,7 @@ import './StudentList.css';
 import { useState, useEffect, useContext } from 'react';
 import CohortContext from '../../../Context/CohortContext';
 import LoadingAnimation from '../../../LoadingAnimation';
+import moment from 'moment';
 
 const StudentList = () => {
     const { displayedStudents, cohort, cohortList, studentAverage } = useContext(CohortContext);
@@ -66,7 +67,7 @@ const StudentList = () => {
                     <tr key={student.studentsid} className='studentlist_tabledata'>
                         <td>{student.firstname}</td>
                         <td>{student.lastname}</td>
-                        <td>{student.ets}</td>
+                        <td>{moment(student.ets).format('MM/DD/YYYY')}</td>
                         <td>{`${Math.ceil((student.totalComplete / student.totalTask) * 100)}%`}</td>
                     </tr>
                     ))}
