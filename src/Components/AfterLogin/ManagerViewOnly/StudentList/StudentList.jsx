@@ -19,7 +19,8 @@ const StudentList = () => {
         setStudentData([...arr]);
       }, [cohort]);
 
-
+      //we are mapping throught the sorted students not vice Student data
+        //below function is to sort the data, making a copy of the studentData
       const sortedStudentData = studentData.slice().sort((a, b) => {
         if (sortedColumn === 'firstname') {
             return sortDirection === 'asc' ? a.firstname.localeCompare(b.firstname) : b.firstname.localeCompare(a.firstname);
@@ -37,6 +38,7 @@ const StudentList = () => {
         return 0;
     });
 
+    //handles asc/desc based of the selected column
     const handleSortClick = (column) => {
         if (sortedColumn === column) {
             setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
