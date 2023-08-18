@@ -52,6 +52,7 @@ border: 1px  solid red;
   margin-bottom: 0.5rem;
   /* padding: 1.5rem; */
   overflow: hidden;
+  color:#f0f0f0
 }
 
 /* Header styling for the accordion */

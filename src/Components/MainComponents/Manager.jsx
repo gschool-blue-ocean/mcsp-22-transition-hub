@@ -1,19 +1,26 @@
-import React from "react";
+
 import Header from "../AfterLogin/Reuseable/Header";
-import { CohortProvider } from "../Context/CohortContext";
+import { useContext } from "react";
+import CohortContext from "../Context/CohortContext";
 import ManagerSideNav from "../AfterLogin/ManagerViewOnly/ManagerNavigationBar/ManagerSideNav";
 import ManagerContent from "../AfterLogin/ManagerViewOnly/ManagerContent"
 import AddCohort from "../AfterLogin/ManagerViewOnly/AddCohort"
 
 const Manager = () => {
+
+const {setCohortFormOpen, cohortFormOpen} = useContext(CohortContext)
+
   return (
             <>
                 <Header />
-                  <CohortProvider>
                   <ManagerSideNav />
                   <ManagerContent />
-                  {/* <AddCohort /> */}
-                </CohortProvider>
+                  {cohortFormOpen && (
+                  <AddCohort 
+                  setCohortFormOpen={setCohortFormOpen}
+                  />
+                  )} 
+
             </>
   );
 }

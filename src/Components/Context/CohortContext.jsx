@@ -10,7 +10,7 @@ export const CohortProvider = ({children}) => {
     const [cohort, setCohort] = useState(1) //Current displayed Cohort
     const [displayedStudents, setDisplayedStudents] = useState([]) //Current students displayed
     const [studentAverage, setStudentAverage] = useState([])
-
+    const [cohortFormOpen, setCohortFormOpen] = useState(false)
 
     useEffect(() =>{
         const getData = async () => {
@@ -95,6 +95,8 @@ catch(err){
         average,
         studentAverage,
         cohort,
+        setCohortFormOpen,
+        cohortFormOpen,
     }}>
         {children}
         </CohortContext.Provider>

@@ -5,6 +5,7 @@ import { UrlProvider } from "./Components/Context/URLContext";
 import LogInPage from "./Components/MainComponents/LogInPage";
 import Manager from "./Components/MainComponents/Manager";
 import Student from "./Components/MainComponents/Student";
+import { CohortProvider } from "./Components/Context/CohortContext";
 
 function App() {
   const isAuthenticated = true;
@@ -14,13 +15,15 @@ function App() {
   return (
     <AuthProvider>
       <UrlProvider >
+            <CohortProvider>
         <Router>
           <Routes>
-            <Route path="/" element={<LogInPage />} />
-            <Route path="/manager" element={isAuthenticated && isManager ? <Manager /> : <LogInPage/>} />
-            <Route path="/student" element={isAuthenticated && isStudent ? <Student /> : <LogInPage />} />
+            <Route path="/" element={<LogInPage />} ></Route>
+              <Route path="/manager" element={isAuthenticated && isManager ? <Manager /> : <LogInPage/>} ></Route>
+            <Route path="/student" element={isAuthenticated && isStudent ? <Student /> : <LogInPage />} ></Route>
           </Routes>
         </Router>
+            </CohortProvider>
       </UrlProvider>
     </AuthProvider>
   );
