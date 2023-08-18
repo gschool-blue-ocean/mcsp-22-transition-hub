@@ -27,7 +27,8 @@ const Header = () => {
 
   return (
     <>
-      <div className='app_BG'>
+    <header>
+
         <div className='header-container'>
           <Link className='header-logout-link' to='/'>
             <button className='header-buttons' onClick={onLogout}>
@@ -36,7 +37,7 @@ const Header = () => {
                   icon={faArrowRightFromBracket}
                   size='lg'
                   style={{ color: "#ffffff" }}
-                />
+                  />
               </span>
               <span>Log Out</span>
             </button>
@@ -69,7 +70,7 @@ const Header = () => {
                 href='.pdf'
                 download='general_tasklist_template'
                 target='_blank'
-              >
+                >
                 <li className='header-dropdownlist-item'>
                   Download Tasklist Template
                 </li>
@@ -77,7 +78,7 @@ const Header = () => {
             </ul>
           </div>
         )}
-      </div>
+        </header>
     </>
   );
 };
