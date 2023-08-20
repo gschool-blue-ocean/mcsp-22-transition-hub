@@ -23,23 +23,26 @@ const ManagerSideNav = () => {
         <div className='managerSide_Bar_Container'>
             <div>
                 <select className='managerSide_Bar_Select' onChange={handleChange} >
-                    <option disabled selected value> -- Select a Cohort -- </option>
+                    <option disabled selected value>Select a Cohort</option>
                     {cohortList.map((cohort, index) => (
                         <option value={cohort.cohortsid} key={index}>
                             {cohort.cohortname}
                         </option>
                     ))}
                 </select>
+                <div className='addcohortbtn-container'>
                 <button className='addCohort_formOpenBtn' onClick={() => setCohortFormOpen(true)}>
-                    <FontAwesomeIcon icon={faPlus} style={{color: "black",}} size='xl' />
+                    <FontAwesomeIcon icon={faPlus} className='plus-icon' size='lg' />
                 </button>
+                <div className="addCohortBtn-function-indicator">add cohort</div>
+                </div>
             </div>
-            {displayedStudents.length > 0 ? 
+            {/* {displayedStudents.length > 0 ? 
             <div className='studentCardsContainer'>
                 {displayedStudents.map((student, index) => (
                     <SidNavStudentCards student={student} key={index} id={index}/>
                     ))}
-            </div> : <></> }
+            </div> : <></> } */}
 
             {/* {cohortFormOpen && (
             <AddCohort 

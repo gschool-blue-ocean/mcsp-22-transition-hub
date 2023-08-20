@@ -13,7 +13,7 @@ const AverageCohort = () => {
         average.length > 1 ? (
         <div className="average_cohort_outerContainer">
             <div className='average_cohort_container'>
-                <div className="average_cohort_title">Average Tasks Completed Per Cohort</div>
+                <div className="average_cohort_title">Task Progress By Cohort</div>
                     {average.map( (cohort, index) => (
                         <SingleAverage cohort={cohort} key={index} id={index}/>
                         ))}

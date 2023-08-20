@@ -42,7 +42,7 @@ const Header = () => {
               <span>Log Out</span>
             </button>
           </Link>
-
+          
           <img src={logo} loading='lazy'></img>
 
           <div className='header-dropdownBtn'>

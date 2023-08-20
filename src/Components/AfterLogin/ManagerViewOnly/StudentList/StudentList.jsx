@@ -3,6 +3,7 @@ import { useState, useEffect, useContext } from 'react';
 import CohortContext from '../../../Context/CohortContext';
 import LoadingAnimation from '../../../LoadingAnimation';
 import moment from 'moment';
+import ManagerSideNav from '../ManagerNavigationBar/ManagerSideNav';
 
 const StudentList = () => {
     const { displayedStudents, cohort, cohortList, studentAverage } = useContext(CohortContext);
@@ -50,16 +51,23 @@ const StudentList = () => {
     };
 
     return (
-        cohort && studentData ? 
-        (<div className='studentlist_taskprogress_bigcontainer'>
-            <h2 className='studentlist_h2'>Task Progress By Student</h2>
+        // cohort && studentData ? (
+        
+        <div className='studentlist_taskprogress_bigcontainer'>
+            <div className='studentlist_headerContainer'>
+                <h2 className='studentlist_h2'>Task Progress By Student</h2>
+                <div className='studentList_cohort_buttons'>
+                    <ManagerSideNav />
+                </div>
+            </div>
+
             <table className='studentlist_table'>
                 <thead>
                     <tr>
-                        <th className="th_Sort" onClick={() => handleSortClick('firstname')}>First Name</th>
-                        <th className="th_Sort" onClick={() => handleSortClick('lastname')}>Last Name</th>
-                        <th className="th_Sort" onClick={() => handleSortClick('ets')}>ETS Date</th>
-                        <th className="th_Sort" onClick={() => handleSortClick('completion')}>Task Completion</th>
+                        <th className="th_Sort" onClick={() => handleSortClick('firstname')}>First Name 🢓</th>
+                        <th className="th_Sort" onClick={() => handleSortClick('lastname')}>Last Name 🢓</th>
+                        <th className="th_Sort" onClick={() => handleSortClick('ets')}>ETS Date 🢓</th>
+                        <th className="th_Sort" onClick={() => handleSortClick('completion')}>Task Completion 🢓</th>
                     </tr>
                 </thead>
                 <tbody className='studentlist_tablerow'>
@@ -73,9 +81,9 @@ const StudentList = () => {
                     ))}
                 </tbody>
             </table>
-        </div>)
-        : 
-        (<LoadingAnimation />)
+        </div>
+        // : 
+        // (<LoadingAnimation />)
     );
 }
 
