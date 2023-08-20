@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useContext } from "react";
 import "./Register_Student.css";
 import AuthContext from "../../Context/AuthContext";
-import UrlContext from '../../Context/URLContext'
+import UrlContext from '../../Context/UrlContext'
 import axios from "axios";
 import AccountContext from "../../Context/AccountServicesContext";
 

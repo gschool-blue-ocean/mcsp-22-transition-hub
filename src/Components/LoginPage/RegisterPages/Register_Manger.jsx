@@ -4,7 +4,7 @@ import { useState, useContext } from "react";
 import { Link } from "react";
 import axios from "axios";
 import AccountContext from "../../Context/AccountServicesContext";
-import UrlContext from '../../Context/URLContext'
+import UrlContext from '../../Context/UrlContext'
 
 
 const Register_Manager = () => {
