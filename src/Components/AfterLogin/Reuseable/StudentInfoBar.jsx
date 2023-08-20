@@ -4,7 +4,7 @@ import { useState, useEffect, useContext } from 'react';
 // import { faUser } from '@fortawesome/free-solid-svg-icons';
 import profileicon from "./img/usericon.png";
 import moment from 'moment';
-import UrlContext from '../../Context/URLContext';
+import UrlContext from '../../Context/UrlContext';
 
 
 const StudentInfoBar = () => {
