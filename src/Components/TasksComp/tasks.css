@@ -112,6 +112,20 @@ border: 1px  solid red;
   display: block;
 }
 
+.descriptionHeader {
+  display: flex;
+}
+
+.descriptionBody {
+  margin-top: 0rem;
+}
+
+
+
+.apptDateDiv {
+  margin-left: 30rem;
+}
+
 .update-button {
   border-radius: 4px;
   /* background-color: #333; */
@@ -121,9 +135,30 @@ border: 1px  solid red;
   font-weight: bold;
   border: none;
   width: 240px;
+  margin-top: .75rem;
 }
 
 .update-button:hover {
+  background-color: rgb(251, 140, 0, 0.8);
+  border: none;
+  color:#F0f0f0;
+}
+
+.sortButton {
+  border-radius: 4px;
+  /* background-color: #333; */
+  background-color: #0d0f4a;
+  color: #f0f0f0 ;
+  padding: 10px 10px;
+  font-weight: bold;
+  border: none;
+  width: 240px;
+  margin-top: -1rem;
+  margin-bottom: 1rem;
+
+}
+
+.sortButton:hover {
   background-color: rgb(251, 140, 0, 0.8);
   border: none;
   color:#F0f0f0;
