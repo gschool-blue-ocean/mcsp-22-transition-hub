@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import { AuthProvider } from "./Components/Context/AuthContext";
-import { UrlProvider } from "./Components/Context/URLContext";
+import { UrlProvider } from "./Components/Context/UrlContext";
 import LogInPage from "./Components/MainComponents/LogInPage";
 import Manager from "./Components/MainComponents/Manager";
 import Student from "./Components/MainComponents/Student";
