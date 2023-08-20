@@ -1,4 +1,4 @@
-import "./RegisterPasscode.css";
+import "./RegisterPassCode.css";
 import React from "react";
 import axios from "axios";
 import AuthContext from "../Context/AuthContext";
