@@ -3,3 +3,13 @@
   background-color: #393941;
   height: 100%;
 }
+
+input {
+  margin-top: 10px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 0.5rem;
+}

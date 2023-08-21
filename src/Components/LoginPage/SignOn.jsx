@@ -5,8 +5,8 @@ import axios from "axios";
 import { useContext, useState } from "react";
 import AuthContext from "../Context/AuthContext";
 import AccountContext from "../Context/AccountServicesContext";
-import UrlContext from '../Context/UrlContext'
- 
+import UrlContext from "../Context/UrlContext";
+
 const SignOn = () => {
   const { setCurrentService, accountServices } = useContext(AccountContext);
   const { setIsAuthenticated, isAuthenticated, roles, setRoles } =
@@ -15,7 +15,7 @@ const SignOn = () => {
     username: "",
     password: "",
   });
-  const {url} = useContext(UrlContext)
+  const { url } = useContext(UrlContext);
 
   const navigate = useNavigate();
   const { username, password } = formData;
@@ -28,10 +28,7 @@ const SignOn = () => {
     e.preventDefault();
     try {
       const body = { username, password };
-      const response = await axios.post(
-        url + "/api/auth/login",
-        body
-      );
+      const response = await axios.post(url + "/api/auth/login", body);
 
       const parseRes = await response.data;
 
@@ -67,37 +64,37 @@ const SignOn = () => {
   }, [roles]);
 
   return (
-    <div className='logOnBG'>
-      <div className='logOnContainer'>
-        <div className='logOn_Title'></div>
-        <form className='login-form' onSubmit={onSubmitForm}>
-          <div className='login_Input'>
+    <div className="logOnBG">
+      <div className="logOnContainer">
+        <div className="logOn_Title"></div>
+        <form className="login-form" onSubmit={onSubmitForm}>
+          <div className="login_Input">
             <label>User Name</label>
             <input
-              type='text'
-              name='username'
+              type="text"
+              name="username"
               onChange={handleChange}
               value={formData.username}
             />
           </div>
-          <div className='login_Input'>
+          <div className="login_Input">
             <label>Password</label>
             <input
-              type='password'
-              name='password'
+              type="password"
+              name="password"
               onChange={handleChange}
               value={formData.password}
             />
           </div>
-          <button className='SignOn_Buttons' id='signOn_Submit' type='submit'>
+          <button className="SignOn_Buttons" id="signOn_Submit" type="submit">
             Log On
           </button>
         </form>
-        <div className='signOn_Register_Container'>
+        <div className="signOn_Register_Container">
           <button
-            className='SignOn_Buttons'
-            id='signOn_Register'
-            type='button'
+            className="SignOn_Buttons"
+            id="signOn_Register"
+            type="button"
             onClick={() => setCurrentService(accountServices[1])}
           >
             Register
