@@ -6,7 +6,7 @@ const StudentContext = createContext();
 export const StudentProvider = ({ children }) => {
   const [tasks, setTasks] = useState([]);
   const [activeTaskId, setActiveTaskId] = useState(null);
-  const [studentId, setStudentId] = useState("1");
+  const [studentId, setStudentId] = useState(null);
   const { url } = useContext(UrlContext);
   const [formData, setFormData] = useState({
     taskName: "",
@@ -23,7 +23,7 @@ export const StudentProvider = ({ children }) => {
         const data = await response.json();
         setTasks(data);
       } catch (error) {
-        setTasks(null);
+         console.log(error); //Setting tasks here will cause en error code
       }
     };
     fetchTasks();
@@ -99,23 +99,24 @@ export const StudentProvider = ({ children }) => {
     setActiveTaskId((prevId) => (prevId === taskId ? null : taskId));
   };
 
-  return (
-    <StudentContext.Provider
-      value={{
-        handleCheckboxChange,
-        toggleAccordion,
-        tasks,
-        activeTaskId,
-        setStudentId,
-        studentId,
-        formData,
-        handleChange,
-        handleSubmit,
-      }}
-    >
-      {children}
-    </StudentContext.Provider>
-  );
-};
+
+    return (
+        <StudentContext.Provider value={{
+            handleCheckboxChange,
+            toggleAccordion,
+            tasks,
+            activeTaskId,
+            setStudentId,
+            studentId,
+            formData,
+            handleChange,
+            handleSubmit,
+            handleCheckboxChange,
+        }}>
+            {children}
+        </StudentContext.Provider>
+    );
+}
+
 
 export default StudentContext;

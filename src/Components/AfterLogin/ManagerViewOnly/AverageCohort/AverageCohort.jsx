@@ -1,13 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState, useContext } from "react";
 import SingleAverage from "./SingleAverage";
 import './averageCohort.css'
 import CohortContext from "../../../Context/CohortContext";
+import StudentContext from "../../../Context/StudentContext";
 import LoadingAnimation from "../../../LoadingAnimation";
 
 const AverageCohort = () => {
-    const {average} = useContext(CohortContext)
+    const {average, getData} = useContext(CohortContext)
+    const {tasks} = useContext(StudentContext)
+
     // const average = []
+    useEffect(()=>{
+       getData()
+    }, [tasks] )
 
     return (
         average.length > 1 ? (

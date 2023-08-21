@@ -1,17 +1,20 @@
 import './BackButton.css'
 import { useContext } from 'react';
 import CohortContext from '../../Context/CohortContext';
+import StudentContext from '../../Context/StudentContext';
 
 const BackButton = () => {
     const {setCurrentManagerContent} = useContext(CohortContext)
+    const {setStudentId} = useContext(StudentContext)
 
-    const handleClick = () => {
+
+    const handleBackButton = () => {
         setCurrentManagerContent(true)
-        //reset current showing student to no one
+        setStudentId(null)
     }
 
     return (
-      <button className="back-button" onClick={handleClick}>
+      <button className="back-button" onClick={handleBackButton}>
         Back
       </button>
     );
