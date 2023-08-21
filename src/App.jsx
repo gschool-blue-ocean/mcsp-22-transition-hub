@@ -1,9 +1,7 @@
-import React from "react";
 import {
   BrowserRouter as Router,
   Route,
   Routes,
-  Navigate,
 } from "react-router-dom";
 import { StudentProvider } from "./Components/Context/StudentContext";
 import LogInPage from "./Components/MainComponents/LogInPage";
