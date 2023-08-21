@@ -1,10 +1,4 @@
-import React from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  Navigate,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { AuthProvider } from "./Components/Context/AuthContext";
 import { UrlProvider } from "./Components/Context/UrlContext";
 import LogInPage from "./Components/MainComponents/LogInPage";
