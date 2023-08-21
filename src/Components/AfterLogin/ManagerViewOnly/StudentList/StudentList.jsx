@@ -8,7 +8,7 @@ import ManagerSideNav from '../ManagerNavigationBar/ManagerSideNav';
 
 const StudentList = () => {
     const { displayedStudents, cohort, cohortList, studentAverage, setCurrentManagerContent } = useContext(CohortContext);
-    const {handleCheckBoxChange, setStudentId, studentId, fetchTasks, test, setTest} = useContext(StudentContext)
+    const {handleCheckBoxChange, setStudentId, studentId, fetchTasks} = useContext(StudentContext)
     const [studentData, setStudentData] = useState([]);
     const [sortDirection, setSortDirection] = useState('asc');
     const [sortedColumn, setSortedColumn] = useState(null);
