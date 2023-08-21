@@ -5,12 +5,13 @@ const CohortContext = createContext()
 
 export const CohortProvider = ({children}) => {
   const {url} = useContext(UrlContext)
+  const [currentManagerContent, setCurrentManagerContent] = useState(true)
   
     /* ------------------  To Grab Students First and Last Name By Cohort ------------------- */
     const [cohort, setCohort] = useState(0) //Current displayed Cohort
     const [displayedStudents, setDisplayedStudents] = useState([]) //Current students displayed
     const [studentAverage, setStudentAverage] = useState([])
-    const [cohortFormOpen, setCohortFormOpen] = useState(false)
+    const [cohortFormOpen, setCohortFormOpen] = useState(true)
 
     useEffect(() =>{
         const getData = async () => {
@@ -96,6 +97,8 @@ catch(err){
         cohort,
         setCohortFormOpen,
         cohortFormOpen,
+        currentManagerContent,
+        setCurrentManagerContent
     }}>
         {children}
         </CohortContext.Provider>

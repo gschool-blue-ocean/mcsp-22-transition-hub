@@ -6,7 +6,7 @@ import moment from 'moment';
 import ManagerSideNav from '../ManagerNavigationBar/ManagerSideNav';
 
 const StudentList = () => {
-    const { displayedStudents, cohort, cohortList, studentAverage } = useContext(CohortContext);
+    const { displayedStudents, cohort, cohortList, studentAverage, setCurrentManagerContent } = useContext(CohortContext);
     const [studentData, setStudentData] = useState([]);
     const [sortDirection, setSortDirection] = useState('asc');
     const [sortedColumn, setSortedColumn] = useState(null);
@@ -50,6 +50,14 @@ const StudentList = () => {
         }
     };
 
+
+
+    const handleSetStudent = (e) => {
+            setCurrentManagerContent(false) //will be false
+            console.log(e.currentTarget) // will need to pass name which is the students id)
+            //set current student based off of id
+    }
+
     return (
         // cohort && studentData ? (
         
@@ -72,7 +80,7 @@ const StudentList = () => {
                 </thead>
                 <tbody className='studentlist_tablerow'>
                     {sortedStudentData.map((student, index) => (
-                    <tr key={student.studentsid} className='studentlist_tabledata'>
+                    <tr key={student.studentsid} className='studentlist_tabledata' onClick={handleSetStudent} name={student.studentsid}>
                         <td>{student.firstname}</td>
                         <td>{student.lastname}</td>
                         <td>{moment(student.ets).format('MM/DD/YYYY')}</td>
