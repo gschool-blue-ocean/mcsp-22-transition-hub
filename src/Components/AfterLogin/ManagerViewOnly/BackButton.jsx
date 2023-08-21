@@ -1,6 +1,6 @@
 import './BackButton.css'
 import { useContext } from 'react';
-import CohortContext from '../../../Context/CohortContext';
+import CohortContext from '../../Context/CohortContext';
 
 const BackButton = () => {
     const {setCurrentManagerContent} = useContext(CohortContext)

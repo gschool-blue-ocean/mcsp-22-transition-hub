@@ -4,26 +4,38 @@ import StudentList from "../ManagerViewOnly/StudentList/StudentList";
 import './ManagerContent.css'
 import { useContext } from "react";
 import CohortContext from "../../Context/CohortContext";
+import BackButton from "./BackButton";
+import { StudentProvider } from "../../Context/StudentContext";
+import StudentInfoBar from "../Reuseable/StudentInfoBar";
+import AddTask from "../Reuseable/AddTask/AddTask";
 import TasksPage from "../../TasksComp/TasksPage";
-import BackButton from "./ManagerNavigationBar/BackButton";
 
 const ManagerContent = () => {
 const {currentManagerContent} = useContext(CohortContext)
-console.log(currentManagerContent)
+
+
     return (
-        <div className="ManagerContent_Container">
-            {currentManagerContent ? 
-            <>
-                <AverageCohort /> 
-                <StudentList />
-            </> : <>
+
+            currentManagerContent ? 
+            <div className='app_BG'>
+                <div className="ManagerContent_Container">
+                    <StudentProvider> 
+                        <AverageCohort /> 
+                        <StudentList />
+                    </StudentProvider>
+                    </div>
+                </div> : <>
                 <BackButton />
-                {/* <TasksPage /> */}
+                <StudentProvider>
+                    <StudentInfoBar />
+                    <AddTask />
+                    <TasksPage />
+                </StudentProvider>   
             </>
 
-            }   
+               
 
-        </div>
+
     )
 }
 
