@@ -96,7 +96,6 @@ app.post("/tasks", async (req, res) => {
 
 app.delete("/tasks/:taskId", async (req, res) => {
   const { taskId } = req.params;
-  
   try {
       const deleteResult = await pool.query("DELETE FROM tasks WHERE tasksId = $1 RETURNING *", [taskId]);
       
@@ -203,6 +202,19 @@ app.delete("/api/tasks/:id", async (req, res, next) => {
 //   res.send(result.rows);
 // });
 
+app.get("/user/:username", async (req, res) => {
+  const { username } = req.params;
+  try {
+    const data = await pool.query(
+     ' SELECT s.studentsId, u.usersId FROM students s JOIN users u ON s.usersId = u.usersId WHERE u.userName = $1',
+      [username]
+    );
+    res.status(200).send(data.rows);
+  } catch (err) {
+    console.error("Unable to fetch user", err);
+    res.status(500).send("Internal server error");
+  }
+});
 
 app.get("/api/cohort", async (req, res, next) => {
   const result = await pool
@@ -275,13 +287,12 @@ app.get("/api/studentinfo", async (req, res) => {
   }
 });
 
-app.get("/user/:usersId/info", async (req, res) => {
-  const { usersId } = req.params;
-
+app.get("/info/:studentId", async (req, res) => {  ////working //////
+  const { studentId } = req.params;
   try {
     const result = await pool.query(
-      "SELECT users.firstName, users.lastName, users.email, students.ets, students.branch, students.jobTitle, students.dutyLocation, students.clearanceType FROM users JOIN students ON users.usersId = students.usersId WHERE users.usersId = $1",
-      [usersId]
+      "SELECT u.firstname, u.lastname, u.email, s.ets, s.branch, s.jobtitle, s.dutylocation, s.clearancetype FROM users AS u JOIN students AS s ON u.usersid = s.usersid WHERE s.studentsid = $1",
+      [studentId]
     );
     res.status(200).json(result.rows);
   } catch (err) {

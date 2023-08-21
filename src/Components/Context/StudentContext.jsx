@@ -6,7 +6,7 @@ const StudentContext = createContext();
 export const StudentProvider = ({ children }) => {
   const [tasks, setTasks] = useState([]);
   const [activeTaskId, setActiveTaskId] = useState(null);
-  const [studentId, setStudentId] = useState(null);
+  const [studentId, setStudentId] = useState(null)
   const { url } = useContext(UrlContext);
   const [formData, setFormData] = useState({
     taskName: "",
@@ -15,16 +15,36 @@ export const StudentProvider = ({ children }) => {
     apptDate: "",
   });
 
+    const grabStudentId = async (url, username) => {
+        try {
+            const response = await fetch(`${url}/user/${username}`);
+            if (!response.ok) throw new Error("Network response was not ok");
+            const data = await response.json();
+            if(data[0]){
+                setStudentId(data[0].studentsid)
+            }
+
+          } catch (error) {
+             console.log(error);
+          }
+    }
+
+
   useEffect(() => {
     const fetchTasks = async () => {
-      try {
-        const response = await fetch(`${url}/tasks/${studentId}`);
-        if (!response.ok) throw new Error("Network response was not ok");
-        const data = await response.json();
-        setTasks(data);
-      } catch (error) {
-         console.log(error); //Setting tasks here will cause en error code
-      }
+        if(studentId) {
+            try {
+                const response = await fetch(`${url}/tasks/${studentId}`);
+                if (!response.ok) throw new Error("Network response was not ok");
+                const data = await response.json();
+                setTasks(data);
+              } catch (error) {
+                 console.log(error); //Setting tasks here will cause en error code
+              }
+        }
+        else{
+            console.log(`No student id, current: ${studentId}`)
+        }
     };
     fetchTasks();
   }, [studentId]);
@@ -111,7 +131,7 @@ export const StudentProvider = ({ children }) => {
             formData,
             handleChange,
             handleSubmit,
-            handleCheckboxChange,
+            grabStudentId,
         }}>
             {children}
         </StudentContext.Provider>
