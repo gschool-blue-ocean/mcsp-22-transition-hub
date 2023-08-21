@@ -1,7 +1,5 @@
 import './StudentInfoBar.css';
 import { useState, useEffect, useContext } from 'react';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faUser } from '@fortawesome/free-solid-svg-icons';
 import profileicon from "./img/usericon.png";
 import moment from 'moment';
 import UrlContext from '../../Context/UrlContext';
@@ -26,7 +24,6 @@ const StudentInfoBar = () => {
     useEffect(() => {
         const getStudentInfo = async () => {
         if(studentId !== null){
-            console.log(`${url}/info/${studentId}`)
             const response = await fetch(`${url}/info/${studentId}`);
             const results = await response.json();
             if(results[0]){
@@ -38,9 +35,6 @@ const StudentInfoBar = () => {
         }
         getStudentInfo();
     }, [studentId]);
-    // useEffect(() => {
-    //     getStudentInfo();
-    // }, []);
     
     return (
         <div className='app_BG'>
