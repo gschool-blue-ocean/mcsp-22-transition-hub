@@ -30,17 +30,18 @@ export const CohortProvider = ({children}) => {
 
 /* ---------------------Everything from Cohort Table ------------------------- */
      const [cohortList, setCohortList] = useState([]) 
-      useEffect(() =>{
-        const getData = async () => {
-        try{
-                const result = await fetch(`${url}/manager/cohorts`)
-                const data = await result.json()
-                setCohortList([...data])
-              }
-         catch (err){
-            console.log(err.message)
+     const getData = async () => {
+      try{
+              const result = await fetch(`${url}/manager/cohorts`)
+              const data = await result.json()
+              setCohortList([...data])
             }
-        }
+       catch (err){
+          console.log(err.message)
+          }
+      }
+
+      useEffect(() =>{
         getData()
       }, [])
 
@@ -98,7 +99,8 @@ catch(err){
         setCohortFormOpen,
         cohortFormOpen,
         currentManagerContent,
-        setCurrentManagerContent
+        setCurrentManagerContent,
+        getData
     }}>
         {children}
         </CohortContext.Provider>

@@ -4,9 +4,10 @@ import UrlContext from './UrlContext';
 const StudentContext = createContext();
 
 export const StudentProvider = ({ children }) => {
+    const [test, setTest] = useState("hi")
     const [tasks, setTasks] = useState([]);
     const [activeTaskId, setActiveTaskId] = useState(null);
-    const [studentId, setStudentId] = useState("1")
+    const [studentId, setStudentId] = useState(2)
     const {url} = useContext(UrlContext)
     const [formData, setFormData] = useState({
         taskName: "",
@@ -16,6 +17,7 @@ export const StudentProvider = ({ children }) => {
     });
 
     useEffect(() => {
+        console.log(`Current in effect: ${studentId}`)
         const fetchTasks = async () => {
             try {
                 const response = await fetch(`${url}/tasks/${studentId}`);
@@ -24,7 +26,7 @@ export const StudentProvider = ({ children }) => {
                 console.log("Fetched data from server:", data);
                 setTasks(data);
             } catch (error) {
-                setTasks(null);
+               console.log(error);
             }
         };
         fetchTasks();
@@ -105,7 +107,10 @@ export const StudentProvider = ({ children }) => {
             studentId,
             formData,
             handleChange,
-            handleSubmit
+            handleSubmit,
+            handleCheckboxChange,
+            test,
+            setTest
         }}>
             {children}
         </StudentContext.Provider>

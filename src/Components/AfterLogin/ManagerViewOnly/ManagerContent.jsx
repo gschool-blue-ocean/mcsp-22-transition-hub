@@ -4,39 +4,29 @@ import StudentList from "../ManagerViewOnly/StudentList/StudentList";
 import './ManagerContent.css'
 import { useContext } from "react";
 import CohortContext from "../../Context/CohortContext";
-import BackButton from "./BackButton";
 import { StudentProvider } from "../../Context/StudentContext";
-import StudentInfoBar from "../Reuseable/StudentInfoBar";
-import AddTask from "../Reuseable/AddTask/AddTask";
-import TasksPage from "../../TasksComp/TasksPage";
+import StudentInManager from "./StudentInManager";
 
 const ManagerContent = () => {
 const {currentManagerContent} = useContext(CohortContext)
 
 
-    return (
-
-            currentManagerContent ? 
-            <div className='app_BG'>
-                <div className="ManagerContent_Container">
-                    <StudentProvider> 
-                        <AverageCohort /> 
-                        <StudentList />
-                    </StudentProvider>
-                    </div>
-                </div> : <>
-                <BackButton />
-                <StudentProvider>
-                    <StudentInfoBar />
-                    <AddTask />
-                    <TasksPage />
-                </StudentProvider>   
-            </>
-
-               
-
-
-    )
+return (
+    <StudentProvider> 
+      {currentManagerContent ? (
+        <div className='app_BG'>
+          <div className="ManagerContent_Container">
+            <AverageCohort /> 
+            <StudentList />
+          </div>
+        </div>
+      ) : (
+        <>
+            <StudentInManager />
+        </>
+      )}
+    </StudentProvider>
+  );
 }
 
 export default ManagerContent
