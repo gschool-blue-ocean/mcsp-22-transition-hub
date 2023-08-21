@@ -5,10 +5,12 @@ import { useState, useEffect, useContext } from 'react';
 import profileicon from "./img/usericon.png";
 import moment from 'moment';
 import UrlContext from '../../Context/UrlContext';
+import StudentContext from '../../Context/StudentContext';
 
 
 const StudentInfoBar = () => {
     const {url} = useContext(UrlContext)
+    const {studentId} = useContext(StudentContext)
 
     const [studentInfo, setStudentInfo] = useState({
         firstname: '',
@@ -23,13 +25,19 @@ const StudentInfoBar = () => {
 
     useEffect(() => {
         const getStudentInfo = async () => {
-            const response = await fetch(url + '/info');
+        if(studentId !== null){
+            console.log(`${url}/info/${studentId}`)
+            const response = await fetch(`${url}/info/${studentId}`);
             const results = await response.json();
-            setStudentInfo(...results);
-            console.log(results)
+            if(results[0]){
+                setStudentInfo(results[0]);
+            }
+        }
+
+            
         }
         getStudentInfo();
-    }, []);
+    }, [studentId]);
     // useEffect(() => {
     //     getStudentInfo();
     // }, []);

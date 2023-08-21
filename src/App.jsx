@@ -5,12 +5,11 @@ import {
   Routes,
   Navigate,
 } from "react-router-dom";
-import { AuthProvider } from "./Components/Context/AuthContext";
-import { UrlProvider } from "./Components/Context/UrlContext";
+import { StudentProvider } from "./Components/Context/StudentContext";
 import LogInPage from "./Components/MainComponents/LogInPage";
 import Manager from "./Components/MainComponents/Manager";
 import Student from "./Components/MainComponents/Student";
-import { CohortProvider } from "./Components/Context/CohortContext";
+
 
 function App() {
   const isAuthenticated = true;
@@ -18,9 +17,7 @@ function App() {
   const isStudent = true;
 
   return (
-    <AuthProvider>
-      <UrlProvider>
-        <CohortProvider>
+    <StudentProvider>
           <Router>
             <Routes>
               <Route path="/" element={<LogInPage />}></Route>
@@ -38,9 +35,9 @@ function App() {
               ></Route>
             </Routes>
           </Router>
-        </CohortProvider>
-      </UrlProvider>
-    </AuthProvider>
+    </StudentProvider>
+
+
   );
 }
 

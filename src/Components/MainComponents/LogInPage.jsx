@@ -9,15 +9,9 @@ const LogInPage = () => {
 
   return (
             <>
-                  <AccountProvider>
-                    <CohortProvider>
-                      <StudentProvider>
-
-                        <AccountServices /> {/* Actual Component */}
-                      
-                      </StudentProvider>
-                    </CohortProvider>
-                  </AccountProvider>
+              <AccountProvider>
+                  <AccountServices /> {/* Actual Component */}
+              </AccountProvider>
             </>
   );
 }

@@ -6,11 +6,12 @@ import { useContext, useState } from "react";
 import AuthContext from "../Context/AuthContext";
 import AccountContext from "../Context/AccountServicesContext";
 import UrlContext from '../Context/UrlContext'
+import StudentContext from "../Context/StudentContext";
  
 const SignOn = () => {
   const { setCurrentService, accountServices } = useContext(AccountContext);
-  const { setIsAuthenticated, isAuthenticated, roles, setRoles } =
-    useContext(AuthContext);
+  const { setIsAuthenticated, isAuthenticated, roles, setRoles } = useContext(AuthContext);
+  const {grabStudentId, studentId} = useContext(StudentContext)
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -53,16 +54,30 @@ const SignOn = () => {
     }
   };
 
+//this will run first 
+  useEffect( () => {
+    console.log(isAuthenticated, roles)
+    if(isAuthenticated && roles === 'student') {
+      console.log('passed')
+      grabStudentId(url, username)
+    } 
+  }, [roles])
+
+
+ //then  
   useEffect(() => {
     if (isAuthenticated) {
       switch (roles) {
         case "manager":
           navigate("/manager");
           break;
-        case "student":
+        case "student": //Added to make sure the person has an id, it can load their page
           navigate("/student");
           break;
       }
+    }
+    else {
+      console.log("Not authenticated")
     }
   }, [roles]);
 

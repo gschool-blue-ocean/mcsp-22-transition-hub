@@ -57,7 +57,9 @@ const StudentList = () => {
 
 
     const handleSetStudent = (e) => {
+        if(e.currentTarget.id){
             setStudentId(e.currentTarget.id) 
+        }
             setCurrentManagerContent(false)
 
     }
