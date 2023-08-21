@@ -1,12 +1,14 @@
 import './StudentList.css';
 import { useState, useEffect, useContext } from 'react';
 import CohortContext from '../../../Context/CohortContext';
+import StudentContext from '../../../Context/StudentContext';
 import LoadingAnimation from '../../../LoadingAnimation';
 import moment from 'moment';
 import ManagerSideNav from '../ManagerNavigationBar/ManagerSideNav';
 
 const StudentList = () => {
     const { displayedStudents, cohort, cohortList, studentAverage, setCurrentManagerContent } = useContext(CohortContext);
+    const {setStudentId} = useContext(StudentContext)
     const [studentData, setStudentData] = useState([]);
     const [sortDirection, setSortDirection] = useState('asc');
     const [sortedColumn, setSortedColumn] = useState(null);
@@ -54,7 +56,7 @@ const StudentList = () => {
 
     const handleSetStudent = (e) => {
             setCurrentManagerContent(false) //will be false
-            console.log(e.currentTarget) // will need to pass name which is the students id)
+            setStudentId(e.currentTarget.name) // will need to pass name which is the students id)
             //set current student based off of id
     }
 
