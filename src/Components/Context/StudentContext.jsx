@@ -16,7 +16,6 @@ export const StudentProvider = ({ children }) => {
   });
 
     const grabStudentId = async (url, username) => {
-        console.log('In grab student id')
         try {
             const response = await fetch(`${url}/user/${username}`);
             if (!response.ok) throw new Error("Network response was not ok");
@@ -35,11 +34,9 @@ export const StudentProvider = ({ children }) => {
     const fetchTasks = async () => {
         if(studentId) {
             try {
-                console.log(`${url}/tasks/${studentId}`)
                 const response = await fetch(`${url}/tasks/${studentId}`);
                 if (!response.ok) throw new Error("Network response was not ok");
                 const data = await response.json();
-                console.log(data)
                 setTasks(data);
               } catch (error) {
                  console.log(error); //Setting tasks here will cause en error code
