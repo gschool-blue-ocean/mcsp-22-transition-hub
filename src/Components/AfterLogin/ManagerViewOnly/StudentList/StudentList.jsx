@@ -13,8 +13,6 @@ const StudentList = () => {
     const [sortDirection, setSortDirection] = useState('asc');
     const [sortedColumn, setSortedColumn] = useState(null);
 
-    const [test2, setTest2] = useState(true)
-
 
     useEffect(() => {
         const arr = [];
@@ -59,8 +57,6 @@ const StudentList = () => {
 
 
     const handleSetStudent = (e) => {
-            console.log("In handle")
-            console.log(`Should be: ${e.currentTarget.id}`)
             setStudentId(e.currentTarget.id) 
             setCurrentManagerContent(false)
 

@@ -11,7 +11,6 @@ const BackButton = () => {
     const handleBackButton = () => {
         setCurrentManagerContent(true)
         setStudentId(null)
-        console.log('back button is set')
     }
 
     return (
