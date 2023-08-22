@@ -85,6 +85,12 @@ export const StudentProvider = ({ children }) => {
         const data = await response.json()
         setTasks((prevTasks) => [...prevTasks, data]);
         setAddTaskVisible(false)
+        setFormData({    
+            taskName: "",
+            taskDescription: "",
+            dueDate: "",
+            apptDate: ""
+        })
         
       } else {
         const data = await response.json();
