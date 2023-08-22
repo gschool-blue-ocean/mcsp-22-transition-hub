@@ -13,8 +13,15 @@
   display: none;
 }
 
-@media (max-width: 1024px) {
+/* @media (max-width: 1024px) {
   .ManagerContent_Container {
-    left: 250px; /* Will need to adjust in future*/
+    left: 250px;
   }
+} */
+
+
+@media (max-width: 405px) {
+	.ManagerContent_Container {
+		min-width: 360px;
+	}
 }

@@ -1,14 +1,12 @@
 import "./Header.css";
 import { useState, useContext } from "react";
-import StudentInfoBar from "./StudentInfoBar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faBars,
-  faArrowRightFromBracket,
-} from "@fortawesome/free-solid-svg-icons";
+import {  faBars, faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import logo from "./img/transition-light.png";
 import AuthContext from "../../Context/AuthContext";
+import tasklistTemplate from './img/Gen-Mil-Transition-Tasks.pdf';
+import FAQCohortResources from './img/FAQ-Cohort-Resources.pdf';
 
 const Header = () => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -43,7 +41,7 @@ const Header = () => {
             </button>
           </Link>
           
-          <img src={logo} loading='lazy'></img>
+          <img className="TT-logo" src={logo} loading='lazy'></img>
 
           <div className='header-dropdownBtn'>
             <span onClick={toggleExpansion}>
@@ -54,23 +52,17 @@ const Header = () => {
         {isExpanded && (
           <div className='header-actualdropdown'>
             <ul className='headerUL-dropdownlist' style={{ listStyle: "none" }}>
-              <a className='header-dropdownlist-item-link' href=''>
-                <li
-                  className='header-dropdownlist-item'
-                  style={{
-                    borderBottom: "1px solid #393941",
-                    borderTop: "1px solid #393941",
-                  }}
-                >
+              <a className='header-dropdownlist-item-link' href={FAQCohortResources} 
+                download='FAQ-Cohort-Resources.pdf'
+                target='_blank'>
+                <li className='header-dropdownlist-item' style={{borderBottom: "1px solid #393941", borderTop: "1px solid #393941"}}>
                   Frequently Asked Questions
                 </li>
               </a>
-              <a
-                className='header-dropdownlist-item-link'
-                href='.pdf'
-                download='general_tasklist_template'
-                target='_blank'
-                >
+              <a className='header-dropdownlist-item-link'
+                href={tasklistTemplate}
+                download='Gen-Mil-Transition-Tasks.pdf'
+                target='_blank'>
                 <li className='header-dropdownlist-item'>
                   Download Tasklist Template
                 </li>

@@ -78,9 +78,10 @@ const TasksPage = () => {
             </div>
             {activeTaskId === task.tasksid && (
                 <div className="expansion">
+
                     <div className="descriptionHeader">
                     <div>
-                    <h4>Description</h4>
+                    <h4 style={{  textDecoration: 'underline', marginTop: '0px',marginBottom: '0px'}}>Description</h4>
                     </div>
                     <div>
                     <h4 className="apptDateDiv">
@@ -89,7 +90,8 @@ const TasksPage = () => {
                         </h4>
                         </div>
                     </div>
-                    <p className="descriptionBody">{task.taskdescription}</p>
+                    <p style={{  marginTop: '4px'}}>{task.taskdescription}</p>
+
                     <button onClick={() => openModalWithTask(task)} className="update-button">Update Task</button>
                 </div>
             )}

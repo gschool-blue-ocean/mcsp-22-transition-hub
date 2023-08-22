@@ -107,3 +107,19 @@
 .plus-icon {
   color: "black";
 }
+
+@media (max-width: 405px) {
+  .addCohort_formOpenBtn {
+    padding: 2px;
+    font-size: 13px;
+  }
+
+  .managerSide_Bar_Select {
+    font-size: 13px;
+    padding: 3px;
+  }
+
+  .managerSide_Bar_Container {
+    margin-bottom: 10px;
+  }
+}

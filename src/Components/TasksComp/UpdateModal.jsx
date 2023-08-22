@@ -60,10 +60,13 @@ const UpdateModal = ({ taskId, initialData, closeModal }) => {
   };
 
   return (
-    <div className="modal-container">
-        <div className="update-modal">
-            <button className="closeButton" onClick={closeModal}>X</button>
-             <form onSubmit={handleSubmit}>
+    <div className="edittask-overlay">
+        <div className="modal-container">
+            <button className="closeButton" onClick={closeModal}>x</button>
+             <form className='edittask-form' onSubmit={handleSubmit}>
+              <div className='edittask-form-title'>
+                  <h2>Edit and Submit!</h2>
+              </div>
             <div className="taskTitleDiv">
             <div className="nameTitle">
               <label>
@@ -80,13 +83,7 @@ const UpdateModal = ({ taskId, initialData, closeModal }) => {
                  <textarea name="taskdescription" value={formData.taskdescription} onChange={handleChange} />
               </div>
               </div>
-              <div className="warningDiv">
-                <div className="warning">
-                  <label>
-                    MUST ENTER DATES BEFORE SUBMITTING FORM
-                  </label>
-                </div>
-                </div>
+              
               <div className="dateDiv">
                 <div className="dueDateDiv"> 
                 <label>
@@ -101,7 +98,16 @@ const UpdateModal = ({ taskId, initialData, closeModal }) => {
                 <input type="date" name="apptdate" value={formData.apptdate} onChange={handleChange} />
                 </div>
               </div>
-                <button className="submitButton" type="submit">Submit</button>
+              <div className="warningDiv">
+                <div className="warning">
+                  <label>
+                    * Must enter dates before submission
+                  </label>
+                </div>
+                </div>
+                <div>
+                <button className="submitButton" type="submit">Update Task</button>
+                </div>
             </form>
             </div>
             </div>
