@@ -7,18 +7,18 @@ import { useContext } from "react";
 import LoadingAnimation from "../../LoadingAnimation";
 
 const StudentInManager = () => {
-    const {studentId} = useContext(StudentContext)
-    
-    return (
-        studentId ? 
-        <>
-            <BackButton />
-            <StudentInfoBar />
-            <AddTask />
-            <TasksPage />
-        </> :
-        <LoadingAnimation />
-    )
-}
+  const { studentId } = useContext(StudentContext);
 
-export default StudentInManager
+  return studentId ? (
+    <>
+      <BackButton />
+      <StudentInfoBar />
+      <AddTask />
+      <TasksPage />
+    </>
+  ) : (
+    <></>
+  );
+};
+
+export default StudentInManager;
