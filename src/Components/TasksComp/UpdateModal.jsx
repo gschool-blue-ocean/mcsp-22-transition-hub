@@ -34,7 +34,7 @@ const UpdateModal = ({ taskId, initialData, closeModal }) => {
     e.preventDefault();
     console.log('Sending this data:', formData);
 
-    // Send the PATCH request
+    
     try {
       const response = await fetch(`http://localhost:8000/tasks/${taskId}`, {
         method: 'PATCH',
@@ -55,7 +55,7 @@ const UpdateModal = ({ taskId, initialData, closeModal }) => {
       console.error(err);
     }
 
-    // Close the modal after submitting
+
     closeModal();
   };
 

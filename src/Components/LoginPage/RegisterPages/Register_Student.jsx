@@ -21,10 +21,13 @@ const Register_Student = () => {
     clearance: "",
     ETS: "",
     role: "student",
+    dutylocation: '',
+    jobtitle: '',
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    console.log(e.target)
     setFormData({ ...formData, [name]: value });
   };
 
@@ -41,6 +44,7 @@ const Register_Student = () => {
     } catch (err) {
       console.error(err.message);
     }
+    console.log(formData)
   };
 
   return (
@@ -67,6 +71,7 @@ const Register_Student = () => {
             onChange={handleChange}
           ></input>
         </div>
+
         <div className="Register_Student_Form_Input_Container">
           <label>First Name</label>
           <input
@@ -94,12 +99,34 @@ const Register_Student = () => {
             onChange={handleChange}
           ></input>
         </div>
+
+        <div className="Register_Student_Form_Input_Container">
+          <label>Duty Location</label>
+          <input
+            type="text"
+            placeholder=""
+            name="dutylocation"
+            onChange={handleChange}
+          ></input>
+        </div>
+
+        <div className="Register_Student_Form_Input_Container">
+          <label>Job Title</label>
+          <input
+            type="text"
+            placeholder=""
+            name="jobtitle"
+            onChange={handleChange}
+          ></input>
+        </div>
+
+
         <div className="Clearance_Container">
           <label htmlFor="clearance">Clearance:</label>
           <select
             name="clearance"
             className="Register_Student_Branch"
-            onSelect={handleChange}
+            onChange={handleChange}
           >
             <option>None</option>
             <option>Secret</option>
@@ -111,7 +138,7 @@ const Register_Student = () => {
         </div>
         <div className="BranchSelection">
           <label htmlFor="branch">Select Branch:</label>
-          <select id="BranchSelect" name="branch" onSelect={handleChange}>
+          <select id="BranchSelect" name="branch" onChange={handleChange}>
             <option value="Civilian">Civilian</option>
             <option value="Air Force">Air Force</option>
             <option value="Coast Guard">Coast Guard</option>
