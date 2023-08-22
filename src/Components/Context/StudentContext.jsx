@@ -7,6 +7,7 @@ export const StudentProvider = ({ children }) => {
   const [tasks, setTasks] = useState([]);
   const [activeTaskId, setActiveTaskId] = useState(null);
   const [studentId, setStudentId] = useState(null)
+  const [addTaskVisible, setAddTaskVisible] = useState(false);
   const { url } = useContext(UrlContext);
   const [formData, setFormData] = useState({
     taskName: "",
@@ -69,19 +70,28 @@ export const StudentProvider = ({ children }) => {
       ...formData,
       completed: false,
     };
-
-    try {
+    try { 
       const response = await fetch(`${url}/tasks`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(newTask),
+
       });
 
       if (response.ok) {
         alert("Task added successfully");
-        window.location.reload();
+        const data = await response.json()
+        setTasks((prevTasks) => [...prevTasks, data]);
+        setAddTaskVisible(false)
+        setFormData({    
+            taskName: "",
+            taskDescription: "",
+            dueDate: "",
+            apptDate: ""
+        })
+        
       } else {
         const data = await response.json();
         alert("Failed to add task: " + data.message);
@@ -132,6 +142,8 @@ export const StudentProvider = ({ children }) => {
             handleChange,
             handleSubmit,
             grabStudentId,
+            addTaskVisible, 
+            setAddTaskVisible
         }}>
             {children}
         </StudentContext.Provider>
