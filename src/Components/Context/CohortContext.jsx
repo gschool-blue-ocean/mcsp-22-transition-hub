@@ -12,6 +12,7 @@ export const CohortProvider = ({ children }) => {
   const [displayedStudents, setDisplayedStudents] = useState([]); //Current students displayed
   const [studentAverage, setStudentAverage] = useState([]);
   const [cohortFormOpen, setCohortFormOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -101,6 +102,8 @@ export const CohortProvider = ({ children }) => {
         getData,
         isVisible,
         setIsVisible,
+        isLoading,
+        setIsLoading,
       }}
     >
       {children}
