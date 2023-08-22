@@ -31,7 +31,6 @@
   color: transparent;
   margin-left: 1%;
   width: 120px;
-  min-width: 120px;
 }
 .header-buttons {
   border-radius: 2px;
@@ -48,6 +47,7 @@
 .header-dropdownBtn {
   margin-right: 2%;
   cursor: pointer;
+  margin-left: 5%;
 }
 .barIcon {
   color: #fb8c00;
@@ -64,7 +64,8 @@
   top: 75px;
   height: 108px;
   width: 250px;
-  background-color: rgb(58, 69, 90, 0.6);
+  /* background-color: rgb(58, 69, 90, 0.9); */
+  background-color: rgba(49, 58, 75, 0.8);;
   border: 3px solid rgb(63, 75, 98);
   border-top: none;
   border-right: none;
@@ -91,4 +92,34 @@
 
 .header-dropdownlist-item-link {
   text-decoration: none;
+}
+
+
+@media (max-width: 415px) {
+  .header-buttons {
+    font-size: 14px;
+  }
+  .header-logout-link {
+    width: 94px;
+  }
+}
+
+@media (max-width: 405px) {
+  .barIcon {
+    font-size: 30px;
+  }
+  .TT-logo {
+    height: 50px;
+    width: 180px;
+  }
+  .header-container {
+    height: 60px    
+  }
+  .header-dropdownBtn {
+    margin-left: 30px;
+  }
+  .header-actualdropdown {
+    top:60px;
+    width: 100%;
+  }
 }

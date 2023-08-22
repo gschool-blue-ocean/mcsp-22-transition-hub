@@ -65,3 +65,20 @@
 /* .studentlist_tabledata:hover {
 
 } */
+
+@media (max-width: 405px) {
+  .studentlist_table th {
+  font-size: 12px;
+
+  }
+  .studentlist_table td {
+  font-size: 13px;
+  }
+  .studentlist_h2 {
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
+  .studentlist_headerContainer {
+    display: block;
+  }
+}
