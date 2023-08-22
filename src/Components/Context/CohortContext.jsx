@@ -34,6 +34,7 @@ export const CohortProvider = ({children}) => {
       try{
               const result = await fetch(`${url}/manager/cohorts`)
               const data = await result.json()
+              console.log(data)
               setCohortList([...data])
             }
        catch (err){
