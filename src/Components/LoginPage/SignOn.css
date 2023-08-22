@@ -43,7 +43,6 @@
 .login-form input {
   padding: 8px;
   margin-bottom: 12px;
-  margin: 0 auto;
   border: 1px solid #ccc;
   border-radius: 4px;
   width: 100%;
@@ -54,7 +53,8 @@
   margin-bottom: 20px;
 }
 
-.SignOn_Buttons {
+.SignOn_Buttons,
+#registerPasscode_submit {
   background-color: #d8d1d836;
   color: white;
   border: none;
@@ -73,7 +73,7 @@
 .logOn_Title {
   height: 50%;
   width: 60%;
-  background-image: url("../../public/transition-light.png");
+  background-image: url("../AfterLogin/Reuseable/img/transition-dark.png");
   background-repeat: no-repeat;
   background-size: auto;
   background-position: center center;

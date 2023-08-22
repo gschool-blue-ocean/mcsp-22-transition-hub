@@ -11,7 +11,7 @@ export default async (req, res, next) => {
       return res.send("not authorized");
     }
 
-    const payload = jwt.verify(jwtToken, process.env.secret);
+    const payload = jwt.verify(jwtToken, process.env.SECRET);
 
     req.user = payload.user;
     next();

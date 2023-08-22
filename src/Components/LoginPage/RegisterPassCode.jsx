@@ -1,4 +1,4 @@
-import "./RegisterPasscode.css";
+import "./RegisterPassCode.css";
 import React from "react";
 import axios from "axios";
 import AuthContext from "../Context/AuthContext";
@@ -48,25 +48,29 @@ const RegisterPasscode = () => {
     }
   };
   return (
-    <div className='Passcode_BG'>
-      <div className='Passcode_Container'>
-        <div className='RegisterPassCode_Title'>Verification passcode</div>
-        <form className='passcode_form' onSubmit={handleSubmit}>
-          <div className='passcode_Input'>
-            <label>passcode</label>
+    <div className="Passcode_BG">
+      <div className="Passcode_Container">
+        <div className="RegisterPassCode_Title">Verification Passcode</div>
+        <form className="passcode_form" onSubmit={handleSubmit}>
+          <div className="passcode_Input">
+            <label>Passcode</label>
             <input
-              type='text'
-              placeholder=''
-              name='passcode'
+              type="password"
+              placeholder=""
+              name="passcode"
               onChange={handleChange}
               value={formData.passcode}
             ></input>
           </div>
-          <button type='submit' id='registerPasscode_submit'>
+          <button
+            type="submit"
+            id="registerPasscode_submit"
+            style={{ width: "233px" }}
+          >
             Submit
           </button>
         </form>
-        <p className='passcode_notes'>
+        <p className="passcode_notes">
           ***This passcode will be provided by either your instructor or
           manager.
         </p>

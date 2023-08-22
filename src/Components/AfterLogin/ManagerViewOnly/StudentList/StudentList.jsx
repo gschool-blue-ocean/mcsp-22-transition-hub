@@ -1,16 +1,19 @@
 import './StudentList.css';
 import { useState, useEffect, useContext } from 'react';
 import CohortContext from '../../../Context/CohortContext';
+import StudentContext from '../../../Context/StudentContext';
 import LoadingAnimation from '../../../LoadingAnimation';
 import moment from 'moment';
 import ManagerSideNav from '../ManagerNavigationBar/ManagerSideNav';
 
 const StudentList = () => {
-    const { displayedStudents, cohort, cohortList, studentAverage } = useContext(CohortContext);
+    const { displayedStudents, cohort, cohortList, studentAverage, setCurrentManagerContent } = useContext(CohortContext);
+    const {handleCheckBoxChange, setStudentId, studentId, fetchTasks} = useContext(StudentContext)
     const [studentData, setStudentData] = useState([]);
     const [sortDirection, setSortDirection] = useState('asc');
     const [sortedColumn, setSortedColumn] = useState(null);
-  
+
+
     useEffect(() => {
         const arr = [];
         studentAverage.forEach((student) => {
@@ -19,7 +22,8 @@ const StudentList = () => {
             }
         })
         setStudentData([...arr]);
-      }, [cohort]);
+      }, [cohort, handleCheckBoxChange]);
+
 
       //we are mapping throught the sorted students not vice Student data
         //below function is to sort the data, making a copy of the studentData
@@ -50,6 +54,16 @@ const StudentList = () => {
         }
     };
 
+
+
+    const handleSetStudent = (e) => {
+        if(e.currentTarget.id){
+            setStudentId(e.currentTarget.id) 
+        }
+            setCurrentManagerContent(false)
+
+    }
+
     return (
         // cohort && studentData ? (
         
@@ -72,7 +86,7 @@ const StudentList = () => {
                 </thead>
                 <tbody className='studentlist_tablerow'>
                     {sortedStudentData.map((student, index) => (
-                    <tr key={student.studentsid} className='studentlist_tabledata'>
+                    <tr key={student.studentsid} className='studentlist_tabledata' onClick={e => handleSetStudent(e)} id={student.studentsid}>
                         <td>{student.firstname}</td>
                         <td>{student.lastname}</td>
                         <td>{moment(student.ets).format('MM/DD/YYYY')}</td>

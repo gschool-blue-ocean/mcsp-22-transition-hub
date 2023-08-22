@@ -62,7 +62,10 @@
   transition: background-color 0.3s ease;
 }
 
-/* .studentlist_tabledata:hover {
+.studentlist_tabledata:hover {
+  color: #EF6E47;
+  cursor: pointer;
+}
 
 } */
 
@@ -81,4 +84,5 @@
   .studentlist_headerContainer {
     display: block;
   }
+
 }
