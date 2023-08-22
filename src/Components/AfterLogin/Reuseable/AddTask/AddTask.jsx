@@ -1,14 +1,15 @@
 import React from "react";
-import { useState } from "react";
+import { useContext} from "react";
 import AddTaskForm from "./AddTaskForm";
 import './AddTask.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
+import StudentContext from "../../../Context/StudentContext";
 
 const AddTask = () => {
-    const [visible, setVisible] = useState(false);
+    const {addTaskVisible, setAddTaskVisible} = useContext(StudentContext)
 
-    const handleVisibility = () => setVisible(!visible);
+    const handleVisibility = () => setAddTaskVisible(!addTaskVisible);
 
     return (
         <>
@@ -20,7 +21,7 @@ const AddTask = () => {
             <div className='AddTask_Circle' onClick={handleVisibility}>  
                 <FontAwesomeIcon icon={faCirclePlus} style={{color: "rgb(251, 140, 0)", height: '4.5rem', width: '4.5rem'}} />
             </div>
-                {visible ? <AddTaskForm handleVisibility={handleVisibility}/> : <></>}
+                {addTaskVisible ? <AddTaskForm handleVisibility={handleVisibility}/> : <></>}
         </>
     )
 }

@@ -61,6 +61,7 @@ const StudentList = () => {
             setStudentId(e.currentTarget.id) 
         }
             setCurrentManagerContent(false)
+            //navigate to /student/:id
 
     }
 
