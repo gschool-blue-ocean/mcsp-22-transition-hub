@@ -4,10 +4,13 @@ import profileicon from "./img/usericon.png";
 import moment from "moment";
 import UrlContext from "../../Context/UrlContext";
 import StudentContext from "../../Context/StudentContext";
+import { useParams } from 'react-router-dom'
 
 const StudentInfoBar = () => {
   const { url } = useContext(UrlContext);
-  const { studentId } = useContext(StudentContext);
+  const { studentId, setStudentId } = useContext(StudentContext); //no longer using
+  const { studentIdentification } = useParams()
+
 
   const [studentInfo, setStudentInfo] = useState({
     firstname: "",
@@ -22,8 +25,8 @@ const StudentInfoBar = () => {
 
   useEffect(() => {
     const getStudentInfo = async () => {
-      if (studentId !== null) {
-        const response = await fetch(`${url}/info/${studentId}`);
+      if (studentIdentification !== null) {
+        const response = await fetch(`${url}/info/${studentIdentification}`);
         const results = await response.json();
         if (results[0]) {
           setStudentInfo(results[0]);
@@ -31,14 +34,13 @@ const StudentInfoBar = () => {
       }
     };
     getStudentInfo();
-  }, [studentId]);
+  }, [studentIdentification]);
 
   return (
     <div className='app_BG'>
       <div className='studentInfo-bigcontainer' id='mySideNav'>
         <div className='studentInfo-wrapper'>
           <div style={{ marginTop: "50px" }}>
-            {/* <FontAwesomeIcon icon={faUser} style={{color: "#f0f0f0"}} size="xl"/> */}
             <img
               src={profileicon}
               style={{ height: "55px", width: "55px" }}

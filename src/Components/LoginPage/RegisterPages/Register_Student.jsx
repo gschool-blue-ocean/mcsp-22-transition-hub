@@ -1,13 +1,17 @@
 import ReturnToLogin from "../ReturnToLogin";
+import React, { useEffect } from "react";
 import { useState, useContext } from "react";
 import "./Register_Student.css";
 import AuthContext from "../../Context/AuthContext";
 import UrlContext from "../../Context/UrlContext";
 import axios from "axios";
 import AccountContext from "../../Context/AccountServicesContext";
+import StudentContext from "../../Context/StudentContext";
 
 const Register_Student = () => {
   const { accountServices, setCurrentService } = useContext(AccountContext);
+  const {postDefaultTasks} = useContext(StudentContext)
+  const [localStudentId, setLocalStudentId] = useState(null);
   const { cohortsId } = useContext(AuthContext);
   const { url } = useContext(UrlContext);
   const [formData, setFormData] = useState({
@@ -27,19 +31,33 @@ const Register_Student = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log(e.target);
     setFormData({ ...formData, [name]: value });
   };
 
-  const onSubmitForm = async (e) => {
+  //Have to run this local so it doesn't effect other studentId useEffects throughout the application
+  const grabLocalStudentId = async (url, username) => {
+    try {
+      const response = await fetch(`${url}/user/${username}`);
+      if (!response.ok) throw new Error("Network response was not ok");
+      const data = await response.json();
+      if (data[0]) {
+        setLocalStudentId(data[0].studentsid);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
+
+  const onStudentRegister = async (e) => {
     e.preventDefault();
     try {
-      // setCurrentService(accountServices[0])
-      const res = await axios.post(url + "/api/auth/register", formData); // may have to change route, unsure at this time
-      const parseRes = await res.data;
-
+      const res = await axios.post(url + "/api/auth/register", formData); 
+      const parseRes = await res.data;      
       if (parseRes.token) {
-        setCurrentService(accountServices[0]);
+        alert("Success")
+        await grabLocalStudentId(url, formData.username)
       }
     } catch (err) {
       console.error(err.message);
@@ -47,19 +65,32 @@ const Register_Student = () => {
     console.log(formData);
   };
 
+  useEffect( ()=> {
+    if(localStudentId) {
+      console.log(`In localStudent use effect ${localStudentId}`)
+      postDefaultTasks(url, localStudentId, formData.ETS);
+    }
+  }, [localStudentId])
+
+  useEffect( () => {
+    if(localStudentId) {
+      setCurrentService(accountServices[0]);  
+    }
+  }, [localStudentId])
+
   return (
     <>
       <ReturnToLogin />
       <div className="Register_Student_Title">
         Welcome, to Career Services Manager!
       </div>
-      <form className="Register_Student_Form" onSubmit={onSubmitForm}>
+      <form className="Register_Student_Form" onSubmit={onStudentRegister}>
         <div className="Register_Manager_Form_Input_Container">
           <label>UserName</label>
           <input
             type="text"
             placeholder=""
-            name="username"
+            name="username" 
             onChange={handleChange}
           ></input>
         </div>

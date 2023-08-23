@@ -30,7 +30,7 @@ const AddTaskForm = () => {
                     <button className="exit_Add_Task_Form_Container" onClick={handleClose}>x</button>
 
                     <div className='addtask-form-title'>
-                        <h2>Add your task and submit!</h2>
+                        <h2 style={{marginTop: '2rem', marginBottom: '0.75rem'}}>Add your task and submit!</h2>
                     </div>
 
                     <div className="Add_Task_Form_Input_Title">

@@ -34,7 +34,7 @@ const UpdateModal = ({ taskId, initialData, closeModal, onTaskUpdate }) => {
     e.preventDefault();
     
     try {
-      const response = await fetch(`http://localhost:8000/tasks/${taskId}`, {
+      const response = await fetch(`https://transition-hub.onrender.com/tasks/${taskId}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

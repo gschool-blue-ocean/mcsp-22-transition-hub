@@ -20,20 +20,19 @@ const ManagerContent = () => {
 
   return (
     <>
-      <StudentProvider>
+
         <div className='app_BG'>
-          {isLoading ? (
+          {/* {isLoading ? (
             <LoadingAnimation />
-          ) : currentManagerContent ? (
+          ) : currentManagerContent ? ( */}
             <div className='ManagerContent_Container'>
               <AverageCohort />
               <StudentList />
             </div>
-          ) : (
+          {/* ) : (
             <StudentInManager />
-          )}
+          )} */}
         </div>
-      </StudentProvider>
     </>
   );
 };

@@ -17,6 +17,7 @@ export const CohortProvider = ({ children }) => {
 
   useEffect(() => {
     const getData = async () => {
+      if(cohort === 0) return 
       try {
         const result = await fetch(`${url}/manager/${cohort}/students`);
         const data = await result.json();

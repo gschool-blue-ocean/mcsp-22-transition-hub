@@ -41,9 +41,9 @@ const RegisterPasscode = () => {
     }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     const toRegistration = passcodeVerification(formData);
-
     if (toRegistration) {
       setCurrentService(accountServices[2]); // <--- === "Register"
     }
@@ -57,22 +57,22 @@ const RegisterPasscode = () => {
           <div className="passcode_Input">
             <label>Passcode</label>
             <input
-              type="password"
-              placeholder=""
-              name="passcode"
+              type='password'
+              placeholder=''
+              name='passcode'
               onChange={handleChange}
               value={formData.passcode}
             ></input>
           </div>
           <button
-            type="submit"
-            id="registerPasscode_submit"
+            type='submit'
+            id='registerPasscode_submit'
             style={{ width: "233px" }}
           >
             Submit
           </button>
         </form>
-        <p className="passcode_notes">
+        <p className='passcode_notes'>
           ***This passcode will be provided by either your instructor or
           manager.
         </p>
