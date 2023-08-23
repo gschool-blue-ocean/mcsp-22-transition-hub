@@ -32,11 +32,13 @@ router.post("/register/verify", async (req, res) => {
 });
 
 router.post("/register", validInfo, async (req, res, next) => {
-  const { username, password, firstName, lastName, email, role, cohortsId } =
+  const { username, password, firstName, lastName, email, role, cohortsid } =
     req.body;
+    console.log(req.body)
   const user = await pool
     .query("SELECT * FROM users WHERE username = $1", [username])
     .catch(next);
+    console.log(username)
 
   if (user.rows.length !== 0) {
     return res.send("This username is already in use.");
@@ -54,11 +56,11 @@ router.post("/register", validInfo, async (req, res, next) => {
     .catch(next);
 
   if (role === "student") {
-    const { ets, branch, clearanceType } = req.body;
+    const { ETS, branch, clearance, dutylocation, jobtitle } = req.body;
     await pool
       .query(
-        "INSERT INTO students (usersId, cohortsId, ets, branch, clearanceType) VALUES ($1, $2, $3, $4, $5)",
-        [newUser.rows[0].usersid, cohortsId, ets, branch, clearanceType]
+        "INSERT INTO students (usersId, cohortsid, ets, branch, clearancetype, dutylocation, jobtitle) VALUES ($1, $2, $3, $4, $5, $6, $7)",
+        [newUser.rows[0].usersid, cohortsid, ETS, branch, clearance, dutylocation, jobtitle]
       )
       .catch(next);
   }

@@ -6,7 +6,8 @@ const StudentContext = createContext();
 export const StudentProvider = ({ children }) => {
   const [tasks, setTasks] = useState([]);
   const [activeTaskId, setActiveTaskId] = useState(null);
-  const [studentId, setStudentId] = useState(null)
+  const [studentId, setStudentId] = useState(null);
+  const [addTaskVisible, setAddTaskVisible] = useState(false);
   const { url } = useContext(UrlContext);
   const [formData, setFormData] = useState({
     taskName: "",
@@ -15,36 +16,33 @@ export const StudentProvider = ({ children }) => {
     apptDate: "",
   });
 
-    const grabStudentId = async (url, username) => {
-        try {
-            const response = await fetch(`${url}/user/${username}`);
-            if (!response.ok) throw new Error("Network response was not ok");
-            const data = await response.json();
-            if(data[0]){
-                setStudentId(data[0].studentsid)
-            }
-
-          } catch (error) {
-             console.log(error);
-          }
+  const grabStudentId = async (url, username) => {
+    try {
+      const response = await fetch(`${url}/user/${username}`);
+      if (!response.ok) throw new Error("Network response was not ok");
+      const data = await response.json();
+      if (data[0]) {
+        setStudentId(data[0].studentsid);
+      }
+    } catch (error) {
+      console.log(error);
     }
-
+  };
 
   useEffect(() => {
     const fetchTasks = async () => {
-        if(studentId) {
-            try {
-                const response = await fetch(`${url}/tasks/${studentId}`);
-                if (!response.ok) throw new Error("Network response was not ok");
-                const data = await response.json();
-                setTasks(data);
-              } catch (error) {
-                 console.log(error); //Setting tasks here will cause en error code
-              }
+      if (studentId) {
+        try {
+          const response = await fetch(`${url}/tasks/${studentId}`);
+          if (!response.ok) throw new Error("Network response was not ok");
+          const data = await response.json();
+          setTasks(data);
+        } catch (error) {
+          console.log(error); //Setting tasks here will cause en error code
         }
-        else{
-            console.log(`No student id, current: ${studentId}`)
-        }
+      } else {
+        console.log(`No student id, current: ${studentId}`);
+      }
     };
     fetchTasks();
   }, [studentId]);
@@ -69,7 +67,6 @@ export const StudentProvider = ({ children }) => {
       ...formData,
       completed: false,
     };
-
     try {
       const response = await fetch(`${url}/tasks`, {
         method: "POST",
@@ -81,7 +78,15 @@ export const StudentProvider = ({ children }) => {
 
       if (response.ok) {
         alert("Task added successfully");
-        window.location.reload();
+        const data = await response.json();
+        setTasks((prevTasks) => [...prevTasks, data]);
+        setAddTaskVisible(false);
+        setFormData({
+          taskName: "",
+          taskDescription: "",
+          dueDate: "",
+          apptDate: "",
+        });
       } else {
         const data = await response.json();
         alert("Failed to add task: " + data.message);
@@ -119,24 +124,27 @@ export const StudentProvider = ({ children }) => {
     setActiveTaskId((prevId) => (prevId === taskId ? null : taskId));
   };
 
-
-    return (
-        <StudentContext.Provider value={{
-            handleCheckboxChange,
-            toggleAccordion,
-            tasks,
-            activeTaskId,
-            setStudentId,
-            studentId,
-            formData,
-            handleChange,
-            handleSubmit,
-            grabStudentId,
-        }}>
-            {children}
-        </StudentContext.Provider>
-    );
-}
-
+  return (
+    <StudentContext.Provider
+      value={{
+        handleCheckboxChange,
+        toggleAccordion,
+        tasks,
+        setTasks,
+        activeTaskId,
+        setStudentId,
+        studentId,
+        formData,
+        handleChange,
+        handleSubmit,
+        grabStudentId,
+        addTaskVisible,
+        setAddTaskVisible,
+      }}
+    >
+      {children}
+    </StudentContext.Provider>
+  );
+};
 
 export default StudentContext;
