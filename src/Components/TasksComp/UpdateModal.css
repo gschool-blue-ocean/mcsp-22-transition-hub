@@ -26,7 +26,7 @@
 
   }
   
-  .update-modal {
+  /* .update-modal { */
     /* position: relative;
     height: 95%;
     width: 95%;
@@ -37,7 +37,7 @@
     background-color: rgb(58, 69, 90, 0.2);
     border: 3px solid rgb(63, 75, 98);
     border-radius: 2px; */
-  }
+  /* } */
   
 .edittask-form {
   position: relative;
