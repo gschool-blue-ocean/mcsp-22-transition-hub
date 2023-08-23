@@ -130,6 +130,7 @@ export const StudentProvider = ({ children }) => {
         handleCheckboxChange,
         toggleAccordion,
         tasks,
+        setTasks,
         activeTaskId,
         setStudentId,
         studentId,
