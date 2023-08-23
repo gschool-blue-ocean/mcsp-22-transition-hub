@@ -1,13 +1,24 @@
 .app_BG {
-	background-image: url("/src/public/managerBG.png");
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-position: center center;
-	color: #f0f0f0;
-	width: 100%;
-	height: 100vh;
-	display: flex;
-	justify-content: center;
+  background-image: url("/src/public/managerBG.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  color: #f0f0f0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 100vw) {
+  .app_BG {
+    min-height: 330vh;
+  }
+
+  .header-container {
+    min-width: 100%;
+    justify-content: space-around;
+  }
 }
 
 .header-container {
@@ -65,7 +76,7 @@
   height: 108px;
   width: 250px;
   /* background-color: rgb(58, 69, 90, 0.9); */
-  background-color: rgba(49, 58, 75, 0.8);;
+  background-color: rgba(49, 58, 75, 0.8);
   border: 3px solid rgb(63, 75, 98);
   border-top: none;
   border-right: none;
@@ -94,7 +105,6 @@
   text-decoration: none;
 }
 
-
 @media (max-width: 415px) {
   .header-buttons {
     font-size: 14px;
@@ -113,13 +123,13 @@
     width: 180px;
   }
   .header-container {
-    height: 60px    
+    height: 60px;
   }
   .header-dropdownBtn {
     margin-left: 30px;
   }
   .header-actualdropdown {
-    top:60px;
+    top: 60px;
     width: 100%;
   }
 }
