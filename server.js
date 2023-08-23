@@ -80,7 +80,6 @@ app.patch("/tasks/:taskId/complete", async (req, res) => {
 
 app.post("/tasks", async (req, res) => {
   const { studentsId, taskName, taskDescription, dueDate, apptDate } = req.body;
-  console.log(req.body)
   try {
     const newTask = await pool.query(
       "INSERT INTO tasks (studentsId, taskName, taskDescription, dueDate, apptDate, completed) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *", 
