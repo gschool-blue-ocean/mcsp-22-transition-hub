@@ -1,3 +1,10 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  width: 100vw;
+}
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -21,8 +28,6 @@ select {
   margin-bottom: 12px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  width: 100%;
-  box-sizing: border-box;
 }
 
 a {
