@@ -96,7 +96,7 @@ INSERT INTO tasks(studentsId, taskName, taskDescription, dueDate, apptDate, comp
 INSERT INTO tasks(studentsId, taskName, taskDescription, dueDate, apptDate, completed) VALUES(13, 'Submit VA Claim', 'Get medical records and submit to VA', '2023-11-01', '2023-10-22', false);
 INSERT INTO tasks(studentsId, taskName, taskDescription, dueDate, apptDate, completed) VALUES(14, 'Submit VA Claim', 'Get medical records and submit to VA', '2023-11-01', '2023-10-22', false);
 INSERT INTO tasks(studentsId, taskName, taskDescription, dueDate, apptDate, completed) VALUES(15, 'Submit VA Claim', 'Get medical records and submit to VA', '2023-11-01', '2023-10-22', false);
-
+INSERT INTO tasks(studentsId, taskName, taskDescription, dueDate, apptDate, completed) VALUES(30, 'Submit VA Claim', 'Get medical records and submit to VA', '2023-11-01', '2023-10-22', false);
 -- INSERT INTO comments(managersId, tasksId, description) VALUES('Do the dishes');
 
 

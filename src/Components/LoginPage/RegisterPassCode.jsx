@@ -40,9 +40,9 @@ const RegisterPasscode = () => {
     }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     const toRegistration = passcodeVerification(formData);
-
     if (toRegistration) {
       setCurrentService(accountServices[2]); // <--- === "Register"
     }

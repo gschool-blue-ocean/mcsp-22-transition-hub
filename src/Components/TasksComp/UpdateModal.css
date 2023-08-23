@@ -5,28 +5,32 @@
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent darkening effect */
-  z-index: 9999;
+  z-index: 9999;  
 }
 
 .modal-container {
-  z-index: 501;
-  position: fixed;
-  left: 35%;
-  top: 20%;
-  min-height: 400px;
-  min-width: 400px;
-  height: 65%;
-  width: 40%;
-  /* background-color: #ccc; */
-  background-image: url("../../public/logIn.svg");
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 6px;
-}
+    z-index: 501;
+    position: fixed;
+    left: 35%;
+    top: 20%;
+    min-height: 400px;
+    min-width: 400px;
+    height: 65%;
+    width: 40%;
+    /* background-color: #ccc; */
+    background-image: url("../../public/logIn.svg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+  }
+  
+
 
 .update-modal {
-  /* position: relative;
+    position: relative;
     height: 95%;
     width: 95%;
     display: flex;
@@ -35,9 +39,9 @@
     flex-direction: column;
     background-color: rgb(58, 69, 90, 0.2);
     border: 3px solid rgb(63, 75, 98);
-    border-radius: 2px; */
-}
-
+    border-radius: 2px;
+  } 
+  
 .edittask-form {
   position: relative;
   height: 95%;
@@ -52,76 +56,76 @@
 }
 
 .edittask-form-title {
-  color: rgb(240, 240, 240, 0.8);
-  margin-right: 32px;
-  margin-left: 3rem;
+    color: rgb(240, 240, 240, 0.8);
+    margin-right: 32px;
+    margin-left: 3rem;
 }
 
-.closeButton {
-  position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-  transform: translate(50%, -50%);
-  outline: none;
-  color: rgb(81, 97, 126);
-}
+  .closeButton {
+    position: absolute; 
+    top: 1.5rem; 
+    right: 1.5rem; 
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transform: translate(50%, -50%);
+    outline: none;
+    color: rgb(81, 97, 126);
+  }
 
-.closeButton:hover {
+  .closeButton:hover {
   color: rgb(251, 140, 0, 0.8);
   transition: 0.2s;
-}
+  }
 
-.taskTitleDiv {
-  width: 100%;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  margin-bottom: 1rem;
-}
+  .taskTitleDiv {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center; 
+    margin-bottom: 1rem;
+  }
 
-.nameTitle {
-  width: 80%;
-  margin-bottom: 0.5rem;
-}
+  .nameTitle {
+    width: 80%;
+    margin-bottom: 0.5rem;
+  }
 
-.nameTitle label {
-  padding: 0 4px;
-  font-weight: 800;
-  color: rgb(119, 152, 213);
-}
+  .nameTitle label {
+    padding: 0 4px;
+    font-weight: 800;
+    color: rgb(119, 152, 213);
+  }
 
-.nameTitle input {
-  width: 90%;
-  margin-left: 5px;
-  background-color: rgba(49, 58, 75, 0.8);
-  border-radius: 2px;
-  border: 2px solid rgb(81, 97, 126);
-  outline: none;
-  padding: 0.5rem 0;
-  font-size: 1rem;
+  .nameTitle input {
+    width: 90%;
+    margin-left: 5px;
+    background-color: rgba(49, 58, 75, 0.8);
+    border-radius: 2px;
+    border: 2px solid rgb(81, 97, 126);
+    outline: none;
+    padding: 0.5rem 0;
+    font-size: 1rem;
   color: #f0f0f0;
-}
+  }
 
-.taskDescriptionDiv {
-  width: 100%;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  margin-bottom: 1rem;
-}
+  .taskDescriptionDiv {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center; 
+    margin-bottom: 1rem;
+  }
 
-.task-description {
-  width: 80%;
-  height: 40%;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  .task-description {
+    width: 80%;
+    height: 40%;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .task-description label {
@@ -148,7 +152,7 @@
   width: 100%;
   display: flex;
   justify-content: space-evenly;
-  align-items: center;
+  align-items: center; 
   /* margin-bottom: 1rem; */
 }
 
@@ -165,7 +169,7 @@
 }
 
 .dueDateDiv {
-  flex: 1;
+  flex: 1; 
   display: flex;
   flex-direction: column;
   margin-left: 3.3rem;
@@ -190,8 +194,9 @@
 }
 
 .dueDateDiv input[type="date"]::-webkit-calendar-picker-indicator {
-  cursor: pointer;
+  cursor: pointer; 
 }
+
 
 .submitButton {
   border-radius: 4px;
