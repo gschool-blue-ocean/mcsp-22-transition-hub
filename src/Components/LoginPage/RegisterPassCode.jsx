@@ -5,6 +5,7 @@ import AuthContext from "../Context/AuthContext";
 import AccountContext from "../Context/AccountServicesContext";
 import { useContext, useState } from "react";
 import UrlContext from "../Context/UrlContext";
+import ReturnToLogin from "./ReturnToLogin";
 
 const RegisterPasscode = () => {
   //use effect to grab all the cohort names, put into student in the state
@@ -48,11 +49,12 @@ const RegisterPasscode = () => {
     }
   };
   return (
-    <div className='Passcode_BG'>
-      <div className='Passcode_Container'>
-        <div className='RegisterPassCode_Title'>Verification Passcode</div>
-        <form className='passcode_form' onSubmit={handleSubmit}>
-          <div className='passcode_Input'>
+    <div className="Passcode_BG">
+      <div className="Passcode_Container">
+        <ReturnToLogin />
+        <div className="RegisterPassCode_Title">Verification Passcode</div>
+        <form className="passcode_form" onSubmit={handleSubmit}>
+          <div className="passcode_Input">
             <label>Passcode</label>
             <input
               type='password'

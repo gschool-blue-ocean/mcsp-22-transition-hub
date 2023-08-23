@@ -1,3 +1,4 @@
+import ReturnToLogin from "../ReturnToLogin";
 import React, { useEffect } from "react";
 import { useState, useContext } from "react";
 import "./Register_Student.css";
@@ -24,8 +25,8 @@ const Register_Student = () => {
     clearance: "",
     ETS: "",
     role: "student",
-    dutylocation: '',
-    jobtitle: '',
+    dutylocation: "",
+    jobtitle: "",
   });
 
   const handleChange = (e) => {
@@ -61,7 +62,7 @@ const Register_Student = () => {
     } catch (err) {
       console.error(err.message);
     }
-    console.log(formData)
+    console.log(formData);
   };
 
   useEffect( ()=> {
@@ -79,6 +80,7 @@ const Register_Student = () => {
 
   return (
     <>
+      <ReturnToLogin />
       <div className="Register_Student_Title">
         Welcome, to Career Services Manager!
       </div>
@@ -149,7 +151,6 @@ const Register_Student = () => {
             onChange={handleChange}
           ></input>
         </div>
-
 
         <div className="Clearance_Container">
           <label htmlFor="clearance">Clearance:</label>
