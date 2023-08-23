@@ -25,10 +25,6 @@ app.use(express.json());
 app.use("/api/auth", userRouter);
 app.use("/api/manager", manageRouter);
 
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "dist", "index.html"));
-});
-
 // -------------- SERVER ROUTES FOR TASKS --------------------
 
 //-------------------What Joe Needs is below -------------------
