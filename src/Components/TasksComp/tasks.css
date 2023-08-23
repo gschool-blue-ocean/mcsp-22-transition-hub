@@ -36,14 +36,14 @@
   font-weight: 400;
 }
 
-/* .task-checkbox {
-border: 1px  solid red;
-} */
-
 .headerName {
-  /* border: 1px  solid red; */
   text-align: center;
   padding: 0.5rem;
+}
+
+.task-checkbox {
+  height: 30px;
+  width: 100px;
 }
 
 /* Global accordion styling */
@@ -71,7 +71,6 @@ border: 1px  solid red;
 }
 
 .due-date {
-  /* border: 1px  solid red; */
   background-color: none;
   padding: 0.5rem;
 }
@@ -88,10 +87,8 @@ border: 1px  solid red;
 
 /* Arrow indicator for the accordion state (collapsed/expanded) */
 .accordion-arrow {
-  /* border: 1px  solid red; */
   float: right;
   padding: 0.5rem;
-  /* margin-left: 33rem;  */
 }
 
 .expansion {
