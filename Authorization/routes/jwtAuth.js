@@ -56,9 +56,7 @@ router.post("/register", validInfo, async (req, res, next) => {
     .catch(next);
 
   if (role === "student") {
-    console.log('working')
     const { ETS, branch, clearance, dutylocation, jobtitle } = req.body;
-    console.log(req.body);
     await pool
       .query(
         "INSERT INTO students (usersId, cohortsid, ets, branch, clearancetype, dutylocation, jobtitle) VALUES ($1, $2, $3, $4, $5, $6, $7)",
@@ -74,13 +72,9 @@ router.post("/register", validInfo, async (req, res, next) => {
 
 router.post("/login", validInfo, async (req, res, next) => {
   const { username, password } = req.body;
-  const user = await pool
-    .query(
-      "SELECT u.*, s.studentsId FROM users u JOIN students s ON u.usersId = s.usersId WHERE userName = $1",
-      [username]
-    )
+  let user = await pool
+    .query("SELECT * FROM users WHERE userName = $1", [username])
     .catch(next);
-  console.log(user.rows);
 
   // if (user.rows.length < 1) {
   //   return res.send("User not found...");
@@ -94,7 +88,14 @@ router.post("/login", validInfo, async (req, res, next) => {
 
   const token = jwtGenerator(user.rows[0].userId);
 
-  if (user.rows[0].studentsid) {
+  if (user.rows[0].role === "student") {
+    user = await pool
+      .query(
+        "SELECT u.*, s.studentsId FROM users u JOIN students s ON u.usersId = s.usersId WHERE userName = $1",
+        [username]
+      )
+      .catch(next);
+
     return res.json({
       token,
       role: user.rows[0].role,

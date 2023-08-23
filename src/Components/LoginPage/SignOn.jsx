@@ -5,14 +5,14 @@ import axios from "axios";
 import { useContext, useState } from "react";
 import AuthContext from "../Context/AuthContext";
 import AccountContext from "../Context/AccountServicesContext";
-import UrlContext from '../Context/UrlContext'
+import UrlContext from "../Context/UrlContext";
 import StudentContext from "../Context/StudentContext";
- 
 
 const SignOn = () => {
   const { setCurrentService, accountServices } = useContext(AccountContext);
-  const { setIsAuthenticated, isAuthenticated, roles, setRoles } = useContext(AuthContext);
-  const {grabStudentId, studentId} = useContext(StudentContext)
+  const { setIsAuthenticated, isAuthenticated, roles, setRoles } =
+    useContext(AuthContext);
+  const { grabStudentId, studentId } = useContext(StudentContext);
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -41,7 +41,9 @@ const SignOn = () => {
       });
 
       if (verify) {
-        localStorage.setItem("token", parseRes.token);
+        for (let key in parseRes) {
+          localStorage.setItem(key, parseRes[key]);
+        }
         setIsAuthenticated(true);
         setRoles(parseRes.role);
       } else {
@@ -52,15 +54,14 @@ const SignOn = () => {
     }
   };
 
-//this will run first 
-  useEffect( () => {
-    if(isAuthenticated && roles === 'student') {
-      grabStudentId(url, username)
-    } 
-  }, [roles])
+  //this will run first
+  useEffect(() => {
+    if (isAuthenticated && roles === "student") {
+      grabStudentId(url, username);
+    }
+  }, [roles]);
 
-
- //then  
+  //then
   useEffect(() => {
     if (isAuthenticated) {
       switch (roles) {
@@ -71,9 +72,8 @@ const SignOn = () => {
           navigate("/student");
           break;
       }
-    }
-    else {
-      console.log("Not authenticated")
+    } else {
+      console.log("Not authenticated");
     }
   }, [roles]);
 
