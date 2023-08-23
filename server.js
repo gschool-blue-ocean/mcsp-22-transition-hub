@@ -11,8 +11,11 @@ dotenv.config();
 const PORT = process.env.PORT || 8000;
 const app = express();
 
+const __filename = import.meta.url;
+const __dirname = path.dirname(new URL(__filename).pathname);
+
 app.use(cors());
-app.use(express.static("dist"));
+app.use(express.static(path.join(__dirname, "dist")));
 app.use(express.json());
 
 app.use("/api/auth", userRouter);
@@ -20,7 +23,7 @@ app.use("/api/manager", manageRouter);
 
 // Serve the React app's index.html for all routes
 app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "dist", "index.html"));
+  res.sendFile(path.join(__dirname, "dist", "index.html"));
 });
 
 // -------------- SERVER ROUTES FOR TASKS --------------------
