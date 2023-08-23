@@ -55,7 +55,6 @@ router.post("/register", validInfo, async (req, res, next) => {
 
   if (role === "student") {
     const { ets, branch, clearanceType } = req.body;
-    console.log(ets, branch, clearanceType);
     await pool
       .query(
         "INSERT INTO students (usersId, cohortsId, ets, branch, clearanceType) VALUES ($1, $2, $3, $4, $5)",
@@ -71,17 +70,9 @@ router.post("/register", validInfo, async (req, res, next) => {
 
 router.post("/login", validInfo, async (req, res, next) => {
   const { username, password } = req.body;
-  const user = await pool
-    .query(
-      "SELECT u.*, s.studentsId FROM users u JOIN students s ON u.usersId = s.usersId WHERE userName = $1",
-      [username]
-    )
+  let user = await pool
+    .query("SELECT * FROM users WHERE userName = $1", [username])
     .catch(next);
-  console.log(user.rows[0]);
-
-  // if (user.rows.length < 1) {
-  //   return res.send("User not found...");
-  // }
 
   const validPassword = await bcrypt.compare(password, user.rows[0].password);
 
@@ -91,7 +82,14 @@ router.post("/login", validInfo, async (req, res, next) => {
 
   const token = jwtGenerator(user.rows[0].userId);
 
-  if (user.rows[0].studentsid) {
+  if (user.rows[0].role === "student") {
+    user = await pool
+      .query(
+        "SELECT u.*, s.studentsId FROM users u JOIN students s ON u.usersId = s.usersId WHERE userName = $1",
+        [username]
+      )
+      .catch(next);
+
     return res.json({
       token,
       role: user.rows[0].role,
