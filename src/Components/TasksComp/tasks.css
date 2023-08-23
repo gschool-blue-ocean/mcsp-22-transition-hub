@@ -44,6 +44,7 @@
 .task-checkbox {
   height: 30px;
   width: 100px;
+  margin-top: 1.25rem;
 }
 
 /* Global accordion styling */
