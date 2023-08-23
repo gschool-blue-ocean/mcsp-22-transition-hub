@@ -55,21 +55,22 @@ const SignOn = () => {
   };
 
   //this will run first
-  useEffect(() => {
-    if (isAuthenticated && roles === "student") {
-      grabStudentId(url, username);
-    }
-  }, [roles]);
+  // useEffect(() => {
+  //   if (isAuthenticated && roles === "student") {
+  //     grabStudentId(url, username);
+  //   }
+  // }, [roles]);
 
   //then
   useEffect(() => {
+    const id = localStorage.getItem("id")
     if (isAuthenticated) {
       switch (roles) {
         case "manager":
           navigate("/manager");
           break;
         case "student": //Added to make sure the person has an id, it can load their page
-          navigate("/student");
+          navigate(`/student/${id}`);
           break;
       }
     } else {

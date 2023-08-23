@@ -88,7 +88,7 @@ const Register_Student = () => {
           <input
             type="text"
             placeholder=""
-            name="username"
+            name="username" 
             onChange={handleChange}
           ></input>
         </div>
