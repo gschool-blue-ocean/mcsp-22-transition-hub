@@ -52,7 +52,7 @@ What additional features do you plan to add, how do you plan to implement those 
 - Dorion Boesch
 - Michelle Dukette
 - Yasmin Aguilar
-- Joe Carillo
+- Joe Carrillo
 
 # Tech Stack Used
 ![Screenshot (169)](https://github.com/gschool-blue-ocean/mcsp-22-transition-hub/assets/122406231/c17aa271-2480-4d66-b004-f49feb420be8)
