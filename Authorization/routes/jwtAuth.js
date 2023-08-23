@@ -76,9 +76,6 @@ router.post("/login", validInfo, async (req, res, next) => {
     .query("SELECT * FROM users WHERE userName = $1", [username])
     .catch(next);
 
-  // if (user.rows.length < 1) {
-  //   return res.send("User not found...");
-  // }
 
   const validPassword = await bcrypt.compare(password, user.rows[0].password);
 
