@@ -4,21 +4,22 @@ A Full-Stack React application to assist transition managers and service members
 **place screenshot of login page here**
 
 # How it Works
-This app is designed to validate logins for two types of users: transition managers and students. Managers have admin rights for all functionalities of the app. This includes viewing all cohorts, viewing average task completion by cohort, adding a cohort, selecting an individual cohort, viewing each student and their progress with assigned tasks, selecting a student, marking a task complete, editing a task, and adding a new task. Students (service members) only have access to their own profile which includes relevant personal details and all their assigned tasks. Like managers, they are able to add and edit tasks, as well as mark tasks complete.
-**place video demo of the app here**
+This app is designed to validate logins for two types of users: transition managers and students. Managers are granted full admin rights to app features/functionality and to view the manager dashboard and every individual student dashboard. Full app functionalities include: viewing all cohorts, viewing average task completion by cohort, adding a cohort, selecting an individual cohort, viewing each student and their progress with assigned tasks, selecting a student, marking a task complete, editing a task, and adding a new task. Students (service members) only have access to their own dashboard which includes relevant personal details and all their assigned tasks. Like managers, they are able to add and edit tasks, as well as mark tasks complete.
 
-* What happens behind the scenes when the user interacts with it? 
-* OR What are all the place the data travels?  What happens to that data?
-* Optionally include a diagram
-* How does the tech stack come together?
+* User Authentication: Upon accessing the app, users are presented with a login page where they input their credentials. The app communicates with our server, which in turn interfaces with the PostgreSQL database to authenticate users. This process involves data exchange through API calls, ensuring secure access.
+
+* Data Display and Manipulation: React components are dynamically rendered based on the user's actions. For example, when a manager selects a cohort, the app fetches cohort-specific data to display. This includes all students in that cohort, their full name, ETS date and task progress measured as a percentage. This data table allows you to sort by column and each student row is clickable, routing you to the correct student dashboard to display their task list.
+
+* Data Flow and Presentation: Data travels seamlessly between the backend and frontend layers. Our API serves as the bridge, fetching data from the PostgreSQL database and delivering it to the React frontend. React components then render this data in an organized and user-friendly manner on the app's interface.
+**place video demo of the app here**
 
 # Workflow / Organization
 From Start to Finish, this project lasted 2.5 weeks with a total of 5 sprints, lasting 4 days each. 
 
 The tools we selected for task planning and organization were: 
-- Excalidraw for our initial wireframing
+- [Excalidraw](https://excalidraw.com/) for our initial wireframing
 - ____ for our Entity Relationship Diagram **place up-to-date ERD here**
-- Jira for task management and documentation **place link to Jira/Confluence here**
+- [Jira/Confluence](https://blueocean-transitionhub.atlassian.net/jira/software/projects/SMTRAN/boards/1) for task management and documentation
 
 # Technical Challenges / Unexpected Challenges Faced
 * Why, what was the plan to overcome those challenges?
@@ -39,7 +40,7 @@ specifically those related to: Agile, CI/CD, testing, working with external stak
 mention MVP, Any non-MVP tickets (optional)
 Code refactorings
 Performance Optimizations
-Additional features
+Additional features delivered
 
 # Thoughts on Future Features / Additions
 What additional features do you plan to add, how do you plan to implement those features?
@@ -48,11 +49,16 @@ What additional features do you plan to add, how do you plan to implement those 
 * UI/UX additions?
 
 # The Contributers:
-- Garett Lubecki **add links to github and linkedin**
+- Garett Lubecki
+  * [Github](https://github.com/Garett-Lubecki) | [LinkedIn](https://www.linkedin.com/in/garett-lubecki/)
 - Dorion Boesch
+  * [Github](https://github.com/Paz828) | [LinkedIn](https://www.linkedin.com/in/dorionboesch/)
 - Michelle Dukette
+  * [Github](https://github.com/mdukette978) | [LinkedIn](https://www.linkedin.com/in/michelle-dukette/)
 - Yasmin Aguilar
+  * [Github](https://github.com/yasminaguilarx) | [LinkedIn](https://www.linkedin.com/in/yasmin-aguilar9/)
 - Joe Carrillo
+  * [Github](https://github.com/jlcarrillojr81) | [LinkedIn](https://www.linkedin.com/in/joseph-carrillo-jr/)
 
 # Tech Stack Used
 ![Screenshot (169)](https://github.com/gschool-blue-ocean/mcsp-22-transition-hub/assets/122406231/c17aa271-2480-4d66-b004-f49feb420be8)
