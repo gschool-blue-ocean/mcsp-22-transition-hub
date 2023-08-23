@@ -8,7 +8,11 @@ const ReturnToLogin = () => {
     setCurrentService(accountServices[0]);
   };
 
-  return <button onClick={handleClick}>Return To Login</button>;
+  return (
+    <button className='registerPasscode_return' onClick={handleClick}>
+      Return To Login
+    </button>
+  );
 };
 
 export default ReturnToLogin;
