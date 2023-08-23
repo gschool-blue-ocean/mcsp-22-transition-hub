@@ -38,9 +38,11 @@ const Register_Manager = () => {
 
   return (
     <>
-      <ReturnToLogin />
       <div className="Register_Manager_Title">
-        Welcome, New Career Services Manager!
+        <div className="return_button_ctn">
+          <ReturnToLogin />
+        </div>
+        <div>Welcome, New Career Services Manager!</div>
       </div>
       <form className="Register_Manager_Form" onSubmit={onSubmitForm}>
         <div className="Register_Manager_Form_Input_Container">

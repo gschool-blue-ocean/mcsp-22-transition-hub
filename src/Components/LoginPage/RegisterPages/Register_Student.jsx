@@ -10,7 +10,7 @@ import StudentContext from "../../Context/StudentContext";
 
 const Register_Student = () => {
   const { accountServices, setCurrentService } = useContext(AccountContext);
-  const {postDefaultTasks} = useContext(StudentContext)
+  const { postDefaultTasks } = useContext(StudentContext);
   const [localStudentId, setLocalStudentId] = useState(null);
   const { cohortsId } = useContext(AuthContext);
   const { url } = useContext(UrlContext);
@@ -48,16 +48,14 @@ const Register_Student = () => {
     }
   };
 
-
-
   const onStudentRegister = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(url + "/api/auth/register", formData); 
-      const parseRes = await res.data;      
+      const res = await axios.post(url + "/api/auth/register", formData);
+      const parseRes = await res.data;
       if (parseRes.token) {
-        alert("Success")
-        await grabLocalStudentId(url, formData.username)
+        alert("Success");
+        await grabLocalStudentId(url, formData.username);
       }
     } catch (err) {
       console.error(err.message);
@@ -65,23 +63,25 @@ const Register_Student = () => {
     console.log(formData);
   };
 
-  useEffect( ()=> {
-    if(localStudentId) {
-      console.log(`In localStudent use effect ${localStudentId}`)
+  useEffect(() => {
+    if (localStudentId) {
+      console.log(`In localStudent use effect ${localStudentId}`);
       postDefaultTasks(url, localStudentId, formData.ETS);
     }
-  }, [localStudentId])
+  }, [localStudentId]);
 
-  useEffect( () => {
-    if(localStudentId) {
-      setCurrentService(accountServices[0]);  
+  useEffect(() => {
+    if (localStudentId) {
+      setCurrentService(accountServices[0]);
     }
-  }, [localStudentId])
+  }, [localStudentId]);
 
   return (
     <>
-      <ReturnToLogin />
-      <div className="Register_Student_Title">
+      <div className="Register_Manager_Title">
+        <div className="return_button_ctn">
+          <ReturnToLogin />
+        </div>
         Welcome, to Career Services Manager!
       </div>
       <form className="Register_Student_Form" onSubmit={onStudentRegister}>
@@ -90,7 +90,7 @@ const Register_Student = () => {
           <input
             type="text"
             placeholder=""
-            name="username" 
+            name="username"
             onChange={handleChange}
           ></input>
         </div>
