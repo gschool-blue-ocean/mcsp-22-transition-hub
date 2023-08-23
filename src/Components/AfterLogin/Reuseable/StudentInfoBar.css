@@ -49,3 +49,9 @@
     color: rgb(119, 152, 213);
     font-weight: normal;
 }
+
+@media (max-width: 405px) {
+    .studentInfo-bigcontainer {
+        top: 65px;
+    }
+}
