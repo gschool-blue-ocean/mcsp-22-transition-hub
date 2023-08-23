@@ -20,6 +20,8 @@ The tools we selected for task planning and organization were:
 - [Excalidraw](https://excalidraw.com/) for our initial wireframing
 - ____ for our Entity Relationship Diagram **place up-to-date ERD here**
 - [Jira/Confluence](https://blueocean-transitionhub.atlassian.net/jira/software/projects/SMTRAN/boards/1) for task management and documentation
+- Git/GitHub for branching/merging code changes
+- Discord for daily communications (sprint planning, group troubleshooting, and code reviews)
 
 # Technical Challenges / Unexpected Challenges Faced
 * Why, what was the plan to overcome those challenges?
