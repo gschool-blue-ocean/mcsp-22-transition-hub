@@ -57,8 +57,8 @@ What additional features do you plan to add, how do you plan to implement those 
 # Tech Stack Used
 ![Screenshot (169)](https://github.com/gschool-blue-ocean/mcsp-22-transition-hub/assets/122406231/c17aa271-2480-4d66-b004-f49feb420be8)
 
-# Development
-To view live or make your own contributions, follow the steps outlined below to get started!
+# Continued Development
+To view the app live or make your own contributions, follow the steps outlined below to get started!
 
 To Start Our Application:
 1) Fork and clone the repo
