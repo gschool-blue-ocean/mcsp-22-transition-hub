@@ -1,43 +1,45 @@
 .taskform-overlay {
-  position: fixed;
-  top: 75px;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent darkening effect */
-  z-index: 9999;
+    position: fixed;
+    top: 75px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent darkening effect */
+    z-index: 9999;  
 }
 
-.Add_Task_Form_Container {
-  z-index: 501;
-  position: fixed;
-  left: 35%;
-  top: 20%;
-  min-height: 400px;
-  min-width: 400px;
-  height: 65%;
-  width: 40%;
-  /* background-color: #ccc; */
-  background-image: url("./logIn.svg");
-  background-repeat: no-repeat;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 6px;
+.Add_Task_Form_Container{
+    z-index: 501;
+    position: fixed;
+    left: 35%;
+    top: 20%;
+    min-height: 400px;
+    min-width: 400px;
+    /* height: 525px;
+    width: 400px; */
+    height: 65%;
+    width: 40%;
+    /* background-color: #ccc; */
+    background-image: url("./logIn.svg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
 }
 
-.Add_Task_Form {
-  position: relative;
-  bottom: 17px;
-  height: 90%;
-  width: 95%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  background-color: rgb(58, 69, 90, 0.2);
-  border: 3px solid rgb(63, 75, 98);
-  border-radius: 2px;
+.Add_Task_Form{
+    position: relative;
+    height: 95%;
+    width: 95%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgb(58, 69, 90, 0.2);
+    border: 3px solid rgb(63, 75, 98);
+    border-radius: 2px;
 }
 
 .addtask-form-title {
@@ -46,8 +48,8 @@
 }
 
 .Add_Task_Form_Input_Title {
-  width: 80%;
-  margin-bottom: 0.5rem;
+    width: 80%;
+    /* margin-bottom: 0.5rem; */
 }
 
 .Add_Task_Form_Input_Title label {
@@ -57,43 +59,43 @@
 }
 
 .Add_Task_Form_Input_Title input {
-  width: 90%;
-  margin-left: 5px;
-  background-color: rgba(49, 58, 75, 0.8);
-  border-radius: 2px;
-  border: 2px solid rgb(81, 97, 126);
-  outline: none;
-  padding: 0.5rem 0;
-  font-size: 1rem;
-  color: #f0f0f0;
+    width: 90%;
+    margin-left: 5px;
+    background-color: rgba(49, 58, 75, 0.8);
+    border-radius: 2px;
+    border: 2px solid rgb(81, 97, 126);
+    outline: none;
+    padding: 0.5rem 0;
+    font-size: 1rem;
+    color:#F0f0f0
 }
 
-.Add_Task_Form_Input_Description {
-  width: 80%;
-  height: 40%;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+.Add_Task_Form_Input_Description{
+    width: 80%;
+    height: 40%;
+    /* margin-top: 0.5rem; */
+    margin-bottom: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
-.Add_Task_Form_Input_Description label {
-  padding: 0 4px;
-  font-weight: 800;
-  color: rgb(119, 152, 213);
+.Add_Task_Form_Input_Description label{
+    padding: 0 4px;
+    font-weight: 800;
+    color: rgb(119, 152, 213);
 }
-.Add_Task_Form_Input_Description textarea {
-  flex: 1;
-  background-color: rgba(49, 58, 75, 0.8);
-  border: none;
-  border: 2px solid rgb(81, 97, 126);
-  outline: none;
-  padding: 0.5rem 0;
-  resize: vertical;
-  width: 90%;
-  color: #f0f0f0;
-  margin-left: 5px;
+.Add_Task_Form_Input_Description textarea{
+    flex: 1;
+    background-color: rgba(49, 58, 75, 0.8);
+    border: none;
+    border: 2px solid rgb(81, 97, 126);
+    outline: none;
+    padding: 0.5rem 0;
+    resize: vertical;
+    width: 90%;
+    color:#F0f0f0;
+    margin-left: 5px;
 }
 
 .AddTask_Form_Dates {
