@@ -30,11 +30,11 @@ const SignOn = () => {
     e.preventDefault();
     try {
       const body = { username, password };
-      const response = await axios.post(url + "/api/auth/login", body);
+      const response = await axios.post("https://transition-hub.onrender.com/api/auth/login", body);
 
       const parseRes = await response.data;
 
-      const verify = await axios.get(url + "/api/auth/verify", {
+      const verify = await axios.get("https://transition-hub.onrender.com/api/auth/verify", {
         headers: {
           token: parseRes.token,
         },

@@ -12,6 +12,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+
 }
 
 .studentlist_h2 {
@@ -22,6 +23,7 @@
 
 .studentList_cohort_buttons {
   align-content: end;
+  display: inline-block; 
 }
 
 .studentlist_table {
@@ -67,7 +69,7 @@
   cursor: pointer;
 }
 
-} */
+
 
 @media (max-width: 405px) {
   .studentlist_table th {

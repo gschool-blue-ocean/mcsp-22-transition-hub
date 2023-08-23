@@ -38,7 +38,6 @@ const StudentInfoBar = () => {
       <div className='studentInfo-bigcontainer' id='mySideNav'>
         <div className='studentInfo-wrapper'>
           <div style={{ marginTop: "50px" }}>
-            {/* <FontAwesomeIcon icon={faUser} style={{color: "#f0f0f0"}} size="xl"/> */}
             <img
               src={profileicon}
               style={{ height: "55px", width: "55px" }}
