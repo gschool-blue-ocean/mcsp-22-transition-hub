@@ -76,7 +76,6 @@ router.post("/login", validInfo, async (req, res, next) => {
     .query("SELECT * FROM users WHERE userName = $1", [username])
     .catch(next);
 
-
   const validPassword = await bcrypt.compare(password, user.rows[0].password);
 
   if (!validPassword) {
@@ -186,4 +185,3 @@ router.use((err, req, res, next) => {
   res.status(500).send("Internal Server Error");
 });
 
-export { router as userRouter };
