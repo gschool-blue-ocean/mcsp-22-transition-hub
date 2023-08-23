@@ -16,6 +16,14 @@ const TasksPage = () => {
   const [currentTask, setCurrentTask] = useState(null);
   const [sortMethod, setSortMethod] = useState("dueDate");
 
+
+  const updateTaskInList = (updatedTask) => {
+    const updatedTasks = tasks.map(task => 
+        task.tasksid === updatedTask.tasksid ? updatedTask : task
+    );
+    setTasks(updatedTasks);
+};
+
   const toggleSortMethod = () => {
     setSortMethod((prevSortMethod) =>
       prevSortMethod === "dueDate" ? "apptDate" : "dueDate"
@@ -119,8 +127,7 @@ const TasksPage = () => {
       </div>
     );
   };
-  // console.log(studentId)
-  // console.log(tasks)
+
   return studentId && tasks.length > 0 ? (
     <div className='entirePage'>
       <div className='studentPage'>
@@ -142,5 +149,28 @@ const TasksPage = () => {
     <> ... Loading </>
   );
 };
+
+    return (
+        studentId && (tasks.length > 0) ? (
+            <div className="entirePage">
+                <div className="studentPage">
+                    <h1 className="studentTaskList">Student Tasks</h1>
+                    <button className="sortButton" onClick={toggleSortMethod}>
+                    Sort by {sortMethod === 'dueDate' ? 'Appointment Date' : 'Due Date'}
+                    </button>
+                    {sortedTasks.map(renderTask)}
+                    {isModalOpen && currentTask && (
+                        <UpdateModal
+                            taskId={currentTask.tasksid}
+                            initialData={currentTask}
+                            closeModal={closeModal}
+                            onTaskUpdate={updateTaskInList}
+                        />
+                    )}
+                </div>
+             </div>
+        ) : <> ... Loading </>
+    );
+}
 
 export default TasksPage;
