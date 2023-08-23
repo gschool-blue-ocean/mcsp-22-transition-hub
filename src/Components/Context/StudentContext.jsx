@@ -29,6 +29,122 @@ export const StudentProvider = ({ children }) => {
     }
   };
 
+  const postDefaultTasks = async (url, studentId, ets) => {
+    console.log(url, studentId, ets)
+        const defaultTasks = [
+            {
+                studentsId: studentId,
+                taskName: "Request Seperation Orders", 
+                taskDescription: "Servicemember (SM) must request orders to begin their separation from their personnel office.", 
+                dueDate: ets, 
+                apptDate: ets,
+                completed: false
+            }, 
+            {
+                studentsId: studentId,
+                taskName: "Apply For Leave", 
+                taskDescription: "If necessary, servicemember (SM) must file a request leave.", 
+                dueDate: ets, 
+                apptDate: ets,
+                completed: false
+            }, 
+            {
+                studentsId: studentId,
+                taskName: "Checklist Pick Up", 
+                taskDescription: "SM must pick up their out processing checklist, which lays out all of the tasks they need to complete, typically within 30 days.", 
+                dueDate: ets, 
+                apptDate: ets,
+                completed: false
+            }, 
+            {
+                studentsId: studentId,
+                taskName: "Request Seperation Orders", 
+                taskDescription: "Servicemember (SM) must request orders to begin their separation from their personnel office.", 
+                dueDate: ets, 
+                apptDate: ets,
+                completed: false
+            }, 
+            {
+                studentsId: studentId,
+                taskName: "Personnel Clear", 
+                taskDescription: "SM reports to their HR department to clear HR-related issues.", 
+                dueDate: ets, 
+                apptDate: ets,
+                completed: false
+            }, 
+            {
+                studentsId: studentId,
+                taskName: "Finance Clear", 
+                taskDescription: "SM reports to finance office to resolve leave and pay issues.", 
+                dueDate: ets, 
+                apptDate: ets,
+                completed: false
+            }, 
+            {
+                studentsId: studentId,
+                taskName: "Security Clearance Read", 
+                taskDescription: "SM reports to security office to turn in any sensitive documentation or assets and have expectations of sensitive information maintenance communicated to them.", 
+                dueDate: ets, 
+                apptDate: ets,
+                completed: false
+            }, 
+            {
+                studentsId: studentId,
+                taskName: "Medical Checkout", 
+                taskDescription: "SM reports to medical staff to clear medical status and move records to new region where their home of record will be.", 
+                dueDate: ets, 
+                apptDate: ets,
+                completed: false
+            }, 
+            {
+                studentsId: studentId,
+                taskName: "Equipment Turn In", 
+                taskDescription: "SM reports to their quartermaster to return military issued gear.", 
+                dueDate: ets, 
+                apptDate: ets,
+                completed: false
+            }, 
+            {
+                studentsId: studentId,
+                taskName: "Unit Clear", 
+                taskDescription: "SM ensures all tasks are complete to standard with their unit leadership.", 
+                dueDate: ets, 
+                apptDate: ets,
+                completed: false
+            }, 
+            {
+                studentsId: studentId,
+                taskName: "Final Out", 
+                taskDescription: "Once SM has completed their checklist, they must return it before the deadline to their unit.", 
+                dueDate: ets, 
+                apptDate: ets,
+                completed: false
+            }
+        ]
+
+        const fetchPromises = defaultTasks.map(async (task) => {
+            try {
+                const response = await fetch(`${url}/tasks`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        studentsId: studentId,
+                        taskName: task.taskName,
+                        taskDescription: task.taskDescription,
+                        dueDate: ets,
+                        apptDate: ets,
+                        completed: task.completed
+                    }),
+                });
+    
+            } catch (error) {
+                console.log(error);
+            }
+        });
+        await Promise.all(fetchPromises);
+    };
   useEffect(() => {
     const fetchTasks = async () => {
       if (studentId) {
@@ -140,6 +256,7 @@ export const StudentProvider = ({ children }) => {
         grabStudentId,
         addTaskVisible,
         setAddTaskVisible,
+        postDefaultTasks
       }}
     >
       {children}
@@ -148,3 +265,5 @@ export const StudentProvider = ({ children }) => {
 };
 
 export default StudentContext;
+
+
