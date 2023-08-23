@@ -16,7 +16,7 @@ This app is designed to validate logins for two types of users: transition manag
 # Workflow / Organization
 From Start to Finish, this project lasted 2.5 weeks with a total of 5 sprints, lasting 4 days each. 
 
-The tools we selected for task planning and organization were: 
+The workflow tools we selected for this project were: 
 - [Excalidraw](https://excalidraw.com/) for our initial wireframing
 - ____ for our Entity Relationship Diagram **place up-to-date ERD here**
 - [Jira/Confluence](https://blueocean-transitionhub.atlassian.net/jira/software/projects/SMTRAN/boards/1) for task management and documentation
