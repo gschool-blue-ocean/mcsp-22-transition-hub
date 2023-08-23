@@ -1,5 +1,6 @@
 import { useState, createContext, useEffect, useContext } from "react";
 import UrlContext from "./UrlContext";
+import { useParams } from "react-router-dom";
 
 const StudentContext = createContext();
 
@@ -30,7 +31,6 @@ export const StudentProvider = ({ children }) => {
   };
 
   const postDefaultTasks = async (url, studentId, ets) => {
-    console.log(url, studentId, ets)
         const defaultTasks = [
             {
                 studentsId: studentId,
@@ -145,23 +145,8 @@ export const StudentProvider = ({ children }) => {
         });
         await Promise.all(fetchPromises);
     };
-  useEffect(() => {
-    const fetchTasks = async () => {
-      if (studentId) {
-        try {
-          const response = await fetch(`${url}/tasks/${studentId}`);
-          if (!response.ok) throw new Error("Network response was not ok");
-          const data = await response.json();
-          setTasks(data);
-        } catch (error) {
-          console.log(error); //Setting tasks here will cause en error code
-        }
-      } else {
-        console.log(`No student id, current: ${studentId}`);
-      }
-    };
-    fetchTasks();
-  }, [studentId]);
+
+
 
   const handleChange = (name, value) => {
     if ((name === "dueDate" || name === "apptDate") && value) {
@@ -256,7 +241,8 @@ export const StudentProvider = ({ children }) => {
         grabStudentId,
         addTaskVisible,
         setAddTaskVisible,
-        postDefaultTasks
+        postDefaultTasks,
+        // fetchTasks
       }}
     >
       {children}
