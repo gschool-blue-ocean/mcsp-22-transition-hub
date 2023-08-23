@@ -1,4 +1,4 @@
-import React from "react";
+import ReturnToLogin from "../ReturnToLogin";
 import { useState, useContext } from "react";
 import "./Register_Student.css";
 import AuthContext from "../../Context/AuthContext";
@@ -21,13 +21,13 @@ const Register_Student = () => {
     clearance: "",
     ETS: "",
     role: "student",
-    dutylocation: '',
-    jobtitle: '',
+    dutylocation: "",
+    jobtitle: "",
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log(e.target)
+    console.log(e.target);
     setFormData({ ...formData, [name]: value });
   };
 
@@ -44,11 +44,12 @@ const Register_Student = () => {
     } catch (err) {
       console.error(err.message);
     }
-    console.log(formData)
+    console.log(formData);
   };
 
   return (
     <>
+      <ReturnToLogin />
       <div className="Register_Student_Title">
         Welcome, to Career Services Manager!
       </div>
@@ -119,7 +120,6 @@ const Register_Student = () => {
             onChange={handleChange}
           ></input>
         </div>
-
 
         <div className="Clearance_Container">
           <label htmlFor="clearance">Clearance:</label>

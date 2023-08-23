@@ -1,8 +1,7 @@
-import React from "react";
 import "./Register_Manager.css";
 import { useState, useContext } from "react";
-import { Link } from "react";
 import axios from "axios";
+import ReturnToLogin from "../ReturnToLogin";
 import AccountContext from "../../Context/AccountServicesContext";
 import UrlContext from "../../Context/UrlContext";
 
@@ -39,6 +38,7 @@ const Register_Manager = () => {
 
   return (
     <>
+      <ReturnToLogin />
       <div className="Register_Manager_Title">
         Welcome, New Career Services Manager!
       </div>
