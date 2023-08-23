@@ -43,14 +43,16 @@ app.get("/tasks/:studentsId", async (req, res) => {
   const studentsId = req.params.studentsId;
 
   try {
-    const result = await pool.query("SELECT * FROM tasks WHERE studentsId = $1", [studentsId]);
+    const result = await pool.query(
+      "SELECT * FROM tasks WHERE studentsId = $1",
+      [studentsId]
+    );
     res.json(result.rows);
   } catch (err) {
     console.error("Error executing query", err.stack);
     res.status(500).json({ error: "Internal server error" });
   }
 });
-
 
 app.patch("/tasks/:taskId/complete", async (req, res) => {
   const { taskId } = req.params;
@@ -80,65 +82,74 @@ app.patch("/tasks/:taskId/complete", async (req, res) => {
 
 app.post("/tasks", async (req, res) => {
   const { studentsId, taskName, taskDescription, dueDate, apptDate } = req.body;
-  
+
   try {
     const newTask = await pool.query(
-      "INSERT INTO tasks (studentsId, taskName, taskDescription, dueDate, apptDate, completed) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *", 
+      "INSERT INTO tasks (studentsId, taskName, taskDescription, dueDate, apptDate, completed) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
       [studentsId, taskName, taskDescription, dueDate, apptDate, false]
     );
-    
-    res.status(201).send(newTask.rows[0]); 
+
+    res.status(201).send(newTask.rows[0]);
   } catch (error) {
-    console.error('Error creating task:', error.stack);
-    res.status(500).send('Internal Server Error');
+    console.error("Error creating task:", error.stack);
+    res.status(500).send("Internal Server Error");
   }
 });
 
 app.delete("/tasks/:taskId", async (req, res) => {
   const { taskId } = req.params;
   try {
-      const deleteResult = await pool.query("DELETE FROM tasks WHERE tasksId = $1 RETURNING *", [taskId]);
-      
-      if (deleteResult.rows.length === 0) {
-          res.status(404).send('Task not Found');
-      } else {
-          res.status(200).send({ message: 'Task deleted successfully', deletedTask: deleteResult.rows[0] });
-      }
-      
+    const deleteResult = await pool.query(
+      "DELETE FROM tasks WHERE tasksId = $1 RETURNING *",
+      [taskId]
+    );
+
+    if (deleteResult.rows.length === 0) {
+      res.status(404).send("Task not Found");
+    } else {
+      res
+        .status(200)
+        .send({
+          message: "Task deleted successfully",
+          deletedTask: deleteResult.rows[0],
+        });
+    }
   } catch (error) {
-      console.error('Error deleting task:', error.stack);
-      res.status(500).send('Internal Server Error');
+    console.error("Error deleting task:", error.stack);
+    res.status(500).send("Internal Server Error");
   }
 });
 
 app.patch("/tasks/:taskId", async (req, res) => {
-  console.log('Received data:', req.body);
+  console.log("Received data:", req.body);
   const taskId = req.params.taskId;
-  const { taskname: taskName, taskdescription: taskDescription, duedate: dueDate, apptdate: apptDate } = req.body;
-  
+  const {
+    taskname: taskName,
+    taskdescription: taskDescription,
+    duedate: dueDate,
+    apptdate: apptDate,
+  } = req.body;
+
   try {
-      await pool.query(
-          "UPDATE tasks SET taskname = $1, taskdescription = $2, duedate = $3, apptdate = $4 WHERE tasksid = $5",
-          [taskName, taskDescription, dueDate, apptDate, taskId]
-      );
-      const result = await pool.query(
-          "SELECT * FROM tasks WHERE tasksid = $1",
-          [taskId]
-      );
-      if (result.rows && result.rows.length) {
-          res.status(200).json(result.rows[0]);
-      } else {
-          res.status(404).json({ error: "Task not found" });
-      }
+    await pool.query(
+      "UPDATE tasks SET taskname = $1, taskdescription = $2, duedate = $3, apptdate = $4 WHERE tasksid = $5",
+      [taskName, taskDescription, dueDate, apptDate, taskId]
+    );
+    const result = await pool.query("SELECT * FROM tasks WHERE tasksid = $1", [
+      taskId,
+    ]);
+    if (result.rows && result.rows.length) {
+      res.status(200).json(result.rows[0]);
+    } else {
+      res.status(404).json({ error: "Task not found" });
+    }
   } catch (err) {
-      console.error("Error executing query", err.stack);
-      res.status(500).json({ error: "Internal server error" });
+    console.error("Error executing query", err.stack);
+    res.status(500).json({ error: "Internal server error" });
   }
 });
 
-
 //------------------------^What Joe Needs^----------------------------
-
 
 app.get("/api/tasks", async (req, res, next) => {
   const result = await db
@@ -199,7 +210,7 @@ app.put("/api/tasks/:id", async (req, res) => {
 
 app.delete("/api/tasks/:id", async (req, res, next) => {
   const { id } = req.params;
-})
+});
 
 // //  -------------- SERVER ROUTES FOR COHORTS --------------------
 
@@ -212,7 +223,7 @@ app.get("/user/:username", async (req, res) => {
   const { username } = req.params;
   try {
     const data = await pool.query(
-     ' SELECT s.studentsId, u.usersId FROM students s JOIN users u ON s.usersId = u.usersId WHERE u.userName = $1',
+      " SELECT s.studentsId, u.usersId FROM students s JOIN users u ON s.usersId = u.usersId WHERE u.userName = $1",
       [username]
     );
     res.status(200).send(data.rows);
@@ -293,7 +304,8 @@ app.get("/api/studentinfo", async (req, res) => {
   }
 });
 
-app.get("/info/:studentId", async (req, res) => {  ////working //////
+app.get("/info/:studentId", async (req, res) => {
+  ////working //////
   const { studentId } = req.params;
   try {
     const result = await pool.query(
@@ -364,15 +376,16 @@ app.get("/manager/tasks/all", async (req, res) => {
 //Add Cohort
 app.post("/cohort", async (req, res) => {
   const { cohortName, startDate, endDate } = req.body;
-  try{
-    const result = await pool.query("INSERT INTO cohorts (cohortName, startDate, endDate) VALUES ($1, $2, $3) RETURNING *", [cohortName, startDate, endDate])
+  try {
+    const result = await pool.query(
+      "INSERT INTO cohorts (cohortName, startDate, endDate) VALUES ($1, $2, $3) RETURNING *",
+      [cohortName, startDate, endDate]
+    );
     res.send(result.rows[0]);
   } catch (error) {
-    console.error('Error querying tasks:', error.stack);
-    res.status(500).send('Internal Server Error');
+    console.error("Error querying tasks:", error.stack);
+    res.status(500).send("Internal Server Error");
   }
-  
-  
 });
 
 //Michelle: Grab all tasks for each student
@@ -404,64 +417,67 @@ app.get("/manager/:cohort/studentsTasks", async (req, res) => {
 //Michelle: Grab each students first and last name, ETS, tasks and task completion from each cohort
 app.get("/manager/:cohort/studentdetails", async (req, res) => {
   const { cohort } = req.params;
-    try {
-      const result = await pool.query(`
+  try {
+    const result = await pool.query(
+      `
         SELECT s.studentsId, u.firstName, u.lastName, s.ets
         FROM users u
         JOIN students s ON u.usersId = s.usersId
         WHERE s.cohortsId = $1
         ORDER BY s.ets ASC
-      `, [cohort])
-      if (result.rows.length === 0) {
-        res.sendStatus(404);
-      } else {
-        res.send(result.rows);
-      }
+      `,
+      [cohort]
+    );
+    if (result.rows.length === 0) {
+      res.sendStatus(404);
+    } else {
+      res.send(result.rows);
+    }
 
-  // try {
-  //   const result = await pool.query(
-  //     `SELECT u.firstName, u.lastName, s.ets, t.taskName, t.completed
-  //     FROM users u
-  //     JOIN students s ON u.usersId = s.usersId
-  //     LEFT JOIN tasks t ON s.usersId = t.studentsId
-  //     WHERE s.cohortsId = $1
-  //     ORDER BY u.lastName ASC`,
-  //     [cohort]
-  //   );
+    // try {
+    //   const result = await pool.query(
+    //     `SELECT u.firstName, u.lastName, s.ets, t.taskName, t.completed
+    //     FROM users u
+    //     JOIN students s ON u.usersId = s.usersId
+    //     LEFT JOIN tasks t ON s.usersId = t.studentsId
+    //     WHERE s.cohortsId = $1
+    //     ORDER BY u.lastName ASC`,
+    //     [cohort]
+    //   );
 
-  //   if (result.rows.length === 0) {
-  //     res.sendStatus(404);
-  //   } else {
-  //     const studentsData = result.rows.reduce((array, student) => {
-  //       const { firstName, lastName, ets, taskName, completed } = student;
-  //       const studentIndex = array.findIndex((s) => s.studentId === studentId);
+    //   if (result.rows.length === 0) {
+    //     res.sendStatus(404);
+    //   } else {
+    //     const studentsData = result.rows.reduce((array, student) => {
+    //       const { firstName, lastName, ets, taskName, completed } = student;
+    //       const studentIndex = array.findIndex((s) => s.studentId === studentId);
 
-  //       if (studentIndex !== -1) {
-  //         array[studentIndex].tasks.push({ taskName, completed });
-  //         if (completed) {
-  //           array[studentIndex].completedTasks++;
-  //         }
-  //       } else {
-  //         array.push({
-  //           firstName,
-  //           lastName,
-  //           ets,
-  //           tasks: [{ taskName, completed }],
-  //           completedTasks: completed ? 1 : 0,
-  //         });
-  //       }
-  //       return array;
-  //     }, []);
+    //       if (studentIndex !== -1) {
+    //         array[studentIndex].tasks.push({ taskName, completed });
+    //         if (completed) {
+    //           array[studentIndex].completedTasks++;
+    //         }
+    //       } else {
+    //         array.push({
+    //           firstName,
+    //           lastName,
+    //           ets,
+    //           tasks: [{ taskName, completed }],
+    //           completedTasks: completed ? 1 : 0,
+    //         });
+    //       }
+    //       return array;
+    //     }, []);
 
-  //     res.send(studentsData);
-  //     console.log(studentsData)
-  //   }
+    //     res.send(studentsData);
+    //     console.log(studentsData)
+    //   }
   } catch (error) {
     console.error("Error querying tasks:", error.stack);
     res.status(500).json({ error: "Internal Server Error" }); // Sending error as JSON
   }
 });
-            
+
 /* -------------------------- Important -------------------  */
 
 // app.get('*', (req, res) => {
