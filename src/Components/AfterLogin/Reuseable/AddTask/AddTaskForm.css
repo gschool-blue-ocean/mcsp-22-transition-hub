@@ -15,10 +15,14 @@
     top: 20%;
     min-height: 400px;
     min-width: 400px;
+    /* height: 525px;
+    width: 400px; */
     height: 65%;
     width: 40%;
     /* background-color: #ccc; */
     background-image: url("./logIn.svg");
+    background-size: cover;
+    background-repeat: no-repeat;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -45,7 +49,7 @@
 
 .Add_Task_Form_Input_Title {
     width: 80%;
-    margin-bottom: 0.5rem;
+    /* margin-bottom: 0.5rem; */
 }
 
 .Add_Task_Form_Input_Title label {
@@ -69,8 +73,8 @@
 .Add_Task_Form_Input_Description{
     width: 80%;
     height: 40%;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+    /* margin-top: 0.5rem; */
+    margin-bottom: 0.5rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
