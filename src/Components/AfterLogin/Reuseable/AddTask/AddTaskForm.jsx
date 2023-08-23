@@ -7,7 +7,9 @@ const AddTaskForm = () => {
         formData,
         handleChange,
         handleSubmit,
-        studentId
+        studentId,
+        addTaskVisible,
+        setAddTaskVisible
     } = useContext(StudentContext);
 
     const [isFormVisible, setFormVisible] = useState(true);
@@ -18,10 +20,10 @@ const AddTaskForm = () => {
     };
 
     const handleClose = () => {
-        setFormVisible(false);
+        setAddTaskVisible(false);
     };
 
-    return isFormVisible ? (
+    return addTaskVisible ? (
         <div className='taskform-overlay'>
             <div className="Add_Task_Form_Container">
                 <form className="Add_Task_Form" onSubmit={handleSubmit}>

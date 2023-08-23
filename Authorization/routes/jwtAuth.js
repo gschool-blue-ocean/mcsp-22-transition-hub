@@ -9,33 +9,36 @@ const router = express.Router();
 // ----------------------- AUTH ROUTES FOR LOGIN AND REGISTER -------------------------------------------------------------
 
 router.post("/register/verify", async (req, res) => {
-  const {passcode} = req.body
+  const { passcode } = req.body;
   try {
-    
-    if (passcode === 'manager') {
-      return res.send({role: 'manager'})
+    if (passcode === "manager") {
+      return res.send({ role: "manager" });
     }
-    
-    const result = await pool.query("SELECT * FROM cohorts WHERE cohortName = $1", [passcode])
+
+    const result = await pool.query(
+      "SELECT * FROM cohorts WHERE cohortName = $1",
+      [passcode]
+    );
 
     if (result.rows[0].cohortname) {
-      return res.send({role:'student', id: result.rows[0].cohortsid})
+      return res.send({ role: "student", id: result.rows[0].cohortsid });
     } else {
-      return res.send('Incorrect Passcode')
+      return res.send("Incorrect Passcode");
     }
-
   } catch (error) {
-    console.error('Error querying tasks:', error.stack);
-    res.status(500).send('Internal Server Error');
+    console.error("Error querying tasks:", error.stack);
+    res.status(500).send("Internal Server Error");
   }
 });
 
 router.post("/register", validInfo, async (req, res, next) => {
-  const { username, password, firstName, lastName, email, role, cohortsId } =
+  const { username, password, firstName, lastName, email, role, cohortsid } =
     req.body;
+    console.log(req.body)
   const user = await pool
     .query("SELECT * FROM users WHERE username = $1", [username])
     .catch(next);
+    console.log(username)
 
   if (user.rows.length !== 0) {
     return res.send("This username is already in use.");
@@ -53,12 +56,11 @@ router.post("/register", validInfo, async (req, res, next) => {
     .catch(next);
 
   if (role === "student") {
-    const { ets, branch, clearanceType } = req.body;
-    console.log(ets, branch, clearanceType);
+    const { ETS, branch, clearance, dutylocation, jobtitle } = req.body;
     await pool
       .query(
-        "INSERT INTO students (usersId, cohortsId, ets, branch, clearanceType) VALUES ($1, $2, $3, $4, $5)",
-        [newUser.rows[0].usersid, cohortsId, ets, branch, clearanceType]
+        "INSERT INTO students (usersId, cohortsid, ets, branch, clearancetype, dutylocation, jobtitle) VALUES ($1, $2, $3, $4, $5, $6, $7)",
+        [newUser.rows[0].usersid, cohortsid, ETS, branch, clearance, dutylocation, jobtitle]
       )
       .catch(next);
   }
@@ -70,13 +72,9 @@ router.post("/register", validInfo, async (req, res, next) => {
 
 router.post("/login", validInfo, async (req, res, next) => {
   const { username, password } = req.body;
-  const user = await pool
+  let user = await pool
     .query("SELECT * FROM users WHERE userName = $1", [username])
     .catch(next);
-
-  // if (user.rows.length < 1) {
-  //   return res.send("User not found...");
-  // }
 
   const validPassword = await bcrypt.compare(password, user.rows[0].password);
 
@@ -85,7 +83,23 @@ router.post("/login", validInfo, async (req, res, next) => {
   }
 
   const token = jwtGenerator(user.rows[0].userId);
-  res.json({ token, role: user.rows[0].role });
+
+  if (user.rows[0].role === "student") {
+    user = await pool
+      .query(
+        "SELECT u.*, s.studentsId FROM users u JOIN students s ON u.usersId = s.usersId WHERE userName = $1",
+        [username]
+      )
+      .catch(next);
+
+    return res.json({
+      token,
+      role: user.rows[0].role,
+      id: user.rows[0].studentsid,
+    });
+  } else {
+    res.json({ token, role: user.rows[0].role });
+  }
 });
 
 // // -------------- AUTH ROUTES FOR TASKS --------------------

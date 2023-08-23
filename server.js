@@ -80,7 +80,6 @@ app.patch("/tasks/:taskId/complete", async (req, res) => {
 
 app.post("/tasks", async (req, res) => {
   const { studentsId, taskName, taskDescription, dueDate, apptDate } = req.body;
-  
   try {
     const newTask = await pool.query(
       "INSERT INTO tasks (studentsId, taskName, taskDescription, dueDate, apptDate, completed) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *", 
@@ -114,22 +113,28 @@ app.delete("/tasks/:taskId", async (req, res) => {
 app.patch("/tasks/:taskId", async (req, res) => {
   console.log('Received data:', req.body);
   const taskId = req.params.taskId;
-  // const { taskName, taskDescription, dueDate, apptDate } = req.body;
   const { taskname: taskName, taskdescription: taskDescription, duedate: dueDate, apptdate: apptDate } = req.body;
-
-
+  
   try {
       await pool.query(
           "UPDATE tasks SET taskname = $1, taskdescription = $2, duedate = $3, apptdate = $4 WHERE tasksid = $5",
           [taskName, taskDescription, dueDate, apptDate, taskId]
       );
-
-      res.status(200).json({ message: "Task updated successfully" });
+      const result = await pool.query(
+          "SELECT * FROM tasks WHERE tasksid = $1",
+          [taskId]
+      );
+      if (result.rows && result.rows.length) {
+          res.status(200).json(result.rows[0]);
+      } else {
+          res.status(404).json({ error: "Task not found" });
+      }
   } catch (err) {
       console.error("Error executing query", err.stack);
       res.status(500).json({ error: "Internal server error" });
   }
 });
+
 
 //------------------------^What Joe Needs^----------------------------
 

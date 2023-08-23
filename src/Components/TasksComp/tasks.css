@@ -10,14 +10,10 @@
 }
 
 .studentPage {
-  /* background-color: #4f515e; */
-  /* border: 1px  solid red; */
   width: 45%;
   height: 84.5%;
-  /* border-radius: 20px; */
   padding: 2.5rem;
   position: fixed;
-  /* align-items: center; */
   top: 9.75%;
   width: 69.5%;
   overflow-y: auto;
@@ -27,45 +23,48 @@
   display: none;
 }
 
+@media (max-width: 480px) {
+  .studentPage {
+    position: fixed;
+    right: 147px;
+  }
+}
+
 .studentTaskList {
-  /* border: 1px solid red; */
   color: #f0f0f0;
   font-size: 2rem;
   font-weight: 400;
 }
 
-/* .task-checkbox {
-border: 1px  solid red;
-} */
-
 .headerName {
-  /* border: 1px  solid red; */
   text-align: center;
   padding: 0.5rem;
+}
+
+.task-checkbox {
+  height: 30px;
+  width: 100px;
+  margin-top: 1.25rem;
 }
 
 /* Global accordion styling */
 .accordion {
   background-color: #393941;
-  /* border: 1px  solid red; */
   border-radius: 5px;
   margin-bottom: 0.5rem;
-  /* padding: 1.5rem; */
   overflow: hidden;
-  color:#f0f0f0
+  color: #f0f0f0;
 }
 
 /* Header styling for the accordion */
 .accordion-header {
   background-color: #3d3d46;
-  /* border: 1px  solid red; */
   padding: 5px 15px;
   font-weight: bold;
   color: #f0f0f0;
   cursor: pointer;
   transition: background-color 0.3s ease;
   display: flex;
-  /* justify-content: space-between; */
 }
 
 .accordion-header:hover {
@@ -73,7 +72,6 @@ border: 1px  solid red;
 }
 
 .due-date {
-  /* border: 1px  solid red; */
   background-color: none;
   padding: 0.5rem;
 }
@@ -90,10 +88,8 @@ border: 1px  solid red;
 
 /* Arrow indicator for the accordion state (collapsed/expanded) */
 .accordion-arrow {
-  /* border: 1px  solid red; */
   float: right;
   padding: 0.5rem;
-  /* margin-left: 33rem;  */
 }
 
 .expansion {
@@ -120,8 +116,6 @@ border: 1px  solid red;
   margin-top: 0rem;
 }
 
-
-
 .apptDateDiv {
   margin-left: 30rem;
 }
@@ -130,36 +124,35 @@ border: 1px  solid red;
   border-radius: 4px;
   /* background-color: #333; */
   background-color: #0d0f4a;
-  color: #f0f0f0 ;
+  color: #f0f0f0;
   padding: 10px 10px;
   font-weight: bold;
   border: none;
   width: 240px;
-  margin-top: .75rem;
+  margin-top: 0.75rem;
 }
 
 .update-button:hover {
   background-color: rgb(251, 140, 0, 0.8);
   border: none;
-  color:#F0f0f0;
+  color: #f0f0f0;
 }
 
 .sortButton {
   border-radius: 4px;
   /* background-color: #333; */
   background-color: #0d0f4a;
-  color: #f0f0f0 ;
+  color: #f0f0f0;
   padding: 10px 10px;
   font-weight: bold;
   border: none;
   width: 240px;
   margin-top: -1rem;
   margin-bottom: 1rem;
-
 }
 
 .sortButton:hover {
   background-color: rgb(251, 140, 0, 0.8);
   border: none;
-  color:#F0f0f0;
+  color: #f0f0f0;
 }
