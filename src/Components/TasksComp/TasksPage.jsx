@@ -3,14 +3,26 @@ import './tasks.css';
 import StudentContext from '../Context/StudentContext';
 import moment from 'moment';
 import UpdateModal from './UpdateModal';
+
+
+
+
 const TasksPage = () => {
 
 
-    const {handleCheckboxChange, toggleAccordion, tasks, activeTaskId, studentId} = useContext(StudentContext)
+    const {handleCheckboxChange, toggleAccordion, tasks, setTasks, activeTaskId, studentId} = useContext(StudentContext)
 
   const [isModalOpen, setModalOpen] = useState(false);
   const [currentTask, setCurrentTask] = useState(null);
   const [sortMethod, setSortMethod] = useState('dueDate');
+
+
+  const updateTaskInList = (updatedTask) => {
+    const updatedTasks = tasks.map(task => 
+        task.tasksid === updatedTask.tasksid ? updatedTask : task
+    );
+    setTasks(updatedTasks);
+};
 
   const toggleSortMethod = () => {
     setSortMethod(prevSortMethod => (prevSortMethod === 'dueDate' ? 'apptDate' : 'dueDate'));
@@ -114,6 +126,7 @@ const TasksPage = () => {
                             taskId={currentTask.tasksid}
                             initialData={currentTask}
                             closeModal={closeModal}
+                            onTaskUpdate={updateTaskInList}
                         />
                     )}
                 </div>
