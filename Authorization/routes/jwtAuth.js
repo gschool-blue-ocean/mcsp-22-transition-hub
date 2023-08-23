@@ -185,3 +185,4 @@ router.use((err, req, res, next) => {
   res.status(500).send("Internal Server Error");
 });
 
+export { router as userRouter };
