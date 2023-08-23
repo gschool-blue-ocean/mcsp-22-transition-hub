@@ -86,3 +86,10 @@
 .signOn_Register_Container {
   width: 80%;
 }
+
+@media only screen and (max-device-width: 480px) {
+  .logOnBG {
+    float: none;
+    width: 100%;
+  }
+}
