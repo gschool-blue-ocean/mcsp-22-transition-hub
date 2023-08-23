@@ -14,7 +14,7 @@ const AverageCohort = () => {
   useEffect(() => {
     getData();
   }, [tasks]);
-
+  console.log(average)
   return average.length > 1 ? (
     <div className='average_cohort_outerContainer'>
       <div className='average_cohort_container'>

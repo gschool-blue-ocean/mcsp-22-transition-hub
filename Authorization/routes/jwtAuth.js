@@ -80,7 +80,7 @@ router.post("/login", validInfo, async (req, res, next) => {
       [username]
     )
     .catch(next);
-  console.log(user.rows[0]);
+  console.log(user.rows);
 
   // if (user.rows.length < 1) {
   //   return res.send("User not found...");
