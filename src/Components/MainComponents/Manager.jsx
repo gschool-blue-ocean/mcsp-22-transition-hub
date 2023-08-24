@@ -8,14 +8,25 @@ import LoadingAnimation from "../LoadingAnimation";
 
 const Manager = () => {
   const { setCohortFormOpen, cohortFormOpen } = useContext(CohortContext);
+  const role = localStorage.getItem("role")
+  if(role === "manager") {
+    return (
+      <>
+        <Header />
+        <ManagerContent />
+        {cohortFormOpen && <AddCohort setCohortFormOpen={false} />}
+      </>
+    );
+  }
+  else {
+    return (
+      <>
+      Not authorized
+      </>
+    )
 
-  return (
-    <>
-      <Header />
-      <ManagerContent />
-      {cohortFormOpen && <AddCohort setCohortFormOpen={false} />}
-    </>
-  );
-};
+  }
+}
+
 
 export default Manager;
