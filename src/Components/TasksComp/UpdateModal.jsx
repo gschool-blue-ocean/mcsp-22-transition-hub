@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import "./UpdateModal.css"
 
 
+
+// toast.configure();
 
 const UpdateModal = ({ taskId, initialData, closeModal, onTaskUpdate }) => {
   const [formData, setFormData] = useState(initialData || {
@@ -43,14 +47,14 @@ const UpdateModal = ({ taskId, initialData, closeModal, onTaskUpdate }) => {
       });
 
       if (response.ok) {
-        alert('Task updated successfully');
+        toast.success('Task updated successfully');
         const updatedTask = await response.json(); 
         onTaskUpdate(updatedTask);
       } else {
-        alert('Failed to update task');
+        toast.error('Failed to update task');
       }
     } catch (err) {
-      alert('Failed to update task');
+      toast.error('Failed to update task');
       console.error(err);
     }
 

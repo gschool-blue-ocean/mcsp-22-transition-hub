@@ -4,6 +4,7 @@ import StudentInfoBar from "../AfterLogin/Reuseable/StudentInfoBar";
 import AddTask from "../AfterLogin/Reuseable/AddTask/AddTask";
 import TasksPage from "../TasksComp/TasksPage";
 import { useParams } from "react-router-dom";
+import { ToastContainer } from 'react-toastify';
 
 const Student = () => {
   const role = localStorage.getItem("role")
@@ -16,6 +17,7 @@ if (role === "student" && currentUser === studentIdentification ){
       <StudentInfoBar />
       <AddTask />
       <TasksPage />   
+      <ToastContainer />
     </>
 );
 } else {
