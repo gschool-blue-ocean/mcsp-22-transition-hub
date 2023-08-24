@@ -5,6 +5,7 @@ import StudentContext from '../../../Context/StudentContext';
 import LoadingAnimation from '../../../LoadingAnimation';
 import moment from 'moment';
 import ManagerSideNav from '../ManagerNavigationBar/ManagerSideNav';
+import { useNavigate } from "react-router-dom";
 
 const StudentList = () => {
     const { displayedStudents, cohort, cohortList, studentAverage, setCurrentManagerContent } = useContext(CohortContext);
@@ -12,7 +13,7 @@ const StudentList = () => {
     const [studentData, setStudentData] = useState([]);
     const [sortDirection, setSortDirection] = useState('asc');
     const [sortedColumn, setSortedColumn] = useState(null);
-
+    const navigate = useNavigate()
 
     useEffect(() => {
         const arr = [];
@@ -57,11 +58,13 @@ const StudentList = () => {
 
 
     const handleSetStudent = (e) => {
+        let id = e.currentTarget.id
         if(e.currentTarget.id){
+
+            console.log(id)
             setStudentId(e.currentTarget.id) 
         }
-            setCurrentManagerContent(false)
-
+            navigate(`/manager/${id}`)
     }
 
     return (

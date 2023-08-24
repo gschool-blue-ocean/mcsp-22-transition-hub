@@ -5,20 +5,27 @@ import BackButton from "./BackButton";
 import StudentContext from "../../Context/StudentContext";
 import { useContext } from "react";
 import LoadingAnimation from "../../LoadingAnimation";
+import Header from "../Reuseable/Header";
+import { useParams } from "react-router-dom";
 
 const StudentInManager = () => {
-    const {studentId} = useContext(StudentContext)
-    
+  const role = localStorage.getItem("role")
+  if(role === "manager") {
     return (
-        studentId ? 
-        <>
-            <BackButton />
-            <StudentInfoBar />
-            <AddTask />
-            <TasksPage />
-        </> :
-        <LoadingAnimation />
-    )
-}
+      <>
+          <Header />
+          <BackButton />
+          <StudentInfoBar />
+          <AddTask />
+          <TasksPage />
+      </>
+    ) 
+  } else{
+    <>
+    Not authorized to view page
+    </>
+  }
 
-export default StudentInManager
+};
+
+export default StudentInManager;

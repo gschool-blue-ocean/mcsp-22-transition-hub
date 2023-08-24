@@ -16,7 +16,6 @@
 }
 
 .logOnContainer {
-  width: 30%;
   height: 50%;
   min-width: 400px;
   min-height: 400px;
@@ -33,7 +32,6 @@
 .login-form {
   display: flex;
   flex-direction: column;
-  width: 80%;
 }
 
 .login-form label {
@@ -41,6 +39,7 @@
 }
 
 .login-form input {
+  position: relative;
   padding: 8px;
   margin-bottom: 12px;
   border: 1px solid #ccc;
@@ -81,8 +80,16 @@
 
 #signOn_Register {
   margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .signOn_Register_Container {
-  width: 80%;
+  width: 100%;
+}
+
+@media only screen and (max-device-width: 480px) {
+  .logOnBG {
+    float: none;
+    width: 100%;
+  }
 }

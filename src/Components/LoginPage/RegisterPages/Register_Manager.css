@@ -1,7 +1,18 @@
 .Register_Manager_Title {
   font-size: 2rem;
   text-align: center;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
+
+.return_button_ctn {
+  font-size: 1rem;
+  padding: 1rem;
+  justify-self: left;
+  width: fit-content;
+}
+
 .Register_Manager_Form_Input_Container {
   width: 80%;
   margin-top: 1rem;

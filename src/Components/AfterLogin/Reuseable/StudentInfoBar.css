@@ -16,6 +16,30 @@
     left: 0;
     top: 80px;
     overflow-y: auto;
+
+
+@media (max-width: 480px) {
+  .studentInfo-bigcontainer {
+    width: 25%;
+  }
+
+  .studentInfo {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  #mySideNav {
+    visibility: hidden;
+  }
+
+  .accordion {
+    transform: translate(calc(784px - 100%));
+    position: relative;
+    width: calc(100vw - 105px);
+    right: 475px;
+  }
+
 }
 
 
@@ -25,7 +49,7 @@
 } */
 
 .studentInfo-text {
-    color: #f0f0f0;
+  color: #f0f0f0;
 }
 
 .studentInfo-fetch {
@@ -34,21 +58,23 @@
     padding: 0.75rem;
     margin-top: 1rem;
     margin-bottom: 1rem;
+
 }
 .studentInfo-fetch:hover {
-    border: 3px solid rgb(251, 140, 0, 0.6)
+  border: 3px solid rgb(251, 140, 0, 0.6);
 }
 
 .studentInfo-key {
-    padding-right: 5px;
-    color: rgb(119, 152, 213);
-    font-weight: bold;
+  padding-right: 5px;
+  color: rgb(119, 152, 213);
+  font-weight: bold;
 }
 
 .studentInfo-value {
     color: rgb(119, 152, 213);
     font-weight: normal;
 }
+
 
 @media (max-width: 405px) {
     .studentInfo-bigcontainer {

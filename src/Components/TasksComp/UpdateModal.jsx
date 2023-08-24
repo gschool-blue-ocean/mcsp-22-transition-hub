@@ -4,7 +4,7 @@ import "./UpdateModal.css"
 
 
 
-const UpdateModal = ({ taskId, initialData, closeModal }) => {
+const UpdateModal = ({ taskId, initialData, closeModal, onTaskUpdate }) => {
   const [formData, setFormData] = useState(initialData || {
     taskname: '',
     taskdescription: '',
@@ -32,11 +32,9 @@ const UpdateModal = ({ taskId, initialData, closeModal }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Sending this data:', formData);
-
-    // Send the PATCH request
+    
     try {
-      const response = await fetch(`http://localhost:8000/tasks/${taskId}`, {
+      const response = await fetch(`https://transition-hub.onrender.com/tasks/${taskId}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -46,7 +44,8 @@ const UpdateModal = ({ taskId, initialData, closeModal }) => {
 
       if (response.ok) {
         alert('Task updated successfully');
-        window.location.reload();
+        const updatedTask = await response.json(); 
+        onTaskUpdate(updatedTask);
       } else {
         alert('Failed to update task');
       }
@@ -55,7 +54,6 @@ const UpdateModal = ({ taskId, initialData, closeModal }) => {
       console.error(err);
     }
 
-    // Close the modal after submitting
     closeModal();
   };
 
