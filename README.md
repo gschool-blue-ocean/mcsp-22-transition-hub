@@ -18,10 +18,10 @@ From Start to Finish, this project lasted 2.5 weeks with a total of 5 sprints, l
 
 The workflow tools we selected for this project were: 
 - [Figma](https://figma.com/) for our initial wireframing | [Link to Actual Wireframe](https://www.figma.com/file/W3RR8ihWRjIJ1XYjEGXBRA/SMTransitionHub?type=design&node-id=0%3A1&mode=design&t=RBvIaW6dZQHNTenQ-1)
-- [drawSQL](https://drawsql.app/) for our Entity Relationship Diagram | [Link to Actual ERD](https://drawsql.app/teams/joseph-carrillos-team/diagrams/blue-ocean)
+- [DrawSQL](https://drawsql.app/) for our Entity Relationship Diagram | [Link to Actual ERD](https://drawsql.app/teams/joseph-carrillos-team/diagrams/blue-ocean)
 - [Jira/Confluence](https://jira.atlassian.com/) for task management and documentation | [Link to Our Board](https://blueocean-transitionhub.atlassian.net/jira/software/projects/SMTRAN/boards/1)
 - [Git/GitHub](https://github.com/) for branching/merging code changes
-- [Render](https://render.com/) for project deployment | [Project Link](https://transition-hub.onrender.com)]
+- [Render](https://render.com/) for project deployment | [Project Link](https://transition-hub.onrender.com)
 - [Discord](https://discord.com/) for daily communications (sprint planning, group troubleshooting, and code reviews)
 
 # Technical / Unexpected Challenges Faced
