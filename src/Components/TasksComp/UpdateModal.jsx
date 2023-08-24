@@ -1,14 +1,9 @@
-import UrlContext from '../Context/UrlContext';
-import { useContext } from 'react';
-import React, { useState, useEffect } from 'react';
-import moment from 'moment';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import "./UpdateModal.css"
-
-
-
-
+import React, { useState, useEffect, useContext } from "react";
+import moment from "moment";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "./UpdateModal.css";
+import UrlContext from "../Context/UrlContext";
 // toast.configure();
 
 const UpdateModal = ({ taskId, initialData, closeModal, onTaskUpdate }) => {
@@ -52,23 +47,19 @@ const UpdateModal = ({ taskId, initialData, closeModal, onTaskUpdate }) => {
       });
 
       if (response.ok) {
-
-        toast.success('Task updated successfully');
-        const updatedTask = await response.json(); 
+        toast.success("Task updated successfully");
+        const updatedTask = await response.json();
 
         onTaskUpdate(updatedTask);
         closeModal();
       } else {
-
-        toast.error('Failed to update task');
+        toast.error("Failed to update task");
       }
     } catch (err) {
-      toast.error('Failed to update task');
+      toast.error("Failed to update task");
 
       console.error(err);
     }
-
-    
   };
 
   return (
