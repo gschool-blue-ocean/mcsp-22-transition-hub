@@ -1,4 +1,3 @@
-import React from "react";
 import Header from "../AfterLogin/Reuseable/Header";
 import StudentInfoBar from "../AfterLogin/Reuseable/StudentInfoBar";
 import AddTask from "../AfterLogin/Reuseable/AddTask/AddTask";
@@ -23,7 +22,7 @@ if (role === "student" && currentUser === studentIdentification ){
       <>
       Not authorized to view page
       </>
-  )
+  ) 
 }
 
 }
