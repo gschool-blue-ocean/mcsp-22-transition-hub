@@ -32,7 +32,11 @@ const ManagerSideNav = () => {
   return (
     <div className='managerSide_Bar_Container'>
       <div className='allcohortbtn-container'>
-        <select className='managerSide_Bar_Select' onChange={handleChange}>
+        <select
+          className='managerSide_Bar_Select'
+          id='managerSidebar-btn-select'
+          onChange={handleChange}
+        >
           <option disabled selected value>
             Select a Cohort
           </option>
@@ -45,6 +49,7 @@ const ManagerSideNav = () => {
         <div className='addcohortbtn-container' onClick={toggleVisibility}>
           <button className='addCohort_formOpenBtn'>
             <FontAwesomeIcon icon={faPlus} className='plus-icon' size='lg' />
+            Add Cohort
           </button>
           <div className='addCohortBtn-function-indicator'>add cohort</div>
         </div>
