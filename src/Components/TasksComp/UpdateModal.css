@@ -63,6 +63,7 @@
 
   .closeButton {
     position: absolute; 
+    z-index: 9998;
     top: 1.5rem; 
     right: 1.5rem; 
     background: none;

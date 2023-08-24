@@ -50,6 +50,7 @@ const UpdateModal = ({ taskId, initialData, closeModal, onTaskUpdate }) => {
         toast.success('Task updated successfully');
         const updatedTask = await response.json(); 
         onTaskUpdate(updatedTask);
+        closeModal();
       } else {
         toast.error('Failed to update task');
       }
@@ -58,7 +59,7 @@ const UpdateModal = ({ taskId, initialData, closeModal, onTaskUpdate }) => {
       console.error(err);
     }
 
-    closeModal();
+    
   };
 
   return (

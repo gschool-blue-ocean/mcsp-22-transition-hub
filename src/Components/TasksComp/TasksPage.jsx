@@ -85,6 +85,7 @@ const TasksPage = () => {
   };
 
   const closeModal = () => {
+    console.log("working")
     setModalOpen(false);
     setCurrentTask(null);
   };
