@@ -73,4 +73,5 @@ To Start Our Application:
 1) Fork and clone the repo
 2) Open the project folder inside of your favorite code editor
 3) Inside of your terminal, run "npm install" followed by "npm run dev"
-4) Start coding!
+4) Create and configure your database connection (use our .env template and migration & seed.sql files)
+5) Start coding!
