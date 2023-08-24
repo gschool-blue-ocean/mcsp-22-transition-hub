@@ -6,7 +6,7 @@ import AccountContext from "../Context/AccountServicesContext";
 import { useContext, useState } from "react";
 import UrlContext from "../Context/UrlContext";
 import ReturnToLogin from "./ReturnToLogin";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import ReactModal from "react-modal";
 
 const RegisterPasscode = () => {
@@ -14,11 +14,11 @@ const RegisterPasscode = () => {
   const { setCurrentService, accountServices } = useContext(AccountContext);
   const { setRoles, setCohortsId } = useContext(AuthContext);
   const { url } = useContext(UrlContext);
-  //const [error, setError] = useState("");
+  const [error, setError] = useState(false);
   const [formData, setFormData] = useState({
     passcode: "",
   });
-  //const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -41,17 +41,20 @@ const RegisterPasscode = () => {
     } catch (err) {
       console.error(err);
       alert("Unable to Validate Passcode");
+      setError(true);
       return false;
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const toRegistration = passcodeVerification(formData);
-    if (toRegistration) {
-      setCurrentService(accountServices[2]); // <--- === "Register"
-      <Navigate to='/' />;
+    const toRegistration = await passcodeVerification(formData);
+    if (!toRegistration) {
+      setError(true);
+      return; // Prevent navigation on incorrect passcode
     }
+    setCurrentService(accountServices[2]); // Navigate to registration
+    //navigate("/"); // You can specify the path to navigate to here
   };
 
   return (

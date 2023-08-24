@@ -54,7 +54,6 @@ const Register_Student = () => {
       const res = await axios.post(url + "/api/auth/register", formData);
       const parseRes = await res.data;
       if (parseRes.token) {
-        alert("Success");
         await grabLocalStudentId(url, formData.username);
       }
     } catch (err) {
@@ -78,85 +77,85 @@ const Register_Student = () => {
 
   return (
     <>
-      <div className="Register_Manager_Title">
-        <div className="return_button_ctn">
+      <div className='Register_Manager_Title'>
+        <div className='return_button_ctn'>
           <ReturnToLogin />
         </div>
         Welcome, to Career Services Manager!
       </div>
-      <form className="Register_Student_Form" onSubmit={onStudentRegister}>
-        <div className="Register_Manager_Form_Input_Container">
+      <form className='Register_Student_Form' onSubmit={onStudentRegister}>
+        <div className='Register_Manager_Form_Input_Container'>
           <label>UserName</label>
           <input
-            type="text"
-            placeholder=""
-            name="username"
+            type='text'
+            placeholder=''
+            name='username'
             onChange={handleChange}
           ></input>
         </div>
-        <div className="Register_Student_Form_Input_Container">
+        <div className='Register_Student_Form_Input_Container'>
           <label>Password</label>
           <input
-            type="password"
-            placeholder=""
-            name="password"
+            type='password'
+            placeholder=''
+            name='password'
             onChange={handleChange}
           ></input>
         </div>
 
-        <div className="Register_Student_Form_Input_Container">
+        <div className='Register_Student_Form_Input_Container'>
           <label>First Name</label>
           <input
-            type="text"
-            placeholder=""
-            name="firstName"
+            type='text'
+            placeholder=''
+            name='firstName'
             onChange={handleChange}
           ></input>
         </div>
-        <div className="Register_Student_Form_Input_Container">
+        <div className='Register_Student_Form_Input_Container'>
           <label>Last Name</label>
           <input
-            type="text"
-            placeholder=""
-            name="lastName"
+            type='text'
+            placeholder=''
+            name='lastName'
             onChange={handleChange}
           ></input>
         </div>
-        <div className="Register_Student_Form_Input_Container">
+        <div className='Register_Student_Form_Input_Container'>
           <label>Email</label>
           <input
-            type="email"
-            placeholder=""
-            name="email"
+            type='email'
+            placeholder=''
+            name='email'
             onChange={handleChange}
           ></input>
         </div>
 
-        <div className="Register_Student_Form_Input_Container">
+        <div className='Register_Student_Form_Input_Container'>
           <label>Duty Location</label>
           <input
-            type="text"
-            placeholder=""
-            name="dutylocation"
+            type='text'
+            placeholder=''
+            name='dutylocation'
             onChange={handleChange}
           ></input>
         </div>
 
-        <div className="Register_Student_Form_Input_Container">
+        <div className='Register_Student_Form_Input_Container'>
           <label>Job Title</label>
           <input
-            type="text"
-            placeholder=""
-            name="jobtitle"
+            type='text'
+            placeholder=''
+            name='jobtitle'
             onChange={handleChange}
           ></input>
         </div>
 
-        <div className="Clearance_Container">
-          <label htmlFor="clearance">Clearance:</label>
+        <div className='Clearance_Container'>
+          <label htmlFor='clearance'>Clearance:</label>
           <select
-            name="clearance"
-            className="Register_Student_Branch"
+            name='clearance'
+            className='Register_Student_Branch'
             onChange={handleChange}
           >
             <option>None</option>
@@ -167,30 +166,30 @@ const Register_Student = () => {
             <option>Top Secret/SCI W/Poly</option>
           </select>
         </div>
-        <div className="BranchSelection">
-          <label htmlFor="branch">Select Branch:</label>
-          <select id="BranchSelect" name="branch" onChange={handleChange}>
-            <option value="Civilian">Civilian</option>
-            <option value="Air Force">Air Force</option>
-            <option value="Coast Guard">Coast Guard</option>
-            <option value="Navy">Navy</option>
-            <option value="Army">Army</option>
-            <option value="Marines">Marines</option>
+        <div className='BranchSelection'>
+          <label htmlFor='branch'>Select Branch:</label>
+          <select id='BranchSelect' name='branch' onChange={handleChange}>
+            <option value='Civilian'>Civilian</option>
+            <option value='Air Force'>Air Force</option>
+            <option value='Coast Guard'>Coast Guard</option>
+            <option value='Navy'>Navy</option>
+            <option value='Army'>Army</option>
+            <option value='Marines'>Marines</option>
           </select>
         </div>
-        <div className="CenteredRow_ETS_Date">
-          <label htmlFor="ETS">ETS Date:</label>
+        <div className='CenteredRow_ETS_Date'>
+          <label htmlFor='ETS'>ETS Date:</label>
           <input
-            type="date"
-            id="Student_ETS"
-            name="ETS"
+            type='date'
+            id='Student_ETS'
+            name='ETS'
             onChange={handleChange}
           />
         </div>
         <button
-          className="Register_Button"
-          id="Register_Student_Button"
-          type="submit"
+          className='Register_Button'
+          id='Register_Student_Button'
+          type='submit'
         >
           Register
         </button>
