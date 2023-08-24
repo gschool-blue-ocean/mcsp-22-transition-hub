@@ -46,10 +46,16 @@ Performance Optimizations
 Additional features delivered
 
 # Thoughts on Future Features / Additions
-What additional features do you plan to add, how do you plan to implement those features?
-* Future refactoring?
-* Additional dev ops considerations?
-* UI/UX additions?
+Features:
+* Implementation of a task/appointment reminder email notification system or sync appointments to google calendar
+* Documentation upload feature
+* Expanding visual analytics section
+* Add military transition resources to header dropdown
+
+Microservices:
+* CI/CD
+* Docker
+* Testing
 
 # The Contributers:
 - Garett Lubecki
