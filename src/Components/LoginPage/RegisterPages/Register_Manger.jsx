@@ -4,9 +4,13 @@ import axios from "axios";
 import ReturnToLogin from "../ReturnToLogin";
 import AccountContext from "../../Context/AccountServicesContext";
 import UrlContext from "../../Context/UrlContext";
+import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
+import AuthContext from "../../Context/AuthContext";
 
 const Register_Manager = () => {
   const { setCurrentService, accountServices } = useContext(AccountContext);
+  const {setRoles} = useContext(AuthContext)
   const { url } = useContext(UrlContext);
   const [formData, setFormData] = useState({
     username: "",
@@ -25,14 +29,17 @@ const Register_Manager = () => {
   const onSubmitForm = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(url + "/api/auth/register", formData); // may have to change route, unsure at this time
+      const res = await axios.post(url + "/api/auth/register", formData);
       const parseRes = await res.data;
 
       if (parseRes.token) {
+        toast.success("Account successfully created.")
+        setRoles("")
         setCurrentService(accountServices[0]);
+        localStorage.clear();
       }
     } catch (err) {
-      console.error(err.message);
+      toast.error("Username already in use");
     }
   };
 
