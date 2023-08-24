@@ -14,7 +14,7 @@ const Register_Student = () => {
   const { accountServices, setCurrentService } = useContext(AccountContext);
   const { postDefaultTasks } = useContext(StudentContext);
   const [localStudentId, setLocalStudentId] = useState(null);
-  const { cohortsId } = useContext(AuthContext);
+  const { cohortsId, setRoles } = useContext(AuthContext);
   const { url } = useContext(UrlContext);
   const [formData, setFormData] = useState({
     username: "",
@@ -43,9 +43,9 @@ const Register_Student = () => {
       if (!response.ok) throw new Error("Network response was not ok");
       const data = await response.json();
       if (data[0]) {
-        setRoles("")
+
         setLocalStudentId(data[0].studentsid);
-        localStorage.clear();
+
       }
     } catch (error) {
       console.log(error);
@@ -71,14 +71,12 @@ const Register_Student = () => {
     if (localStudentId) {
       console.log(`In localStudent use effect ${localStudentId}`);
       postDefaultTasks(url, localStudentId, formData.ETS);
+      setCurrentService(accountServices[0]);
+      setRoles("")
+      localStorage.clear();
     }
   }, [localStudentId]);
 
-  useEffect(() => {
-    if (localStudentId) {
-      setCurrentService(accountServices[0]);
-    }
-  }, [localStudentId]);
 
   return (
     <>
