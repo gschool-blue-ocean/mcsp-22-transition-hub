@@ -41,11 +41,6 @@
   }
 }
 
-/* .studentInfo-titlediv {
-    margin-left: 25px;
-    margin-top: 75px;
-} */
-
 .studentInfo-text {
   color: #f0f0f0;
 }
@@ -57,6 +52,7 @@
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
+
 .studentInfo-fetch:hover {
   border: 3px solid rgb(251, 140, 0, 0.6);
 }

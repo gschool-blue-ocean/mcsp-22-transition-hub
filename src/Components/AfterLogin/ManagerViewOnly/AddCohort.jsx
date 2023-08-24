@@ -23,6 +23,7 @@ const AddCohort = () => {
     console.log(formData);
     postCohort(formData);
     clearFormData(setFormData);
+    setCohortFormOpen(false);
   };
 
   const clearFormData = (setData) => {

@@ -17,11 +17,11 @@ This app is designed to validate logins for two types of users: transition manag
 From Start to Finish, this project lasted 2.5 weeks with a total of 5 sprints, lasting 4 days each. 
 
 The workflow tools we selected for this project were: 
-- [Excalidraw](https://excalidraw.com/) for our initial wireframing
-- ____ for our Entity Relationship Diagram **place up-to-date ERD here**
+- [Figma](https://figma.com/) for our initial wireframing **[Link to Actual Wireframe](https://www.figma.com/file/W3RR8ihWRjIJ1XYjEGXBRA/SMTransitionHub?type=design&node-id=0%3A1&mode=design&t=RBvIaW6dZQHNTenQ-1)**
+- ____ for our Entity Relationship Diagram **[Link to Actual ERD](https://drawsql.app/teams/joseph-carrillos-team/diagrams/blue-ocean)**
 - [Jira/Confluence](https://blueocean-transitionhub.atlassian.net/jira/software/projects/SMTRAN/boards/1) for task management and documentation
 - Git/GitHub for branching/merging code changes
-- [Render](https://render.com/) for project deployment
+- [Render](https://render.com/) for project deployment **[Project Link](https://transition-hub.onrender.com)]**
 - Discord for daily communications (sprint planning, group troubleshooting, and code reviews)
 
 # Technical / Unexpected Challenges Faced
