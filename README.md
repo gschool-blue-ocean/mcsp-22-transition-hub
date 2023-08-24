@@ -4,7 +4,7 @@ A Full-Stack React application to assist transition managers and service members
 **place screenshot of login page here**
 
 # How it Works
-This app is designed to validate logins for two types of users: transition managers and students. Managers are granted full admin rights to app features/functionality and to view the manager dashboard and every individual student dashboard. Full app functionalities include: viewing all cohorts, viewing average task completion by cohort, adding a cohort, selecting an individual cohort, viewing each student and their progress with assigned tasks, selecting a student, marking a task complete, editing a task, and adding a new task. Students (service members) only have access to their own dashboard which includes relevant personal details and all of their assigned tasks. Like managers, they are able to add and edit tasks, as well as mark tasks complete.
+This app is designed to validate logins for two types of users: transition managers and students. Managers are granted full admin rights to app features/functionality, to their manager dashboard, and every individual student dashboard. Full app functionalities include: viewing all cohorts, viewing average task completion by cohort, adding a cohort, selecting an individual cohort, viewing each student and their progress with assigned tasks, selecting a student, marking a task complete, editing a task, and adding a new task. Students (service members) only have access to their own dashboard which includes relevant personal details and all of their assigned tasks. Like managers, they are able to add and edit tasks, as well as mark tasks complete.
 
 * User Authentication: Upon accessing the app, users are presented with a login page where they input their credentials. The app communicates with our server, which in turn interfaces with the PostgreSQL database to authenticate users. This process involves data exchange through API calls, ensuring secure access.
 
@@ -17,12 +17,12 @@ This app is designed to validate logins for two types of users: transition manag
 From Start to Finish, this project lasted 2.5 weeks with a total of 5 sprints, lasting 4 days each. 
 
 The workflow tools we selected for this project were: 
-- [Figma](https://figma.com/) for our initial wireframing **[Link to Actual Wireframe](https://www.figma.com/file/W3RR8ihWRjIJ1XYjEGXBRA/SMTransitionHub?type=design&node-id=0%3A1&mode=design&t=RBvIaW6dZQHNTenQ-1)**
-- ____ for our Entity Relationship Diagram **[Link to Actual ERD](https://drawsql.app/teams/joseph-carrillos-team/diagrams/blue-ocean)**
-- [Jira/Confluence](https://blueocean-transitionhub.atlassian.net/jira/software/projects/SMTRAN/boards/1) for task management and documentation
-- Git/GitHub for branching/merging code changes
-- [Render](https://render.com/) for project deployment **[Project Link](https://transition-hub.onrender.com)]**
-- Discord for daily communications (sprint planning, group troubleshooting, and code reviews)
+- [Figma](https://figma.com/) for our initial wireframing | [Link to Actual Wireframe](https://www.figma.com/file/W3RR8ihWRjIJ1XYjEGXBRA/SMTransitionHub?type=design&node-id=0%3A1&mode=design&t=RBvIaW6dZQHNTenQ-1)
+- [DrawSQL](https://drawsql.app/) for our Entity Relationship Diagram | [Link to Actual ERD](https://drawsql.app/teams/joseph-carrillos-team/diagrams/blue-ocean)
+- [Jira/Confluence](https://jira.atlassian.com/) for task management and documentation | [Link to Our Board](https://blueocean-transitionhub.atlassian.net/jira/software/projects/SMTRAN/boards/1)
+- [Git/GitHub](https://github.com/) for branching/merging code changes
+- [Render](https://render.com/) for project deployment | [Our Project Link](https://transition-hub.onrender.com)
+- [Discord](https://discord.com/) for daily communications (sprint planning, group troubleshooting, and code reviews)
 
 # Technical / Unexpected Challenges Faced
 * Why, what was the plan to overcome those challenges?
@@ -73,4 +73,5 @@ To Start Our Application:
 1) Fork and clone the repo
 2) Open the project folder inside of your favorite code editor
 3) Inside of your terminal, run "npm install" followed by "npm run dev"
-4) Start coding!
+4) Create and configure your database connection (use our .env template and migration & seed.sql files)
+5) Start coding!

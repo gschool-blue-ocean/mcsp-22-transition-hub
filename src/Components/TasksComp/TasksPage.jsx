@@ -78,17 +78,10 @@ const TasksPage = () => {
   };
 
   const closeModal = () => {
+    console.log("working")
     setModalOpen(false);
     setCurrentTask(null);
   };
-
-  // const sortedTasks = [...tasks].sort((a, b) => {
-  //   if (sortMethod === "dueDate") {
-  //     return new Date(a.duedate) - new Date(b.duedate);
-  //   } else {
-  //     return new Date(a.apptdate) - new Date(b.apptdate);
-  //   }
-  // });
 
   const renderTask = (task) => {
     const today = moment();
@@ -102,14 +95,14 @@ const TasksPage = () => {
       dueDateClass = "due-date due-soon";
     }
     return (
-      <div key={task.tasksid} className='accordion'>
+      <div key={task.tasksid} className="accordion">
         <div
-          className='accordion-header'
+          className="accordion-header"
           onClick={() => toggleAccordion(task.tasksid)}
         >
           <input
-            type='checkbox'
-            className='task-checkbox'
+            type="checkbox"
+            className="task-checkbox"
             checked={!!task.completed}
             onChange={(e) => {
               e.stopPropagation();
@@ -119,17 +112,17 @@ const TasksPage = () => {
               e.stopPropagation();
             }}
           />
-          <p className='headerName'>{task.taskname}</p>
+          <p className="headerName">{task.taskname}</p>
           <p className={dueDateClass}>
             Due Date: {moment(task.duedate).format("MM/DD/YYYY")}
           </p>
-          <p className='accordion-arrow'>
+          <p className="accordion-arrow">
             {activeTaskId === task.tasksid ? "▼" : "▶"}
           </p>
         </div>
         {activeTaskId === task.tasksid && (
-          <div className='expansion'>
-            <div className='descriptionHeader'>
+          <div className="expansion">
+            <div className="descriptionHeader">
               <div>
                 <h4
                   style={{
@@ -142,8 +135,8 @@ const TasksPage = () => {
                 </h4>
               </div>
               <div>
-                <h4 className='apptDateDiv'>
-                  <label className='apptDateLabel'>Appointment Date: </label>
+                <h4 className="apptDateDiv">
+                  <label className="apptDateLabel">Appointment Date: </label>
                   {moment(task.apptdate).format("MM/DD/YYYY")}
                 </h4>
               </div>
@@ -152,7 +145,7 @@ const TasksPage = () => {
 
             <button
               onClick={() => openModalWithTask(task)}
-              className='update-button'
+              className="update-button"
             >
               Update Task
             </button>
@@ -163,10 +156,10 @@ const TasksPage = () => {
   };
 
   return studentIdentification && tasks.length > 0 ? (
-    <div className='entirePage'>
-      <div className='studentPage'>
-        <h1 className='studentTaskList'>Student Tasks</h1>
-        <button className='sortButton' onClick={toggleSortMethod}>
+    <div className="entirePage">
+      <div className="studentPage">
+        <h1 className="studentTaskList">Student Tasks</h1>
+        <button className="sortButton" onClick={toggleSortMethod}>
           Sort by {sortMethod === "dueDate" ? "Appointment Date" : "Due Date"}
         </button>
         {sortedTasks.map(renderTask)}
