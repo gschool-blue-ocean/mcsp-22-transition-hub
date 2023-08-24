@@ -24,7 +24,7 @@ The workflow tools we selected for this project were:
 - [Render](https://render.com/) for project deployment
 - Discord for daily communications (sprint planning, group troubleshooting, and code reviews)
 
-# Technical Challenges / Unexpected Challenges Faced
+# Technical / Unexpected Challenges Faced
 * Why, what was the plan to overcome those challenges?
 * What did you learn?
 * Why was it a challenge
