@@ -25,11 +25,12 @@ The workflow tools we selected for this project were:
 - [Discord](https://discord.com/) for daily communications (sprint planning, group troubleshooting, and code reviews)
 
 # Technical / Unexpected Challenges Faced
-* Why, what was the plan to overcome those challenges?
-* What did you learn?
-* Why was it a challenge
-* What did you learn?
-* what research was required?
+## React Router
+- Issues with implementing React Router and using parameters from the router instead of utilizing data from the Context API.
+- **We learned:** dynamic routing with parameters, component reusability, Context API for Global State, as well as balancing state management approaches.
+- Some challenges we faced while implementing were choosing between using route parameters or the Context API, arising from complexities in managing state, data sharing, component reusability, and architectural decisions, requiring a balance between dynamic data rendering and global state management.
+
+
 
 # Key Lessons Learned
 specifically those related to: Agile, CI/CD, testing, working with external stakeholders, ticketing, and user stories.
