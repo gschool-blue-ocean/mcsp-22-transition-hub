@@ -1,22 +1,24 @@
 import "./RegisterPassCode.css";
-import React from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 import AuthContext from "../Context/AuthContext";
 import AccountContext from "../Context/AccountServicesContext";
 import { useContext, useState } from "react";
 import UrlContext from "../Context/UrlContext";
 import ReturnToLogin from "./ReturnToLogin";
+import { Navigate } from "react-router-dom";
+import ReactModal from "react-modal";
 
 const RegisterPasscode = () => {
   //use effect to grab all the cohort names, put into student in the state
-  const { setCurrentService, accountServices, currentCohort } =
-    useContext(AccountContext);
+  const { setCurrentService, accountServices } = useContext(AccountContext);
   const { setRoles, setCohortsId } = useContext(AuthContext);
   const { url } = useContext(UrlContext);
-
+  //const [error, setError] = useState("");
   const [formData, setFormData] = useState({
     passcode: "",
   });
+  //const [open, setOpen] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -38,6 +40,8 @@ const RegisterPasscode = () => {
       return true;
     } catch (err) {
       console.error(err);
+      alert("Unable to Validate Passcode");
+      return false;
     }
   };
 
@@ -46,15 +50,17 @@ const RegisterPasscode = () => {
     const toRegistration = passcodeVerification(formData);
     if (toRegistration) {
       setCurrentService(accountServices[2]); // <--- === "Register"
+      <Navigate to='/' />;
     }
   };
+
   return (
-    <div className="Passcode_BG">
-      <div className="Passcode_Container">
+    <div className='Passcode_BG'>
+      <div className='Passcode_Container'>
         <ReturnToLogin />
-        <div className="RegisterPassCode_Title">Verification Passcode</div>
-        <form className="passcode_form" onSubmit={handleSubmit}>
-          <div className="passcode_Input">
+        <div className='RegisterPassCode_Title'>Verification Passcode</div>
+        <form className='passcode_form' onSubmit={handleSubmit}>
+          <div className='passcode_Input'>
             <label>Passcode</label>
             <input
               type='password'
