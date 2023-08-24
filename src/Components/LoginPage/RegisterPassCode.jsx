@@ -7,7 +7,6 @@ import { useContext, useState } from "react";
 import UrlContext from "../Context/UrlContext";
 import ReturnToLogin from "./ReturnToLogin";
 import { Navigate, useNavigate } from "react-router-dom";
-import ReactModal from "react-modal";
 
 const RegisterPasscode = () => {
   //use effect to grab all the cohort names, put into student in the state
