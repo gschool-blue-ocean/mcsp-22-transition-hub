@@ -4,7 +4,6 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./UpdateModal.css";
 import UrlContext from "../Context/UrlContext";
-
 // toast.configure();
 
 const UpdateModal = ({ taskId, initialData, closeModal, onTaskUpdate }) => {
@@ -22,8 +21,8 @@ const UpdateModal = ({ taskId, initialData, closeModal, onTaskUpdate }) => {
     setFormData({
       taskname: initialData.taskname || "",
       taskdescription: initialData.taskdescription || "",
-      duedate: moment(initialData.duedate).format("yyyy/MM/DD") || "",
-      apptdate: moment(initialData.apptdate).format("yyyy/MM/DD") || "",
+      duedate: moment(initialData.duedate).format("yyyy-MM-DD") || "",
+      apptdate: moment(initialData.apptdate).format("yyyy-MM-DD") || "",
     });
   }, [initialData]);
 
