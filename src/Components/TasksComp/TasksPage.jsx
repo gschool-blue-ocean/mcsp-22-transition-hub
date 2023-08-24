@@ -5,6 +5,7 @@ import moment from "moment";
 import UpdateModal from "./UpdateModal";
 import { useParams } from "react-router-dom";
 import UrlContext from "../Context/UrlContext";
+import CohortContext from "../Context/CohortContext";
 
 const TasksPage = () => {
   const {
@@ -15,6 +16,8 @@ const TasksPage = () => {
     setTasks,
   } = useContext(StudentContext);
 
+  const {getCohortData} = useContext(CohortContext)
+
   const [sortedTasks, setSortedTasks] = useState([]);
   const [isModalOpen, setModalOpen] = useState(false);
   const [currentTask, setCurrentTask] = useState(null);
@@ -23,6 +26,10 @@ const TasksPage = () => {
   const { url } = useContext(UrlContext);
 
   const { studentIdentification } = useParams();
+
+  useEffect (() => {
+    getCohortData()
+  }, [handleCheckboxChange])
 
   useEffect(() => {
     const fetchTasks = async () => {

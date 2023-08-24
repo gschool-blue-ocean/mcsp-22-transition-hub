@@ -9,7 +9,6 @@ const BackButton = () => {
     const {setStudentId} = useContext(StudentContext)
     const navigate = useNavigate()
 
-
     const handleBackButton = () => {
         navigate(`/manager`)
         setStudentId(null)
