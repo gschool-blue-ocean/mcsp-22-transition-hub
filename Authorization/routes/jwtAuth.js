@@ -34,14 +34,14 @@ router.post("/register/verify", async (req, res) => {
 router.post("/register", validInfo, async (req, res, next) => {
   const { username, password, firstName, lastName, email, role, cohortsid } =
     req.body;
-    console.log(req.body)
+
   const user = await pool
     .query("SELECT * FROM users WHERE username = $1", [username])
     .catch(next);
-    console.log(username)
+
 
   if (user.rows.length !== 0) {
-    return res.send("This username is already in use.");
+    return res.status(401).send("This username is already in use.");
   }
 
   const saltRounds = 10;
@@ -76,11 +76,13 @@ router.post("/login", validInfo, async (req, res, next) => {
     .query("SELECT * FROM users WHERE userName = $1", [username])
     .catch(next);
 
-  const validPassword = await bcrypt.compare(password, user.rows[0].password);
 
-  if (!validPassword) {
-    return res.send("Incorrect username or password...");
-  }
+    if(user.rows[0]){
+      const validPassword = await bcrypt.compare(password, user.rows[0].password);
+      if(!validPassword) return res.status(401).send("Incorrect username or password...");
+    } else {
+      return res.status(401).send("Incorrect username or password...");
+    }
 
   const token = jwtGenerator(user.rows[0].userId);
 

@@ -7,6 +7,8 @@ import UrlContext from "../../Context/UrlContext";
 import axios from "axios";
 import AccountContext from "../../Context/AccountServicesContext";
 import StudentContext from "../../Context/StudentContext";
+import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 
 const Register_Student = () => {
   const { accountServices, setCurrentService } = useContext(AccountContext);
@@ -41,7 +43,9 @@ const Register_Student = () => {
       if (!response.ok) throw new Error("Network response was not ok");
       const data = await response.json();
       if (data[0]) {
+        setRoles("")
         setLocalStudentId(data[0].studentsid);
+        localStorage.clear();
       }
     } catch (error) {
       console.log(error);
@@ -57,7 +61,8 @@ const Register_Student = () => {
         await grabLocalStudentId(url, formData.username);
       }
     } catch (err) {
-      console.error(err.message);
+      
+      toast.error("Username already in use");
     }
     console.log(formData);
   };
