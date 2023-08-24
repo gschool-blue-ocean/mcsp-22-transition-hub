@@ -25,7 +25,7 @@
 }
 
 .RegisterPage_Container {
-  width: 50%;
+  width: 30%;
   min-width: 640px;
   height: 80%;
   min-height: 640px;
@@ -37,4 +37,9 @@
   border-radius: 20px;
   box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.1);
   padding: 20px;
+  overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+  visibility: hidden;
 }
