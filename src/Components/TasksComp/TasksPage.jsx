@@ -3,7 +3,7 @@ import "./tasks.css";
 import StudentContext from "../Context/StudentContext";
 import moment from "moment";
 import UpdateModal from "./UpdateModal";
-import { useParams } from 'react-router-dom'
+import { useParams } from "react-router-dom";
 import UrlContext from "../Context/UrlContext";
 
 const TasksPage = () => {
@@ -15,29 +15,27 @@ const TasksPage = () => {
     setTasks,
   } = useContext(StudentContext);
 
-
   const [sortedTasks, setSortedTasks] = useState([]);
   const [isModalOpen, setModalOpen] = useState(false);
   const [currentTask, setCurrentTask] = useState(null);
   const [sortMethod, setSortMethod] = useState("dueDate");
 
-  const {url} = useContext(UrlContext)
+  const { url } = useContext(UrlContext);
 
-  const { studentIdentification } = useParams()
-
+  const { studentIdentification } = useParams();
 
   useEffect(() => {
     const fetchTasks = async () => {
-          try {
-            const response = await fetch(`${url}/tasks/${studentIdentification}`);
-            if (!response.ok) throw new Error("Network response was not ok");
-            const data = await response.json();
-            setTasks([...data]);
-          } catch (error) {
-            console.log(error);
-          }
-      };
-      fetchTasks()
+      try {
+        const response = await fetch(`${url}/tasks/${studentIdentification}`);
+        if (!response.ok) throw new Error("Network response was not ok");
+        const data = await response.json();
+        setTasks([...data]);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchTasks();
   }, [studentIdentification]);
 
   useEffect(() => {
@@ -51,10 +49,8 @@ const TasksPage = () => {
       });
       setSortedTasks(sortedArray);
     };
-    sortTasks(); 
+    sortTasks();
   }, [tasks, sortMethod]);
-
-
 
   const updateTaskInList = (updatedTask) => {
     const updatedTasks = tasks.map((task) =>
@@ -62,9 +58,6 @@ const TasksPage = () => {
     );
     setTasks(updatedTasks);
   };
-
-
-
 
   const toggleSortMethod = () => {
     setSortMethod((prevSortMethod) =>
@@ -168,8 +161,6 @@ const TasksPage = () => {
       </div>
     );
   };
-
-
 
   return studentIdentification && tasks.length > 0 ? (
     <div className='entirePage'>
