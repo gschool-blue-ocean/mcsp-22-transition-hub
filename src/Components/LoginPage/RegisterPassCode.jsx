@@ -57,8 +57,12 @@ const RegisterPasscode = () => {
   return (
     <div className='Passcode_BG'>
       <div className='Passcode_Container'>
-        <ReturnToLogin />
-        <div className='RegisterPassCode_Title'>Verification Passcode</div>
+        <div className='Register_Manager_Title'>
+          <div className='return_button_ctn'>
+            <ReturnToLogin />
+          </div>
+          Verification Passcode
+        </div>
         <form className='passcode_form' onSubmit={handleSubmit}>
           <div className='passcode_Input'>
             <label>Passcode</label>
@@ -70,11 +74,7 @@ const RegisterPasscode = () => {
               value={formData.passcode}
             ></input>
           </div>
-          <button
-            type='submit'
-            id='registerPasscode_submit'
-            style={{ width: "233px" }}
-          >
+          <button type='submit' id='registerPasscode_submit'>
             Submit
           </button>
         </form>
