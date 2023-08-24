@@ -18,7 +18,7 @@ From Start to Finish, this project lasted 2.5 weeks with a total of 5 sprints, l
 
 The workflow tools we selected for this project were: 
 - [Excalidraw](https://excalidraw.com/) for our initial wireframing
-- ____ for our Entity Relationship Diagram **[place up-to-date ERD here](https://drawsql.app/teams/joseph-carrillos-team/diagrams/blue-ocean)**
+- ____ for our Entity Relationship Diagram **[Link to Actual ERD](https://drawsql.app/teams/joseph-carrillos-team/diagrams/blue-ocean)**
 - [Jira/Confluence](https://blueocean-transitionhub.atlassian.net/jira/software/projects/SMTRAN/boards/1) for task management and documentation
 - Git/GitHub for branching/merging code changes
 - [Render](https://render.com/) for project deployment
