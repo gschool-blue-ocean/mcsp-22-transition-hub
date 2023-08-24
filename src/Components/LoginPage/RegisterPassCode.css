@@ -13,6 +13,7 @@
   align-items: center;
   justify-content: center;
 }
+
 .Passcode_Container {
   width: 30%;
   min-width: 330px;
@@ -26,6 +27,7 @@
   box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.1);
   padding: 20px;
 }
+
 .RegisterPassCode_Title {
   font-size: 2rem;
 }
@@ -37,9 +39,11 @@
   justify-content: center;
   width: 50%;
 }
+
 .passcode_form label {
   text-align: center;
 }
+
 .passcode_form input {
   padding: 8px;
   margin-bottom: 12px;
@@ -48,6 +52,7 @@
   width: 100%;
   box-sizing: border-box;
 }
+
 #registerPasscode_submit {
   /* Button */
   margin-top: 10px;
@@ -57,6 +62,7 @@
   background-color: #ef6e47;
   transform: scale(1.05);
 }
+
 .passCode_notes {
   /* Description under button */
   font-size: 0.875rem;
