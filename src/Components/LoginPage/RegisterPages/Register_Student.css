@@ -44,8 +44,8 @@
   display: block;
   margin-bottom: 10px;
 }
-.Clearance_Container select,
-.BranchSelection select {
+.Clearance_Container option,
+.BranchSelection option {
   background-color: #2b2a33;
   color: #ccc;
   font-size: 0.875rem;
