@@ -1,4 +1,5 @@
-
+import UrlContext from '../Context/UrlContext';
+import { useContext } from 'react';
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import { toast } from 'react-toastify';
@@ -25,8 +26,8 @@ const UpdateModal = ({ taskId, initialData, closeModal, onTaskUpdate }) => {
     setFormData({
       taskname: initialData.taskname || "",
       taskdescription: initialData.taskdescription || "",
-      duedate: moment(initialData.duedate).format("yyyy/MM/DD") || "",
-      apptdate: moment(initialData.apptdate).format("yyyy/MM/DD") || "",
+      duedate: moment(initialData.duedate).format("yyyy-MM-DD") || "",
+      apptdate: moment(initialData.apptdate).format("yyyy-MM-DD") || "",
     });
   }, [initialData]);
 
