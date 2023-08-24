@@ -1,26 +1,27 @@
-import React, { useState, useEffect } from 'react';
-import moment from 'moment';
-import "./UpdateModal.css"
-
-
+import React, { useState, useEffect, useContext } from "react";
+import moment from "moment";
+import "./UpdateModal.css";
+import UrlContext from "../Context/UrlContext";
 
 const UpdateModal = ({ taskId, initialData, closeModal, onTaskUpdate }) => {
-  const [formData, setFormData] = useState(initialData || {
-    taskname: '',
-    taskdescription: '',
-    duedate: '',
-    apptdate: '',
-  });
+  const { url } = useContext(UrlContext);
+  const [formData, setFormData] = useState(
+    initialData || {
+      taskname: "",
+      taskdescription: "",
+      duedate: "",
+      apptdate: "",
+    }
+  );
 
   useEffect(() => {
-    console.log('Initial Data:', initialData);
     setFormData({
-        taskname: initialData.taskname || '',
-        taskdescription: initialData.taskdescription || '',
-        duedate: moment(initialData.duedate).format('yyyy/MM/DD') || '',
-        apptdate: moment(initialData.apptdate).format('yyyy/MM/DD') || '',
+      taskname: initialData.taskname || "",
+      taskdescription: initialData.taskdescription || "",
+      duedate: moment(initialData.duedate).format("yyyy/MM/DD") || "",
+      apptdate: moment(initialData.apptdate).format("yyyy/MM/DD") || "",
     });
-}, [initialData]);
+  }, [initialData]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -32,25 +33,25 @@ const UpdateModal = ({ taskId, initialData, closeModal, onTaskUpdate }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     try {
-      const response = await fetch(`https://transition-hub.onrender.com/tasks/${taskId}`, {
-        method: 'PATCH',
+      const response = await fetch(`${url}/tasks/${taskId}`, {
+        method: "PATCH",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
       });
 
       if (response.ok) {
-        alert('Task updated successfully');
-        const updatedTask = await response.json(); 
+        alert("Task updated successfully");
+        const updatedTask = await response.json();
         onTaskUpdate(updatedTask);
       } else {
-        alert('Failed to update task');
+        alert("Failed to update task");
       }
     } catch (err) {
-      alert('Failed to update task');
+      alert("Failed to update task");
       console.error(err);
     }
 
@@ -59,57 +60,70 @@ const UpdateModal = ({ taskId, initialData, closeModal, onTaskUpdate }) => {
 
   return (
     <div className="edittask-overlay">
-        <div className="modal-container">
-            <button className="closeButton" onClick={closeModal}>x</button>
-             <form className='edittask-form' onSubmit={handleSubmit}>
-              <div className='edittask-form-title'>
-                  <h2>Edit and Submit!</h2>
-              </div>
-            <div className="taskTitleDiv">
+      <div className="modal-container">
+        <form className="edittask-form" onSubmit={handleSubmit}>
+          <div className="edittask-form-title">
+            <h2>Edit and Submit!</h2>
+          </div>
+          <div className="taskTitleDiv">
             <div className="nameTitle">
-              <label>
-                  Task Name:
-                </label>
-                  <input type="text" name="taskname" value={formData.taskname} onChange={handleChange} />
-              </div>
-              </div>
-              <div className="taskDescriptionDiv">
-              <div className="task-description">
-             <label>
-                 Task Description:
-              </label>
-                 <textarea name="taskdescription" value={formData.taskdescription} onChange={handleChange} />
-              </div>
-              </div>
-              
-              <div className="dateDiv">
-                <div className="dueDateDiv"> 
-                <label>
-                 Due Date:
-                </label>
-                <input type="date" name="duedate" value={formData.duedate} onChange={handleChange} />
-                </div>
-                <div className="dueDateDiv">
-                <label>
-                Appointment Date:
-                </label>
-                <input type="date" name="apptdate" value={formData.apptdate} onChange={handleChange} />
-                </div>
-              </div>
-              <div className="warningDiv">
-                <div className="warning">
-                  <label>
-                    * Must enter dates before submission
-                  </label>
-                </div>
-                </div>
-                <div>
-                <button className="submitButton" type="submit">Update Task</button>
-                </div>
-            </form>
+              <label>Task Name:</label>
+              <input
+                type="text"
+                name="taskname"
+                value={formData.taskname}
+                onChange={handleChange}
+              />
             </div>
+          </div>
+          <div className="taskDescriptionDiv">
+            <div className="task-description">
+              <label>Task Description:</label>
+              <textarea
+                name="taskdescription"
+                value={formData.taskdescription}
+                onChange={handleChange}
+              />
             </div>
-        );
-        }
+          </div>
+
+          <div className="dateDiv">
+            <div className="dueDateDiv">
+              <label>Due Date:</label>
+              <input
+                type="date"
+                name="duedate"
+                value={formData.duedate}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="dueDateDiv">
+              <label>Appointment Date:</label>
+              <input
+                type="date"
+                name="apptdate"
+                value={formData.apptdate}
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+          <div className="warningDiv">
+            <div className="warning">
+              <label>* Must enter dates before submission</label>
+            </div>
+          </div>
+          <div>
+            <button className="submitButton" type="submit">
+              Update Task
+            </button>
+          </div>
+        </form>
+        <button className="closeButton" onClick={closeModal}>
+          x
+        </button>
+      </div>
+    </div>
+  );
+};
 
 export default UpdateModal;
