@@ -8,6 +8,8 @@ import UrlContext from "../Context/UrlContext";
 import ReturnToLogin from "./ReturnToLogin";
 import { Navigate, useNavigate } from "react-router-dom";
 import ReactModal from "react-modal";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const RegisterPasscode = () => {
   //use effect to grab all the cohort names, put into student in the state
@@ -40,7 +42,7 @@ const RegisterPasscode = () => {
       return true;
     } catch (err) {
       console.error(err);
-      alert("Unable to Validate Passcode");
+      toast.error("Unable to Validate Passcode");
       setError(true);
       return false;
     }

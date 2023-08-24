@@ -16,6 +16,7 @@
     left: 0;
     top: 80px;
     overflow-y: auto;
+}
 
 
 @media (max-width: 480px) {
