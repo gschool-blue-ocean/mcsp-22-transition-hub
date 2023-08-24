@@ -21,7 +21,7 @@ The workflow tools we selected for this project were:
 - [DrawSQL](https://drawsql.app/) for our Entity Relationship Diagram | [Link to Actual ERD](https://drawsql.app/teams/joseph-carrillos-team/diagrams/blue-ocean)
 - [Jira/Confluence](https://jira.atlassian.com/) for task management and documentation | [Link to Our Board](https://blueocean-transitionhub.atlassian.net/jira/software/projects/SMTRAN/boards/1)
 - [Git/GitHub](https://github.com/) for branching/merging code changes
-- [Render](https://render.com/) for project deployment | [Project Link](https://transition-hub.onrender.com)
+- [Render](https://render.com/) for project deployment | [Our Project Link](https://transition-hub.onrender.com)
 - [Discord](https://discord.com/) for daily communications (sprint planning, group troubleshooting, and code reviews)
 
 # Technical / Unexpected Challenges Faced
