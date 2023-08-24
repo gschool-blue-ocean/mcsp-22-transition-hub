@@ -46,6 +46,7 @@ const UpdateModal = ({ taskId, initialData, closeModal, onTaskUpdate }) => {
         alert('Task updated successfully');
         const updatedTask = await response.json(); 
         onTaskUpdate(updatedTask);
+        closeModal();
       } else {
         alert('Failed to update task');
       }
@@ -54,7 +55,7 @@ const UpdateModal = ({ taskId, initialData, closeModal, onTaskUpdate }) => {
       console.error(err);
     }
 
-    closeModal();
+    
   };
 
   return (
