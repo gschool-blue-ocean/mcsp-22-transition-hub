@@ -7,12 +7,14 @@ import UrlContext from "../../Context/UrlContext";
 import axios from "axios";
 import AccountContext from "../../Context/AccountServicesContext";
 import StudentContext from "../../Context/StudentContext";
+import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 
 const Register_Student = () => {
   const { accountServices, setCurrentService } = useContext(AccountContext);
   const { postDefaultTasks } = useContext(StudentContext);
   const [localStudentId, setLocalStudentId] = useState(null);
-  const { cohortsId } = useContext(AuthContext);
+  const { cohortsId, setRoles } = useContext(AuthContext);
   const { url } = useContext(UrlContext);
   const [formData, setFormData] = useState({
     username: "",
@@ -41,7 +43,9 @@ const Register_Student = () => {
       if (!response.ok) throw new Error("Network response was not ok");
       const data = await response.json();
       if (data[0]) {
+
         setLocalStudentId(data[0].studentsid);
+
       }
     } catch (error) {
       console.log(error);
@@ -57,7 +61,8 @@ const Register_Student = () => {
         await grabLocalStudentId(url, formData.username);
       }
     } catch (err) {
-      console.error(err.message);
+      
+      toast.error("Username already in use");
     }
     console.log(formData);
   };
@@ -66,14 +71,12 @@ const Register_Student = () => {
     if (localStudentId) {
       console.log(`In localStudent use effect ${localStudentId}`);
       postDefaultTasks(url, localStudentId, formData.ETS);
+      setCurrentService(accountServices[0]);
+      setRoles("")
+      localStorage.clear();
     }
   }, [localStudentId]);
 
-  useEffect(() => {
-    if (localStudentId) {
-      setCurrentService(accountServices[0]);
-    }
-  }, [localStudentId]);
 
   return (
     <>

@@ -1,5 +1,7 @@
 import { useState, createContext, useEffect, useContext } from "react";
 import UrlContext from "./UrlContext";
+import { toast } from 'react-toastify';  
+import 'react-toastify/dist/ReactToastify.css';
 import { useParams } from "react-router-dom";
 
 const StudentContext = createContext();
@@ -152,7 +154,7 @@ export const StudentProvider = ({ children }) => {
     if ((name === "dueDate" || name === "apptDate") && value) {
       const datePattern = /^\d{4}-\d{2}-\d{2}$/;
       if (!datePattern.test(value)) {
-        alert("The date fields need to be in YYYY-MM-DD format");
+        toast.error("The date fields need to be in YYYY-MM-DD format");
         return;
       }
     }
@@ -178,7 +180,7 @@ export const StudentProvider = ({ children }) => {
       });
 
       if (response.ok) {
-        alert("Task added successfully");
+        toast.success("Task added successfully");
         const data = await response.json();
         setTasks((prevTasks) => [...prevTasks, data]);
         setAddTaskVisible(false);
@@ -190,10 +192,10 @@ export const StudentProvider = ({ children }) => {
         });
       } else {
         const data = await response.json();
-        alert("Failed to add task: " + data.message);
+        toast.error("Failed to add task: " + data.message);
       }
     } catch (err) {
-      alert("Failed to add task");
+      toast.error("Failed to add task");
       console.error(err);
     }
   };

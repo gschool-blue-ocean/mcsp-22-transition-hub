@@ -7,12 +7,13 @@ import AuthContext from "../Context/AuthContext";
 import AccountContext from "../Context/AccountServicesContext";
 import UrlContext from "../Context/UrlContext";
 import StudentContext from "../Context/StudentContext";
+import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 
 const SignOn = () => {
   const { setCurrentService, accountServices } = useContext(AccountContext);
   const { setIsAuthenticated, isAuthenticated, roles, setRoles } =
     useContext(AuthContext);
-  const { grabStudentId, studentId } = useContext(StudentContext);
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -49,26 +50,26 @@ const SignOn = () => {
       } else {
         setIsAuthenticated(false);
       }
-    } catch (err) {
-      console.error(err.message);
+    } catch (error) {
+      toast.error(`Incorrect username or password.`, { className: "error-toast" });
     }
   };
 
   useEffect(() => {
-    const id = localStorage.getItem("id");
     if (isAuthenticated) {
       switch (roles) {
         case "manager":
           navigate("/manager");
           break;
         case "student": //Added to make sure the person has an id, it can load their page
+          const id = localStorage.getItem("id");
           navigate(`/student/${id}`);
           break;
       }
     } else {
       console.log("Not authenticated");
     }
-  }, [roles]);
+  }, [roles, isAuthenticated]);
 
   return (
     <div className="logOnBG">
