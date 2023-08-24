@@ -4,7 +4,7 @@ A Full-Stack React application to assist transition managers and service members
 **place screenshot of login page here**
 
 # How it Works
-This app is designed to validate logins for two types of users: transition managers and students. Managers are granted full admin rights to app features/functionality and to view the manager dashboard and every individual student dashboard. Full app functionalities include: viewing all cohorts, viewing average task completion by cohort, adding a cohort, selecting an individual cohort, viewing each student and their progress with assigned tasks, selecting a student, marking a task complete, editing a task, and adding a new task. Students (service members) only have access to their own dashboard which includes relevant personal details and all their assigned tasks. Like managers, they are able to add and edit tasks, as well as mark tasks complete.
+This app is designed to validate logins for two types of users: transition managers and students. Managers are granted full admin rights to app features/functionality and to view the manager dashboard and every individual student dashboard. Full app functionalities include: viewing all cohorts, viewing average task completion by cohort, adding a cohort, selecting an individual cohort, viewing each student and their progress with assigned tasks, selecting a student, marking a task complete, editing a task, and adding a new task. Students (service members) only have access to their own dashboard which includes relevant personal details and all of their assigned tasks. Like managers, they are able to add and edit tasks, as well as mark tasks complete.
 
 * User Authentication: Upon accessing the app, users are presented with a login page where they input their credentials. The app communicates with our server, which in turn interfaces with the PostgreSQL database to authenticate users. This process involves data exchange through API calls, ensuring secure access.
 
@@ -21,6 +21,7 @@ The workflow tools we selected for this project were:
 - ____ for our Entity Relationship Diagram **place up-to-date ERD here**
 - [Jira/Confluence](https://blueocean-transitionhub.atlassian.net/jira/software/projects/SMTRAN/boards/1) for task management and documentation
 - Git/GitHub for branching/merging code changes
+- [Render](https://render.com/) for project deployment
 - Discord for daily communications (sprint planning, group troubleshooting, and code reviews)
 
 # Technical Challenges / Unexpected Challenges Faced
@@ -70,6 +71,6 @@ To view the app live or make your own contributions, follow the steps outlined b
 
 To Start Our Application:
 1) Fork and clone the repo
-2) Open the folder inside your favorite code editor
-3) Inside your terminal, run "npm install" followed by "npm run dev"
+2) Open the project folder inside of your favorite code editor
+3) Inside of your terminal, run "npm install" followed by "npm run dev"
 4) Start coding!
