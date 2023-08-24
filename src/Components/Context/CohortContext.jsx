@@ -49,17 +49,18 @@ export const CohortProvider = ({ children }) => {
   /* ---------------------All Tasks with Cohortid------------------------- */
   const [cohortTaskList, setCohortTaskList] = useState([]);
   const [average, setAverage] = useState({});
+
+  const getCohortData = async () => {
+    try {
+      const result = await fetch(`${url}/manager/tasks/all`);
+      const data = await result.json();
+      setCohortTaskList([...data]);
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
   useEffect(() => {
-    const getData = async () => {
-      try {
-        const result = await fetch(`${url}/manager/tasks/all`);
-        const data = await result.json();
-        setCohortTaskList([...data]);
-      } catch (err) {
-        console.log(err.message);
-      }
-    };
-    getData();
+    getCohortData();
   }, []);
   /* ---------------------Create an Array of all totals/averages per cohort------------------------- */
   useEffect(() => {
@@ -105,6 +106,7 @@ export const CohortProvider = ({ children }) => {
         setIsVisible,
         isLoading,
         setIsLoading,
+        getCohortData
       }}
     >
       {children}
