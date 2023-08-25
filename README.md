@@ -26,26 +26,19 @@ The workflow tools we selected for this project were:
 - [Discord](https://discord.com/) for daily communications (sprint planning, group troubleshooting, and code reviews)
 
 # Technical / Unexpected Challenges Faced
-## React Router
+**React Router**
 - Issues with implementing React Router and using parameters from the router instead of utilizing data from the Context API.
-- **We learned:** dynamic routing with parameters, component reusability, Context API for Global State, as well as balancing state management approaches.
 - Some challenges we faced while implementing were choosing between using route parameters or the Context API, arising from complexities in managing state, data sharing, component reusability, and architectural decisions, requiring a balance between dynamic data rendering and global state management.
-
-
+- Database management and handling SQL queries between tables based on their relationships
 
 # Key Lessons Learned
-specifically those related to: Agile, CI/CD, testing, working with external stakeholders, ticketing, and user stories.
-* Your git workflow, style guides, commit guides, etc
-* What did you learn from the process
-* What were key takeaways from stand ups, code reviews, etc
-* Writing tests
-* discuss completed tickets
+* Dynamic routing with parameters, component reusability, Context API for Global State, as well as balancing state management approaches
+* Deploy early and often!
+* Keep good documentation throughout to reduce cleanup time at the end
+* Team work makes the dream work! Important to keep everyone on the same page and help where needed
 
 # Accomplishments
-mention MVP, Any non-MVP tickets (optional)
-Code refactorings
-Performance Optimizations
-Additional features delivered
+A fully functional react application with dynamic rendering of data using criteria and expectations from our client
 
 # Thoughts on Future Features / Additions
 Features:
