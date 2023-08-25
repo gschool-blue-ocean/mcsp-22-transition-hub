@@ -40,7 +40,7 @@ The workflow tools we selected for this project were:
 * Team work makes the dream work! Important to keep everyone on the same page and help where needed
 
 # Accomplishments
-A fully functional react application with user authentication, routing, and dynamic rendering of data using the expectations and project criteria from our client
+A fully functional react application with user authentication, routing, and dynamic rendering of data using the expectations and project criteria provided from our client
 
 # Thoughts on Future Features / Additions
 Features:
