@@ -10,7 +10,7 @@
   justify-content: center;
 }
 
-@media (max-width: 100vw) {
+/* @media (max-width: 100vw) {
   .app_BG {
     min-height: 330vh;
   }
@@ -19,7 +19,7 @@
     min-width: 100%;
     justify-content: space-around;
   }
-}
+} */
 
 .header-container {
   background-color: #f0f0f0;
