@@ -1,7 +1,8 @@
  # ![transition-light](https://github.com/gschool-blue-ocean/mcsp-22-transition-hub/assets/122406231/2f755b74-daa7-4c85-a848-e9566c8fb376)
 
 A Full-Stack React application to assist transition managers and service members keep track of their mandatory tasks as they transition out of the military.
-**place screenshot of login page here**
+![tt](https://github.com/gschool-blue-ocean/mcsp-22-transition-hub/assets/122406231/52ac1c0c-4bc9-4b80-8117-b8e7675ee69c)
+
 
 # How it Works
 This app is designed to validate logins for two types of users: transition managers and students. Managers are granted full admin rights to app features/functionality, to their manager dashboard, and every individual student dashboard. Full app functionalities include: viewing all cohorts, viewing average task completion by cohort, adding a cohort, selecting an individual cohort, viewing each student and their progress with assigned tasks, selecting a student, marking a task complete, editing a task, and adding a new task. Students (service members) only have access to their own dashboard which includes relevant personal details and all of their assigned tasks. Like managers, they are able to add and edit tasks, as well as mark tasks complete.
