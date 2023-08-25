@@ -29,6 +29,8 @@ The workflow tools we selected for this project were:
 **React Router**
 - Issues with implementing React Router and using parameters from the router instead of utilizing data from the Context API.
 - Some challenges we faced while implementing were choosing between using route parameters or the Context API, arising from complexities in managing state, data sharing, component reusability, and architectural decisions, requiring a balance between dynamic data rendering and global state management.
+
+**Databases**
 - Database management and handling SQL queries between tables based on their relationships
 
 # Key Lessons Learned
